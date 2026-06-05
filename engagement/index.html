@@ -14,19 +14,24 @@ wide: true
 
 <h2 class="heading">Leadership roles</h2>
 <p class="prose">
-  I am <strong>Coordinator of the Education and Outreach group of the ATLAS
-  Collaboration</strong> — an elected position, on the votes of 181
-  collaborating institutes, with strategic oversight of all of ATLAS's
-  educational and outreach activity. The role hosts more than 50,000 visitors a
-  year and reaches millions online, coordinating content across
-  <a href="https://atlas.cern" rel="noopener">atlas.cern</a> and reporting to
-  the ATLAS spokesperson.
-</p>
-<p class="prose">
   At Manchester I am <strong>Associate Dean for Public, Civic and Schools
   Engagement</strong> in the Faculty of Science and Engineering, providing
-  strategic leadership for engagement across the Faculty. I also represent the
-  UK on the Collaboration Board of the
+  strategic leadership for engagement across the Faculty.
+</p>
+<p class="prose">
+  From 2022 to 2024 I served as <strong>Coordinator of the Education and
+  Outreach group of the ATLAS Collaboration</strong> &mdash; an elected
+  position, on the votes of 181 collaborating institutes, with strategic
+  oversight of all of ATLAS's educational and outreach activity. The role
+  hosts more than 55,000 visitors a year to the ATLAS Visitor Centre and
+  reaches millions online, coordinating content across
+  <a href="https://atlas.cern" rel="noopener">atlas.cern</a>, social media,
+  educational materials, and the flagship Open Data initiative at
+  <a href="https://opendata.atlas.cern" rel="noopener">opendata.atlas.cern</a>;
+  reporting directly to the ATLAS spokesperson.
+</p>
+<p class="prose">
+  I also represent (2017&ndash;2024) the UK on the Collaboration Board of the
   <a href="https://ippog.org/" rel="noopener">International Particle Physics
   Outreach Group (IPPOG)</a>.
 </p>
@@ -45,6 +50,49 @@ wide: true
   <img src="{{ '/assets/images/dark-matter.jpg' | relative_url }}" alt="Public lecture on dark matter">
   <figcaption>Public lecture on the search for dark matter.</figcaption>
 </figure>
+
+<hr class="rule">
+
+<h2 class="section-label">Detailed activity</h2>
+<p class="prose small">A fuller record &mdash; reverse-chronological. Click any entry to expand.</p>
+
+<ul class="engagement-list">
+  {% assign entries = site.data.engagement.entries | sort: "iso" | reverse %}
+  {% for e in entries %}
+  <li class="engagement-entry">
+    <details id="{{ e.id }}">
+      <summary>
+        <span class="yr">{{ e.year }}</span>
+        <span class="what">
+          <strong>{{ e.title }}</strong>
+          {% if e.category %}<span class="cat">{{ e.category }}</span>{% endif %}
+          <span class="summary">{{ e.summary }}</span>
+        </span>
+      </summary>
+      <div class="engagement-body">
+        {% if e.image %}
+        <figure class="engagement-fig">
+          <img src="{{ e.image | relative_url }}" alt="{{ e.image_alt | default: e.title }}" loading="lazy">
+        </figure>
+        {% endif %}
+        {% if e.body %}<p>{{ e.body }}</p>{% endif %}
+        {% if e.link %}
+          <p><a href="{{ e.link.url }}" rel="noopener">{{ e.link.label }} &rarr;</a></p>
+        {% endif %}
+        {% if e.links %}
+          <p>{% for l in e.links %}<a href="{{ l.url }}" rel="noopener">{{ l.label }} &rarr;</a>{% unless forloop.last %} &middot; {% endunless %}{% endfor %}</p>
+        {% endif %}
+      </div>
+    </details>
+  </li>
+  {% endfor %}
+</ul>
+
+<p class="prose small">
+  Selected public lectures are listed in the
+  <a href="{{ '/research/presentations/' | relative_url }}">presentations</a>
+  archive &mdash; filter by <em>Public</em>.
+</p>
 
 <p class="prose small">
   For broadcast, press and commentary, see <a href="{{ '/media/' | relative_url }}">media enquiries</a>.

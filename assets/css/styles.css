@@ -11,7 +11,7 @@
   --bg-card: #fffaf0;                                   /* card highlight */
   --text: #3c372f;                                      /* warm body text */
   --text-bright: #1a1712;                               /* headlines / strong text */
-  --text-muted: #7a7468;                                /* meta, muted */
+  --text-muted: #6a6552;                                /* meta, muted — WCAG AA on bg / bg-elevated / bg-card */
   --accent: #8c3a2b;                                    /* oxblood ink */
   --accent-soft: rgba(140, 58, 43, 0.35);               /* link underlines (raised contrast for paper) */
   --accent-glow: rgba(140, 58, 43, 0.25);               /* team-card glow */
@@ -328,6 +328,7 @@ a.talk-title:hover { color: var(--accent); }
 }
 .alumnus-card h4 { font-family: var(--font-display); font-size: 0.97rem; color: var(--text-bright); margin: 0; font-weight: 500; font-variation-settings: "opsz" 20; }
 .alumnus-card .role { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+.alumnus-card .focus { font-size: 0.85rem; line-height: 1.4; color: var(--text); margin: 0.25rem 0 0; }
 .alumnus-card .nowat { font-size: 0.84rem; color: var(--text-muted); margin: 0; margin-top: auto; padding-top: 0.3rem; }
 .alumnus-card .nowat a { color: var(--accent); }
 .alumnus-card .taglist { margin-top: 0.1rem; }
@@ -519,3 +520,156 @@ figure.page-fig figcaption { font-size: 0.82rem; color: var(--text-muted); margi
 .example-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
 .example-list li { padding: 0.4rem 0; border-bottom: 1px solid var(--rule-soft); font-size: 0.95rem; }
 .example-list .year { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--accent); margin-right: 0.5rem; text-transform: uppercase; }
+
+/* ============================================================
+   Accessibility — skip-link, focus ring
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.6rem 1rem;
+  background: var(--text-bright);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+}
+.skip-link:focus { left: 0; outline: 2px solid var(--accent); outline-offset: 0; }
+
+/* Global focus ring — visible on the warm-paper palette.
+   :focus-visible only applies when keyboard / programmatic focus moves,
+   so mouse clicks on links/buttons stay clean. */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Inputs / textareas keep a stronger ring since outline-offset can clip into adjacent padding */
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+/* ============================================================
+   Print stylesheet — primarily for /cv but applies site-wide
+   ============================================================ */
+@media print {
+  /* Strip chrome */
+  .site-header, .nav-toggle, .site-nav, .site-footer,
+  .breadcrumb, .jumpnav, .skip-link, .filter-bar,
+  .toc, .sibling-link { display: none !important; }
+
+  /* Single-column, paper-friendly */
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+  }
+  main { padding: 0 !important; margin: 0 !important; }
+  .container, .container.wide { max-width: 100% !important; padding: 0 !important; }
+
+  /* Tighten typography */
+  h1, h2, h3, h4, .heading, .section-label {
+    color: #000 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h1 { font-size: 18pt; margin: 0 0 0.4em; }
+  h2, .section-label { font-size: 13pt; margin: 1em 0 0.3em; }
+  h3, .heading { font-size: 11pt; margin: 0.6em 0 0.2em; }
+  p, li { line-height: 1.35; orphans: 3; widows: 3; }
+  .lede { font-size: 11pt; color: #333 !important; margin: 0.2em 0 0.8em; }
+  .eyebrow { font-size: 8pt; color: #555 !important; }
+
+  /* Roles / grants list: compact two-column-ish */
+  .roles-list { list-style: none; padding: 0; margin: 0; }
+  .role-item { padding: 0.15em 0; border: none !important; page-break-inside: avoid; break-inside: avoid; display: block; }
+  .role-item .yr { font-family: var(--font-mono); font-size: 9pt; color: #444 !important; display: inline-block; width: 5em; margin-right: 0.5em; }
+  .role-item .what { display: inline; }
+
+  /* Show URLs for links so printed CV is still navigable */
+  a, a:visited { color: #000 !important; text-decoration: underline; }
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+    word-break: break-all;
+  }
+  /* but don't print URLs for in-page anchors or icon-only links */
+  a[href^="#"]::after,
+  .icon-link::after,
+  nav a::after { content: ""; }
+
+  /* Page breaks */
+  hr.rule { border: 0; border-top: 1px solid #999; margin: 0.8em 0; }
+  section, article { page-break-inside: auto; }
+
+  /* Hide explainers and large interactive blocks if a CV-like view ever embeds them */
+  .explainer-body, .pub-aux, .toy-hist, svg { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Margins */
+  @page { margin: 1.6cm 1.4cm; }
+}
+
+/* ============================================================
+   Engagement page — detailed list with <details> expanders
+   ============================================================ */
+.engagement-list { list-style: none; padding: 0; margin: 1.25rem 0; }
+.engagement-entry { padding: 0; border-bottom: 1px solid var(--rule-soft); }
+.engagement-entry > details { padding: 0.7rem 0 0.8rem; }
+.engagement-entry > details > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.6rem 1rem;
+  align-items: baseline;
+  padding: 0.1rem 0;
+}
+.engagement-entry > details > summary::-webkit-details-marker { display: none; }
+.engagement-entry > details > summary::before {
+  content: "+";
+  position: absolute;
+  right: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.engagement-entry { position: relative; }
+.engagement-entry > details[open] > summary::before { content: "−"; color: var(--accent); }
+.engagement-entry .yr {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.engagement-entry .what strong { font-family: var(--font-display); font-weight: 500; color: var(--text-bright); display: block; margin-bottom: 0.05rem; font-variation-settings: "opsz" 24; }
+.engagement-entry .cat {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  margin: 0 0 0.25rem;
+}
+.engagement-entry .summary { display: block; color: var(--text); font-size: 0.93rem; margin-top: 0.1rem; }
+.engagement-body { padding: 0.5rem 0 0.2rem 5.6rem; font-size: 0.92rem; color: var(--text); }
+.engagement-body p { margin: 0.4rem 0; line-height: 1.55; }
+.engagement-body a { color: var(--accent); }
+.engagement-body .engagement-fig { margin: 0 0 0.6rem; max-width: 360px; }
+.engagement-body .engagement-fig img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 2px; }
+@media (max-width: 620px) {
+  .engagement-entry > details > summary { grid-template-columns: 1fr; gap: 0.2rem; }
+  .engagement-body { padding-left: 0; }
+}

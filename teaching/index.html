@@ -55,12 +55,51 @@ wide: true
   {% assign names = site.data.supervision.pdra | map: "name" | join: ", " %}{{ names }}.
 </p>
 
-<h2 class="section-label">MPhys projects</h2>
-<p class="prose">{{ site.data.supervision.mphys_note }}</p>
+<h2 class="section-label">MPhys final-year research projects</h2>
+<p class="prose small">37 final-year MPhys research projects supervised since 2014. Selected from the CV — projects span dark matter, photon-fusion searches, heavy Majorana neutrinos, generative models for liquid-argon simulation, and industrial data-science with partners including HSBC UK Asset Finance.</p>
+<ul class="roles-list">
+  {% for s in site.data.supervision.mphys %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what"><strong>{{ s.names }}</strong> &mdash; {{ s.topic }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">Undergraduate summer research projects</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.undergrad_summer %}
+  <li class="role-item"><span class="yr">{{ s.year }}</span><span class="what"><strong>{{ s.names }}</strong> &mdash; {{ s.topic }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">BSc final-year dissertations</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.bsc %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what"><strong>{{ s.names }}</strong> &mdash; {{ s.topic }}</span></li>
+  {% endfor %}
+</ul>
+
+<hr class="rule">
+
+<h2 class="section-label">Lecturing &amp; course development</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.lecturing %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what">{{ s.what }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">Tutoring &amp; teaching assistance</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.tutoring %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what">{{ s.what }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">Invited lectures outside University courses</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.invited_lectures %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what">{{ s.what }}</span></li>
+  {% endfor %}
+</ul>
 
 <h2 class="section-label">Examining</h2>
-<p class="prose">
-  External examiner of PhD vivas and MSc/MPhil dissertations at Liverpool, UCL,
-  Warwick, Royal Holloway, Lancaster, Durham and Cape Town; internal examiner at
-  Manchester.
-</p>
+<p class="prose">{{ site.data.supervision.examining.external }}</p>
+<p class="prose">{{ site.data.supervision.examining.internal }}</p>

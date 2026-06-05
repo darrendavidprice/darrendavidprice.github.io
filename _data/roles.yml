@@ -30,6 +30,9 @@ groups:
 
   - name: "University of Manchester & data-intensive science"
     items:
+      - { year: "2026–", what: "**Member, Jodrell Bank Centre for Engagement (JBCE) Programme Advisory Board.**" }
+      - { year: "2025–", what: "**Member, University Public, Civic, Community Engagement Group**, University of Manchester." }
+      - { year: "2025–26", what: "Member of Senate, University of Manchester." }
       - { year: "2017–", what: "**Director, 4IR STFC Centre for Doctoral Training in Data Intensive Science** — consortium across Manchester (lead), Lancaster and Sheffield." }
       - { year: "2016–", what: "**Postgraduate Coordinator for Particle Physics** — admissions, training, pastoral support and finance for 60+ research students." }
       - { year: "2019–21", what: "Management of an Alan Turing Institute project on ML-enabled experimental design and scientific discovery." }
@@ -37,7 +40,9 @@ groups:
 
   - name: "National & professional service"
     items:
-      - { year: "2022–", what: "**Chair, UKRI-STFC GridPP Peer Review Panel** — UK computing for experimental particle physics and the WLCG." }
+      - { year: "2026–", what: "**Appointed member, UKRI-STFC Projects Peer Review Panel.**" }
+      - { year: "2025–", what: "**Royal Society University Research Fellowships extended research appointment panel (Ai: Astronomy, cosmology, physics, earth sciences, environmental physical sciences & geosciences).**" }
+      - { year: "2022–24", what: "**Chair, UKRI-STFC GridPP7 Peer Review Panel** — UK computing for experimental particle physics and the WLCG." }
       - { year: "2019–", what: "**Member, UKRI-STFC Particle Physics Grants Panel** (reappointed 2022)." }
       - { year: "2017–", what: "UK representative, International Particle Physics Outreach Group (IPPOG) Collaboration Board." }
       - { year: "2023–", what: "Peer review, Royal Society University Research Fellowships." }

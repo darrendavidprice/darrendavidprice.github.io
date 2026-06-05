@@ -1,0 +1,203 @@
+# ============================================================
+#  engagement.yml — public, civic, schools and policy
+#  engagement entries. Reverse-chronological list rendered on
+#  the Engagement page below the headline narrative.
+#
+#  Schema per entry:
+#    id:           short slug (used as <details> anchor)
+#    year:         "2022–24" or "2024" (display string)
+#    iso:          "2024" (sort key — string, descending)
+#    category:     "Leadership" | "Activity" | "Press / media"
+#                  | "Public lecture" | "Policy / advisory"
+#    title:        short headline
+#    summary:      one-line teaser shown on the closed card
+#    body:         (optional) markdown-friendly long body inside <details>
+#    image:        (optional) /path to an image; appears alongside body
+#    image_alt:    (optional) alt for image
+#    link:         (optional) { url, label } external link
+#    links:        (optional) [{url,label}, ...] multiple external links
+# ============================================================
+entries:
+
+  - id: atlas-eo-coordinator
+    year: "2022–2024"
+    iso: "2024"
+    category: "Leadership"
+    title: "ATLAS Collaboration Education and Outreach Coordinator"
+    summary: "Elected coordinator (on the votes of 181 institutes) leading all educational and outreach activity of the ATLAS Collaboration at CERN."
+    body: >-
+      Elected position, on the votes of 181 institutes internationally that
+      collaborate on the ATLAS experiment.  Strategic oversight and
+      management of all educational and outreach initiatives from the
+      international project; promotion of research outputs and the
+      diversity of the collaboration.  Managed a core team of approximately
+      twenty people.  The role hosts more than 55,000 visitors per year to
+      the ATLAS Visitor Centre and reaches millions of engagements on
+      social media and web platforms — co-ordinating content under
+      atlas.cern and the social media channels, production of educational
+      materials and events, and the flagship Open Data initiative.
+    links:
+      - { url: "https://atlas.cern",           label: "atlas.cern" }
+      - { url: "https://opendata.atlas.cern",  label: "Open Data" }
+
+  - id: ippog-uk-rep
+    year: "2017–2024"
+    iso: "2024-1"
+    category: "Leadership"
+    title: "UK representative, International Particle Physics Outreach Group"
+    summary: "Appointed UK representative to the IPPOG Collaboration Board — coordinating and representing UK public engagement activities internationally."
+    body: >-
+      Appointed role (via the Institute of Physics) representing and
+      coordinating UK public engagement activities within the IPPOG
+      Collaboration — an international board of physicists, educators and
+      public engagement professionals.  Particular focus on the
+      development of a web database and public engagement resources for
+      schoolchildren (presentations, activities, booklets) for re-use
+      worldwide, and initiatives to widen participation in countries with
+      limited opportunities for advanced science and computing teaching.
+    link: { url: "https://ippog.org/", label: "ippog.org" }
+
+  - id: cern-guide
+    year: "2022–"
+    iso: "2022-3"
+    category: "Activity"
+    title: "Official CERN guide"
+    summary: "Official CERN guide for the ATLAS Control Room and Visitor Centre, the Antimatter Factory (Antiproton Decelerator) and the Synchrocyclotron."
+
+  - id: run3-startup
+    year: "2022"
+    iso: "2022-2"
+    category: "Press / media"
+    title: "Coordination of ATLAS contributions to the international media event for LHC Run-3 startup"
+    summary: "Coordinated ATLAS experiment contributions to the international media event for the start of LHC Run-3."
+    link: { url: "https://www.youtube.com/watch?v=06kFq1QF5-s", label: "Watch the event" }
+
+  - id: discovery-tours
+    year: "2019–"
+    iso: "2019-2"
+    category: "Public lecture"
+    title: "Scientific expert / tour guide for New Scientist Discovery Tours"
+    summary: "Multi-day public holiday tour organised by New Scientist: lectures, discussion sessions and tours of experimental facilities at CERN."
+    link: { url: "https://www.newscientist.com/tours/geneva-explore-dark-and-frozen-matter/", label: "New Scientist Discovery Tours" }
+
+  - id: iop-stfc-advisory
+    year: "2018–"
+    iso: "2018-2"
+    category: "Policy / advisory"
+    title: "Advisory roles on public engagement strategy at the IoP and STFC"
+    summary: "IoP Big Data Public Engagement Steering Group, and STFC Public Engagement Reaction Award review panel."
+
+  - id: turing-pe-panel
+    year: "2022–"
+    iso: "2022-1"
+    category: "Policy / advisory"
+    title: "Alan Turing Institute Public Engagement Funding Review Panel"
+    summary: "Reviewer for Public Engagement funding awards at the Alan Turing Institute."
+
+  - id: schools-masterclass
+    year: "2014–"
+    iso: "2014-3"
+    category: "Activity"
+    title: "Organiser, annual Manchester Schools Particle Physics Masterclass"
+    summary: "Full-day event of lectures, Q&A, and hands-on analysis of LHC data — reaching thousands of A-Level students each year."
+    body: >-
+      Coordinate an annual full-day event that incorporates lectures,
+      Q&A sessions and hands-on activities including experience with
+      analysis of data from the Large Hadron Collider.  The masterclass
+      relies on the involvement of around twenty-five staff and PGR
+      students from the Particle Physics Group every year, currently
+      reaching thousands of A-Level students.  Expanding to a twice-a-year
+      activity targeting Widening Participation audiences, in partnership
+      with the UoM Widening Participation Team.
+
+  - id: public-lectures
+    year: "2016–"
+    iso: "2016-2"
+    category: "Public lecture"
+    title: "Invited public lectures on particle physics"
+    summary: "Multiple public lectures per year at museums, bars, schools, and scientific societies — targeting diverse venues, ages and audiences."
+
+  - id: press-interviews
+    year: "2015–"
+    iso: "2015-2"
+    category: "Press / media"
+    title: "Press, radio and broadcast interviews"
+    summary: "Interviews and expert commentary for BBC Radio, Radio Dubai, Western Mail, and the CERN press office — including 'Science Cafe', 'The Unexplainers', and live LHC Run-3 startup coverage."
+
+  - id: social-media-curation
+    year: "2015–"
+    iso: "2015-1"
+    category: "Activity"
+    title: "Founder and curator of the Manchester particle physics group social presence"
+    summary: "~300k views per year. Outlet for public understanding of science, enhanced international presence of the research group, and recruitment support for undergraduate and PGR students."
+    link: { url: "https://twitter.com/UoMparticle", label: "UoMparticle" }
+
+  - id: stem-ambassador
+    year: "2016–"
+    iso: "2016-1"
+    category: "Activity"
+    title: "Registered STEM Ambassador"
+    summary: "Multiple events per year supporting schools and regional events, continuing professional development for teachers, and training in public engagement planning and evaluation."
+
+  - id: science-uncovered-2016
+    year: "2016"
+    iso: "2016-3"
+    category: "Activity"
+    title: "Lightning talks, research stations and schools Q&A at Science Uncovered"
+    summary: "Organiser of lightning talks and a science bar for ten researchers at the 'Science Uncovered' event at the Manchester Museum (European Researchers' Night)."
+
+  - id: bsa-mentor-2016
+    year: "2016"
+    iso: "2016-4"
+    category: "Activity"
+    title: "Academic mentor, British Science Association Manchester outreach activities"
+    summary: "Academic mentor supporting BSA Manchester outreach activities."
+
+  - id: lhc-roadshow-cardiff
+    year: "2015"
+    iso: "2015-3"
+    category: "Public lecture"
+    title: "STFC LHC Roadshow at the Welsh National Assembly"
+    summary: "Presenter for the STFC LHC Roadshow at the National Assembly, Cardiff — thousands of visitors from the general public, school groups, and ministers."
+
+  - id: wales-masterclass-2015
+    year: "2015"
+    iso: "2015-4"
+    category: "Activity"
+    title: "STFC Welsh Particle Physics Masterclass"
+    summary: "Lecturer and demonstrator at the STFC Welsh Particle Physics Masterclass, Wrexham — aimed at widening participation."
+
+  - id: cern-welsh-teachers
+    year: "2015–"
+    iso: "2015-5"
+    category: "Public lecture"
+    title: "Invited speaker, CERN Welsh Schoolteachers Education Programme"
+    summary: "Invited speaker at the CERN Welsh Schoolteachers Education Programme."
+
+  - id: big-bang-fair
+    year: "2014–15"
+    iso: "2014-2"
+    category: "Activity"
+    title: "Particle Physics exhibit, Big Bang Young Scientists and Engineers Fair"
+    summary: "Activity leader at the Particle Physics exhibition at the Big Bang Fair, Birmingham."
+
+  - id: collider-msi
+    year: "2013–"
+    iso: "2013-2"
+    category: "Activity"
+    title: "Collider exhibit, Manchester Museum of Science and Industry"
+    summary: "Exhibitor and demonstrator at the 'Collider' exhibit and other events at the Manchester Science Festival and the Museum of Science and Industry."
+
+  - id: royal-society-2013
+    year: "2013"
+    iso: "2013-1"
+    category: "Activity"
+    title: "Understanding the Higgs boson — Royal Society Summer Science Exhibition"
+    summary: "Presented an exhibit on ‘Understanding the Higgs boson’ at the Royal Society Summer Science Exhibition, London."
+
+  - id: science-highlights
+    year: "2010–"
+    iso: "2010-1"
+    category: "Press / media"
+    title: "Research write-ups for general audiences"
+    summary: "Research showcased in write-ups for the US Department of Energy Science Highlights, Fermilab Frontier Science Results, Fermilab Result of the Week, ATLAS Physics Briefings, and reflected in international media."

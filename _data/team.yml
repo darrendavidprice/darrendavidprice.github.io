@@ -1,384 +1,541 @@
 # ============================================================
-#  team.yml — research team, mirroring the DM People page:
-#  Current members + Alumni, each with an initials avatar, role,
-#  focus line, "Works on" chips, and optional links. Alumni may
-#  carry a "now" destination.
-#
-#  works_on / worked_on are free-text display labels (not filter tags).
+#  team.yml — current Manchester group + alumni.
+#  alumni schema: name, role, years, worked_on (tags), focus
+#  (one-line project description, mirrors current[].focus),
+#  optional now: { label, url }.
 # ============================================================
-
 current:
-  - initials: "DP"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Prof. Darren Price"
-    role: "Principal Investigator"
-    focus: "Works across dark matter at colliders and in direct detection, phenomenology, instrumentation, and the deployment of AI techniques."
-    works_on: ["Dark matter", "DarkSide", "Instrumentation", "Levitating sensors", "Neutrinos", "Collider physics", "ML/AI"]
-    email: "darren.price@manchester.ac.uk"
-    linkedin: "https://www.linkedin.com/in/darrendavidprice/"
-
-  - initials: "AR"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Dr. Ash Ritchie-Yates"
-    role: "Particle Astrophysics Postdoctoral Research Fellow"
-    focus: "Research focus to come."
-    works_on: ["DarkSide", "Levitating sensors", "Instrumentation"]
-
-  - initials: "GM"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Graham Miller"
-    role: "Engineer"
-    focus: "SiPM sensor assembly, metrology, and testing for the neutron veto system of the DarkSide experiment."
-    works_on: ["DarkSide", "Instrumentation"]
-
-  - initials: "RC"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Rob Chapple"
-    role: "Engineer"
-    focus: "SiPM sensor assembly, metrology, and testing for the neutron veto system of the DarkSide experiment."
-    works_on: ["DarkSide", "Instrumentation"]
-
-  - initials: "YZ"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Yingchang Zhang"
-    role: "PhD student (2026–)"
-    focus: "Development of opto-mechanical levitating quantum sensors for dark matter detection."
-    works_on: ["Instrumentation", "Levitating sensors"]
-
-  - initials: "SP"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Saulė Pigulevičiūtė"
-    role: "PhD student (2025–)"
-    focus: "Research focus to come."
-    works_on: ["DarkSide", "Instrumentation", "Phenomenology"]
-
-  - initials: "HZ"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Haoxiang Zhan"
-    role: "PhD student (2025–)"
-    focus: "Research focus to come."
-    works_on: ["Phenomenology", "DarkSide", "Instrumentation"]
-
-  - initials: "AG"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Andrzej Gawdzik"
-    role: "PhD student (2023–)"
-    focus: "Research focus to come."
-    works_on: ["Phenomenology", "DarkSide", "Neutrinos", "Levitating sensors", "ML/AI"]
-
-  - initials: "CR"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Conner Roberts"
-    role: "PhD student (2021–)"
-    focus: "Silicon photosensor instrumentation for next-generation dark matter searches."
-    works_on: ["DarkSide", "Instrumentation"]
-
-  - initials: "HC"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Hayden Casey"
-    role: "MPhil student"
-    focus: "Sensitivity studies for beyond-the-Standard-Model low-energy solar CEνNS anomalies with low-threshold dual-phase liquid-argon TPCs."
-    works_on: ["DarkSide", "Neutrinos"]
-
-  - initials: "DC"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "David Crofts"
-    role: "MPhys student (2025–26)"
-    focus: "A muon cosmic-ray detector and mini DarkSide-20k demonstrator for public engagement, using silicon photosensor modules built for the DarkSide-20k neutron veto. With Louis Durand."
-    works_on: ["DarkSide", "Instrumentation"]
-
-  - initials: "LD"
-    photo: ""            # EDIT — add /assets/images/people/<file>; placeholder shows initials until then
-    name: "Louis Durand"
-    role: "MPhys student (2025–26)"
-    focus: "A muon cosmic-ray detector and mini DarkSide-20k demonstrator for public engagement, using silicon photosensor modules built for the DarkSide-20k neutron veto. With David Crofts."
-    works_on: ["DarkSide", "Instrumentation"]
-
+- initials: DP
+  photo: ''
+  name: Prof. Darren Price
+  role: Principal Investigator
+  focus: Works across dark matter at colliders and in direct detection, phenomenology, instrumentation, and the deployment of AI techniques.
+  works_on:
+  - Dark matter
+  - DarkSide
+  - Instrumentation
+  - Levitating sensors
+  - Neutrinos
+  - Collider physics
+  - ML/AI
+  email: darren.price@manchester.ac.uk
+  linkedin: https://www.linkedin.com/in/darrendavidprice/
+- initials: AR
+  photo: ''
+  name: Dr. Ash Ritchie-Yates
+  role: Particle Astrophysics Postdoctoral Research Fellow
+  focus: Research focus to come.
+  works_on:
+  - DarkSide
+  - Levitating sensors
+  - Instrumentation
+- initials: GM
+  photo: ''
+  name: Graham Miller
+  role: Engineer
+  focus: SiPM sensor assembly, metrology, and testing for the neutron veto system of the DarkSide experiment.
+  works_on:
+  - DarkSide
+  - Instrumentation
+- initials: RC
+  photo: ''
+  name: Rob Chapple
+  role: Engineer
+  focus: SiPM sensor assembly, metrology, and testing for the neutron veto system of the DarkSide experiment.
+  works_on:
+  - DarkSide
+  - Instrumentation
+- initials: YZ
+  photo: ''
+  name: Yingchang Zhang
+  role: PhD student (2026–)
+  focus: Development of opto-mechanical levitating quantum sensors for dark matter detection.
+  works_on:
+  - Instrumentation
+  - Levitating sensors
+- initials: SP
+  photo: ''
+  name: Saulė Pigulevičiūtė
+  role: PhD student (2025–)
+  focus: Research focus to come.
+  works_on:
+  - DarkSide
+  - Instrumentation
+  - Phenomenology
+- initials: HZ
+  photo: ''
+  name: Haoxiang Zhan
+  role: PhD student (2025–)
+  focus: Research focus to come.
+  works_on:
+  - Phenomenology
+  - DarkSide
+  - Instrumentation
+- initials: AG
+  photo: ''
+  name: Andrzej Gawdzik
+  role: PhD student (2023–)
+  focus: Research focus to come.
+  works_on:
+  - Phenomenology
+  - DarkSide
+  - Neutrinos
+  - Levitating sensors
+  - ML/AI
+- initials: CR
+  photo: ''
+  name: Conner Roberts
+  role: PhD student (2021–)
+  focus: Silicon photosensor instrumentation for next-generation dark matter searches.
+  works_on:
+  - DarkSide
+  - Instrumentation
+- initials: HC
+  photo: ''
+  name: Hayden Casey
+  role: MPhil student
+  focus: Sensitivity studies for beyond-the-Standard-Model low-energy solar CEνNS anomalies with low-threshold dual-phase liquid-argon TPCs.
+  works_on:
+  - DarkSide
+  - Neutrinos
+- initials: DC
+  photo: ''
+  name: David Crofts
+  role: MPhys student (2025–26)
+  focus: A muon cosmic-ray detector and mini DarkSide-20k demonstrator for public engagement, using silicon photosensor modules built for the DarkSide-20k neutron veto. With Louis Durand.
+  works_on:
+  - DarkSide
+  - Instrumentation
+- initials: LD
+  photo: ''
+  name: Louis Durand
+  role: MPhys student (2025–26)
+  focus: A muon cosmic-ray detector and mini DarkSide-20k demonstrator for public engagement, using silicon photosensor modules built for the DarkSide-20k neutron veto. With David Crofts.
+  works_on:
+  - DarkSide
+  - Instrumentation
 alumni:
-  # ── Postdoctoral Research Associates ──────────────────────────────────────
-  - name: "Dr. Volker Austrup"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["DarkSide", "Instrumentation"]
-    now: { label: "", url: "" }   # EDIT — current position
-
-  - name: "Dr. Sam Dysch"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["Collider physics", "Electroweak"]
-    now: { label: "", url: "" }   # EDIT — current position
-
-  - name: "Dr. James Robinson"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["ML/AI", "Collider physics"]
-    now: { label: "Senior staff, Alan Turing Institute", url: "" }
-
-  - name: "Dr. Stephen Menary"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["ML/AI", "Phenomenology"]
-    now: { label: "", url: "" }   # EDIT — current position
-
-  - name: "Dr. Agni Bethani"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["Collider physics", "B-physics"]
-    now: { label: "Research fellow, Belgium", url: "" }
-
-  - name: "Dr. Xiahou Sun"
-    role: "Postdoctoral Research Associate"
-    years: "—"
-    worked_on: ["Collider physics"]
-    now: { label: "Faculty member, China", url: "" }
-
-  - name: "Dr. Julia Iturbe"
-    role: "PhD / Postdoctoral Research Associate"
-    years: "2013–2016"
-    worked_on: ["Electroweak", "Collider physics"]
-    now: { label: "Research fellow, Hong Kong", url: "" }
-
-  # ── Research staff ─────────────────────────────────────────────────────────
-  - name: "Mark Langstaff"
-    role: "Electronics Technician"
-    years: "—"
-    worked_on: ["DarkSide", "Instrumentation"]
-    now: { label: "", url: "" }   # EDIT — current position
-
-  # ── PhD students ───────────────────────────────────────────────────────────
-  - name: "Ben Wilson"
-    role: "PhD student"
-    years: "2020–2024"
-    worked_on: ["Collider physics", "Electroweak"]
-    now: { label: "", url: "" }   # EDIT
-
-  - name: "Dr. Ellen Sandford"
-    role: "PhD student"
-    years: "2019–2023"
-    worked_on: ["Dark matter", "Phenomenology"]
-    now: { label: "", url: "" }   # EDIT
-
-  - name: "Dr. Candice Basson"
-    role: "PhD student"
-    years: "2017–2022"
-    worked_on: ["Dark matter", "Collider physics"]
-    now: { label: "", url: "" }   # EDIT
-
-  - name: "Dr. Rebecca Pickles"
-    role: "PhD student"
-    years: "2015–2019"
-    worked_on: ["Electroweak", "Collider physics"]
-    now: { label: "", url: "" }   # EDIT
-
-  - name: "Conor Sheehan"
-    role: "PhD student"
-    years: "—"
-    worked_on: ["ML/AI", "Collider physics"]
-    now: { label: "Data Scientist, Peak", url: "" }
-
-  - name: "Dr. Yaadav Bhauruth"
-    role: "PhD student"
-    years: "2013–2017"
-    worked_on: ["Electroweak", "Collider physics"]
-
-  - name: "Dr. Aparajita Dattagupta"
-    role: "PhD student (Indiana University)"
-    years: "2012–2016"
-    worked_on: ["Electroweak", "Collider physics"]
-    now: { label: "Postdoc, University of Oregon (ATLAS)", url: "" }
-
-  - name: "Dr. Yi Yang"
-    role: "PhD student (Indiana University)"
-    years: "2008–2012"
-    worked_on: ["Collider physics", "B-physics"]
-    now: { label: "Faculty, Nat'l Cheng Kung University (AMS)", url: "" }
-
-  # ── MScR / MPhil students ──────────────────────────────────────────────────
-  - name: "Eleanor Bishop"
-    role: "MScR student"
-    years: "2021–2022"
-    worked_on: ["Dark matter", "Neutrinos"]
-
-  - name: "Huazhen Li"
-    role: "MScR student"
-    years: "2021–2022"
-    worked_on: ["Collider physics"]
-
-  - name: "Sparshita Dey"
-    role: "MScR student"
-    years: "2019–2020"
-    worked_on: ["Dark matter"]
-    now: { label: "PhD student", url: "" }
-
-  - name: "Ishanee Pophale"
-    role: "MScR student"
-    years: "2018–2020"
-    worked_on: ["Dark matter", "Neutrinos"]
-    now: { label: "PhD student", url: "" }
-
-  # ── MPhys projects ─────────────────────────────────────────────────────────
-  - name: "Marcelo Borill & Pau Petit Rosas"
-    role: "MPhys students"
-    years: "2022–23"
-    worked_on: ["Dark matter", "Phenomenology"]
-
-  - name: "Josephine Hall & Lucas Foreman"
-    role: "MPhys students"
-    years: "2021–22"
-    worked_on: ["Collider physics", "Electroweak"]
-
-  - name: "Thomas Gething & Andrew Brown"
-    role: "MPhys students"
-    years: "2021–22"
-    worked_on: ["Collider physics", "Dark matter"]
-
-  - name: "Advait Kanekar & Zak Goble"
-    role: "MPhys students"
-    years: "2020–21"
-    worked_on: ["Collider physics", "Dark matter"]
-
-  - name: "Jake McKean & Joshua Green"
-    role: "MPhys students"
-    years: "2020–21"
-    worked_on: ["Collider physics"]
-
-  - name: "Sarah Burns & Caron McColgan"
-    role: "MPhys students"
-    years: "2020–21"
-    worked_on: ["ML/AI"]
-
-  - name: "Zhiyuan Zhang & Waritsara Bunyarak"
-    role: "MPhys students"
-    years: "2020–21"
-    worked_on: ["ML/AI"]
-
-  - name: "Mohamed Aly & Ahmed Abdelmotteleb"
-    role: "MPhys students"
-    years: "2019–20"
-    worked_on: ["Collider physics", "Electroweak"]
-    now: { label: "Abdelmotteleb: PhD student, Warwick", url: "" }
-
-  - name: "George Everiss & Soran Hazar"
-    role: "MPhys students"
-    years: "2019–20"
-    worked_on: ["Collider physics", "Dark matter"]
-
-  - name: "Enrico Londardelli & Krishan Jethwa"
-    role: "MPhys students"
-    years: "2019–20"
-    worked_on: ["ML/AI", "Dark matter"]
-
-  - name: "Genis Marfa & Ahmad Alachkar"
-    role: "MPhys students"
-    years: "2019–20"
-    worked_on: ["Dark matter", "Phenomenology"]
-
-  - name: "Sean McGuffin & Matthew Silcocks"
-    role: "MPhys students"
-    years: "2019–20"
-    worked_on: ["Collider physics"]
-
-  - name: "Niamh Fearon"
-    role: "MPhys student"
-    years: "2018–19"
-    worked_on: ["Dark matter", "Neutrinos"]
-    now: { label: "PhD student, University of Oxford", url: "" }
-
-  - name: "Chris Goodwin"
-    role: "MPhys student"
-    years: "2018–19"
-    worked_on: ["Dark matter"]
-    now: { label: "PhD student, University of Manchester", url: "" }
-
-  - name: "Nicola Neophytou & Anthony Wisdom"
-    role: "MPhys students"
-    years: "2018–19"
-    worked_on: ["Collider physics", "Electroweak"]
-
-  - name: "Lewis Davies & Wei Ann Heng"
-    role: "MPhys students"
-    years: "2017–18"
-    worked_on: ["Collider physics", "Dark matter"]
-
-  - name: "Kyle Lacy-Andrews & Alexander Macdonald"
-    role: "MPhys students"
-    years: "2017–18"
-    worked_on: ["Collider physics"]
-
-  - name: "Meirin Evans"
-    role: "MPhys student"
-    years: "2017–18"
-    worked_on: ["Collider physics", "ML/AI"]
-    now: { label: "PhD student, University of Sussex", url: "" }
-
-  - name: "Ally Suen"
-    role: "MPhys student"
-    years: "2016–17"
-    worked_on: ["Collider physics", "B-physics"]
-
-  - name: "Robert Vallance"
-    role: "MPhys student"
-    years: "2016"
-    worked_on: ["Collider physics", "B-physics"]
-    now: { label: "PhD student, University of Birmingham", url: "" }
-
-  - name: "Chloe Gray & Emily Graham"
-    role: "MPhys students"
-    years: "2014–15"
-    worked_on: ["Collider physics"]
-    now: { label: "Gray: PhD, Glasgow · Graham: PhD, Liverpool", url: "" }
-
-  # ── Summer research interns ────────────────────────────────────────────────
-  - name: "Flavia Cimpean"
-    role: "Summer research intern"
-    years: "2022"
-    worked_on: ["Dark matter", "Phenomenology"]
-
-  - name: "Silvia Castillo Vergara"
-    role: "Summer research intern"
-    years: "2022"
-    worked_on: ["Collider physics"]
-
-  - name: "Eoin O'Neill"
-    role: "Summer research intern"
-    years: "2021"
-    worked_on: ["Dark matter", "Neutrinos"]
-
-  - name: "Julia Sisk"
-    role: "Summer research intern"
-    years: "2019"
-    worked_on: ["Dark matter", "Phenomenology"]
-    now: { label: "PhD student, University of Cambridge", url: "" }
-
-  - name: "Mohamed Aly"
-    role: "Summer research intern"
-    years: "2019"
-    worked_on: ["Collider physics", "Electroweak"]
-
-  - name: "Emily Hampshire"
-    role: "Summer research intern"
-    years: "2019"
-    worked_on: ["Collider physics"]
-    now: { label: "PhD student, Royal Holloway London", url: "" }
-
-  - name: "Sol Cotton & Niamh Fearon"
-    role: "Summer research interns"
-    years: "2018"
-    worked_on: ["Dark matter"]
-
-  - name: "Likun Xie"
-    role: "Summer research intern"
-    years: "2017"
-    worked_on: ["Collider physics", "Electroweak"]
-
-  - name: "Vilius Cepaitis"
-    role: "Summer research intern"
-    years: "2016"
-    worked_on: ["Collider physics", "B-physics"]
-    now: { label: "PhD student, Imperial College London", url: "" }
-
-  - name: "Chloe Gray"
-    role: "Summer research intern"
-    years: "2014"
-    worked_on: ["Collider physics"]
-    now: { label: "PhD student, University of Glasgow", url: "" }
+- name: Dr. Volker Austrup
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - DarkSide
+  - Instrumentation
+  now:
+    label: ''
+    url: ''
+  focus: ATLAS analysis and data-intensive methods for collider physics.
+- name: Dr. Sam Dysch
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - Collider physics
+  - Electroweak
+  now:
+    label: ''
+    url: ''
+  focus: ATLAS analysis — electroweak and Higgs measurements.
+- name: Dr. James Robinson
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - ML/AI
+  - Collider physics
+  now:
+    label: Senior staff, Alan Turing Institute
+    url: ''
+  focus: Machine learning for scientific discovery; now Senior Research Software Engineer at the Alan Turing Institute.
+- name: Dr. Stephen Menary
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - ML/AI
+  - Phenomenology
+  now:
+    label: ''
+    url: ''
+  focus: Expressive density models and machine learning for the physical sciences.
+- name: Dr. Agni Bethani
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - Collider physics
+  - B-physics
+  now:
+    label: Research fellow, Belgium
+    url: ''
+  focus: ATLAS B-physics and quarkonium measurements.
+- name: Dr. Xiahou Sun
+  role: Postdoctoral Research Associate
+  years: —
+  worked_on:
+  - Collider physics
+  now:
+    label: Faculty member, China
+    url: ''
+  focus: Collider physics at ATLAS; now faculty in China.
+- name: Dr. Julia Iturbe
+  role: PhD / Postdoctoral Research Associate
+  years: 2013–2016
+  worked_on:
+  - Electroweak
+  - Collider physics
+  now:
+    label: Research fellow, Hong Kong
+    url: ''
+  focus: Determination of the electroweak Zjj production cross-section at ATLAS.
+- name: Mark Langstaff
+  role: Electronics Technician
+  years: —
+  worked_on:
+  - DarkSide
+  - Instrumentation
+  now:
+    label: ''
+    url: ''
+  focus: Electronics for silicon photosensor systems on DarkSide.
+- name: Ben Wilson
+  role: PhD student
+  years: 2020–2024
+  worked_on:
+  - Collider physics
+  - Electroweak
+  now:
+    label: ''
+    url: ''
+  focus: Novel probes of lepton number violation through electroweak interactions.
+- name: Dr. Ellen Sandford
+  role: PhD student
+  years: 2019–2023
+  worked_on:
+  - Dark matter
+  - Phenomenology
+  now:
+    label: ''
+    url: ''
+  focus: Non-standard dark matter searches with the DarkSide experiment.
+- name: Dr. Candice Basson
+  role: PhD student
+  years: 2017–2022
+  worked_on:
+  - Dark matter
+  - Collider physics
+  now:
+    label: ''
+    url: ''
+  focus: Standard Model backgrounds in the search for dark matter produced in association with b-quarks at ATLAS.
+- name: Dr. Rebecca Pickles
+  role: PhD student
+  years: 2015–2019
+  worked_on:
+  - Electroweak
+  - Collider physics
+  now:
+    label: ''
+    url: ''
+  focus: Novel searches for new phenomena through electroweak boson fusion measurements at ATLAS.
+- name: Conor Sheehan
+  role: PhD student
+  years: —
+  worked_on:
+  - ML/AI
+  - Collider physics
+  now:
+    label: Data Scientist, Peak
+    url: ''
+  focus: EDIT ME — research focus to add.
+- name: Dr. Yaadav Bhauruth
+  role: PhD student
+  years: 2013–2017
+  worked_on:
+  - Electroweak
+  - Collider physics
+  focus: Searches for new heavy gauge bosons in weak boson fusion.
+- name: Dr. Aparajita Dattagupta
+  role: PhD student (Indiana University)
+  years: 2012–2016
+  worked_on:
+  - Electroweak
+  - Collider physics
+  now:
+    label: Postdoc, University of Oregon (ATLAS)
+    url: ''
+  focus: Observation of electroweak W+jets production and kinematic tests of vector boson fusion.
+- name: Dr. Yi Yang
+  role: PhD student (Indiana University)
+  years: 2008–2012
+  worked_on:
+  - Collider physics
+  - B-physics
+  now:
+    label: Faculty, Nat'l Cheng Kung University (AMS)
+    url: ''
+  focus: Di-muons near the Upsilon resonances in ATLAS.
+- name: Eleanor Bishop
+  role: MScR student
+  years: 2021–2022
+  worked_on:
+  - Dark matter
+  - Neutrinos
+  focus: Prospects for DarkSide-20k to probe non-standard neutrino interactions from solar neutrino sources.
+- name: Huazhen Li
+  role: MScR student
+  years: 2021–2022
+  worked_on:
+  - Collider physics
+  focus: Searching for new phenomena in high-energy photon–photon collisions at the LHC with ATLAS-AFP.
+- name: Sparshita Dey
+  role: MScR student
+  years: 2019–2020
+  worked_on:
+  - Dark matter
+  now:
+    label: PhD student
+    url: ''
+  focus: Diagnostic study of the DarkSide-50 direct dark matter detection experiment.
+- name: Ishanee Pophale
+  role: MScR student
+  years: 2018–2020
+  worked_on:
+  - Dark matter
+  - Neutrinos
+  now:
+    label: PhD student
+    url: ''
+  focus: Coherent scattering of supernova neutrinos in next-generation liquid noble gas dark matter detectors.
+- name: Marcelo Borill & Pau Petit Rosas
+  role: MPhys students
+  years: 2022–23
+  worked_on:
+  - Dark matter
+  - Phenomenology
+  focus: Experimental signatures to search for low mass dark matter gravitationally captured in celestial bodies.
+- name: Josephine Hall & Lucas Foreman
+  role: MPhys students
+  years: 2021–22
+  worked_on:
+  - Collider physics
+  - Electroweak
+  focus: Doubly-charged Higgs boson searches at the LHC through vector boson fusion.
+- name: Thomas Gething & Andrew Brown
+  role: MPhys students
+  years: 2021–22
+  worked_on:
+  - Collider physics
+  - Dark matter
+  focus: Feasibility of new searches for dark photons at the LHC ATLAS experiment.
+- name: Advait Kanekar & Zak Goble
+  role: MPhys students
+  years: 2020–21
+  worked_on:
+  - Collider physics
+  - Dark matter
+  focus: Dark matter production in high-energy photon–photon interactions at the LHC ATLAS and AFP experiments.
+- name: Jake McKean & Joshua Green
+  role: MPhys students
+  years: 2020–21
+  worked_on:
+  - Collider physics
+  focus: WW and ZZ production in photon-fusion interactions at the ATLAS experiment.
+- name: Sarah Burns & Caron McColgan
+  role: MPhys students
+  years: 2020–21
+  worked_on:
+  - ML/AI
+  focus: Applications of data science to HSBC UK Asset Finance.
+- name: Zhiyuan Zhang & Waritsara Bunyarak
+  role: MPhys students
+  years: 2020–21
+  worked_on:
+  - ML/AI
+  focus: Applications of data science to HSBC UK Asset Finance.
+- name: Mohamed Aly & Ahmed Abdelmotteleb
+  role: MPhys students
+  years: 2019–20
+  worked_on:
+  - Collider physics
+  - Electroweak
+  now:
+    label: 'Abdelmotteleb: PhD student, Warwick'
+    url: ''
+  focus: Feasibility studies and sensitivity estimations for a new search for heavy Majorana neutrinos at the LHC.
+- name: George Everiss & Soran Hazar
+  role: MPhys students
+  years: 2019–20
+  worked_on:
+  - Collider physics
+  - Dark matter
+  focus: New approaches to searching for dark matter and QCD axion production at the LHC.
+- name: Enrico Londardelli & Krishan Jethwa
+  role: MPhys students
+  years: 2019–20
+  worked_on:
+  - ML/AI
+  - Dark matter
+  focus: Generative adversarial network approaches to enhance simulation of liquid-argon time projection chambers and dark matter detection sensitivity.
+- name: Genis Marfa & Ahmad Alachkar
+  role: MPhys students
+  years: 2019–20
+  worked_on:
+  - Dark matter
+  - Phenomenology
+  focus: Fisher information to enhance the sensitivity of future dark matter searches.
+- name: Sean McGuffin & Matthew Silcocks
+  role: MPhys students
+  years: 2019–20
+  worked_on:
+  - Collider physics
+  focus: Potential to measure double parton scattering interactions in top quark pair production at the LHC.
+- name: Niamh Fearon
+  role: MPhys student
+  years: 2018–19
+  worked_on:
+  - Dark matter
+  - Neutrinos
+  now:
+    label: PhD student, University of Oxford
+    url: ''
+  focus: Simulation and sensitivity studies for supernovae detection with the DarkSide-20k dark matter detector.
+- name: Chris Goodwin
+  role: MPhys student
+  years: 2018–19
+  worked_on:
+  - Dark matter
+  now:
+    label: PhD student, University of Manchester
+    url: ''
+  focus: Performance of the DarkSide-50 detector for direct dark matter searches.
+- name: Nicola Neophytou & Anthony Wisdom
+  role: MPhys students
+  years: 2018–19
+  worked_on:
+  - Collider physics
+  - Electroweak
+  focus: Indirect searches for extra dimensions at the LHC.
+- name: Lewis Davies & Wei Ann Heng
+  role: MPhys students
+  years: 2017–18
+  worked_on:
+  - Collider physics
+  - Dark matter
+  focus: New searches for invisible phenomena at the LHC.
+- name: Kyle Lacy-Andrews & Alexander Macdonald
+  role: MPhys students
+  years: 2017–18
+  worked_on:
+  - Collider physics
+  focus: Sensitivity of future searches for vector-like quarks at the LHC.
+- name: Meirin Evans
+  role: MPhys student
+  years: 2017–18
+  worked_on:
+  - Collider physics
+  - ML/AI
+  now:
+    label: PhD student, University of Sussex
+    url: ''
+  focus: Future release of the CERN ATLAS 13 TeV proton–proton Open Data.
+- name: Ally Suen
+  role: MPhys student
+  years: 2016–17
+  worked_on:
+  - Collider physics
+  - B-physics
+  focus: First extraction of the direct J/ψ production rate using LHC pp collision data.
+- name: Robert Vallance
+  role: MPhys student
+  years: '2016'
+  worked_on:
+  - Collider physics
+  - B-physics
+  now:
+    label: PhD student, University of Birmingham
+    url: ''
+  focus: Long-distance matrix elements for charmonium production in Non-Relativistic QCD.
+- name: Chloe Gray & Emily Graham
+  role: MPhys students
+  years: 2014–15
+  worked_on:
+  - Collider physics
+  now:
+    label: 'Gray: PhD, Glasgow · Graham: PhD, Liverpool'
+    url: ''
+  focus: Discovery potential for an extended Higgs sector in novel rare decay modes at HL-LHC.
+- name: Flavia Cimpean
+  role: Summer research intern
+  years: '2022'
+  worked_on:
+  - Dark matter
+  - Phenomenology
+  focus: Interplay of non-standard neutrino interactions and dark matter discovery in liquid-argon direct detection experiments.
+- name: Silvia Castillo Vergara
+  role: Summer research intern
+  years: '2022'
+  worked_on:
+  - Collider physics
+  focus: Educational and public engagement materials for the ATLAS Education and Outreach group at CERN.
+- name: Eoin O'Neill
+  role: Summer research intern
+  years: '2021'
+  worked_on:
+  - Dark matter
+  - Neutrinos
+  focus: Potential for DarkSide-20k to probe non-standard neutrino interactions.
+- name: Julia Sisk
+  role: Summer research intern
+  years: '2019'
+  worked_on:
+  - Dark matter
+  - Phenomenology
+  now:
+    label: PhD student, University of Cambridge
+    url: ''
+  focus: Effective field theory simulations of nuclear energy recoils for non-standard dark matter searches at DarkSide-20k.
+- name: Mohamed Aly
+  role: Summer research intern
+  years: '2019'
+  worked_on:
+  - Collider physics
+  - Electroweak
+  focus: Sensitivity studies for new ATLAS searches for heavy sterile Majorana neutrinos.
+- name: Emily Hampshire
+  role: Summer research intern
+  years: '2019'
+  worked_on:
+  - Collider physics
+  now:
+    label: PhD student, Royal Holloway London
+    url: ''
+  focus: New phenomena searches with the ATLAS forward proton detector.
+- name: Sol Cotton & Niamh Fearon
+  role: Summer research interns
+  years: '2018'
+  worked_on:
+  - Dark matter
+  focus: Simulations for the DarkSide-20k dark matter detection neutron veto system.
+- name: Likun Xie
+  role: Summer research intern
+  years: '2017'
+  worked_on:
+  - Collider physics
+  - Electroweak
+  focus: Quantum-mechanical interference modelling in searches for high mass di-lepton resonances at the LHC.
+- name: Vilius Cepaitis
+  role: Summer research intern
+  years: '2016'
+  worked_on:
+  - Collider physics
+  - B-physics
+  now:
+    label: PhD student, Imperial College London
+    url: ''
+  focus: Precision measurement of the branching fraction of the ψ(2S) meson into di-muon pairs using LHC pp collision data.
+- name: Chloe Gray
+  role: Summer research intern
+  years: '2014'
+  worked_on:
+  - Collider physics
+  now:
+    label: PhD student, University of Glasgow
+    url: ''
+  focus: Quantum-mechanical interference in electroweak physics processes.

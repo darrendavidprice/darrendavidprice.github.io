@@ -48,6 +48,7 @@ wide: true
   <article class="alumnus-card">
     <h4>{{ a.name }}</h4>
     <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
+    {% if a.focus %}<p class="focus">{{ a.focus }}</p>{% endif %}
     {% if a.worked_on %}
     <div class="taglist">
       {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}

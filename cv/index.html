@@ -31,12 +31,12 @@ wide: true
 <hr class="rule">
 
 <h2 class="section-label" id="grants">Research grants</h2>
-<p class="prose small">Sustained external funding attributable to me of £4.1M (CoI credit split), total grant value £15.7M.</p>
+<p class="prose small">Combined grant income attributable to me (CoI credit split) of <strong>{{ site.data.grants.totals.attributable }}</strong>, with a total grant value of <strong>{{ site.data.grants.totals.total_value }}</strong>.</p>
 <ul class="roles-list">
   {% for gr in site.data.grants.entries %}
   <li class="role-item">
     <span class="yr">{{ gr.year }}</span>
-    <span class="what"><strong>{{ gr.title }}</strong> — {{ gr.value }}{% if gr.role %} &middot; {{ gr.role }}{% endif %}{% if gr.funder %} &middot; {{ gr.funder }}{% endif %}</span>
+    <span class="what"><strong>{{ gr.title }}</strong>{% if gr.role %} &middot; {{ gr.role }}{% endif %}{% if gr.funder %} &middot; {{ gr.funder }}{% endif %}</span>
   </li>
   {% endfor %}
 </ul>

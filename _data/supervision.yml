@@ -35,3 +35,94 @@ mphys_note: >-
   dark matter, photon-fusion searches, heavy Majorana neutrinos, generative
   models for liquid-argon simulation, and industrial data-science projects
   with partners including HSBC UK Asset Finance.
+
+# ============================================================
+# MPhys final-year research projects — full list seeded from CV
+# (years where students started → finished; pair-names separated
+# by " & " on a single line per CV).
+# ============================================================
+mphys:
+  - { years: "2022–23", names: "Marcelo Borill, Pau Petit Rosas",                  topic: "Experimental signatures to search for low-mass dark matter gravitationally captured in celestial bodies." }
+  - { years: "2021–22", names: "Lucas Foreman, Josephine Hall",                    topic: "Doubly-charged Higgs boson searches at the LHC through vector boson fusion." }
+  - { years: "2021–22", names: "Thomas Gething, Andrew Brown",                     topic: "Feasibility of new searches for dark photons at the ATLAS experiment." }
+  - { years: "2020–21", names: "Advait Kanekar, Zak Goble",                        topic: "Dark matter production in high-energy photon–photon interactions at ATLAS and AFP." }
+  - { years: "2020–21", names: "Jake McKean, Joshua Green",                        topic: "WW and ZZ production in photon-fusion interactions at the ATLAS experiment." }
+  - { years: "2020–21", names: "Sarah Burns, Caron McColgan, Zhiyuan Zhang, Waritsara Bunyarak", topic: "Applications of data science to HSBC UK Asset Finance." }
+  - { years: "2019–20", names: "Mohamed Aly, Ahmed Abdelmotteleb",                 topic: "Feasibility studies and sensitivity estimations for a new search for heavy Majorana neutrinos at the LHC." }
+  - { years: "2019–20", names: "George Everiss, Soran Hazar",                      topic: "New approaches to searching for dark matter and QCD axion production at the LHC." }
+  - { years: "2019–20", names: "Enrico Londardelli, Krishan Jethwa",               topic: "Generative-adversarial-network approaches to enhance simulation of liquid-argon TPC detector responses and dark matter detection sensitivity." }
+  - { years: "2019–20", names: "Genis Marfa, Ahmad Alachkar",                      topic: "Fisher information to enhance the sensitivity of future dark matter searches." }
+  - { years: "2019–20", names: "Sean McGuffin, Matthew Silcocks",                  topic: "Potential to measure double parton scattering interactions in top-quark pair production at the LHC." }
+  - { years: "2018–19", names: "Niamh Fearon",                                     topic: "Simulation and sensitivity studies for supernovae detection with the DarkSide-20k dark matter detector." }
+  - { years: "2018–19", names: "Chris Goodwin",                                    topic: "Performance of the DarkSide-50 detector for direct dark matter searches." }
+  - { years: "2018–19", names: "Nicola Neophytou, Anthony Wisdom",                 topic: "Indirect searches for extra dimensions at the LHC." }
+  - { years: "2017–18", names: "Lewis Davies, Wei Ann Heng",                       topic: "New searches for invisible phenomena at the LHC." }
+  - { years: "2017–18", names: "Kyle Lacy-Andrews, Alexander Macdonald",           topic: "Sensitivity of future searches for vector-like quarks at the LHC." }
+  - { years: "2017–18", names: "Meirin Evans",                                     topic: "Future release of the CERN ATLAS 13 TeV proton–proton Open Data." }
+  - { years: "2016–17", names: "Ally Suen",                                        topic: "First extraction of the direct J/ψ production rate using LHC pp collision data." }
+  - { years: "2016",    names: "Robert Vallance",                                  topic: "Long-distance matrix elements for charmonium production in Non-Relativistic QCD." }
+  - { years: "2014–15", names: "Chloe Gray, Emily Graham",                         topic: "Discovery potential for an extended Higgs sector in novel rare decay modes at HL-LHC." }
+
+# ============================================================
+# Undergraduate summer research projects
+# ============================================================
+undergrad_summer:
+  - { year: "2022", names: "Flavia-Alexandra Cimpean",      topic: "Interplay of non-standard neutrino interactions and dark matter discovery in liquid-argon direct-detection experiments." }
+  - { year: "2022", names: "Silvia Castillo Vergara",       topic: "Educational and public engagement materials in particle physics for the ATLAS Education and Outreach group at CERN." }
+  - { year: "2021", names: "Eoin O'Neill",                  topic: "Potential for DarkSide-20k to probe non-standard neutrino interactions." }
+  - { year: "2019", names: "Julia Sisk",                    topic: "Effective field theory simulations of nuclear energy recoils for non-standard dark matter searches at DarkSide-20k." }
+  - { year: "2019", names: "Mohamed Aly",                   topic: "Sensitivity studies for new ATLAS searches for heavy sterile Majorana neutrinos." }
+  - { year: "2019", names: "Emily Hampshire",               topic: "New-phenomena searches with the ATLAS forward proton detector." }
+  - { year: "2018", names: "Sol Cotton, Niamh Fearon",      topic: "Simulations for the DarkSide-20k neutron-veto system (co-supervised)." }
+  - { year: "2017", names: "Likun Xie",                     topic: "Quantum-mechanical interference modelling in searches for high-mass di-lepton resonances at the LHC (co-supervised)." }
+  - { year: "2016", names: "Vilius Cepaitis",               topic: "Precision measurement of the branching fraction of the ψ(2S) meson into di-muon pairs using LHC pp collision data." }
+  - { year: "2014", names: "Chloe Gray",                    topic: "Quantum-mechanical interference in electroweak physics processes." }
+
+# ============================================================
+# BSc final-year dissertations
+# ============================================================
+bsc:
+  - { years: "2016–present", names: "Lauren Draper, Patrick Odagiu, …",  topic: "“The hunt for dark matter.”" }
+
+# ============================================================
+# Tutoring & teaching assistance (from CV)
+# ============================================================
+tutoring:
+  - { years: "2020–present", what: "Third-year Particle Physics Computing Laboratory demonstrator (University of Manchester)." }
+  - { years: "2018–present", what: "Particle Physics Schools masterclass tutor (University of Manchester)." }
+  - { years: "2014–2017",    what: "Particle Physics Schools masterclass experimental session tutor (Manchester)." }
+  - { years: "2014",         what: "Third-year Particle Physics examples classes (Manchester)." }
+  - { years: "2013–2014",    what: "First-year undergraduate tutor (Manchester)." }
+  - { years: "2013–2014",    what: "Tutor at Georg-August-Universität Göttingen summer school." }
+  - { years: "2008",         what: "Demonstrator at the ATLAS offline software and distributed computing tutorial, CERN." }
+  - { years: "2005–2006",    what: "Teaching Assistant in Particle Physics / Solid State Physics (Lancaster University)." }
+  - { years: "2004–2005",    what: "Undergraduate Laboratory Demonstrator (Manchester)." }
+
+# ============================================================
+# Lecturing & course development (from CV)
+# ============================================================
+lecturing:
+  - { years: "2023–present", what: "‘Taster Lectures’ for undergraduate offer-holders, and contributions to the development of a ‘Physics Discovery Day’ for post-16 Widening Participation students." }
+  - { years: "2020–present", what: "Curriculum work integrating ATLAS Open Access research data into third-year particle physics laboratories [PHYS30180, PHYS30280, PHYS40580] — including a fully remote-capable Jupyter / Microsoft Teams model." }
+  - { years: "2017–present", what: "Programme design and delivery of 15 postgraduate training courses for the 4IR Centre for Doctoral Training in Data Intensive Science (online + asynchronous from 2020, in collaboration with the HEP Software Foundation and the Software Sustainability Institute)." }
+  - { years: "2016–2018",    what: "Lecturer, “Special Topics in Physics: Particle Physics” [PHYS1018F] (Manchester)." }
+  - { years: "2014–2015",    what: "Examples-class leader, “Introduction to Particle and Nuclear Physics” [PHYS30121] (Manchester)." }
+  - { years: "2016",         what: "Syllabus development for “Introduction to Data Science” [PHYS10791] (Manchester)." }
+  - { years: "2013, 2015",   what: "Lecturer, “Frontiers of Particle Physics I: Searches for New Physics” [PHYS40521] (Manchester)." }
+
+# ============================================================
+# Invited lectures outside University courses (from CV)
+# ============================================================
+invited_lectures:
+  - { years: "2018–present", what: "Invited lecturer on physics, Trafford Schools Ogden Trust Study Day." }
+  - { years: "2016",         what: "Invited lecturer at a Teacher Development Day, Institute for Research in Schools." }
+  - { years: "2013–2014",    what: "Invited lecturer at the HASCO international summer school, Germany — two new five-hour courses on “QCD and jet physics” and “Introduction to Hadron Collider Physics”, with examinations, for ~150 undergraduate/Masters students." }
+  - { years: "2008, 2015",   what: "Presenter, High Energy Physics professional-development courses for secondary-school teachers, CERN." }
+  - { years: "2008",         what: "Demonstrator at the ATLAS analysis software tutorial sessions, CERN — training new researchers from 38 different countries." }
+
+# ============================================================
+# Examining (external + internal)
+# ============================================================
+examining:
+  external: "External examiner of PhD vivas and MPhil/MSc dissertations at the University of Liverpool, University of Edinburgh, University College London, University of Warwick, Royal Holloway (UoL), University of Sheffield, Lancaster University, University of Durham, University of Cape Town, and University of Zürich."
+  internal: "Internal examiner of PhD vivas and MSc dissertations at the University of Manchester."
