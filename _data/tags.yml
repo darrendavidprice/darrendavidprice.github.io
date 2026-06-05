@@ -1,0 +1,22 @@
+# ============================================================
+#  Canonical tags. The first eight are ALSO research themes
+#  (they have a page under /research/ — see themes.yml).
+#  Tags compose freely: a heavy sterile-neutrino search may
+#  carry [neutrinos, electroweak, collider]; a MET+jets LHC
+#  search [dark-matter, collider]; learning-to-discover work
+#  [ai-ml, phenomenology]. Add new tags here; only set
+#  theme: true if a matching /research/<id>/ page exists.
+# ============================================================
+list:
+  - { id: dark-matter,         label: "Dark matter",         theme: true }
+  - { id: electroweak,         label: "Electroweak",         theme: true }
+  - { id: qcd,                 label: "QCD",                 theme: true }
+  - { id: b-physics,           label: "B-physics",           theme: true }
+  - { id: neutrinos,           label: "Neutrinos",           theme: true }
+  - { id: instrumentation,     label: "Instrumentation",     theme: true }
+  - { id: levitating-sensors,  label: "Levitating sensors",  theme: true }
+  - { id: ai-ml,               label: "AI / ML",             theme: true }
+  - { id: collider,            label: "Collider / ATLAS",    theme: false }
+  - { id: phenomenology,       label: "Phenomenology",       theme: false }
+  - { id: open-data,           label: "Open data",           theme: false }
+  - { id: gravitational-waves, label: "Gravitational waves", theme: false }

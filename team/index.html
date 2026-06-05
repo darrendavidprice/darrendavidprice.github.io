@@ -1,0 +1,66 @@
+---
+layout: page
+title: "Team"
+eyebrow: "People"
+heading: "My research team"
+lede: "The researchers and students I work with at Manchester — across dark matter, instrumentation, levitating sensors, neutrinos, phenomenology and AI. This group is also the core of Dark Matter Manchester."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Team'
+wide: true
+---
+
+<div class="applicants-advert">
+  <p>Prospective PhD students and postdoctoral researchers: I welcome enquiries. See <a href="{{ '/join/' | relative_url }}">join the group</a> for current opportunities and advice.</p>
+</div>
+
+<h2 class="section-label">Current members</h2>
+<div class="team-grid">
+  {% for m in site.data.team.current %}
+  <article class="member-card">
+    <div class="member-photo">
+      {% if m.photo %}<img src="{{ m.photo | relative_url }}" alt="{{ m.name }}">
+      {% else %}<span class="placeholder">{{ m.initials }}</span>{% endif %}
+    </div>
+    <div>
+      <h3>{{ m.name }}</h3>
+      <p class="role">{{ m.role }}</p>
+      {% if m.focus %}<p class="focus">{{ m.focus }}</p>{% endif %}
+      {% if m.works_on %}
+      <div class="taglist">
+        {% for w in m.works_on %}<span class="tag">{{ w }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      {% if m.email or m.linkedin %}
+      <p class="links">
+        {% if m.email %}<a href="mailto:{{ m.email }}">Email</a>{% endif %}
+        {% if m.linkedin %}<a href="{{ m.linkedin }}" rel="noopener">LinkedIn</a>{% endif %}
+      </p>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
+<hr class="rule">
+
+<h2 class="section-label">Alumni</h2>
+<div class="alumni-grid">
+  {% for a in site.data.team.alumni %}
+  <article class="alumnus-card">
+    <h4>{{ a.name }}</h4>
+    <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
+    {% if a.worked_on %}
+    <div class="taglist">
+      {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+    </div>
+    {% endif %}
+    {% if a.now.label %}
+    <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+
+<hr class="rule">
+
+<h2 class="section-label">The group</h2>
+<div class="placeholder-fig">PLACEHOLDER — group photo</div>

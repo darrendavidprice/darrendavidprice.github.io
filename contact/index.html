@@ -1,0 +1,34 @@
+---
+layout: page
+title: "Contact"
+eyebrow: "Contact"
+heading: "Contact"
+lede: "Get in touch about research, PhD and postdoc enquiries, consultancy, media or speaking."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Contact'
+wide: true
+---
+
+<p class="prose">
+  Prof. Darren Price<br>
+  Department of Physics &amp; Astronomy<br>
+  The University of Manchester<br>
+  Oxford Road, Manchester M13 9PL, United Kingdom
+</p>
+
+<p class="prose">
+  Email: <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a><br>
+  {% if site.author.phone %}Tel: {{ site.author.phone }}{% endif %}
+</p>
+
+<h2 class="section-label">Profiles</h2>
+{% include socials.html %}
+
+<p class="prose small" style="margin-top:1.5rem">
+  For specific enquiries see <a href="{{ '/join/' | relative_url }}">join the group</a>,
+  <a href="{{ '/consultancy/' | relative_url }}">consultancy</a>, or
+  <a href="{{ '/media/' | relative_url }}">media</a>.
+</p>
+
+<figure class="page-fig">
+  <img src="{{ '/assets/images/schuster.jpg' | relative_url }}" alt="Department of Physics & Astronomy, University of Manchester">
+</figure>

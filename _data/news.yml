@@ -1,0 +1,94 @@
+# ============================================================
+#  news.yml — news & achievements timeline. Rendered on
+#  /research/achievements/, filterable by category and topic tag.
+#  Also surfaced in the homepage "Recent" block and on theme pages.
+#
+#  category: award | grant | role | result | media | milestone
+#  iso:  "YYYY-MM" (sorting)   date: free display string
+#  tags: optional topic tags from _data/tags.yml
+#
+#  Optional fields:
+#    explainer:  one-sentence extra context, shown as a "+ More context"
+#                drop-down on the entry. Brief — for the long version, link out.
+#    link:       external link for more detail. Either a plain URL string,
+#                or { url: "...", label: "BBC News" } for a labelled link
+#                rendered as "<label> ↗". With no label it renders "Read more ↗".
+#
+#  >>> Seeded historically from the CV and old sites. Add new items
+#  >>> at the top. One DUMMY entry shows the pattern.
+# ============================================================
+entries:
+
+  - { id: n-assoc-dean-2024, category: role, year: 2024, iso: "2024-01", date: "2024",
+      title: "Appointed Associate Dean for Public, Civic and Schools Engagement",
+      body: "Strategic leadership for public, civic and schools engagement across the Faculty of Science and Engineering, University of Manchester.",
+      explainer: "The role spans schools outreach, civic partnerships and public engagement across all of FSE — coordinating with research institutes and external partners across Greater Manchester.",
+      link: { url: "https://www.manchester.ac.uk/", label: "Faculty page" },
+      tags: [open-data] }   # EDIT — confirm exact start date
+
+  - { id: n-atlas-eo-2022, category: role, year: 2022, iso: "2022-09", date: "2022",
+      title: "Elected Coordinator of the ATLAS Education & Outreach group",
+      body: "Elected on votes from 181 collaborating institutes to lead all education and outreach for the ATLAS experiment at CERN — over 50,000 annual visitors and millions of online engagements.",
+      tags: [open-data, collider] }
+
+  - { id: n-gridpp-2022, category: role, year: 2022, iso: "2022-01", date: "2022",
+      title: "Chair of the UKRI-STFC GridPP Peer Review Panel",
+      body: "Overseeing strategy and funding for the UK's large-scale computing for experimental particle physics and the Worldwide LHC Computing Grid." }
+
+  - { id: n-darkside-roles-2021, category: role, year: 2021, iso: "2021-01", date: "2021",
+      title: "Appointed to DarkSide Editorial Board and co-lead of Outer Detector Readout Electronics",
+      body: "Executive oversight of the physics programme and leadership of a key detector subsystem in the international DarkSide project.",
+      tags: [instrumentation, dark-matter] }
+
+  - { id: n-darkside-uk-2020, category: milestone, year: 2020, iso: "2020-01", date: "2020",
+      title: "DarkSide approved as a UKRI-STFC funded project in the UK",
+      body: "A central role for the Manchester group in opening a new UK funding line for direct dark-matter detection, with Manchester as lead institute for cryogenic silicon photosensors.",
+      tags: [dark-matter, instrumentation] }
+
+  - { id: n-darkside-ib-2020, category: role, year: 2020, iso: "2020-02", date: "2020",
+      title: "Elected Chair of the DarkSide-UK Institutional Board",
+      body: "Cost and schedule oversight and leadership appointments across the 15 institutes of the DarkSide-UK project.",
+      tags: [dark-matter] }
+
+  - { id: n-turing-2019, category: award, year: 2019, iso: "2019-01", date: "2019",
+      title: "Turing Fellowship, Alan Turing Institute",
+      body: "Leading a programme on machine-learning tools to enable automation of scientific discovery in the physical sciences. (Renewed 2020–2022.)",
+      tags: [ai-ml] }
+
+  - { id: n-stfc-panel-2019, category: role, year: 2019, iso: "2019-02", date: "2019",
+      title: "Appointed to the UKRI-STFC Particle Physics Grants Panel",
+      body: "Assessing UK particle-physics grant applications. Reappointed for a second term in 2022." }
+
+  - { id: n-presidential-2018, category: award, year: 2018, iso: "2018-01", date: "2018",
+      title: "University Presidential Fellowship, University of Manchester" }
+
+  - { id: n-rutherford-2015, category: award, year: 2015, iso: "2015-01", date: "2015",
+      title: "Ernest Rutherford Fellowship, UKRI-STFC",
+      body: "“Using the LHC as an electroweak boson collider: a novel laboratory for dark matter, neutrino, and new electroweak phenomena.”",
+      tags: [electroweak, dark-matter] }
+
+  - { id: n-marie-curie-2013, category: award, year: 2013, iso: "2013-02", date: "2013",
+      title: "Marie Curie Intra-European Fellowship, European Commission",
+      body: "“A path to understanding: precision studies through Weak Boson Fusion.”",
+      tags: [electroweak] }
+
+  - { id: n-royal-society-2013, category: result, year: 2013, iso: "2013-07", date: "2013",
+      title: "“Understanding the Higgs boson” at the Royal Society Summer Science Exhibition",
+      body: "A public exhibit on the newly-discovered Higgs boson at the Royal Society, London.",
+      tags: [open-data] }
+
+  - { id: n-chib-2012, category: result, year: 2012, iso: "2012-01", date: "2012",
+      title: "First new particle discovered at the LHC — the χb(3P)",
+      body: "Widely covered in international media, including the BBC.",
+      tags: [b-physics, collider] }
+
+  - { id: n-prl-suggestion-2012, category: result, year: 2012, iso: "2012-04", date: "2012",
+      title: "χb(3P) observation selected as a PRL Editors' Suggestion",
+      tags: [b-physics] }
+
+  # ---------- DUMMY — copy, edit, or delete ----------
+  - { id: n-dummy-2026, category: media, year: 2026, iso: "2026-01", date: "2026",
+      title: "EXAMPLE — Interviewed on BBC Radio about the hunt for dark matter",
+      body: "EXAMPLE — replace with a real news item, or delete.",
+      tags: [dark-matter],
+      link: "https://example.com/EDIT" }

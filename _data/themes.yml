@@ -1,0 +1,73 @@
+# ============================================================
+#  Research themes. Each has a page at /research/<id>/ using
+#  the `theme` layout, which auto-pulls publications/talks/news
+#  tagged with the matching id.
+# ============================================================
+list:
+  - id: dark-matter
+    label: "Dark matter"
+    order: 1
+    image: /assets/images/dark-matter.jpg
+    blurb: >-
+      Direct detection with the DarkSide argon programme and dark-matter
+      searches at the LHC, joined up through phenomenology that maps models
+      onto what different detectors actually see.
+
+  - id: electroweak
+    label: "Electroweak physics"
+    order: 2
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Weak boson fusion and scattering, anomalous gauge couplings and
+      precision electroweak measurements as a laboratory for new phenomena.
+
+  - id: qcd
+    label: "QCD"
+    order: 3
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Strong-interaction physics from vector-boson + heavy-flavour production
+      to double parton scattering and jet physics at hadron colliders.
+
+  - id: b-physics
+    label: "B-physics & quarkonium"
+    order: 4
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Heavy-flavour spectroscopy — including the first new particle found at
+      the LHC — rare decays, and CP-violation in the B-meson system.
+
+  - id: neutrinos
+    label: "Neutrinos"
+    order: 5
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Heavy Majorana and sterile-neutrino searches at colliders, a heritage in
+      neutrinoless double-beta decay, and coherent neutrino scattering with
+      argon detectors.
+
+  - id: instrumentation
+    label: "Instrumentation"
+    order: 6
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Cryogenic silicon photosensors and low-radioactivity readout electronics
+      for next-generation rare-event searches, plus detector performance work.
+
+  - id: levitating-sensors
+    label: "Levitating sensors"
+    order: 7
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Opto-mechanical levitated quantum sensors as an emerging route to
+      ultra-low-threshold dark-matter detection — spanning instrumentation,
+      dark matter and gravitational-wave sensing.
+
+  - id: ai-ml
+    label: "AI / Machine learning"
+    order: 8
+    image: /assets/images/research-hero.jpg
+    blurb: >-
+      Machine-learning methods for scientific discovery in the physical
+      sciences — expressive generative models, simulation, inference and
+      tools that let AI act as a collaborator in physics analyses.

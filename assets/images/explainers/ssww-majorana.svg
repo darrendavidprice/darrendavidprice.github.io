@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 340"
+     font-family="DejaVu Serif, Liberation Serif, serif">
+  <rect width="500" height="340" fill="#ebe5d8"/>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1 L8 5 L0 9 z" fill="#3c372f"/>
+    </marker>
+    <marker id="arr-acc" viewBox="0 0 10 10" refX="6" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1 L8 5 L0 9 z" fill="#8c3a2b"/>
+    </marker>
+  </defs>
+
+  <!-- Incoming quark lines -->
+  <line x1="30"  y1="50"  x2="180" y2="110" stroke="#3c372f" stroke-width="1.6"/>
+  <line x1="30"  y1="290" x2="180" y2="230" stroke="#3c372f" stroke-width="1.6"/>
+  <!-- Outgoing forward jets -->
+  <line x1="180" y1="110" x2="340" y2="50"  stroke="#3c372f" stroke-width="1.6"
+        marker-end="url(#arr)"/>
+  <line x1="180" y1="230" x2="340" y2="290" stroke="#3c372f" stroke-width="1.6"
+        marker-end="url(#arr)"/>
+
+  <!-- Quark labels -->
+  <text x="14" y="46"  font-size="13" fill="#3c372f" font-style="italic">q</text>
+  <text x="14" y="295" font-size="13" fill="#3c372f" font-style="italic">q</text>
+  <text x="345" y="46" font-size="13" fill="#3c372f" font-style="italic">q&#8242;</text>
+  <text x="345" y="295" font-size="13" fill="#3c372f" font-style="italic">q&#8242;</text>
+  <text x="55"  y="28"  font-size="10" fill="#7a7468">forward tag jets</text>
+
+  <!-- W bosons (wavy) -->
+  <path d="M180.00 110.00 Q179.90 114.37 184.12 113.24 Q188.34 112.10 188.24 116.47 Q188.13 120.84 192.35 119.71 Q196.57 118.57 196.47 122.94 Q196.37 127.31 200.59 126.18 Q204.81 125.04 204.71 129.41 Q204.60 133.78 208.82 132.65 Q213.04 131.51 212.94 135.88 Q212.84 140.25 217.06 139.12 Q221.28 137.98 221.18 142.35 Q221.07 146.72 225.29 145.59 Q229.52 144.45 229.41 148.82 Q229.31 153.19 233.53 152.06 Q237.75 150.92 237.65 155.29 Q237.54 159.66 241.76 158.53 Q245.99 157.39 245.88 161.76 Q245.78 166.13 250.00 165.00" stroke="#3c372f" stroke-width="1.5" fill="none"/>
+  <path d="M180.00 230.00 Q184.22 231.13 184.12 226.76 Q184.01 222.39 188.24 223.53 Q192.46 224.66 192.35 220.29 Q192.25 215.92 196.47 217.06 Q200.69 218.19 200.59 213.82 Q200.48 209.45 204.71 210.59 Q208.93 211.72 208.82 207.35 Q208.72 202.98 212.94 204.12 Q217.16 205.25 217.06 200.88 Q216.96 196.51 221.18 197.65 Q225.40 198.78 225.29 194.41 Q225.19 190.04 229.41 191.18 Q233.63 192.31 233.53 187.94 Q233.43 183.57 237.65 184.71 Q241.87 185.84 241.76 181.47 Q241.66 177.10 245.88 178.24 Q250.10 179.37 250.00 175.00" stroke="#3c372f" stroke-width="1.5" fill="none"/>
+  <text x="120" y="170" font-size="13" fill="#3c372f" font-style="italic">W</text>
+  <text x="132" y="164" font-size="9"  fill="#3c372f">+</text>
+  <text x="140" y="170" font-size="13" fill="#3c372f" font-style="italic">W</text>
+  <text x="152" y="164" font-size="9"  fill="#3c372f">+</text>
+  <text x="115" y="184" font-size="9"  fill="#7a7468">(same-sign)</text>
+
+  <!-- Outgoing same-sign leptons -->
+  <line x1="250" y1="165" x2="450" y2="105" stroke="#8c3a2b" stroke-width="1.8"
+        marker-end="url(#arr-acc)"/>
+  <line x1="250" y1="175" x2="450" y2="235" stroke="#8c3a2b" stroke-width="1.8"
+        marker-end="url(#arr-acc)"/>
+  <text x="460" y="103" font-size="14" fill="#8c3a2b" font-style="italic">l</text>
+  <text x="469" y="97"  font-size="11" fill="#8c3a2b">+</text>
+  <text x="460" y="240" font-size="14" fill="#8c3a2b" font-style="italic">l</text>
+  <text x="469" y="234" font-size="11" fill="#8c3a2b">+</text>
+  <text x="370" y="80"  font-size="10" fill="#7a7468">same-sign</text>
+  <text x="370" y="265" font-size="10" fill="#7a7468">same-sign</text>
+
+  <!-- Majorana N propagator -->
+  <line x1="250" y1="165" x2="250" y2="175" stroke="#3c372f" stroke-width="1.6"
+        stroke-dasharray="3 2"/>
+  <line x1="244" y1="167" x2="256" y2="173" stroke="#8c3a2b" stroke-width="2.2"/>
+  <line x1="256" y1="167" x2="244" y2="173" stroke="#8c3a2b" stroke-width="2.2"/>
+  <text x="262" y="173" font-size="13" fill="#3c372f" font-style="italic">N</text>
+  <text x="275" y="173" font-size="9"  fill="#7a7468">(Majorana)</text>
+
+  <!-- Vertices -->
+  <circle cx="180" cy="110" r="2.6" fill="#3c372f"/>
+  <circle cx="180" cy="230" r="2.6" fill="#3c372f"/>
+  <circle cx="250" cy="165" r="2.6" fill="#3c372f"/>
+  <circle cx="250" cy="175" r="2.6" fill="#3c372f"/>
+
+  <!-- Footer (text positioned with care so it fits inside viewBox) -->
+  <line x1="30" y1="316" x2="470" y2="316" stroke="#bcb5a4" stroke-width="0.6"/>
+  <text x="30" y="330" font-size="10" fill="#7a7468">
+    &#215; on the propagator: Majorana mass insertion (source of &#916;L = 2 lepton-number violation).
+  </text>
+</svg>

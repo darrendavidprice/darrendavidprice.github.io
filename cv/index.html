@@ -1,0 +1,60 @@
+---
+layout: page
+title: "Leadership & service"
+eyebrow: "CV"
+heading: "Leadership & service"
+lede: "An informal CV: leadership and management roles, research funding, conference organisation, and professional service. The full publication record is at INSPIRE-HEP."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Leadership &amp; service'
+wide: true
+---
+
+<nav class="jumpnav" aria-label="On this page">
+  <span class="glabel">On this page</span>
+  <a href="#roles">Roles</a>
+  <a href="#grants">Grants</a>
+  <a href="#organisation">Conference organisation</a>
+</nav>
+
+<h2 class="section-label" id="roles">Leadership &amp; management roles</h2>
+{% for g in site.data.roles.groups %}
+<h3 class="heading">{{ g.name }}</h3>
+<ul class="roles-list">
+  {% for item in g.items %}
+  <li class="role-item">
+    <span class="yr">{{ item.year }}</span>
+    <span class="what">{{ item.what | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+<hr class="rule">
+
+<h2 class="section-label" id="grants">Research grants</h2>
+<p class="prose small">Sustained external funding attributable to me of £4.1M (CoI credit split), total grant value £15.7M.</p>
+<ul class="roles-list">
+  {% for gr in site.data.grants.entries %}
+  <li class="role-item">
+    <span class="yr">{{ gr.year }}</span>
+    <span class="what"><strong>{{ gr.title }}</strong> — {{ gr.value }}{% if gr.role %} &middot; {{ gr.role }}{% endif %}{% if gr.funder %} &middot; {{ gr.funder }}{% endif %}</span>
+  </li>
+  {% endfor %}
+</ul>
+
+<hr class="rule">
+
+<h2 class="section-label" id="organisation">Conference &amp; workshop organisation</h2>
+<ul class="roles-list">
+  {% for o in site.data.organisation.entries %}
+  <li class="role-item">
+    <span class="yr">{{ o.year }}</span>
+    <span class="what"><strong>{{ o.role }}</strong> — {{ o.event }}{% if o.location %}, {{ o.location }}{% endif %}{% if o.size %} <span class="prose small">[{{ o.size }} attendees]</span>{% endif %}</span>
+  </li>
+  {% endfor %}
+</ul>
+
+<hr class="rule">
+<p class="prose small">
+  A short CV may be added here later. Full publications and metrics:
+  <a href="{{ site.author.inspire }}" rel="noopener">INSPIRE-HEP &rarr;</a>
+</p>

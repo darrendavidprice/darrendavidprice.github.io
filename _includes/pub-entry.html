@@ -1,0 +1,56 @@
+{% assign p = include.pub %}
+{% assign statusmap = "refereed:Published,preprint:Preprint,proceedings:Proceedings,thesis:Thesis,poster:Poster,note:Note" %}
+{% assign badgelabel = p.status %}
+{% for pair in statusmap | split: "," %}
+  {% assign kv = pair | split: ":" %}
+  {% if kv[0] == p.status %}{% assign badgelabel = kv[1] %}{% endif %}
+{% endfor %}
+<li class="pub f-item" data-tags="{{ p.tags | join: ' ' }}"{% if p.arxiv %} data-arxiv="{{ p.arxiv }}"{% endif %}>
+  <div class="pub-line">
+    <span class="badge {{ p.status }}">{{ badgelabel }}</span>
+    {% if p.arxiv %}<a class="pub-title" href="https://arxiv.org/abs/{{ p.arxiv }}" rel="noopener">{{ p.title }}</a>
+    {% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
+  </div>
+  <div class="pub-line">
+    <span class="pub-authors">
+      {%- if p.collaboration -%}{{ p.collaboration }}
+      {%- elsif p.authors -%}
+        {%- assign na = p.authors | size -%}
+        {%- if na <= 4 -%}{{ p.authors | join: ", " }}{%- else -%}{{ p.authors | first }} et al.{%- endif -%}
+      {%- endif -%}
+    </span>
+    {% if p.venue %}
+      {%- if p.doi -%}
+        <a class="pub-venue" href="https://doi.org/{{ p.doi }}" rel="noopener">{{ p.venue }}</a>
+      {%- else -%}
+        <span class="pub-venue">{{ p.venue }}</span>
+      {%- endif -%}
+    {% endif %}
+  </div>
+  {% include tag-chips.html tags=p.tags %}
+  <div class="pub-links">
+    {% if p.arxiv %}<a href="https://arxiv.org/abs/{{ p.arxiv }}" rel="noopener">arXiv:{{ p.arxiv }}</a>{% endif %}
+    {% if p.inspire %}<a href="{{ p.inspire }}" rel="noopener">INSPIRE</a>{% elsif p.arxiv %}<a href="https://inspirehep.net/literature?q=arxiv:{{ p.arxiv }}" rel="noopener">INSPIRE</a>{% endif %}
+    {% if p.links.pdf %}<a href="{{ p.links.pdf }}" rel="noopener" title="PDF">{% include icon-pdf.html %}<span class="sr-only">PDF</span></a>{% elsif p.arxiv %}<a href="https://arxiv.org/pdf/{{ p.arxiv }}" rel="noopener" title="PDF (arXiv)">{% include icon-pdf.html %}<span class="sr-only">PDF</span></a>{% endif %}
+    {% if p.links.aux_figures %}<a href="{{ p.links.aux_figures }}" rel="noopener">Figures</a>{% endif %}
+    {% if p.links.data %}<a href="{{ p.links.data }}" rel="noopener">Data</a>{% endif %}
+    {% if p.links.code %}<a href="{{ p.links.code }}" rel="noopener">Code</a>{% endif %}
+    {% if p.links.note %}<a href="{{ p.links.note }}" rel="noopener">Note</a>{% endif %}
+    {% for pr in p.links.press %}<a href="{{ pr.url }}" rel="noopener">{{ pr.label }}</a>{% endfor %}
+    <span class="pub-cite"></span>
+  </div>
+  {% if p.explainer %}
+  <details class="explainer">
+    <summary>Explainer</summary>
+    <div class="explainer-body{% if p.explainer_image %} has-fig{% endif %}">
+      {% if p.explainer_image %}
+      <figure class="explainer-fig">
+        <img src="{{ p.explainer_image | relative_url }}" alt="Key figure for {{ p.title }}" loading="lazy">
+        {% if p.explainer_caption %}<figcaption>{{ p.explainer_caption }}</figcaption>{% endif %}
+      </figure>
+      {% endif %}
+      <p>{{ p.explainer }}</p>
+    </div>
+  </details>
+  {% endif %}
+</li>

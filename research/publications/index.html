@@ -1,0 +1,107 @@
+---
+layout: default
+title: "Publications"
+description: "Full publications record for Darren Price — primary-author papers, editorial-board oversight, and conference proceedings, filterable by topic, with explainers and live INSPIRE citation counts."
+filters: true
+citations: true
+---
+<section class="hero compact">
+  <div class="container wide">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; <a href="{{ '/research/' | relative_url }}">Research</a> &rsaquo; Publications</p>
+    <p class="eyebrow">Research</p>
+    <h1 class="display">Publications</h1>
+    <p class="lede">Organised as on my CV: papers with significant personal contribution, then journal publications overseen as editorial-board chair or expert reviewer, then conference results. Filter by topic; primary-author papers carry a short explainer. Citation counts are fetched live from INSPIRE-HEP.</p>
+    <p class="prose small">Full record including smaller collaborative contributions at <a href="{{ site.author.inspire }}" rel="noopener">INSPIRE-HEP &rarr;</a></p>
+  </div>
+</section>
+
+<section class="container wide">
+  {% include section-nav.html current="publications" %}
+
+  <div class="filterbar" data-controls="publist">
+    <div class="filter-group" data-group="tags" data-mode="any">
+      <span class="glabel">Topic</span>
+      {% for tag in site.data.tags.list %}
+      <button class="chip" data-value="{{ tag.id }}">{{ tag.label }}</button>
+      {% endfor %}
+      <button class="chip reset">Reset</button>
+      <span class="filter-count"></span>
+    </div>
+  </div>
+
+  <nav class="jumpnav" aria-label="Jump to section">
+    <span class="glabel">Jump to</span>
+    <a href="#primary">Primary contributions</a>
+    <a href="#convener">Group convener</a>
+    <a href="#editorial">Editorial board</a>
+    <a href="#proceedings">Conference results</a>
+  </nav>
+
+  <div id="publist">
+
+    <div class="pub-section">
+      <h2 class="section-head" id="primary">Peer-reviewed papers with significant personal contribution</h2>
+      <p class="section-sub">Primary-author publications</p>
+      {% assign primary = site.data.publications.primary | sort: "year" | reverse %}
+      {% assign years = primary | map: "year" | uniq %}
+      {% for year in years %}
+      <div class="year-group">
+        <h3 class="year-head">{{ year }}</h3>
+        <ul class="pub-list">
+          {% assign yp = primary | where: "year", year %}
+          {% for p in yp %}{% include pub-entry.html pub=p %}{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="pub-section">
+      <h2 class="section-head" id="convener">Publications as group convener (not otherwise listed)</h2>
+      <p class="section-sub">Journal publications signed as physics-group convener &mdash; coordinated analysis, reviewed and edited</p>
+      {% assign convener = site.data.publications.convener | sort: "year" | reverse %}
+      {% assign cyears = convener | map: "year" | uniq %}
+      {% for year in cyears %}
+      <div class="year-group">
+        <h3 class="year-head">{{ year }}</h3>
+        <ul class="pub-list">
+          {% assign yp = convener | where: "year", year %}
+          {% for p in yp %}{% include pub-entry.html pub=p %}{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="pub-section">
+      <h2 class="section-head" id="editorial">Editorial-board chair &amp; expert review</h2>
+      <p class="section-sub">Journal publications overseen as editorial-board chair or invited expert reviewer</p>
+      {% assign editorial = site.data.publications.editorial | sort: "year" | reverse %}
+      {% assign eyears = editorial | map: "year" | uniq %}
+      {% for year in eyears %}
+      <div class="year-group">
+        <h3 class="year-head">{{ year }}</h3>
+        <ul class="pub-list">
+          {% assign yp = editorial | where: "year", year %}
+          {% for p in yp %}{% include pub-entry.html pub=p %}{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="pub-section">
+      <h2 class="section-head" id="proceedings">Conference results &amp; notes</h2>
+      <p class="section-sub">Peer-reviewed conference proceedings and collaboration notes</p>
+      {% assign proc = site.data.publications.proceedings | sort: "year" | reverse %}
+      {% assign pyears = proc | map: "year" | uniq %}
+      {% for year in pyears %}
+      <div class="year-group">
+        <h3 class="year-head">{{ year }}</h3>
+        <ul class="pub-list">
+          {% assign yp = proc | where: "year", year %}
+          {% for p in yp %}{% include pub-entry.html pub=p %}{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

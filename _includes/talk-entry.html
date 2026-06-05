@@ -1,0 +1,21 @@
+{% assign t = include.talk %}
+{% assign typemap = "invited:Invited / conference,seminar:Seminar / colloquium,public:Public lecture,internal:Working meeting,poster:Poster" %}
+{% assign typelabel = t.type %}
+{% for pair in typemap | split: "," %}
+  {% assign kv = pair | split: ":" %}
+  {% if kv[0] == t.type %}{% assign typelabel = kv[1] %}{% endif %}
+{% endfor %}
+<li class="talk f-item{% if t.type == 'internal' %} internal{% endif %}" data-type="{{ t.type }}" data-tags="{{ t.tags | join: ' ' }}">
+  <div class="talk-row">
+    <span class="talk-type">{{ typelabel }}</span>
+    {% if t.links.agenda %}<a class="talk-title" href="{{ t.links.agenda }}" rel="noopener">{{ t.title }}</a>
+    {% else %}<span class="talk-title">{{ t.title }}</span>{% endif %}
+  </div>
+  <div class="talk-meta">
+    {{ t.venue }}{% if t.location %}, {{ t.location }}{% endif %} &middot; {{ t.date }}
+    {% if t.links.slides %} &middot; <a href="{{ t.links.slides }}" rel="noopener" title="Slides (PDF)">{% include icon-pdf.html %}<span class="sr-only">Slides</span></a>{% endif %}
+    {% if t.links.video %} &middot; <a href="{{ t.links.video }}" rel="noopener">Video</a>{% endif %}
+    {% if t.links.recording %} &middot; <a href="{{ t.links.recording }}" rel="noopener">Recording</a>{% endif %}
+  </div>
+  {% include tag-chips.html tags=t.tags %}
+</li>

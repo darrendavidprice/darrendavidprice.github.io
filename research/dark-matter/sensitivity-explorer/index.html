@@ -1,0 +1,2323 @@
+---
+layout: page
+title: "Dark Matter Sensitivity Explorer"
+description: "An interactive tool exploring how energy threshold, exposure, background, and depth shape WIMP direct-detection sensitivity. Compare your experiment against DarkSide-50, LZ, and DarkSide-20k."
+permalink: /research/dark-matter/sensitivity-explorer/
+breadcrumb: "Research / Dark matter"
+eyebrow: "Interactive · Pedagogical tool"
+heading: "How do we hunt for dark matter?"
+lede: "A working dark-matter experiment is a delicate balance — a lower energy threshold here, a quieter background there, a deeper lab, a longer run. Slide the controls and watch your sensitivity curve move against the world-leading limits from DarkSide-50, LZ, and the projected reach of DarkSide-20k."
+wide: true
+---
+
+<style>
+/* ─── Explorer-scoped styles, layered on top of the site's Manuscript theme ─── */
+
+/* Layout: plot on top (full-width, sticky), controls in a grid below.
+   The plot stays pinned to the viewport top as the user scrolls down to
+   adjust controls — so every slider tweak is visible live without
+   scroll-jumping. */
+.explorer-layout {
+  display: block;
+  margin: 2rem 0 3rem;
+}
+
+/* Plot card — sticky at the top of the viewport while scrolling the controls */
+.plot-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.25rem 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0 6px 20px -8px rgba(26, 23, 18, 0.18);
+  /* Bound plot height so controls remain reachable. The SVG scales
+     proportionally via its viewBox. */
+  max-height: calc(100dvh - 1rem);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Plot row — two panes side by side on desktop, swipe-able on mobile */
+.plot-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+.pane-svg {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  max-height: calc(100dvh - 3rem);
+}
+
+/* Pane dots — only visible on mobile (scroll position indicator) */
+.pane-dots {
+  display: none;
+}
+.pane-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.pane-dot.active {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+.pane-dot:hover { background: var(--text-muted); }
+.pane-dot.active:hover { background: var(--accent); }
+
+@media (max-width: 720px) {
+  /* Mobile: each pane takes 100% of viewport width, scroll-snap between them */
+  .plot-card {
+    max-height: calc(100dvh - 1rem);
+    padding: 0.75rem 0 0.5rem;
+  }
+  .plot-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    scrollbar-width: none;            /* Firefox */
+  }
+  .plot-row::-webkit-scrollbar { display: none; }   /* WebKit */
+  .pane-svg {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    max-height: calc(100dvh - 6rem);
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+  }
+  .pane-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0 0.2rem;
+  }
+}
+.plot-svg .axis-label {
+  font-family: var(--font-mono);
+  fill: var(--text-muted);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.plot-svg .axis-title {
+  font-family: var(--font-mono);
+  fill: var(--text);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.plot-svg .pane-title {
+  font-family: var(--font-display);
+  fill: var(--text-bright);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.plot-svg .pane-subtitle {
+  font-family: var(--font-mono);
+  fill: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.plot-svg .curve-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.plot-svg .grid-major { stroke: rgba(26, 23, 18, 0.10); stroke-width: 0.7; }
+.plot-svg .grid-minor { stroke: rgba(26, 23, 18, 0.04); stroke-width: 0.4; }
+.plot-svg .axis { stroke: var(--text-bright); stroke-width: 1.2; }
+.plot-svg .tick  { stroke: var(--text-bright); stroke-width: 0.9; }
+
+/* Reference experiment curves — thicker, more legible */
+.curve-ds50      { fill: none; stroke: #a36b3a; stroke-width: 2.4; }
+.curve-ds50-s2   { fill: none; stroke: #a36b3a; stroke-width: 2.2; stroke-dasharray: 2 4; opacity: 0.9; }
+.curve-lz        { fill: none; stroke: #4a6b7a; stroke-width: 2.4; }
+.curve-lz-light  { fill: none; stroke: #4a6b7a; stroke-width: 2.2; stroke-dasharray: 5 3; opacity: 0.9; }
+.curve-ds20k     { fill: none; stroke: #6b8a3c; stroke-width: 2.4; stroke-dasharray: 6 4; }
+.curve-ds20k-s2  { fill: none; stroke: #6b8a3c; stroke-width: 2.2; stroke-dasharray: 2 4; opacity: 0.9; }
+.curve-ds20k-s2-10y { fill: none; stroke: #4a5a2a; stroke-width: 2.2; stroke-dasharray: 8 3 2 3; opacity: 0.85; }
+.curve-cresst    { fill: none; stroke: #7a3a8a; stroke-width: 2.4; }
+.curve-pandax    { fill: none; stroke: #2e4a8a; stroke-width: 2.4; }
+.curve-fog-fill  { fill: rgba(40, 35, 28, 0.32); }
+.curve-fog-line  { fill: none; stroke: rgba(30, 25, 18, 0.75); stroke-width: 1.4; stroke-dasharray: 3 3; }
+
+/* User's experiment — the main event */
+.curve-user {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3.2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(140, 58, 43, 0.3));
+  transition: d 0.25s ease;
+}
+.curve-user-min {
+  fill: var(--accent);
+  stroke: var(--bg-card);
+  stroke-width: 1.5;
+}
+
+/* Controls — multi-column grid below the (sticky) plot */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-soft);
+}
+.control-group {
+  border-bottom: 1px solid var(--rule-soft);
+  padding-bottom: 1.25rem;
+}
+.control-group:last-child { border-bottom: none; }
+/* The reset bar is a row that spans every column at the top of the grid. */
+.controls-toolbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+  margin-bottom: 0.25rem;
+}
+.controls-toolbar h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+.btn-reset {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--text);
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-reset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.control-label .name { color: var(--text-bright); }
+.control-label .value {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.control-note {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+  line-height: 1.45;
+}
+.control-note em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+/* Live, slider-value-dependent annotation that appears below the static note */
+.ctx-note {
+  margin: 0.6rem 0 0;
+  padding: 0.55rem 0.75rem;
+  background: rgba(140, 58, 43, 0.04);
+  border-left: 2px solid rgba(140, 58, 43, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  min-height: 1.2rem;
+}
+.ctx-note.warn {
+  background: rgba(140, 58, 43, 0.10);
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.ctx-note.ok {
+  background: rgba(60, 100, 60, 0.06);
+  border-left-color: rgba(60, 130, 60, 0.6);
+}
+.ctx-note .ctx-key { color: var(--text-bright); font-weight: 500; }
+.ctx-note .ctx-strong { color: var(--accent); font-weight: 500; }
+.ctx-note:empty { display: none; }
+
+/* Custom slider styling */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  margin: 0.25rem 0;
+}
+.slider:focus { outline: none; }
+.slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--rule);
+  border: none;
+}
+.slider::-moz-range-track {
+  height: 2px;
+  background: var(--rule);
+  border: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  background: var(--accent);
+  border: 2px solid var(--bg-card);
+  border-radius: 0;
+  margin-top: -7px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--accent);
+  transition: transform 0.15s ease;
+}
+.slider::-moz-range-thumb {
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border: 2px solid var(--bg-card);
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.slider:hover::-webkit-slider-thumb { transform: scale(1.18); }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 1px var(--accent), 0 0 0 4px var(--accent-glow); }
+
+/* Target toggle */
+.toggle-row {
+  display: flex;
+  gap: 0;
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--rule);
+}
+.toggle-row button {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-right: 1px solid var(--rule);
+}
+.toggle-row button:last-child { border-right: none; }
+.toggle-row button:hover { color: var(--accent); }
+.toggle-row button.active {
+  background: var(--accent);
+  color: var(--bg-card);
+}
+
+/* Status panel — the live editorial readout */
+.status-panel {
+  margin: 2rem 0 3rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--accent);
+}
+.status-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+.status-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-variation-settings: "opsz" 24;
+  color: var(--text-bright);
+  line-height: 1.5;
+  margin: 0;
+}
+.status-text .num {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+}
+.status-text .feas {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.5;
+  font-style: italic;
+}
+.status-text .feas-ok {
+  font-family: var(--font-mono);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: rgba(60, 130, 60, 0.85);
+}
+.status-text .feas-warn {
+  font-family: var(--font-mono);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+/* Preset buttons */
+.presets {
+  margin: 2rem 0 3rem;
+}
+.presets h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin: 0 0 0.85rem;
+}
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
+}
+.preset-btn {
+  padding: 0.85rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-bright);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.preset-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.preset-btn .preset-sub {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+/* Explainer columns */
+.explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem 2.5rem;
+  margin: 2.5rem 0;
+}
+.explainer-cell h4 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0 0 0.6rem;
+}
+.explainer-cell h4 span {
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+}
+.explainer-cell p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Shared pedagogical components (mirrors the recoil explorer) ─── */
+.try-panel {
+  margin: 0 0 2rem; padding: 1.25rem 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+}
+.try-panel .eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 0.5rem;
+}
+.try-panel h3 {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.6rem;
+}
+.try-panel ol {
+  margin: 0; padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.55; color: var(--text);
+}
+.try-panel ol li { margin: 0.3rem 0; }
+.try-panel ol li em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+.explainer-drop {
+  margin: 0.65rem 0 0; padding: 0; border-top: 1px dashed var(--rule);
+}
+.explainer-drop summary {
+  list-style: none; cursor: pointer; padding: 0.45rem 0 0.4rem;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.explainer-drop summary::-webkit-details-marker { display: none; }
+.explainer-drop summary::before {
+  content: "+"; display: inline-block; width: 1em; color: var(--accent);
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; line-height: 1;
+}
+.explainer-drop[open] summary::before { content: "−"; }
+.explainer-drop summary:hover, .explainer-drop summary:focus-visible { color: var(--accent); outline: none; }
+.explainer-drop summary:focus-visible { box-shadow: 0 0 0 2px var(--accent-soft); border-radius: 2px; }
+.explainer-drop .drop-body {
+  padding: 0.4rem 0 0.6rem; font-size: 0.9rem; line-height: 1.55;
+  color: var(--text); border: 0;
+}
+.explainer-drop .drop-body p { margin: 0 0 0.5rem; }
+.explainer-drop .drop-body p:last-child { margin-bottom: 0; }
+.explainer-drop .drop-body em { color: var(--accent); font-style: italic; }
+
+.plot-explain { margin: 0.5rem 0 1.5rem; padding: 0 0.25rem; }
+.plot-explain summary {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); cursor: pointer;
+  padding: 0.35rem 0; list-style: none;
+}
+.plot-explain summary::-webkit-details-marker { display: none; }
+.plot-explain summary::before {
+  content: "?"; display: inline-block; width: 1.1em; height: 1.1em; margin-right: 0.5rem;
+  border: 1px solid var(--accent-soft); border-radius: 50%; text-align: center;
+  font-weight: 600; color: var(--accent); font-size: 0.7rem; line-height: 1.1em;
+}
+.plot-explain[open] summary::before { background: var(--accent-soft); }
+.plot-explain summary:hover, .plot-explain summary:focus-visible { color: var(--accent); outline: none; }
+.plot-explain .drop-body {
+  font-size: 0.92rem; line-height: 1.55; color: var(--text);
+  padding: 0.5rem 0 0.25rem; border-top: 1px dashed var(--rule);
+}
+.plot-explain .drop-body p { margin: 0 0 0.5rem; }
+.plot-explain .drop-body p:last-child { margin-bottom: 0; }
+
+/* Tabs inside the plot-explain disclosure to pick which pane's explainer to show */
+.plot-explain-tabs {
+  display: flex; flex-wrap: wrap; gap: 0; margin: 0.5rem 0 0;
+  border-top: 1px dashed var(--rule);
+  padding-top: 0.5rem;
+}
+.plot-explain-tabs button {
+  background: transparent; border: 1px solid var(--rule); border-right: none;
+  padding: 0.35rem 0.7rem; font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s ease, background 0.15s ease;
+}
+.plot-explain-tabs button:last-child { border-right: 1px solid var(--rule); }
+.plot-explain-tabs button:hover { color: var(--accent); }
+.plot-explain-tabs button.active {
+  background: var(--accent); color: var(--bg-card); border-color: var(--accent);
+}
+.plot-explain-tabs button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+
+.controls-effects {
+  margin: 2.5rem 0 1.5rem; padding: 1.25rem 1.5rem;
+  background: var(--bg-elevated); border: 1px solid var(--rule);
+}
+.controls-effects h3 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.5rem;
+}
+.controls-effects .lede {
+  margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;
+}
+.controls-effects table { width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.5; }
+.controls-effects th, .controls-effects td {
+  text-align: left; padding: 0.55rem 0.6rem; vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+.controls-effects th {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); font-weight: 600;
+  border-bottom: 1px solid var(--text-muted);
+}
+.controls-effects td:first-child { font-family: var(--font-display); color: var(--text-bright); width: 38%; }
+.controls-effects td em { color: var(--accent); font-style: normal; font-weight: 500; }
+@media (max-width: 540px) {
+  .controls-effects table, .controls-effects tbody, .controls-effects tr, .controls-effects td { display: block; width: 100%; }
+  .controls-effects thead { display: none; }
+  .controls-effects tr { padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+  .controls-effects td { padding: 0.15rem 0; border: 0; }
+  .controls-effects td:first-child { width: 100%; font-size: 0.95rem; margin-bottom: 0.15rem; }
+  .controls-effects td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+}
+
+.wimp-aside {
+  margin: 0.6rem 0 0; padding: 0.5rem 0.7rem;
+  background: var(--bg-elevated); border-left: 2px solid var(--accent-soft);
+  font-size: 0.82rem; line-height: 1.5; color: var(--text-muted);
+}
+
+.pane-legend {
+  display: none; margin: 0.5rem 0 0; font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); text-align: center;
+}
+@media (max-width: 720px) {
+  .pane-legend { display: block; }
+  .pane-legend strong { color: var(--accent); font-weight: 600; }
+}
+
+.assumptions { margin: 2rem 0 1rem; }
+.assumptions > h3 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.8rem;
+}
+.assumptions details { border-top: 1px solid var(--rule); margin: 0; padding: 0; }
+.assumptions details:last-of-type { border-bottom: 1px solid var(--rule); }
+.assumptions summary {
+  cursor: pointer; padding: 0.7rem 0; list-style: none;
+  font-family: var(--font-display); font-size: 1rem; color: var(--text-bright);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.assumptions summary::-webkit-details-marker { display: none; }
+.assumptions summary::before { content: "+"; color: var(--accent); font-family: var(--font-mono); font-weight: 700; width: 1em; display: inline-block; }
+.assumptions details[open] summary::before { content: "−"; }
+.assumptions summary:hover, .assumptions summary:focus-visible { color: var(--accent); outline: none; }
+.assumptions summary:focus-visible { box-shadow: 0 0 0 2px var(--accent-soft); border-radius: 2px; }
+.assumptions .assumption-body { padding: 0 0 1rem; font-size: 0.92rem; line-height: 1.6; color: var(--text); }
+.assumptions .assumption-body p { margin: 0 0 0.6rem; }
+.assumptions .assumption-body p:last-child { margin-bottom: 0; }
+.assumptions .assumption-body em { font-style: italic; color: var(--accent); }
+.assumptions .assumption-body a { color: var(--accent); }
+</style>
+
+<noscript>
+  <div style="padding:1rem 1.25rem; margin:0 0 2rem; background:#fffaf0; border-left:3px solid #8c3a2b;">
+    <strong>This interactive page needs JavaScript.</strong>
+    The sensitivity plots and slider-driven calculations all run live in your browser — turn JavaScript on (or open the page in a JS-enabled browser) to use it.
+  </div>
+</noscript>
+
+<p class="prose">
+  In a direct-detection experiment, the signal is fearfully small — a few keV
+  of recoil energy in a tonne of liquid argon or xenon, deep underground, far
+  from any disturbance. Every choice we make pulls the sensitivity in a
+  different direction. Here you can play with those choices: drop the energy
+  threshold, lengthen the run, swap argon for xenon, descend below a kilometre
+  of rock, and watch the limit you'd set move against today's best results.
+</p>
+
+<aside class="try-panel" aria-labelledby="try-panel-heading">
+  <p class="eyebrow">Start here</p>
+  <h3 id="try-panel-heading">Try these three things first</h3>
+  <ol>
+    <li>Move the <em>S1 threshold</em> from 30 keV down toward 5 keV — the high-mass arm of your limit curve drops sharply as the WIMP recoil tail comes into view.</li>
+    <li>Drop the <em>S2 threshold</em> toward 0.3 keV — the limit now extends down to sub-GeV WIMP masses, where the S2-only + Migdal channel takes over.</li>
+    <li>Switch the <em>target</em> from argon to xenon — see the A² coherent boost at high mass, and the bigger ν-fog you have to fight at low mass.</li>
+  </ol>
+</aside>
+
+<div class="explorer-layout">
+  <!-- ───────────────── PLOT ───────────────── -->
+  <div class="plot-card">
+    <div class="plot-row" id="plot-row" role="region" aria-label="Sensitivity plot — swipe between low and high mass on mobile">
+      <svg class="plot-svg pane-svg" id="svg-lo" data-pane="lo" viewBox="0 0 540 640" role="img" aria-labelledby="svg-lo-title svg-lo-desc">
+        <title id="svg-lo-title">Low-mass sensitivity (40 MeV to 5 GeV)</title>
+        <desc id="svg-lo-desc">Spin-independent WIMP–nucleon cross-section limit versus WIMP mass on log-log axes, from 40 MeV to 5 GeV. Reference curves include CRESST-III (leading sub-200 MeV via cryogenic calorimeters), DarkSide-50 S2 + Migdal (leading 200 MeV – 2.5 GeV), PandaX-4T low-DM (leading 2.5 – 5 GeV), and DarkSide-20k S2 projections — all 90% C.L. The shaded region below them is the liquid-argon neutrino fog. The user's experiment curve, drawn from the slider settings, is overlaid on top.</desc>
+        <g class="grid-layer"></g>
+        <g class="curves-layer"></g>
+        <g class="axes-layer"></g>
+        <g class="labels-layer"></g>
+      </svg>
+      <svg class="plot-svg pane-svg" id="svg-hi" data-pane="hi" viewBox="0 0 540 640" role="img" aria-labelledby="svg-hi-title svg-hi-desc">
+        <title id="svg-hi-title">High-mass sensitivity (1 GeV to 10 TeV)</title>
+        <desc id="svg-hi-desc">Spin-independent WIMP–nucleon cross-section limit versus WIMP mass on log-log axes, from 1 GeV to 10 TeV. Reference curves: PandaX-4T low-DM (2.5–5 GeV), LZ light-DM 5.7 t·yr (3–9 GeV), LZ 4.2 tonne-year (classic WIMP region, ≥9 GeV), DarkSide-50 S1+S2, and DarkSide-20k 10-year projection — all 90% C.L. The shaded ν-fog band sets the irreducible floor. The user's experiment curve is overlaid.</desc>
+        <g class="grid-layer"></g>
+        <g class="curves-layer"></g>
+        <g class="axes-layer"></g>
+        <g class="labels-layer"></g>
+      </svg>
+    </div>
+    <div class="pane-dots" id="pane-dots" aria-hidden="true">
+      <button type="button" class="pane-dot active" data-pane-target="svg-lo" aria-label="Show low-mass pane"></button>
+      <button type="button" class="pane-dot" data-pane-target="svg-hi" aria-label="Show high-mass pane"></button>
+    </div>
+    <p class="pane-legend" aria-live="polite" id="pane-legend">
+      Swipe: <strong id="pane-legend-name">Low mass (sub-GeV → 5 GeV)</strong> · High mass (1 GeV → 10 TeV)
+    </p>
+    <details class="plot-explain" id="plot-explain-current">
+      <summary>What does this plot show?</summary>
+      <div class="plot-explain-tabs" role="tablist" aria-label="Choose which plot to explain">
+        <button type="button" role="tab" data-pane-explain="svg-lo" class="active" aria-selected="true">Low mass</button>
+        <button type="button" role="tab" data-pane-explain="svg-hi" aria-selected="false">High mass</button>
+      </div>
+      <div class="drop-body" id="plot-explain-body">
+        <p><strong>Low-mass sensitivity.</strong> Spin-independent WIMP–nucleon cross-section that your experiment can <em>exclude</em> (90% C.L.) versus WIMP mass, from 40 MeV to 5 GeV. Below your "your experiment" curve is the cross-section space your detector can rule out; above it is still allowed.</p>
+        <p>The reference curves track the current leading-experiment envelope. <span style="color:#7a3a8a;">CRESST-III</span> (cryogenic calorimeters with sub-30 eV thresholds) leads below ~200 MeV/c²; <span style="color:#a36b3a; font-style:italic;">DarkSide-50 S2+Migdal</span> (argon, ionisation-only) leads from ~200 MeV to ~2.5 GeV; <span style="color:#2e4a8a;">PandaX-4T</span> (xenon, S2-only) takes over from ~2.5 to 5 GeV. <span style="color:#6b8a3c; font-style:italic;">DarkSide-20k S2</span> projections show the next generation. The shaded region beneath is the <em>neutrino fog</em>: cross-sections below it can only be reached at very high cost, since coherent ν scattering looks like a WIMP signal and you can't subtract it.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── CONTROLS ───────────────── -->
+  <aside class="controls" aria-label="Experimental parameters">
+
+    <div class="controls-toolbar">
+      <h3>Build your experiment</h3>
+      <button type="button" id="btn-reset" class="btn-reset" aria-label="Reset all controls to defaults">↺ Reset all</button>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Target</span>
+        <span class="value" id="target-value">Argon (A=40)</span>
+      </div>
+      <div class="toggle-row" role="radiogroup" aria-label="Target nucleus">
+        <button type="button" id="target-ar" class="active" role="radio" aria-checked="true">Argon</button>
+        <button type="button" id="target-xe" role="radio" aria-checked="false">Xenon</button>
+      </div>
+      <p class="control-note">
+        Heavier nuclei get a stronger <em>A²</em> coherent enhancement for spin-independent
+        scattering, but lose recoil energy to lighter WIMPs less efficiently.
+      </p>
+      <p class="wimp-aside">
+        <em>“WIMP” is used here as shorthand.</em> The slider tracks the sub-GeV regime where the canonical thermal-relic WIMP scenario no longer strictly applies — below ~1 GeV the page is best read as exploring a generic spin-independent contact-interaction dark-matter particle.
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>Switching target changes <em>everything</em>: the A² coherent boost (xenon's A=131 vs argon's A=40), the Helm form-factor falloff at high recoil energy, the kinematic maximum recoil for a given WIMP mass, the realistic background environment (³⁹Ar, ⁸⁵Kr, ²²²Rn lines differ), and the neutrino-fog floor. The two reference curves on the plot follow each target's strengths: argon owns the low-mass S2+Migdal regime; xenon dominates the canonical high-mass WIMP region.</p>
+          <p>The internal calibrations (<em>CAL_AR</em>, <em>CAL_XE</em>) are anchored separately on the published DS-50 minimum and LZ minimum respectively — switching target uses the appropriate one.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">S1 threshold</span>
+        <span class="value"><span id="eth-s1-value">30</span> keV</span>
+      </div>
+      <input type="range" class="slider" id="eth-s1-slider" min="-0.3" max="2.0" step="0.02" value="1.48"
+             aria-label="S1 threshold in keV">
+      <p class="control-note">
+        Scintillation (S1) detection threshold in nuclear-recoil keV. The S1+S2 analysis
+        needs <em>both</em> channels, so its effective threshold is the higher of S1 and S2.
+        S1+S2 gets pulse-shape discrimination — much lower BG, but a higher floor in mass.
+        <em>DS-50 S1+S2 ≈ 30 keV<sub>nr</sub> ‖ DS-20k ≈ 6 keV<sub>nr</sub> (≈ 2 keV<sub>ee</sub>) ‖ LZ ≈ 5 keV<sub>nr</sub></em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>The S1+S2 (scintillation + ionisation) coincidence analysis runs in parallel with an S2-only analysis. The S1+S2 channel's effective threshold is the <em>larger</em> of the two slider values — both signals must be present — and in return you get pulse-shape discrimination that drops backgrounds dramatically. That low-BG advantage is paid back at low mass: the higher threshold rules out sub-10-GeV WIMPs whose recoils are too soft to make an S1.</p>
+          <p>Pushing this slider down extends high-mass reach by integrating more of the rising signal tail; it also makes the model's recovered limit visibly track the LZ reference at high mass.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-eth-s1"></div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">S2 threshold</span>
+        <span class="value"><span id="eth-s2-value">0.5</span> keV</span>
+      </div>
+      <input type="range" class="slider" id="eth-s2-slider" min="-1.5" max="1.0" step="0.02" value="-0.30"
+             aria-label="S2 threshold in keV">
+      <p class="control-note">
+        Ionization (S2) detection threshold in nuclear-recoil keV. The S2-only analysis
+        runs in parallel — no PSD (~5× higher BG, narrower ROI), but reaches the lowest
+        masses and picks up the Migdal channel below ~1.5 GeV. Best of the two analyses
+        is plotted. <em>DS-50 S2-only ≈ 0.6 keV ‖ DS-20k ≈ 0.3 keV</em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>S2 (ionisation-only) sees the secondary scintillation light from drifted ionisation electrons — orders of magnitude amplified, so the energy threshold can drop into the few-hundred-eV range. The price is losing the S1 coincidence and therefore pulse-shape discrimination: you face a much larger electron-recoil background, modelled here as ~5× the S1+S2 channel's BG.</p>
+          <p>S2-only is what opens up the sub-GeV WIMP regime, especially via the Migdal effect (a soft electron ejected during the nuclear recoil). The model adds a phenomenological Migdal contribution below ~1.5 GeV to track DS-50's published S2 + Migdal result qualitatively.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-eth-s2"></div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Exposure</span>
+        <span class="value"><span id="exp-value">0.05</span> t·yr</span>
+      </div>
+      <input type="range" class="slider" id="exp-slider" min="-2" max="3.55" step="0.02" value="-1.3"
+             aria-label="Exposure in tonne-years">
+      <p class="control-note">
+        Detector mass × live time. Doubles the signal — and the background, so the win
+        is only √2 once background-limited. <em>DS-50 ≈ 0.05 t·yr ‖ LZ ≈ 4.2 t·yr ‖ DS-20k ≈ 200 t·yr</em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>In the background-free regime, sensitivity scales as <em>1/exposure</em>: every extra tonne-year proportionally tightens the limit. Once you're background-limited it drops to <em>1/√exposure</em>: doubling exposure doubles both signal and background, and the limit only improves by √2. The model captures this crossover via the Feldman–Cousins-like n₉₀ formula, smoothly interpolating between 2.3 (BG-free) and 1.282·√N_BG (BG-dominated).</p>
+          <p>An ν-induced background term is added so that, with very large exposure on a clean detector, the limit asymptotes properly into the ν-fog floor rather than improving without bound.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-exp"></div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Intrinsic background</span>
+        <span class="value"><span id="bg-value">0.01</span> /(keV·t·yr)</span>
+      </div>
+      <input type="range" class="slider" id="bg-slider" min="-5" max="2" step="0.02" value="-2"
+             aria-label="Intrinsic background in counts per keV per tonne per year">
+      <p class="control-note">
+        Radio-impurities, surface contamination, and irreducible neutrino scattering.
+        Below ~10⁻⁴ you are touching the <em>neutrino fog</em>.
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>Every milli-becquerel of ²³⁸U, ²³²Th, ⁸⁵Kr or ³⁹Ar in or around the detector is a candidate fake-signal source. Cleaning is hard: underground-sourced argon, electroformed copper, screened steels, clean rooms cleaner than chip fabs. The S2-only channel sees ~5× the intrinsic BG because it lacks pulse-shape discrimination — the model handles this automatically.</p>
+          <p>Below ~10⁻⁴ /(keV·t·yr) the irreducible coherent-neutrino contribution dominates and the limit improvement plateaus regardless of how much cleaner you make the detector — this is the ν-fog floor in BG-rate form.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-bg"></div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Depth</span>
+        <span class="value"><span id="depth-value">3800</span> m.w.e.</span>
+      </div>
+      <input type="range" class="slider" id="depth-slider" min="1" max="4.1" step="0.02" value="3.58"
+             aria-label="Depth in metres water equivalent">
+      <p class="control-note">
+        Overburden shields the detector from cosmic-ray muons. Below ~3000 m.w.e. the
+        muon-induced background falls below intrinsic.
+        <em>Boulby ≈ 2805 ‖ Gran Sasso ≈ 3800 ‖ SNOLAB ≈ 6010 ‖ Jinping ≈ 6720</em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>Cosmic-ray muons spall neutrons out of surrounding rock, and those neutrons mimic a WIMP recoil exactly. The muon flux falls by roughly a factor of 10 per ~500 m.w.e. (the model uses this attenuation), so by Gran Sasso (≈3800 m.w.e.) muon-induced BG sits at the level of typical intrinsic; by SNOLAB / Jinping it's negligible.</p>
+          <p>Above ~3000 m.w.e. the depth slider stops mattering much — intrinsic and ν-induced backgrounds take over. Below ~1000 m.w.e. cosmogenic dominates everything and the limit gets dramatically worse.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-depth"></div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ───────────────── LIVE STATUS ───────────────── -->
+<div class="status-panel" id="status-panel" role="status" aria-live="polite" aria-atomic="false">
+  <p class="status-eyebrow">Your experiment now</p>
+  <p class="status-text" id="status-text">Loading…</p>
+</div>
+
+<!-- ───────────────── CONTROLS-EFFECTS CROSS-REFERENCE ───────────────── -->
+<section class="controls-effects" aria-labelledby="controls-effects-h">
+  <h3 id="controls-effects-h">What each control changes</h3>
+  <p class="lede">A glance-table connecting the sliders to which part of the limit they move. Exposure and background interact via the BG-free → BG-limited crossover; thresholds set what mass range you can even reach.</p>
+  <table>
+    <thead><tr><th scope="col">Control</th><th scope="col">What it changes</th></tr></thead>
+    <tbody>
+      <tr><td>Target (Ar / Xe)</td><td><em>Where the curve sits at every mass:</em> A² boost, kinematic reach, form-factor falloff, background environment, ν-fog floor — all retargeted.</td></tr>
+      <tr><td>S1 threshold</td><td><em>The high-mass arm of the limit.</em> Sets the effective threshold for the low-BG S1+S2 analysis; doesn't directly affect the sub-GeV S2-only regime.</td></tr>
+      <tr><td>S2 threshold</td><td><em>The low-mass end of the limit.</em> Opens up sub-GeV WIMPs via the S2-only / Migdal channel. Best-of-two-analyses is plotted.</td></tr>
+      <tr><td>Exposure</td><td><em>Vertical scale at every mass.</em> 1/exposure when BG-free; 1/√exposure once BG-limited. Hits the ν-fog floor eventually.</td></tr>
+      <tr><td>Background</td><td><em>Where the crossover happens.</em> Cleaner detectors stay in the 1/exposure regime longer. Doesn't itself change kinematic reach.</td></tr>
+      <tr><td>Depth</td><td><em>Cosmogenic floor only.</em> Mostly below ~3000 m.w.e.; above that, intrinsic and ν take over and depth stops mattering.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ───────────────── PRESETS ───────────────── -->
+<div class="presets">
+  <h3>Jump to a configuration</h3>
+  <div class="preset-grid">
+    <button type="button" class="preset-btn" data-preset="ds50">
+      DarkSide-50 (S1+S2)
+      <span class="preset-sub">Argon · high-mass · PSD discrimination</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="ds50s2">
+      DarkSide-50 (S2-only)
+      <span class="preset-sub">Argon · ionization-only · low mass</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="lz">
+      LZ (2024)
+      <span class="preset-sub">Xenon · 5.5 t · 280 days</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="ds20k">
+      DarkSide-20k (S1+S2)
+      <span class="preset-sub">Argon · 200 t·yr nominal</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="ds20ks2">
+      DarkSide-20k S2 + Migdal (1 yr)
+      <span class="preset-sub">17.4 t·yr fiducial · arXiv:2407.05813</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="ds20ks2_10y">
+      DarkSide-20k S2 + Migdal (10 yr)
+      <span class="preset-sub">Reaches the neutrino fog at ~5 GeV</span>
+    </button>
+  </div>
+</div>
+
+<!-- ───────────────── EDITORIAL EXPLAINERS ───────────────── -->
+<h2 class="heading">What each control does</h2>
+
+<div class="explainer-grid">
+
+  <div class="explainer-cell">
+    <h4><span>01</span>Threshold &amp; the S2-only trick</h4>
+    <p>
+      A WIMP of mass <em>M<sub>χ</sub></em> can only deposit
+      <em>E<sub>R</sub><sup>max</sup> ≈ 2μ²v²/M<sub>N</sub></em> in a collision. For light
+      WIMPs that maximum sits below the detector threshold and the experiment goes
+      blind. Dropping the threshold opens up sub-10 GeV WIMPs — and DarkSide-50
+      did exactly this by reading <em>only</em> the ionization (S2) signal, sacrificing the
+      pulse-shape discrimination that suppresses electron-recoil backgrounds in
+      exchange for an effective threshold down at ~0.6 keVnr. Push the threshold
+      slider down and watch your line march toward the dotted S2-only reference.
+    </p>
+  </div>
+
+  <div class="explainer-cell">
+    <h4><span>02</span>Exposure</h4>
+    <p>
+      Mass × time. In the background-free regime sensitivity scales as
+      <em>1/exposure</em>; with background it slows to <em>1/√exposure</em>. This is
+      why making detectors larger is only the easy half of the problem — the other
+      half is keeping them clean enough to stay background-free for as long as
+      possible.
+    </p>
+  </div>
+
+  <div class="explainer-cell">
+    <h4><span>03</span>Background</h4>
+    <p>
+      Every milli-becquerel of <sup>238</sup>U, <sup>232</sup>Th, <sup>85</sup>Kr or
+      <sup>39</sup>Ar in the detector is a fake signal candidate. We chase them down
+      by underground-sourced argon, electroformed copper, screened steels, and clean
+      rooms cleaner than chip fabs. Below <em>~10⁻⁴ /(keV·t·yr)</em> we hit an
+      irreducible floor of coherent neutrino scattering.
+    </p>
+  </div>
+
+  <div class="explainer-cell">
+    <h4><span>04</span>Depth</h4>
+    <p>
+      Cosmic-ray muons spall neutrons out of surrounding rock, and those neutrons
+      mimic a WIMP recoil exactly. The muon flux falls roughly exponentially with
+      depth — by Gran Sasso (≈3800 m.w.e.) it is a million times below the surface,
+      enough that muon-induced backgrounds drop below the intrinsic floor.
+    </p>
+  </div>
+
+  <div class="explainer-cell">
+    <h4><span>05</span>Target</h4>
+    <p>
+      Coherent SI scattering enhances rates by <em>A²</em>, so xenon (A=131) gains a
+      factor ~10 over argon (A=40). But argon's lower mass gives more recoil energy
+      per WIMP collision at fixed mass, and pulse-shape discrimination in liquid
+      argon offers a powerful electron-recoil rejection lever xenon cannot match.
+      Both technologies are needed: target complementarity breaks model degeneracies.
+    </p>
+  </div>
+
+  <div class="explainer-cell">
+    <h4><span>06</span>The neutrino fog</h4>
+    <p>
+      No detector — however large, however quiet, however deep — can escape the
+      <sup>8</sup>B, atmospheric, and diffuse-supernova neutrinos that scatter
+      coherently off nuclei and look exactly like WIMPs. The shaded region is where
+      that fog begins to limit sensitivity gain. Beyond it, only directional
+      detection or annual modulation can keep cutting.
+    </p>
+  </div>
+
+</div>
+
+<section class="assumptions" aria-labelledby="assumptions-h">
+  <h3 id="assumptions-h">Model &amp; assumptions</h3>
+
+  <details>
+    <summary>Physics model used</summary>
+    <div class="assumption-body">
+      <p>Sensitivity calculations use the Standard Halo Model (ρ₀ = 0.3 GeV/cm³, v₀ = 220 km/s, v<sub>esc</sub> = 544 km/s), Helm form factors, and a Feldman–Cousins-like 90% C.L. upper limit (smooth interpolation between background-free n₉₀ = 2.3 and BG-dominated n₉₀ = 1.282·√N_BG).</p>
+      <p>Two analysis channels run in parallel: a discriminated <em>S1+S2</em> channel (effective threshold = max of the two slider values, low BG, wide ROI ≈ 200 keV) and an <em>S2-only</em> channel that loses pulse-shape discrimination (~5× higher BG, narrow ROI ≈ 5 keV) but reaches lower threshold and picks up a phenomenological Migdal contribution below ~1.5 GeV. The best limit of the two is plotted at every mass. Each channel's signal rate is integrated over its <em>actual</em> energy window — this is what makes the S1 slider visibly affect high-mass reach while leaving the low-mass S2-only regime untouched.</p>
+      <p>A coherent-ν background term is included so exposure asymptotes properly into the ν-fog floor rather than scaling linearly forever; cosmogenic BG attenuates by a factor of 10 per ~500 m.w.e. of depth.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Normalisation: semi-empirical, not first-principles</summary>
+    <div class="assumption-body">
+      <p>The <em>shape</em> of the limit (mass dependence, threshold cliff, A², exposure scaling) is computed from standard recoil kinematics. The <em>absolute normalisation</em> is two calibrated constants — <em>CAL_AR</em> tuned so DS-50's high-mass limit reproduces its published 1.1×10⁻⁴⁴ cm² minimum at 100 GeV, and <em>CAL_XE</em> tuned so the LZ preset recovers 2.2×10⁻⁴⁸ cm² at 40 GeV (<a href="https://arxiv.org/abs/2410.17036">arXiv:2410.17036</a>, 4.2 t·yr).</p>
+      <p>This is therefore a <em>semi-empirical</em> sensitivity engine, not an independent absolute-rate calculation. With those two anchors in place, the model reproduces the DS-50 minimum to within ~5%, the LZ minimum to within ~5%, and the DS-20k TDR projection to within ~1.7× (the residual is profile-likelihood vs counting — see below).</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Reference curves and sources</summary>
+    <div class="assumption-body">
+      <p>The <span style="color:#a36b3a;">DS-50 S1+S2</span> baseline is the original DarkSide-50 high-mass result; <span style="color:#a36b3a;">DS-50 S2+Migdal</span> is from <a href="https://arxiv.org/abs/2207.11967">arXiv:2207.11967</a> (PRL 130, 101001, 12.3 t·d), approximated from the published figure.</p>
+      <p><span style="color:#4a6b7a;">LZ</span> is the 4.2 t·yr WS2024+WS2022 combined limit from <a href="https://arxiv.org/abs/2410.17036">arXiv:2410.17036</a> (minimum 2.2×10⁻⁴⁸ cm² at 40 GeV/c²). <span style="color:#4a6b7a; font-style:italic;">LZ light-DM</span> (dashed) extends this to 3–9 GeV/c² using the 5.7 t·yr WS2025 analysis in <a href="https://arxiv.org/abs/2512.08065">arXiv:2512.08065</a>, which also reports the first 4.5σ evidence of ⁸B solar-neutrino CEνNS in xenon. <span style="color:#6b8a3c;">DS-20k S1+S2</span> (nominal Fid 10 y, 200 t·yr fiducial) is read from the DarkSide-20k Technical Design Report (<em>DARKSIDE-CSN2-TDR-2112</em>, Figure 2 top panel, 90% C.L. exclusion). Minimum ≈ 1×10⁻⁴⁸ cm² at ~150 GeV.</p>
+      <p><span style="color:#7a3a8a;">CRESST-III</span> is a coarse digitisation of the envelope of two cryogenic CRESST-III analyses: the SOS detector with 6.7 eV threshold (<a href="https://arxiv.org/abs/2405.06527">arXiv:2405.06527</a>, PRD 110, 083038), which sets the leading SI limit in 74–202 MeV/c²; and Detector A, a 23.6 g CaWO<sub>4</sub> crystal with 30.1 eV threshold (<a href="https://arxiv.org/abs/1904.00498">arXiv:1904.00498</a>, PRD 100, 102002), which reaches ~10⁻³⁸ cm² near 1 GeV and ~10⁻⁴² cm² at 10 GeV per the CRESST decade roadmap (<a href="https://arxiv.org/abs/2505.01183">arXiv:2505.01183</a>). Pedagogical — not publication-grade.</p>
+      <p><span style="color:#2e4a8a;">PandaX-4T</span> is the low-DM / ionisation-only S2 search from <a href="https://arxiv.org/abs/2507.11930">arXiv:2507.11930</a> (PRL 135, 211001), 259-day data, 1.04 t·yr effective US2 exposure — the leading SI constraint in the 2.5–5 GeV/c² window, with σ(3 GeV/c²) = 1.1×10⁻⁴³ cm². The paper notes mild upward fluctuations above ~3.5 GeV/c² from a slight event excess in the S2 (5–8 electron) region — reflected in the curve shape.</p>
+      <p><span style="color:#6b8a3c;">DS-20k S2+Migdal</span> projections (1-year, and 10-year by 1/√t scaling) come from <a href="https://arxiv.org/abs/2407.05813">arXiv:2407.05813</a> Fig 4a (2N<sub>e</sub> ultimate fit, data via <a href="https://zenodo.org/records/13911875">Zenodo 13911875</a>). The <em>liquid-argon neutrino fog</em> (n=2 boundary) is from <a href="https://arxiv.org/abs/2109.03116">O'Hare 2021</a> (PRL 127, 251802), read directly from the <a href="https://github.com/cajohare/NeutrinoFog">cajohare/NeutrinoFog</a> Ar_SI data file. Below 100 MeV the fog values are extrapolated since O'Hare's calculation stops at the kinematic edge.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>What this does <em>not</em> include</summary>
+    <div class="assumption-body">
+      <p>Published Migdal analyses use shape-likelihood methods that distinguish the Migdal electron spectrum from the ³⁹Ar background — this tool's counting analysis cannot reproduce that. At sub-GeV mass your S2 curve will be significantly more conservative than the published projection. The qualitative shape and dependences on threshold, exposure, depth and target are what's intended to be explored.</p>
+      <p>Spin-dependent operators, light mediators, momentum- or velocity-suppressed interactions are out of scope here — the model assumes spin-independent contact scattering. Annual modulation and directional detection (the natural next steps once ν-fog is in reach) are also outside scope.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Why real analyses differ from this counting model</summary>
+    <div class="assumption-body">
+      <p>Real published limits use profile-likelihood fits that exploit the predicted dR/dE versus a background model with its own spectral shape — that distinguishes signal from background <em>per event</em>, not just by counting. At the DS-20k preset the user curve sits ~1.7× above the TDR minimum because of this; honest residual.</p>
+      <p>If you ever want a closer match: the gap is a mass-dependent boost factor that could in principle be folded in — noted in the site TODO list as an optional future enhancement.</p>
+    </div>
+  </details>
+</section>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════════
+   DARK MATTER SENSITIVITY EXPLORER
+   Physics: SHM rate calculation + Helm FF + truncated MB velocity integral
+   Calibration: tuned so DS-50 baseline preset gives min ~1.1e-44 cm² @ 100 GeV
+   ════════════════════════════════════════════════════════════════════════ */
+
+// ── Physical constants ─────────────────────────────────────────────────
+const RHO0     = 0.3;          // GeV/cm³
+const V0       = 220;          // km/s (Maxwell-Boltzmann scale)
+const VEARTH   = 232;          // km/s (Earth speed in galactic frame)
+const VESC     = 544;          // km/s (galactic escape)
+const C_KMS    = 299792.458;   // km/s
+const M_NUC    = 0.9315;       // GeV — average nucleon mass
+const HBARC    = 0.197327;     // GeV·fm
+
+// ── Math helpers ──────────────────────────────────────────────────────
+function erf(x) {
+  // Abramowitz & Stegun 7.1.26
+  const sign = Math.sign(x);
+  x = Math.abs(x);
+  const a1=0.254829592, a2=-0.284496736, a3=1.421413741,
+        a4=-1.453152027, a5=1.061405429, p=0.3275911;
+  const t = 1 / (1 + p*x);
+  const y = 1 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t * Math.exp(-x*x);
+  return sign * y;
+}
+
+// ── Helm form factor ─────────────────────────────────────────────────
+function helmF2(ER_keV, A) {
+  if (ER_keV <= 0) return 1;
+  const ER_GeV = ER_keV * 1e-6;
+  const MN = A * M_NUC;
+  const q  = Math.sqrt(2 * MN * ER_GeV);    // GeV
+  const qfm = q / HBARC;                     // fm⁻¹
+  const s = 0.9, a = 0.52;
+  const cp = 1.23 * Math.pow(A, 1/3) - 0.6;
+  const R1 = Math.sqrt(cp*cp + (7/3)*Math.PI*Math.PI*a*a - 5*s*s);
+  const x = qfm * R1;
+  if (x < 1e-4) return 1;
+  const j1 = (Math.sin(x) - x*Math.cos(x)) / (x*x);
+  const F = 3 * j1 / x * Math.exp(-(qfm*s)*(qfm*s)/2);
+  return F*F;
+}
+
+// ── Truncated Maxwell-Boltzmann velocity integral g(v_min) ────────────
+//    Returns ⟨1/v⟩ above v_min in (km/s)⁻¹, with Earth motion + escape cut.
+function gOfVmin(vmin) {
+  const x = vmin   / V0;
+  const y = VEARTH / V0;
+  const z = VESC   / V0;
+  const Nesc = erf(z) - 2/Math.sqrt(Math.PI) * z * Math.exp(-z*z);
+  if (x >= z + y) return 0;
+  const sqrtPi = Math.sqrt(Math.PI);
+  let res;
+  if (x < z - y) {
+    res = 1/(2*y*V0) * (erf(x + y) - erf(x - y)) - 2/(sqrtPi * V0) * Math.exp(-z*z);
+  } else {
+    res = 1/(2*y*V0) * (erf(z) - erf(x - y)) - (z + y - x)/(sqrtPi * y * V0) * Math.exp(-z*z);
+  }
+  if (!isFinite(res) || res < 0) return 0;
+  return res / Nesc;
+}
+
+// ── v_min(E_R, M_chi, A) in km/s ─────────────────────────────────────
+function vMin(ER_keV, Mchi, A) {
+  const MN  = A * M_NUC;
+  const mu  = Mchi * MN / (Mchi + MN);
+  const ER  = ER_keV * 1e-6;
+  return Math.sqrt(MN * ER / (2 * mu * mu)) * C_KMS;
+}
+
+// ── Differential rate ∝ A² F²(E_R) η(v_min) × μ_N² / (M_chi μ_n²) ─────
+//    Returns a unit-less SHAPE × kinematic factor (calibration absorbed
+//    in CAL constant below). Integrating gives total rate per σ_n.
+function dRdER(ER_keV, Mchi, A) {
+  const MN  = A * M_NUC;
+  const mu_N = Mchi * MN / (Mchi + MN);
+  const mu_n = Mchi * M_NUC / (Mchi + M_NUC);
+  const F2   = helmF2(ER_keV, A);
+  const g    = gOfVmin(vMin(ER_keV, Mchi, A));
+  return (A*A) * F2 * g * (mu_N*mu_N) / (Mchi * mu_n*mu_n);
+}
+
+// ── Integrated rate per unit σ_n above threshold ─────────────────────
+//    Log-spaced integration handles the very wide dynamic range needed
+//    when thresholds drop below 0.1 keV (Migdal regime).
+function rateAboveThreshold(Mchi, A, Eth) {
+  if (Eth <= 0) return 0;
+  const Emax = Math.max(250, Eth * 200);
+  const N = 200;
+  const logLo = Math.log(Eth), logHi = Math.log(Emax);
+  const dlog = (logHi - logLo) / N;
+  let sum = 0;
+  let prevE = Eth;
+  let prev = dRdER(Eth, Mchi, A);
+  for (let i = 1; i <= N; i++) {
+    const E = Math.exp(logLo + i * dlog);
+    const curr = dRdER(E, Mchi, A);
+    sum += 0.5 * (prev + curr) * (E - prevE);
+    prev = curr;
+    prevE = E;
+  }
+  return sum;
+}
+
+// Integrate WIMP recoil rate strictly between [Elo, Ehi]. This matters
+// because the BG count uses an analysis ROI of finite width — signal
+// events outside that window are *not* observed, so they shouldn't be
+// counted in I. In particular, an S2-only analysis at threshold 0.3 keV
+// only sees events in the 0.3-5 keV window; a 100 GeV WIMP's recoils mostly
+// land above 5 keV and are missed, which is why S2-only loses at high mass.
+function rateBetween(Mchi, A, Elo, Ehi) {
+  if (Elo <= 0 || Ehi <= Elo) return 0;
+  const N = 150;
+  const logLo = Math.log(Elo), logHi = Math.log(Ehi);
+  const dlog = (logHi - logLo) / N;
+  let sum = 0;
+  let prevE = Elo;
+  let prev = dRdER(Elo, Mchi, A);
+  for (let i = 1; i <= N; i++) {
+    const E = Math.exp(logLo + i * dlog);
+    const curr = dRdER(E, Mchi, A);
+    sum += 0.5 * (prev + curr) * (E - prevE);
+    prev = curr;
+    prevE = E;
+  }
+  return sum;
+}
+
+// ── 90% CL upper limit: smooth Poisson → Gaussian crossover ──────────
+function n90(NBG) {
+  // Background-free Poisson 90% CL: 2.3
+  // High-BG: ~1.282 × √NBG (one-sided 90%)
+  return Math.sqrt(2.3*2.3 + 1.282*1.282 * NBG);
+}
+
+// ── Depth → muon-induced NR-like BG suppression ──────────────────────
+// This is steeper than raw muon flux because real WIMP analyses apply
+// multi-scatter rejection, external muon veto, and time-coincidence cuts
+// that further suppress the muon-induced single-scatter NR-mimicking rate.
+// Empirically the post-veto residual falls by ~factor 10 per ~500 m.w.e.
+// Calibrated so surface (~15 m.w.e.) keeps cosmics dominant; Boulby
+// (~2805 m.w.e.) puts cosmics roughly at the same level as a few-mBq
+// intrinsic BG; Gran Sasso (~3800 m.w.e.) and below makes cosmics
+// sub-dominant for any realistic intrinsic radiopurity.
+function muonFluxRatio(depth_mwe) {
+  return Math.pow(10, -depth_mwe / 500);
+}
+
+// ── Calibration ───────────────────────────────────────────────────────
+//    Per-target constant absorbs detector efficiency, ROI choices, and the
+//    gap between a counting 90% CL and modern profile-likelihood analyses.
+//    Tuned so DS-50 baseline → ~1.1e-44 cm² @ 100 GeV (matches reference)
+// Calibration constants — set so DS-50 baseline preset reaches ~1.1e-44 cm² minimum
+// at ~100 GeV (matches published DS-50 limit), and so LZ reaches ~2e-48 minimum
+// (matches arXiv:2410.17036 4.2 t·yr result).
+const CAL_AR = 1.4e-43;
+const CAL_XE = 7.8e-44;
+function calFor(A) { return A === 40 ? CAL_AR : CAL_XE; }
+
+// ── Migdal contribution ───────────────────────────────────────────────
+//    Phenomenological model: events with NR energy below the user S2 threshold
+//    can be detected via emitted electron. We compute the rate down to a
+//    much lower effective threshold and suppress by an integrated Migdal
+//    probability — plus a mass-dependent factor that mimics the rapid
+//    falloff of the Migdal spectrum at very low WIMP mass (where the WIMP
+//    can't spare enough energy for a visible electron). Pedagogically
+//    captures the sub-GeV reach without claiming to reproduce the full
+//    Ibe-Suzuki Migdal calculation.
+const MIGDAL_FLOOR_KEV   = 0.03;
+const MIGDAL_PROBABILITY = 5e-5;
+
+function migdalRate(Mchi, A, Eth_S2) {
+  if (Eth_S2 <= MIGDAL_FLOOR_KEV) return 0;
+  const subThreshold = rateAboveThreshold(Mchi, A, MIGDAL_FLOOR_KEV)
+                     - rateAboveThreshold(Mchi, A, Eth_S2);
+  const massSupp = Mchi < 1.5 ? Math.pow(Mchi / 1.5, 2) : 1;
+  return Math.max(0, subThreshold) * MIGDAL_PROBABILITY * massSupp;
+}
+
+// ── Irreducible ν-induced background ─────────────────────────────────
+//    8B solar νs dominate at sub-keV nuclear recoil; atmospheric/DSNB
+//    take over at high E_R. Returns a differential rate /(keV·t·yr) at
+//    threshold Eth. This is what makes the ν fog a *real* floor in the
+//    sensitivity calc rather than just a shaded region on the plot —
+//    once exposure × ν_rate gets large, n90 starts scaling as √N_BG and
+//    σ ∝ 1/√exposure (rather than 1/exposure).
+function nuBgDiff(A, Eth) {
+  // Coherent A² coupling: Xe (A=131) ≈ 11× Ar (A=40) per atom, but per
+  // unit mass it's only modestly worse — comparable order of magnitude.
+  const aFactor = (A === 40) ? 1.0 : 1.5;
+  if (Eth >= 10) return 1e-5 * aFactor;
+  if (Eth >= 1)  return aFactor * 1e-4 / Eth;
+  // Sub-keV: 8B fog rises rapidly toward the kinematic peak
+  return aFactor * 1e-3 * Math.pow(1 / Math.max(Eth, 0.05), 1.5);
+}
+
+// ── User experiment sensitivity at one mass ──────────────────────────
+//    Real detectors run two analyses simultaneously:
+//      (1) S1+S2 channel: requires signal in BOTH channels, so effective
+//          threshold = max(Eth_S1, Eth_S2). Gets PSD ⇒ low BG, wide ROI.
+//      (2) S2-only channel: requires only ionization, plus Migdal. No PSD
+//          ⇒ ~5× higher BG, narrow ROI.
+//    The combined limit is the better (lower σ) of the two at each mass.
+//    Critical detail: signal rate must be integrated over the same ROI
+//    that BG is counted in, otherwise S2-only would falsely count
+//    high-energy WIMP recoils that physically end up in S1+S2.
+function sensitivityAt(Mchi, params) {
+  const { A, Eth_S1, Eth_S2, exposure, bgIntrinsic, depth } = params;
+
+  const cosmoBgSurface = 1e3;
+  const cosmo = cosmoBgSurface * muonFluxRatio(depth);
+
+  // ── S1+S2 channel (both signals required, PSD active) ──
+  const Eth_eff_S1S2 = Math.max(Eth_S1, Eth_S2);
+  // Upper end of typical S1+S2 ROI: 200 keV-nr (Helm FF + BG cutoff dominate above).
+  // DS-50 used roughly 6-200 keV-nr; LZ low-energy ~0-15 keV-nr. We use 200 as the
+  // generic ceiling: changing this changes both the signal window and the BG count.
+  const Ehi_S1S2 = Math.max(200, Eth_eff_S1S2 + 50);
+  const Ewin_S1S2 = Ehi_S1S2 - Eth_eff_S1S2;
+  const I_S1S2 = rateBetween(Mchi, A, Eth_eff_S1S2, Ehi_S1S2);
+  let sens_S1S2 = 1e-25;
+  if (I_S1S2 > 0 && isFinite(I_S1S2)) {
+    const nu_S1S2 = nuBgDiff(A, Eth_eff_S1S2);
+    const bgEff_S1S2 = bgIntrinsic + cosmo + nu_S1S2;
+    const N_S1S2 = bgEff_S1S2 * Ewin_S1S2 * exposure;
+    sens_S1S2 = calFor(A) * n90(N_S1S2) / (I_S1S2 * exposure);
+  }
+
+  // ── S2-only channel (PSD lost ⇒ higher BG; Migdal extension) ──
+  // S2-only ROI is narrow (low-energy ionization band, max ~5 keV)
+  const Ehi_S2 = 5.0;
+  const Ewin_S2 = Math.max(Ehi_S2 - Eth_S2, 0.5);
+  const I_S2_NR = (Eth_S2 < Ehi_S2) ? rateBetween(Mchi, A, Eth_S2, Ehi_S2) : 0;
+  const I_S2 = I_S2_NR + migdalRate(Mchi, A, Eth_S2);
+  let sens_S2 = 1e-25;
+  if (I_S2 > 0 && isFinite(I_S2)) {
+    const nu_S2 = nuBgDiff(A, Eth_S2);
+    const bgEff_S2 = bgIntrinsic * 5 + cosmo + nu_S2;
+    const N_S2 = bgEff_S2 * Ewin_S2 * exposure;
+    sens_S2 = calFor(A) * n90(N_S2) / (I_S2 * exposure);
+  }
+
+  return Math.min(sens_S1S2, sens_S2);
+}
+
+// ── Mass grid ─────────────────────────────────────────────────────────
+const MASS_GRID = (() => {
+  const arr = [];
+  const lo = Math.log10(0.04), hi = Math.log10(10000);
+  const N = 180;
+  for (let i = 0; i < N; i++) {
+    arr.push(Math.pow(10, lo + (hi - lo) * i / (N - 1)));
+  }
+  return arr;
+})();
+
+// ════════════════════════════════════════════════════════════════════════
+// REFERENCE CURVES — hand-tuned approximations of published 90% CL limits
+// (M_chi GeV, σ_SI cm²). Reproduce minima and rough shape; not exact.
+// ════════════════════════════════════════════════════════════════════════
+
+// DS-50 high-mass analysis (S1+S2, ~30 keVnr threshold, PSD discrimination
+// against ER backgrounds). Cuts off rapidly below ~30 GeV due to kinematics.
+const REF_DS50_S1S2 = [
+  [30, 8e-44],    [40, 3e-44],    [50, 1.7e-44],  [70, 1.25e-44],
+  [100, 1.1e-44], [150, 1.15e-44],[200, 1.4e-44], [300, 2e-44],
+  [500, 3.5e-44], [1000, 7e-44],  [3000, 2.3e-43],[10000, 7.5e-43]
+];
+
+// DS-50 S2-only with Migdal effect, low-mass analysis.
+// Source: arXiv:2207.11967 (PRL 130, 101001), 12.3 t·d exposure.
+// Below ~1 GeV: Migdal extends reach down to 40 MeV. The published limit shape
+// is approximated here (paper data not in standardised release); the high-mass
+// (>4 GeV) portion is the older S2-only NR result joining smoothly.
+const REF_DS50_S2 = [
+  [0.040, 4e-35],   [0.060, 8e-36],   [0.080, 2.5e-36], [0.100, 1.0e-36],
+  [0.150, 3.0e-37], [0.200, 1.5e-37], [0.300, 6e-38],   [0.500, 2.5e-38],
+  [0.800, 8e-39],   [1.0, 1e-40],     [1.2, 1.8e-41],   [1.5, 5e-42],
+  [2.0, 1.5e-42],   [2.5, 8e-43],     [3.0, 6e-43],     [3.6, 5e-43],
+  [4.0, 1e-42],     [5.0, 5e-43],     [7.0, 4e-43],     [10, 4e-43],
+  [15, 5e-43],      [20, 6e-43]
+];
+
+// LZ WS2024+WS2022 combined, 4.2 t·yr (280 live days).
+// Source: arXiv:2410.17036, published limit. Minimum 2.2×10⁻⁴⁸ cm² at 40 GeV/c².
+const REF_LZ = [
+  [9, 1.2e-46],    [10, 4.5e-47],   [12, 1.5e-47],   [15, 7e-48],
+  [20, 3.7e-48],   [25, 2.6e-48],   [30, 2.3e-48],   [36, 2.2e-48],
+  [40, 2.2e-48],   [50, 2.4e-48],   [60, 2.7e-48],   [80, 3.4e-48],
+  [100, 4.0e-48],  [150, 5.5e-48],  [200, 7.0e-48],  [300, 1.1e-47],
+  [500, 1.7e-47],  [1000, 3.4e-47], [3000, 1.0e-46], [10000, 3.4e-46]
+];
+
+// DS-20k S1+S2 NR analysis, fiducial volume, 10-yr nominal run (200 t·yr).
+// Source: DarkSide-20k Technical Design Report (DARKSIDE-CSN2-TDR-2112),
+// Figure 2 (top panel, 90% C.L. exclusion) — "DS-20k Fid 10 y (200 t-y)"
+// curve. The minimum is ≈ 1×10⁻⁴⁸ cm² at ~150 GeV; the curve rises
+// steeply below ~30 GeV (S1+S2 threshold of ~6 keV-nr limits sub-30 GeV
+// reach) and gently above ~200 GeV (Helm form-factor suppression).
+const REF_DS20K = [
+  [10, 5e-46],     [15, 2e-46],     [20, 8e-47],
+  [25, 6e-47],     [30, 5e-47],
+  [40, 1.5e-47],   [50, 5e-48],     [60, 3e-48],
+  [70, 2e-48],     [80, 1.5e-48],   [100, 1.2e-48],
+  [150, 1.0e-48],  [200, 1.2e-48],  [300, 2.0e-48],
+  [500, 3.0e-48],  [700, 5.0e-48],  [1000, 7.0e-48],
+  [1500, 1.0e-47], [2000, 1.3e-47], [3000, 2.0e-47],
+  [5000, 3.0e-47], [7000, 4.0e-47], [10000, 6.0e-47]
+];
+
+// DarkSide-20k 1-year, S2-only with Migdal effect, ultimate fit (from Ne=2).
+// Source: arXiv:2407.05813 Fig 4a, 2Ne CSV at Zenodo:13911875.
+// Note the sharp transition around 800 MeV — Migdal sub-GeV reach ending,
+// pure NR taking over. The 17.4 t·yr fiducial exposure here is for 1 year
+// of operation (factor 200/17.4 ≈ 11 less than the nominal 200 t·yr).
+const REF_DS20K_S2 = [
+  [0.039, 6.35e-38], [0.046, 4.77e-38], [0.054, 3.24e-38], [0.063, 2.13e-38],
+  [0.100, 9.73e-39], [0.116, 7.32e-39], [0.135, 4.94e-39], [0.158, 4.84e-39],
+  [0.184, 3.10e-39], [0.215, 2.88e-39], [0.251, 2.33e-39], [0.292, 1.78e-39],
+  [0.341, 1.43e-39], [0.398, 1.08e-39], [0.800, 1.32e-42], [1.000, 2.85e-43],
+  [1.200, 1.05e-43], [1.400, 5.20e-44], [1.600, 3.16e-44], [1.800, 2.21e-44],
+  [2.000, 1.72e-44], [2.200, 1.43e-44], [2.400, 1.26e-44], [2.600, 1.15e-44],
+  [2.800, 1.07e-44], [3.000, 1.01e-44], [3.500, 9.01e-45], [4.000, 8.32e-45],
+  [4.500, 7.89e-45], [5.000, 7.66e-45], [5.500, 7.56e-45], [6.000, 7.49e-45],
+  [7.000, 7.31e-45], [8.000, 7.05e-45], [9.000, 6.79e-45], [10.000, 6.64e-45]
+];
+
+// DarkSide-20k 10-year, S2-only NR with QF (Supplementary Fig 3, Ne=2)
+// extended sub-GeV by scaling Fig 4a by 1/3 (paper's √(t) extrapolation).
+const REF_DS20K_S2_10YR = [
+  [0.039, 2.12e-38], [0.054, 1.08e-38], [0.100, 3.24e-39],
+  [0.158, 1.61e-39], [0.251, 7.77e-40], [0.398, 3.60e-40],
+  [0.800, 4.06e-43], [1.000, 8.81e-44], [1.200, 3.25e-44],
+  [1.400, 1.63e-44], [1.600, 9.99e-45], [1.800, 7.10e-45],
+  [2.000, 5.62e-45], [2.500, 4.21e-45], [3.000, 3.67e-45],
+  [4.000, 2.99e-45], [5.000, 2.65e-45], [7.000, 2.46e-45],
+  [10.000, 2.20e-45]
+];
+
+// CRESST-III combined envelope (cryogenic, sub-GeV+).
+// Source: CRESST 2024 SOS detector (arXiv:2405.06527, PRD 110, 083038) gives
+// the leading SI limit in (74–202) MeV/c²: SOS wafer, threshold 6.7 eV,
+// 0.138 kg·d. CRESST-III Detector A (arXiv:1904.00498, PRD 100, 102002),
+// CaWO4, 23.6 g, threshold 30.1 eV, extends from ~160 MeV upward. The
+// CRESST decade roadmap paper (arXiv:2505.01183) summarises the cross-
+// section reach as O(10⁻³⁸) cm² at 1 GeV and O(10⁻⁴²) cm² at 10 GeV via
+// these analyses; the curve here is a coarse, pedagogical digitisation of
+// the envelope across both papers. Values near the SOS endpoint (≲ 80 MeV)
+// are conservative since the published curve there is affected by overburden
+// modelling — see arXiv:2405.06527 App. A.
+const REF_CRESST_III = [
+  [0.073, 1.0e-32], [0.080, 2.0e-33], [0.100, 3.0e-34],
+  [0.130, 5.0e-35], [0.160, 8.0e-36], [0.200, 1.0e-36],
+  [0.250, 2.0e-37], [0.300, 5.0e-38], [0.500, 1.5e-38],
+  [0.700, 1.0e-38], [1.000, 1.0e-38], [1.500, 3.0e-39],
+  [2.000, 1.0e-39], [3.000, 3.0e-40], [5.000, 3.0e-41],
+  [7.000, 5.0e-42], [10.000, 1.0e-42]
+];
+
+// PandaX-4T low-DM / ionisation-only S2 search (xenon, 2.5–5 GeV/c²).
+// Source: arXiv:2507.11930 (PRL 135, 211001, 2025), 1.04 t·yr effective
+// US2 exposure. Published anchor: σ(3 GeV/c²) = 1.1×10⁻⁴³ cm². Leading
+// SI limit in [2.5, 5.0] GeV/c². The paper notes "SI limits exhibit
+// stronger upward fluctuations above ~3.5 GeV/c² because the harder
+// energy spectrum populates the S2 region (5–8 electrons) where we
+// observe a slight event excess"; values above 4 GeV here reflect that.
+const REF_PANDAX4T_LDM = [
+  [2.500, 4.0e-43], [3.000, 1.1e-43], [3.500, 7.0e-44],
+  [4.000, 5.0e-44], [5.000, 5.0e-44], [6.000, 8.0e-44],
+  [7.000, 1.5e-43]
+];
+
+// LZ light-DM / CEvNS search (xenon, 3–9 GeV/c²).
+// Source: arXiv:2512.08065 (LZ Collaboration, Dec 2025), 5.7 t·yr WS2025
+// exposure, ROI 1–6 keV NR. Light-DM extension of the LZ programme below
+// the WS2024+WS2022 4.2 t·yr classic-WIMP result (REF_LZ above, which
+// starts at 9 GeV). The CEvNS spectrum from ⁸B solar neutrinos closely
+// resembles a 5.5 GeV/c² DM signal, so the limit is mildly degraded
+// around there (the ν fog floor in this xenon analysis). Above 9 GeV
+// the WS2025 and WS2024+WS2022 curves are continuous.
+const REF_LZ_LIGHT = [
+  [3.000, 8.0e-44], [4.000, 5.0e-45], [5.000, 1.0e-45],
+  [5.500, 5.0e-46], [6.000, 4.0e-46], [7.000, 2.5e-46],
+  [8.000, 1.5e-46], [9.000, 1.2e-46]
+];
+
+// Liquid argon spin-independent neutrino fog (n=2 boundary).
+// Source: O'Hare 2021, arXiv:2109.03116, PRL 127, 251802. Data from the
+// public NeutrinoFog repository (github.com/cajohare/NeutrinoFog, Ar_SI.txt).
+// The fog has TWO bumps: a solar 8B bump peaking around 500 MeV/c² that drops
+// sharply to a valley at ~30 GeV/c², then a rising atmospheric-ν tail at high
+// mass. Below 100 MeV the values are extrapolated assuming the rising trend
+// from the 8B regime continues (O'Hare's calculation only extends to 100 MeV).
+const REF_NU_FOG_AR = [
+  [0.05, 5e-47],   [0.07, 1e-46],   [0.100, 2.71e-45],
+  [0.134, 5.46e-45], [0.178, 1.13e-44], [0.252, 2.67e-44],
+  [0.357, 4.49e-44], [0.505, 5.83e-44], [0.715, 3.19e-44],
+  [1.012, 6.23e-45], [1.517, 1.29e-45], [2.026, 9.33e-46],
+  [3.037, 1.07e-45], [5.111, 1.38e-45], [6.826, 1.21e-45],
+  [10, 1.60e-47],  [15, 1.74e-48],  [20, 7.12e-49],
+  [31, 5.31e-49],  [49, 6.61e-49],  [98, 1.09e-48],
+  [196, 1.95e-48], [494, 4.53e-48], [988, 8.78e-48],
+  [2967, 2.58e-47], [10000, 8.62e-47]
+];
+
+// ════════════════════════════════════════════════════════════════════════
+// PLOTTING
+// ════════════════════════════════════════════════════════════════════════
+
+// ── Two-pane layout ──────────────────────────────────────────────────
+// TWO separate SVGs, one per pane. Each has its own 540×640 viewBox so
+// they can be flexed side-by-side on desktop and swipe-snapped on mobile.
+// The PANES coords are now LOCAL to each SVG (both start at x=80).
+const PANES = [
+  { id: "lo", svgId: "svg-lo",
+    x: 80, y: 60, w: 430, h: 495,
+    xmin: 0.04, xmax: 5.0,
+    ymin: 1e-47, ymax: 1e-35,
+    title: "Low mass", subtitle: "40 MeV – 5 GeV"
+  },
+  { id: "hi", svgId: "svg-hi",
+    x: 80, y: 60, w: 430, h: 495,
+    xmin: 1, xmax: 10000,
+    ymin: 1e-49, ymax: 1e-42,
+    title: "High mass", subtitle: "1 GeV – 10 TeV"
+  }
+];
+
+function paneLayer(pane, layerClass) {
+  return document.querySelector(`#${pane.svgId} .${layerClass}`);
+}
+
+function xToSVG(pane, M) {
+  const t = (Math.log10(M) - Math.log10(pane.xmin)) / (Math.log10(pane.xmax) - Math.log10(pane.xmin));
+  return pane.x + t * pane.w;
+}
+function yToSVG(pane, s) {
+  const t = (Math.log10(s) - Math.log10(pane.ymin)) / (Math.log10(pane.ymax) - Math.log10(pane.ymin));
+  return pane.y + pane.h - t * pane.h;
+}
+function inPaneX(pane, M) { return M >= pane.xmin && M <= pane.xmax; }
+function inPaneY(pane, s) { return s >= pane.ymin && s <= pane.ymax; }
+
+function curvePath(pane, pts) {
+  let d = "";
+  let started = false;
+  for (let i = 0; i < pts.length; i++) {
+    const [M, s] = pts[i];
+    if (!inPaneX(pane, M)) { started = false; continue; }
+    if (!isFinite(s) || s <= 0) { started = false; continue; }
+    if (s < pane.ymin * 0.5 || s > pane.ymax * 2) { started = false; continue; }
+    const x = xToSVG(pane, M);
+    const y = yToSVG(pane, s);
+    d += (started ? "L" : "M") + x.toFixed(2) + " " + y.toFixed(2) + " ";
+    started = true;
+  }
+  return d.trim();
+}
+
+function fogAreaPath(pane, pts) {
+  // Fill the region BELOW the fog line (toward the bottom of the pane,
+  // i.e. lower cross-sections). That's the unreachable territory — once
+  // the experiment's sensitivity floor matches the ν-induced rate at this
+  // mass it can't keep pushing the limit down. Convention matches
+  // O'Hare 2021 and the DS-20k physics-program paper.
+  const filtered = pts.filter(p => inPaneX(pane, p[0]) && isFinite(p[1]) && p[1] > 0);
+  if (filtered.length === 0) return "";
+  let path = "";
+  const yBottom = (pane.y + pane.h).toFixed(2);
+  const firstX = xToSVG(pane, filtered[0][0]);
+  // Start at bottom-left
+  path += `M ${firstX.toFixed(2)} ${yBottom} `;
+  // Up the left edge, then trace the fog line across the pane
+  for (const [M, s] of filtered) {
+    const x = xToSVG(pane, M);
+    const y = Math.max(pane.y, Math.min(pane.y + pane.h, yToSVG(pane, s)));
+    path += `L ${x.toFixed(2)} ${y.toFixed(2)} `;
+  }
+  // Down to bottom-right, close
+  const lastX = xToSVG(pane, filtered[filtered.length-1][0]);
+  path += `L ${lastX.toFixed(2)} ${yBottom} Z`;
+  return path;
+}
+
+// ── Draw axes + gridlines (once per pane SVG) ─────────────────────────
+function drawAxes() {
+  for (const pane of PANES) {
+    const gridEl   = paneLayer(pane, "grid-layer");
+    const axesEl   = paneLayer(pane, "axes-layer");
+    const labelsEl = paneLayer(pane, "labels-layer");
+    let g = "", a = "", l = "";
+
+    const px0 = pane.x, py0 = pane.y, px1 = pane.x + pane.w, py1 = pane.y + pane.h;
+    // X gridlines: every decade in range, plus minor at 2/3/5/7
+    const xMinLogi = Math.floor(Math.log10(pane.xmin));
+    const xMaxLogi = Math.ceil(Math.log10(pane.xmax));
+    for (let p = xMinLogi; p <= xMaxLogi; p++) {
+      const M = Math.pow(10, p);
+      if (!inPaneX(pane, M)) continue;
+      const x = xToSVG(pane, M);
+      g += `<line class="grid-major" x1="${x}" y1="${py0}" x2="${x}" y2="${py1}" />`;
+      a += `<line class="tick" x1="${x}" y1="${py1}" x2="${x}" y2="${py1 + 5}" />`;
+      let lbl;
+      if (M >= 1000) lbl = (M/1000) + " TeV";
+      else if (M < 1) lbl = (M*1000) + " MeV";
+      else lbl = M + " GeV";
+      l += `<text class="axis-label" x="${x}" y="${py1 + 22}" text-anchor="middle">${lbl}</text>`;
+      for (const m of [2, 3, 5, 7]) {
+        const Mm = m * Math.pow(10, p);
+        if (!inPaneX(pane, Mm)) continue;
+        const xm = xToSVG(pane, Mm);
+        g += `<line class="grid-minor" x1="${xm}" y1="${py0}" x2="${xm}" y2="${py1}" />`;
+      }
+    }
+    // Y gridlines: every decade
+    const yMinLogi = Math.floor(Math.log10(pane.ymin));
+    const yMaxLogi = Math.ceil(Math.log10(pane.ymax));
+    for (let p = yMinLogi; p <= yMaxLogi; p++) {
+      const s = Math.pow(10, p);
+      if (!inPaneY(pane, s)) continue;
+      const y = yToSVG(pane, s);
+      g += `<line class="grid-major" x1="${px0}" y1="${y}" x2="${px1}" y2="${y}" />`;
+      a += `<line class="tick" x1="${px0 - 5}" y1="${y}" x2="${px0}" y2="${y}" />`;
+      l += `<text class="axis-label" x="${px0 - 9}" y="${y + 5}" text-anchor="end">10<tspan dy="-6" font-size="11">${p}</tspan></text>`;
+    }
+    // Frame: just left + bottom (top + right omitted for editorial feel)
+    a += `<line class="axis" x1="${px0}" y1="${py1}" x2="${px1}" y2="${py1}" />`;
+    a += `<line class="axis" x1="${px0}" y1="${py0}" x2="${px0}" y2="${py1}" />`;
+    // Pane title/subtitle above
+    l += `<text class="pane-title" x="${px0}" y="${py0 - 30}">${pane.title}</text>`;
+    l += `<text class="pane-subtitle" x="${px0}" y="${py0 - 12}">${pane.subtitle}</text>`;
+    // Y axis title
+    l += `<text class="axis-title" transform="rotate(-90 ${px0 - 60} ${py0 + pane.h/2})" x="${px0 - 60}" y="${py0 + pane.h/2}" text-anchor="middle">σ&#8202;SI (cm²)</text>`;
+    // X axis title
+    l += `<text class="axis-title" x="${px0 + pane.w/2}" y="${py1 + 50}" text-anchor="middle">WIMP mass</text>`;
+
+    gridEl.innerHTML   = g;
+    axesEl.innerHTML   = a;
+    labelsEl.innerHTML = l;
+  }
+}
+
+// ── Draw all curves (refreshed on every slider change) ───────────────
+function drawCurves(state) {
+  // Build user curve once — shared across panes
+  const userPts = MASS_GRID.map(M => [M, sensitivityAt(M, state)]);
+  // Find global minimum
+  let minPt = null;
+  for (const p of userPts) {
+    if (p[1] > 1e-50 && p[1] < 1e-30) {
+      if (!minPt || p[1] < minPt[1]) minPt = p;
+    }
+  }
+
+  for (const pane of PANES) {
+    let svg = "";
+
+    // Neutrino fog filled region (below the fog line — unreachable territory)
+    svg += `<path class="curve-fog-fill" d="${fogAreaPath(pane, REF_NU_FOG_AR)}" />`;
+    svg += `<path class="curve-fog-line" d="${curvePath(pane, REF_NU_FOG_AR)}" />`;
+
+    // Reference experiments
+    svg += `<path class="curve-cresst"      d="${curvePath(pane, REF_CRESST_III)}" />`;
+    svg += `<path class="curve-ds50"        d="${curvePath(pane, REF_DS50_S1S2)}" />`;
+    svg += `<path class="curve-ds50-s2"     d="${curvePath(pane, REF_DS50_S2)}" />`;
+    svg += `<path class="curve-pandax"      d="${curvePath(pane, REF_PANDAX4T_LDM)}" />`;
+    svg += `<path class="curve-lz-light"    d="${curvePath(pane, REF_LZ_LIGHT)}" />`;
+    svg += `<path class="curve-lz"          d="${curvePath(pane, REF_LZ)}" />`;
+    svg += `<path class="curve-ds20k"       d="${curvePath(pane, REF_DS20K)}" />`;
+    svg += `<path class="curve-ds20k-s2"    d="${curvePath(pane, REF_DS20K_S2)}" />`;
+    svg += `<path class="curve-ds20k-s2-10y" d="${curvePath(pane, REF_DS20K_S2_10YR)}" />`;
+
+    // Pane-specific inline labels for reference curves
+    if (pane.id === "hi") {
+      const lblDS50 = REF_DS50_S1S2.find(p => p[0] === 1000);
+      if (lblDS50 && inPaneY(pane, lblDS50[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 1000) + 8}" y="${yToSVG(pane, lblDS50[1]) + 4}" style="fill:#a36b3a;">DS-50</text>`;
+      }
+      const lblLZ = REF_LZ.find(p => p[0] === 200);
+      if (lblLZ && inPaneY(pane, lblLZ[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 200) + 8}" y="${yToSVG(pane, lblLZ[1]) - 4}" style="fill:#4a6b7a;">LZ (4.2 t·yr)</text>`;
+      }
+      const lblLZLight = REF_LZ_LIGHT.find(p => p[0] === 7);
+      if (lblLZLight && inPaneY(pane, lblLZLight[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 7) + 6}" y="${yToSVG(pane, lblLZLight[1]) - 6}" style="fill:#4a6b7a; font-style: italic;">LZ light-DM</text>`;
+      }
+      const lblPandax = REF_PANDAX4T_LDM.find(p => p[0] === 4);
+      if (lblPandax && inPaneY(pane, lblPandax[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 4)}" y="${yToSVG(pane, lblPandax[1]) + 14}" text-anchor="middle" style="fill:#2e4a8a;">PandaX-4T</text>`;
+      }
+      const lblDS20K = REF_DS20K.find(p => p[0] === 1000);
+      if (lblDS20K && inPaneY(pane, lblDS20K[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 1000) + 8}" y="${yToSVG(pane, lblDS20K[1]) + 4}" style="fill:#6b8a3c;">DS-20k</text>`;
+      }
+      svg += `<text class="curve-label" x="${xToSVG(pane, 40)}" y="${yToSVG(pane, 2.5e-49)}" text-anchor="middle" style="fill: rgba(30,25,18,0.85); font-style: italic; font-weight: 500;">ν fog (atmospheric)</text>`;
+    } else {
+      const lblCRESST = REF_CRESST_III.find(p => p[0] === 0.5);
+      if (lblCRESST && inPaneY(pane, lblCRESST[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 0.5)}" y="${yToSVG(pane, lblCRESST[1]) - 6}" text-anchor="middle" style="fill:#7a3a8a;">CRESST-III</text>`;
+      }
+      const lblDS50S2 = REF_DS50_S2.find(p => Math.abs(p[0] - 1.5) < 0.1);
+      if (lblDS50S2 && inPaneY(pane, lblDS50S2[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 1.5) - 4}" y="${yToSVG(pane, lblDS50S2[1]) - 6}" text-anchor="end" style="fill:#a36b3a; font-style: italic;">DS-50 S2+Migdal</text>`;
+      }
+      const lblPandaxLo = REF_PANDAX4T_LDM.find(p => p[0] === 3);
+      if (lblPandaxLo && inPaneY(pane, lblPandaxLo[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 3) + 6}" y="${yToSVG(pane, lblPandaxLo[1]) - 4}" style="fill:#2e4a8a;">PandaX-4T</text>`;
+      }
+      const lblDS20KS2 = REF_DS20K_S2.find(p => Math.abs(p[0] - 0.4) < 0.01);
+      if (lblDS20KS2 && inPaneY(pane, lblDS20KS2[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 0.4) + 6}" y="${yToSVG(pane, lblDS20KS2[1]) - 4}" style="fill:#6b8a3c; font-style: italic;">DS-20k S2 1yr</text>`;
+      }
+      const lblDS20KS210y = REF_DS20K_S2_10YR.find(p => p[0] === 0.398);
+      if (lblDS20KS210y && inPaneY(pane, lblDS20KS210y[1])) {
+        svg += `<text class="curve-label" x="${xToSVG(pane, 0.398) + 6}" y="${yToSVG(pane, lblDS20KS210y[1]) + 14}" style="fill:#4a5a2a; font-style: italic;">DS-20k 10yr</text>`;
+      }
+      svg += `<text class="curve-label" x="${xToSVG(pane, 0.5)}" y="${yToSVG(pane, 1.2e-43)}" text-anchor="middle" style="fill: rgba(30,25,18,0.85); font-style: italic; font-weight: 500;">ν fog (⁸B bump)</text>`;
+    }
+
+    // User experiment curve
+    svg += `<path class="curve-user" d="${curvePath(pane, userPts)}" />`;
+
+    // Mark minimum + add a label near it, in whichever pane it falls
+    if (minPt && inPaneX(pane, minPt[0]) && inPaneY(pane, minPt[1])) {
+      svg += `<circle class="curve-user-min" cx="${xToSVG(pane, minPt[0])}" cy="${yToSVG(pane, minPt[1])}" r="6" />`;
+      // Label position: above-and-right of the point if it's not too close to the edge
+      const lx = xToSVG(pane, minPt[0]);
+      const ly = yToSVG(pane, minPt[1]);
+      const labelDx = (lx < pane.x + pane.w * 0.7) ? 12 : -12;
+      const anchor = (labelDx > 0) ? "start" : "end";
+      svg += `<text class="curve-label user-label" x="${lx + labelDx}" y="${ly - 10}" text-anchor="${anchor}" style="fill: var(--accent); font-weight: 600;">your experiment</text>`;
+    }
+
+    paneLayer(pane, "curves-layer").innerHTML = svg;
+  }
+
+  return { userPts, minPt };
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// STATE + CONTROLS
+// ════════════════════════════════════════════════════════════════════════
+
+const state = {
+  A: 40,
+  Eth_S1: 30.0,     // keV — S1 (scintillation) NR threshold
+  Eth_S2: 0.5,      // keV — S2 (ionization) NR threshold
+  exposure: 0.05,   // t·yr
+  bgIntrinsic: 0.01, // /(keV·t·yr)
+  depth: 3800       // m.w.e.
+};
+
+// ── Mapping slider raw value (log space) → physical value ────────────
+function ethFromSlider(v)   { return Math.pow(10, parseFloat(v)); }
+function expFromSlider(v)   { return Math.pow(10, parseFloat(v)); }
+function bgFromSlider(v)    { return Math.pow(10, parseFloat(v)); }
+function depthFromSlider(v) { return Math.pow(10, parseFloat(v)); }
+
+function ethToSlider(x)   { return Math.log10(x); }
+function expToSlider(x)   { return Math.log10(x); }
+function bgToSlider(x)    { return Math.log10(x); }
+function depthToSlider(x) { return Math.log10(x); }
+
+function fmt(x, digits) {
+  if (x === 0) return "0";
+  const abs = Math.abs(x);
+  if (abs >= 1000) return x.toFixed(0);
+  if (abs >= 10)   return x.toFixed(1);
+  if (abs >= 1)    return x.toFixed(2);
+  if (abs >= 0.01) return x.toFixed(3);
+  return x.toExponential(1).replace("e", "·10^").replace("+", "");
+}
+function fmtSci(x) {
+  if (x === 0) return "0";
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  const m = x / Math.pow(10, e);
+  return m.toFixed(1) + "×10⁻" + Math.abs(e);
+}
+function fmtDepth(x) {
+  if (x >= 1000) return x.toFixed(0);
+  return x.toFixed(0);
+}
+function fmtMass(x) {
+  if (x >= 1000) return (x/1000).toFixed(1) + " TeV";
+  if (x >= 10)   return x.toFixed(0) + " GeV";
+  if (x >= 1)    return x.toFixed(1) + " GeV";
+  return (x * 1000).toFixed(0) + " MeV";
+}
+
+// ── Live status text ──────────────────────────────────────────────────
+function statusText(minPt, state) {
+  if (!minPt) {
+    return "Your experiment isn't reaching the displayed range — try a lower threshold or more exposure.";
+  }
+  const [Mmin, sMin] = minPt;
+  const sStr = `<span class="num">${fmtSci(sMin)} cm²</span>`;
+  const mStr = `<span class="num">${fmtMass(Mmin)}</span>`;
+
+  // Log-log linear interpolation along a sorted reference curve
+  function interp(curve, M) {
+    for (let i = 0; i < curve.length - 1; i++) {
+      const [m1, s1] = curve[i], [m2, s2] = curve[i+1];
+      if (M >= m1 && M <= m2) {
+        const t = (Math.log10(M) - Math.log10(m1)) / (Math.log10(m2) - Math.log10(m1));
+        return Math.pow(10, Math.log10(s1) + t * (Math.log10(s2) - Math.log10(s1)));
+      }
+    }
+    return null;
+  }
+
+  // ── Seven-regime mass classifier ─────────────────────────────────────
+  // Each WIMP-mass band has a different world-leading SI direct-detection
+  // result — comparing the user curve to DS-50/LZ everywhere is misleading
+  // when CRESST-III or PandaX-4T or LZ-light-DM owns the band. The regimes
+  // mirror the recoil explorer's classifier so the two pages are consistent.
+  //
+  //   <  40 MeV       no clean elastic SI DD limit (non-standard analyses)
+  //   40 – 200 MeV   CRESST-III (cryogenic CaWO4 + SOS, arXiv:2405.06527 + 1904.00498)
+  //   0.2 – 2.5 GeV  DS-50 ionisation-only / Migdal (arXiv:2207.11967)
+  //   2.5 – 5 GeV    PandaX-4T low-DM S2-only (arXiv:2507.11930)
+  //   5 – 9 GeV      bridging band: DS-50, PandaX-4T, LZ light-DM share leadership
+  //   9 GeV – 1 TeV  LZ 4.2 t·yr (arXiv:2410.17036)
+  //   >  1 TeV       LZ + DS-20k, with n=ρ/M flux suppression caveat
+  let verdict;
+
+  if (Mmin < 0.040) {
+    // < 40 MeV: outside the range of standard elastic SI direct detection.
+    // Limits here rely on non-standard assumptions (extreme Migdal, boosted
+    // DM, Earth shielding, collective excitations); the counting-above-
+    // threshold model in this tool cannot represent those analyses.
+    verdict = `Your best reach is ${sStr} at ${mStr}. <strong>Below ~40 MeV/c² the world has no clean elastic SI direct-detection limit</strong> — constraints in this band rely on non-standard assumptions (extreme Migdal, boosted DM, Earth-shielding, collective excitations in superfluid He). The counting model here doesn't capture those analyses.`;
+
+  } else if (Mmin < 0.20) {
+    // 40–200 MeV: CRESST-III leads. Pivot at 100 MeV (CRESST-III's
+    // most-discussed mass in the 2024 SOS analysis).
+    const Mp = 0.10;
+    const sU = sensitivityAt(Mp, state);
+    const sCRESST = interp(REF_CRESST_III, Mp);
+    const pStr = `<span class="num">${fmtSci(sU)} cm²</span> at <span class="num">100 MeV</span>`;
+    if (sCRESST && sU < sCRESST * 0.5) {
+      verdict = `Operating in the deep sub-GeV regime. At 100 MeV you reach ${pStr} — <strong>beats the CRESST-III leading combination</strong> (CaWO4 + SOS). Would push into territory only proposed quantum sensors and superfluid-He targets currently target.`;
+    } else if (sCRESST && sU < sCRESST * 2) {
+      verdict = `Operating in the deep sub-GeV regime. At 100 MeV you reach ${pStr} — competitive with CRESST-III, the leading cryogenic result in this mass band.`;
+    } else if (sCRESST) {
+      verdict = `Operating in the deep sub-GeV regime. At 100 MeV you reach ${pStr} — CRESST-III leads here with cryogenic CaWO4 at 6.7 eV threshold (SOS).`;
+    } else {
+      verdict = `Operating in the deep sub-GeV regime where CRESST-III is the world-leading SI direct-detection result.`;
+    }
+
+  } else if (Mmin < 2.5) {
+    // 0.2–2.5 GeV: DS-50 ionisation-only / Migdal leads world data.
+    // DS-20k S2+Migdal projections (1y and 10y) are the closest future
+    // benchmarks. Pivot at 1 GeV (most-discussed Migdal mass).
+    const Mp = 1.0;
+    const sU = sensitivityAt(Mp, state);
+    const sDS50S2     = interp(REF_DS50_S2,         Mp);
+    const sDS20kS2    = interp(REF_DS20K_S2,        Mp);
+    const sDS20kS210y = interp(REF_DS20K_S2_10YR,   Mp);
+    const sFog        = interp(REF_NU_FOG_AR,       Mp);
+    const pStr = `<span class="num">${fmtSci(sU)} cm²</span> at <span class="num">1 GeV</span>`;
+    if (sFog && sU < sFog * 1.2) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — inside the argon ν fog (⁸B bump). Radiopurity no longer helps; only directional or annual-modulation handles would push further.`;
+    } else if (sDS20kS210y && sU < sDS20kS210y * 0.7) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — <strong>beats the DS-20k 10-year S2+Migdal projection</strong>.`;
+    } else if (sDS20kS210y && sU < sDS20kS210y * 2) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — competitive with the DS-20k 10-year S2+Migdal projection.`;
+    } else if (sDS20kS2 && sU < sDS20kS2 * 0.7) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — better than the DS-20k 1-year S2+Migdal projection.`;
+    } else if (sDS20kS2 && sU < sDS20kS2 * 2) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — in the same league as the DS-20k 1-year S2+Migdal projection.`;
+    } else if (sDS50S2 && sU < sDS50S2 * 0.5) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — <strong>beats the DS-50 published S2+Migdal result</strong>.`;
+    } else if (sDS50S2) {
+      verdict = `Operating in the sub-GeV Migdal regime. At 1 GeV you reach ${pStr} — comparable to the DS-50 S2+Migdal published result.`;
+    } else {
+      verdict = `Operating in the sub-GeV Migdal regime, where DS-50 leads with the ionisation-only S2+Migdal analysis.`;
+    }
+
+  } else if (Mmin < 5.0) {
+    // 2.5–5 GeV: PandaX-4T low-DM (S2-only / ionisation-only, 1.04 t·yr)
+    // leads world data. LZ light-DM 5.7 t·yr published reach starts at
+    // 3 GeV and overlaps from there. Pivot at 3 GeV (PandaX-4T anchor).
+    const Mp = 3.0;
+    const sU = sensitivityAt(Mp, state);
+    const sPandax  = interp(REF_PANDAX4T_LDM, Mp);
+    const sLZlight = interp(REF_LZ_LIGHT,     Mp);
+    const sFog     = interp(REF_NU_FOG_AR,    Mp);
+    const pStr = `<span class="num">${fmtSci(sU)} cm²</span> at <span class="num">3 GeV</span>`;
+    if (sFog && sU < sFog * 1.2) {
+      verdict = `Operating in the few-GeV transition. At 3 GeV you reach ${pStr} — inside the argon ν fog.`;
+    } else if (sPandax && sU < sPandax * 0.5) {
+      verdict = `Operating in the few-GeV transition. At 3 GeV you reach ${pStr} — <strong>beats PandaX-4T's leading S2-only result</strong> in this band.`;
+    } else if (sPandax && sU < sPandax * 2) {
+      verdict = `Operating in the few-GeV transition. At 3 GeV you reach ${pStr} — competitive with PandaX-4T's leading S2-only result at this mass.`;
+    } else if (sLZlight && sU < sLZlight * 2) {
+      verdict = `Operating in the few-GeV transition. At 3 GeV you reach ${pStr} — close to the LZ light-DM 5.7 t·yr published reach.`;
+    } else if (sPandax) {
+      verdict = `Operating in the few-GeV transition. At 3 GeV you reach ${pStr} — PandaX-4T's S2-only analysis leads world data in [2.5, 5] GeV.`;
+    } else {
+      verdict = `Operating in the few-GeV transition where PandaX-4T's S2-only analysis currently leads.`;
+    }
+
+  } else if (Mmin < 9.0) {
+    // 5–9 GeV: bridging band. DS-50 ionisation-only, PandaX-4T (weaker
+    // above ~3.5 GeV from the S2 5-8 e excess), and LZ light-DM 5.7 t·yr
+    // all relevant; no single experiment owns this stretch. LZ light-DM
+    // is the cleanest contiguous benchmark. Pivot at 7 GeV.
+    const Mp = 7.0;
+    const sU = sensitivityAt(Mp, state);
+    const sLZlight = interp(REF_LZ_LIGHT,    Mp);
+    const sFog     = interp(REF_NU_FOG_AR,   Mp);
+    const pStr = `<span class="num">${fmtSci(sU)} cm²</span> at <span class="num">7 GeV</span>`;
+    if (sFog && sU < sFog * 1.2) {
+      verdict = `Operating in the bridging band (5–9 GeV). At 7 GeV you reach ${pStr} — inside the argon ν fog.`;
+    } else if (sLZlight && sU < sLZlight * 0.5) {
+      verdict = `Operating in the bridging band (5–9 GeV). At 7 GeV you reach ${pStr} — <strong>beats the LZ light-DM 5.7 t·yr published result</strong>.`;
+    } else if (sLZlight && sU < sLZlight * 2) {
+      verdict = `Operating in the bridging band (5–9 GeV). At 7 GeV you reach ${pStr} — competitive with the LZ light-DM 5.7 t·yr published result.`;
+    } else if (sLZlight) {
+      verdict = `Operating in the bridging band (5–9 GeV) — DS-50 ionisation-only, PandaX-4T and the LZ light-DM 5.7 t·yr analysis share leadership here.`;
+    } else {
+      verdict = `Operating in the bridging band (5–9 GeV) where DS-50, PandaX-4T and LZ light-DM share leadership.`;
+    }
+
+  } else if (Mmin < 1000.0) {
+    // 9 GeV – 1 TeV: classic-WIMP regime. LZ 4.2 t·yr (WS2024+WS2022)
+    // leads world data — 4× over the previous best above 9 GeV. DS-20k
+    // Fid 10 y is the closest published projection at high mass.
+    const sLZ    = interp(REF_LZ,         Mmin);
+    const sDS50  = interp(REF_DS50_S1S2,  Mmin);
+    const sDS20k = interp(REF_DS20K,      Mmin);
+    const sFog   = interp(REF_NU_FOG_AR,  Mmin);
+
+    if (sFog && sMin < sFog * 1.2) {
+      verdict = `Your best reach is ${sStr} at ${mStr}. <strong>You are inside the neutrino fog</strong> — at this point only directional detection or annual modulation can keep cutting further.`;
+    } else if (sDS20k && sMin < sDS20k * 0.7) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — <strong>better than the DS-20k Fid 10 y projection</strong> at this mass.`;
+    } else if (sDS20k && sMin < sDS20k * 2) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — competitive with the DS-20k Fid 10 y projection.`;
+    } else if (sLZ && sMin < sLZ * 0.5) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — world-leading for this mass range, beating the LZ 4.2 t·yr result.`;
+    } else if (sLZ && sMin < sLZ * 2) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — competitive with the LZ 4.2 t·yr limit.`;
+    } else if (sDS50 && sMin < sDS50 * 0.5) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — beating DarkSide-50, though still some way from xenon's reach.`;
+    } else if (sDS50) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — in the same regime as DarkSide-50.`;
+    } else {
+      verdict = `Your best reach is ${sStr} at ${mStr}. Compare against the published curves to see where you sit.`;
+    }
+
+  } else {
+    // > 1 TeV: heavy-WIMP regime. Number density n = ρ/M dilutes the
+    // particle flux as 1/M, so the limit RISES with mass at fixed exposure
+    // — a different shape from the LZ/DS-20k minima around 30-150 GeV.
+    const sLZ    = interp(REF_LZ,    Mmin);
+    const sDS20k = interp(REF_DS20K, Mmin);
+    if (sDS20k && sMin < sDS20k) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — heavy-WIMP regime (>1 TeV), beating the DS-20k Fid 10 y projection at this mass. The limit rises with mass here because n = ρ/M dilutes the flux as 1/M.`;
+    } else if (sLZ && sMin < sLZ * 2) {
+      verdict = `Your best reach is ${sStr} at ${mStr} — heavy-WIMP regime (>1 TeV), competitive with LZ at this mass. The 1/M flux suppression makes high-mass limits intrinsically harder to push.`;
+    } else {
+      verdict = `Your best reach is ${sStr} at ${mStr}. Heavy WIMPs (>1 TeV) are flux-suppressed (n ∝ ρ/M); pushing here always pays a 1/M penalty.`;
+    }
+  }
+
+  // Build a feasibility line: highlight the BIGGEST technical challenge
+  // for the configuration the user has dialed in.
+  const challenges = [];
+  if (state.Eth_S2 < 0.05) {
+    challenges.push("S2 threshold below current detection technology");
+  } else if (state.Eth_S2 < 0.1) {
+    challenges.push("ionization threshold needs bleeding-edge single-electron R&D");
+  }
+  if (state.Eth_S1 < 1.0 && state.Eth_S1 > state.Eth_S2) {
+    challenges.push("S1 threshold below demonstrated PSD performance");
+  }
+  if (state.A === 131 && state.exposure > 300) {
+    challenges.push("xenon target cost ≈ $" + (state.exposure * 1000).toFixed(0) + "M");
+  }
+  if (state.A === 40 && state.exposure > 3000) {
+    challenges.push("Ar exposure exceeds ARGO program");
+  }
+  if (state.bgIntrinsic < 1e-4) {
+    challenges.push("BG requires unprecedented radiopurity");
+  }
+  if (state.depth < 1000) {
+    challenges.push("shallow site — cosmogenic BG dominates");
+  }
+
+  let feasibility = "";
+  if (challenges.length === 0) {
+    feasibility = `<span class="feas-ok">Feasible configuration</span> — all controls are in regimes that real detectors have demonstrated.`;
+  } else if (challenges.length === 1) {
+    feasibility = `<span class="feas-warn">Reaching that limit requires:</span> ${challenges[0]}.`;
+  } else {
+    feasibility = `<span class="feas-warn">Reaching that limit requires:</span> ${challenges.slice(0,-1).join("; ")}; and ${challenges[challenges.length-1]}.`;
+  }
+
+  return `${verdict}<br><span class="feas">${feasibility}</span>`;
+}
+
+// ── Background context ───────────────────────────────────────────────
+// Banana K-40: ~15 Bq/banana, β at 1.3 MeV (Compton-scattering to low
+// energies gives roughly 0.5 events/(keV·t·yr) per banana sitting in a
+// keV-scale ROI of a 1-tonne detector). Approximate but pedagogically
+// useful. Real detector intrinsic backgrounds include radon (²²²Rn and
+// daughters), ³⁹Ar β-decay, ⁸⁵Kr β-decay, ²¹⁴Pb β/γ, surface α-decay
+// and α-induced neutrons (¹⁹F(α,n)²²Na etc on detector materials), and
+// muon-induced cosmogenic neutrons. The "bananas" framing captures the
+// scale of total radioactive contamination; below 1 banana we switch to
+// "particles of dust" because that's the regime where the contamination
+// is dominated by physical impurities like dust ingress, surface
+// plate-out from radon daughters, and trace U/Th in detector materials.
+//
+// Reference dust radioactivity: typical lab dust has ~1-10 Bq/kg of K-40
+// and 0.01-1 Bq/kg of U/Th-chain isotopes. A single ~10 µm dust grain
+// (mass ~1 ng) contributes ~10⁻¹¹ Bq. So ~1 µg of accumulated dust per
+// tonne of detector is comparable to ~1 mBq, i.e. ~0.06 milli-bananas.
+// (See e.g. Heusser 1995, "Low radioactivity background techniques",
+// Annu. Rev. Nucl. Part. Sci. 45, 543.)
+const BG_PER_BANANA = 0.5;  // /(keV·t·yr) per banana of K-40 in the active volume
+
+function ctxBg(state) {
+  const bg = state.bgIntrinsic;
+  // ν-induced floor at the user's effective threshold — if intrinsic BG
+  // is below this, your detector is so clean that solar/atmospheric
+  // neutrinos scattering coherently off your nuclei are the dominant BG.
+  // No amount of further radiopurity helps.
+  const nuFloor = nuBgDiff(state.A, Math.max(state.Eth_S1, state.Eth_S2));
+  const bananas = bg / BG_PER_BANANA;
+  let line, cls = "";
+
+  if (bg < nuFloor * 0.3) {
+    cls = "ok";
+    line = `Below the irreducible ν-induced rate at your threshold (≈ ${nuFloor.toExponential(1).replace('e-','·10⁻')} /(keV·t·yr)). At this radiopurity, <span class="ctx-key">solar neutrinos scattering coherently off your target nuclei</span> are the dominant background — there's no point cleaning the detector any further.`;
+  } else if (bananas >= 50) {
+    cls = "warn";
+    line = `<span class="ctx-strong">≈ ${bananas.toFixed(0)} bananas</span> of K-40-equivalent activity. You probably shouldn't build your dark matter experiment in a banana processing factory.`;
+  } else if (bananas >= 5) {
+    cls = "warn";
+    line = `<span class="ctx-strong">≈ ${bananas.toFixed(0)} bananas</span> in the detector — a fruit bowl's worth of K-40. Way above what any underground search would tolerate.`;
+  } else if (bananas >= 1) {
+    line = `Roughly <span class="ctx-strong">${bananas.toFixed(1)} bananas</span> of K-40-equivalent activity. About what you'd expect from raw, unscreened lab materials.`;
+  } else {
+    // Below 1 banana — switch to "dust" framing. A single ~10 µm dust grain
+    // is ~1 ng with typical K/U/Th content giving ~10⁻¹¹ Bq. Scaling 1
+    // banana = 15 Bq, so 1 banana ≈ 1.5×10¹² dust grains. Below 1 banana,
+    // express as count of dust grains.
+    const dustGrains = bananas * 1.5e12;
+    if (bananas >= 0.1) {
+      line = `Like leaving <span class="ctx-key">${Math.round(dustGrains/1e11)}×10¹¹ dust grains</span> in the active volume — fingertip-of-dust scale. Real LXe/LAr detectors get cleaner than this with surface screening and Rn-mitigated assembly.`;
+    } else if (bananas >= 0.01) {
+      line = `<span class="ctx-key">${Math.round(dustGrains/1e10)}×10¹⁰ dust grains</span> worth of radioactivity. Now competing with surface ²¹⁴Pb plate-out from residual radon, α-decay on detector walls, and trace U/Th in the steel.`;
+    } else if (bananas >= 1e-3) {
+      line = `<span class="ctx-key">${Math.round(dustGrains/1e9)}×10⁹ dust grains</span>-equivalent. Approaching what DS-50, LZ and XENONnT achieve in their ROI — depleted argon (³⁹Ar reduction ×1400), Kr removal, Rn-suppression all required.`;
+    } else if (bananas >= 1e-5) {
+      line = `<span class="ctx-key">${Math.round(dustGrains/1e7)}×10⁷ dust grains</span>-equivalent: at the limit of underground-Ar / Rn-distillation technology. ³⁹Ar β-decay, cosmogenic activation of detector materials, and (α,n) neutrons set the floor.`;
+    } else {
+      line = `<span class="ctx-key">A handful of K-40 atoms per tonne-year</span>. Beyond any current detector — only sense at this level if you've engineered out every known intrinsic source, including activation of detector copper and cosmogenic ³H/⁴⁰K.`;
+    }
+  }
+  return { html: line, cls };
+}
+
+// ── Exposure context ─────────────────────────────────────────────────
+// Ar: DS-50 (50 kg × few years), DS-20k ~200 t·yr nominal, extended
+// DS-20k run can push to ~1000 t·yr; ARGO (300 t × 10 yr) reaches 3000.
+// Xe: world annual Xe production ~50-60 t; XENONnT/LZ ~5 t targets;
+// DARWIN/XLZD ~50 t. Xe price ~$1k/kg.
+function ctxExp(state) {
+  const exp = state.exposure;
+  let line, cls = "";
+  if (state.A === 40) {
+    if (exp < 1) {
+      line = `Comfortable for a <span class="ctx-key">DS-50-sized prototype</span> (50 kg × few years).`;
+    } else if (exp < 50) {
+      line = `Reachable by a multi-tonne LAr TPC like the early DS-20k UAr volume.`;
+    } else if (exp <= 1000) {
+      line = `<span class="ctx-key">DS-20k territory</span>. 200 t·yr is the nominal physics-program target; an extended ~5-year run reaches ~1000 t·yr.`;
+    } else if (exp <= 3000) {
+      cls = "warn";
+      line = `<span class="ctx-strong">ARGO-scale ambition</span>: requires the proposed ARGO upgrade (300 t × ~10 years). Underground-Ar supply chain becomes a major engineering challenge.`;
+    } else {
+      cls = "warn";
+      line = `<span class="ctx-strong">Beyond ARGO</span>: ${exp.toFixed(0)} t·yr exceeds any current multi-decade plan for liquid-Ar TPCs. Realistic only with a dedicated underground-Ar mining facility.`;
+    }
+  } else {
+    // Xenon
+    const worldXeProdTYr = 60;
+    const worldYrs = exp / worldXeProdTYr;
+    const dollarsPerKg = 1000;
+    const cost_M = exp * 1000 * dollarsPerKg / 1e6;
+    if (exp < 2) {
+      line = `Comfortable for LZ / XENONnT-scale instruments (5–7 t fiducial).`;
+    } else if (exp < 20) {
+      line = `<span class="ctx-key">LZ 4.2 t·yr</span> is the current state of the art (arXiv:2410.17036); pushing to ~10 t·yr is feasible.`;
+    } else if (exp < worldXeProdTYr * 5) {
+      line = `Approaching DARWIN/XLZD-scale (40–60 t target). Target alone ≈ <span class="ctx-key">$${cost_M.toFixed(0)} M</span> at ~$${dollarsPerKg}/kg of Xe.`;
+    } else {
+      cls = "warn";
+      line = `<span class="ctx-strong">${worldYrs.toFixed(1)}× annual global Xe production.</span> Target cost ≈ <span class="ctx-strong">$${cost_M.toFixed(0)} M</span>. Whole-world Xe supply would be diverted for years.`;
+    }
+  }
+  return { html: line, cls };
+}
+
+// ── Threshold context: technical limits / R&D regimes ────────────────
+// Real-detector reference: DS-50 S1 ≈ 30 keV-nr (NR), DS-20k S1 ≈ 6 keV-nr
+// (≈ 2 keV-ee), LZ S1 ≈ 5 keV-nr. S2 thresholds: DS-50 S2-only ≈ 0.6 keV-nr,
+// DS-20k S2-only ≈ 0.3 keV-nr (2 ionization electrons). Below the LXe/LAr
+// bandgap floor (~10 eV/electron), liquid-noble TPCs can't go further;
+// alternative targets and quantum-sensor readouts take over.
+function ctxThreshold(eth_keV, channel) {
+  let line, cls = "";
+  if (channel === "S1") {
+    if (eth_keV >= 20) {
+      line = `Conservative S1 threshold — <span class="ctx-key">DS-50-class</span> well-established PSD performance.`;
+    } else if (eth_keV >= 5) {
+      line = `<span class="ctx-key">DS-20k / LZ-class S1 threshold</span> (~5–6 keV<sub>nr</sub> ≈ 2 keV<sub>ee</sub>). SiPM-based light readout with PSD active.`;
+    } else if (eth_keV >= 1) {
+      line = `Aggressive: light yield and few-photon S1 triggering become limiting. PSD discrimination degrades — becomes statistical at single-photon level.`;
+    } else {
+      cls = "warn";
+      line = `<span class="ctx-strong">Below current liquid-noble PSD floor.</span> Discrimination requires improved scintillation yield (e.g. ⁸³ᵐKr-calibrated drift, wavelength-shifter optimisation) — even with SiPM single-photon timing, separating an NR from ER at sub-keV S1 is not yet demonstrated.`;
+    }
+  } else {
+    if (eth_keV >= 1) {
+      line = `Conservative S2 threshold — well above ionization noise.`;
+    } else if (eth_keV >= 0.3) {
+      line = `<span class="ctx-key">DS-20k S2 baseline</span> (~2–3 ionization electrons). Migdal channel opens here, granting sub-GeV reach.`;
+    } else if (eth_keV >= 0.1) {
+      line = `Sub-keV ionization — needs single-electron-counting amplification and very clean spurious-electron rejection.`;
+    } else if (eth_keV >= 0.05) {
+      cls = "warn";
+      line = `<span class="ctx-strong">Bleeding-edge R&D</span>: 1–2 electron threshold approaches the LXe/LAr <em>bandgap floor</em> (~10 eV per ionization electron). Spurious-electron BG (delayed photoionization, grid emission) dominates.`;
+    } else {
+      cls = "warn";
+      line = `<span class="ctx-strong">Below the noble-liquid bandgap.</span> Liquid Xe/Ar cannot reach this — needs smaller-bandgap targets (Si ≈ 1.1 eV, Ge ≈ 0.7 eV) <em>and</em> quantum-sensor readout: Skipper-CCDs (single-e⁻ counting), TES / MKID / SNSPD phonon readout, or <span class="ctx-key">opto-mechanical levitated sensors</span> tracking nm-scale recoil-induced impulses. New detection paradigm required.`;
+    }
+  }
+  return { html: line, cls };
+}
+
+// ── Depth context: which underground lab does this correspond to? ────
+// Major underground labs with m.w.e. overburden and approximate rock
+// depth. The slider value is in m.w.e. (water-equivalent depth).
+function ctxDepth(state) {
+  const d = state.depth;
+  let line, cls = "";
+  if (d < 30) {
+    cls = "warn";
+    line = `<span class="ctx-strong">Exposed surface</span> — full atmospheric cosmic-ray flux. Hadronic showers, μ-induced neutrons, and direct μ tracks utterly swamp any dark-matter signal.`;
+  } else if (d < 300) {
+    line = `Inside a building with a few metres of concrete overburden. Cosmic-μ flux reduced by ~1 order of magnitude — still nowhere near enough for a rare-event search.`;
+  } else if (d < 2500) {
+    line = `Shallow underground (mine adits, tunnels, ~few-hundred-metre rock). Useful for short-baseline neutrino work but cosmogenic activation still dominates the BG budget.`;
+  } else if (d <= 3100) {
+    cls = "ok";
+    line = `<span class="ctx-key">Boulby Underground Laboratory</span>, North Yorkshire (UK). Nominal overburden <strong>2805 m.w.e.</strong>, ~1100 m rock depth (in halite/polyhalite salt). Hosted DRIFT, ZEPLIN, hosts now BUGS / CYGNUS-Boulby.`;
+  } else if (d < 3500) {
+    line = `Deep underground (~1.4 km rock-equivalent). Between Boulby and Gran Sasso.`;
+  } else if (d <= 4100) {
+    cls = "ok";
+    line = `<span class="ctx-key">Laboratori Nazionali del Gran Sasso (LNGS)</span>, Italy. Nominal overburden <strong>3800 m.w.e.</strong>, ~1400 m rock depth (dolomite/limestone of the Apennines). Hosts DarkSide-50/20k, XENONnT, CUORE, Borexino-legacy infrastructure.`;
+  } else if (d < 5700) {
+    line = `Very deep underground (~2 km rock-equivalent). Between Gran Sasso and SNOLAB.`;
+  } else if (d <= 6300) {
+    cls = "ok";
+    line = `<span class="ctx-key">SNOLAB</span>, Sudbury, Canada. Nominal overburden <strong>6010 m.w.e.</strong>, ~2070 m rock depth (Norite). Hosts LZ-precursor LUX-ZEPLIN R&D, SuperCDMS, PICO-40L, SNO+. Coldest of the big labs.`;
+  } else if (d < 6400) {
+    line = `Very deep underground (~2.1 km rock-equivalent). Just above Jinping.`;
+  } else if (d <= 7000) {
+    cls = "ok";
+    line = `<span class="ctx-key">Jinping Underground Laboratory (CJPL)</span>, Sichuan, China. Nominal overburden <strong>6720 m.w.e.</strong>, ~2400 m rock depth (marble). The deepest operating underground lab. Hosts PandaX-4T, CDEX, JUNA.`;
+  } else {
+    cls = "warn";
+    line = `<span class="ctx-strong">Beyond any operating lab.</span> At this overburden the muon flux is negligible — but the engineering becomes punishing: lithostatic pressure ${(d/100).toFixed(0)} MPa range, ambient rock temperature climbing toward <strong>~120 °C</strong>, and ventilation/heat-rejection costs dominate the construction budget.`;
+  }
+  return { html: line, cls };
+}
+
+function applyCtx(elId, ctx) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.className = "ctx-note" + (ctx.cls ? " " + ctx.cls : "");
+  el.innerHTML = ctx.html;
+}
+
+function refresh() {
+  document.getElementById("eth-s1-value").textContent = fmt(state.Eth_S1, 2);
+  document.getElementById("eth-s2-value").textContent = state.Eth_S2 < 0.1
+    ? state.Eth_S2.toFixed(3) : fmt(state.Eth_S2, 2);
+  document.getElementById("exp-value").textContent   = state.exposure < 0.1
+    ? state.exposure.toFixed(3) : (state.exposure < 10 ? state.exposure.toFixed(2) : state.exposure.toFixed(0));
+  document.getElementById("bg-value").textContent    = state.bgIntrinsic < 0.001
+    ? state.bgIntrinsic.toExponential(0).replace("e-", "·10⁻")
+    : state.bgIntrinsic.toFixed(state.bgIntrinsic < 0.1 ? 4 : 2);
+  document.getElementById("depth-value").textContent = fmtDepth(state.depth);
+  document.getElementById("target-value").textContent = state.A === 40 ? "Argon (A=40)" : "Xenon (A=131)";
+
+  // Live contextual annotations
+  applyCtx("ctx-eth-s1", ctxThreshold(state.Eth_S1, "S1"));
+  applyCtx("ctx-eth-s2", ctxThreshold(state.Eth_S2, "S2"));
+  applyCtx("ctx-exp",    ctxExp(state));
+  applyCtx("ctx-bg",     ctxBg(state));
+  applyCtx("ctx-depth",  ctxDepth(state));
+
+  const { minPt } = drawCurves(state);
+  document.getElementById("status-text").innerHTML = statusText(minPt, state);
+}
+
+// ── rAF-throttled refresh: coalesces rapid slider drags into one redraw
+//    per animation frame. Same idea as the standard debounce-on-rAF pattern;
+//    massively smoother on mobile, indistinguishable on fast desktops.
+let _refreshScheduled = false;
+function scheduleRefresh() {
+  if (_refreshScheduled) return;
+  _refreshScheduled = true;
+  requestAnimationFrame(() => { _refreshScheduled = false; refresh(); });
+}
+
+// ── Wire up sliders ──────────────────────────────────────────────────
+function bindSlider(id, fromFn, toState) {
+  const el = document.getElementById(id);
+  el.addEventListener("input", () => {
+    toState(fromFn(el.value));
+    scheduleRefresh();
+  });
+}
+
+bindSlider("eth-s1-slider", ethFromSlider, v => state.Eth_S1 = v);
+bindSlider("eth-s2-slider", ethFromSlider, v => state.Eth_S2 = v);
+bindSlider("exp-slider",    expFromSlider,    v => state.exposure = v);
+bindSlider("bg-slider",     bgFromSlider,     v => state.bgIntrinsic = v);
+bindSlider("depth-slider",  depthFromSlider,  v => state.depth = v);
+
+document.getElementById("target-ar").addEventListener("click", () => setTarget(40));
+document.getElementById("target-xe").addEventListener("click", () => setTarget(131));
+
+function setTarget(A) {
+  state.A = A;
+  document.getElementById("target-ar").classList.toggle("active", A === 40);
+  document.getElementById("target-xe").classList.toggle("active", A === 131);
+  document.getElementById("target-ar").setAttribute("aria-checked", A === 40);
+  document.getElementById("target-xe").setAttribute("aria-checked", A === 131);
+  refresh();
+}
+
+// ── Radiogroup keyboard navigation (arrow keys move focus + selection) ──
+document.querySelectorAll('.toggle-row[role="radiogroup"]').forEach(group => {
+  const radios = Array.from(group.querySelectorAll('[role="radio"]'));
+  function syncTab() {
+    const activeIdx = Math.max(0, radios.findIndex(r => r.classList.contains("active")));
+    radios.forEach((r,i) => r.tabIndex = (i === activeIdx) ? 0 : -1);
+  }
+  syncTab();
+  group.addEventListener("click", syncTab);
+  radios.forEach((r, idx) => {
+    r.addEventListener("keydown", ev => {
+      let target = null;
+      if (ev.key === "ArrowRight" || ev.key === "ArrowDown") target = radios[(idx+1) % radios.length];
+      else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") target = radios[(idx-1+radios.length) % radios.length];
+      else if (ev.key === "Home") target = radios[0];
+      else if (ev.key === "End")  target = radios[radios.length-1];
+      if (target) { ev.preventDefault(); target.click(); target.focus(); }
+    });
+  });
+});
+
+// ── Presets ──────────────────────────────────────────────────────────
+const PRESETS = {
+  ds50:    { A: 40,  Eth_S1: 30,   Eth_S2: 0.6,  exposure: 0.05,  bgIntrinsic: 0.01,   depth: 3800 },
+  ds50s2:  { A: 40,  Eth_S1: 100,  Eth_S2: 0.3,  exposure: 0.05,  bgIntrinsic: 0.01,   depth: 3800 },
+  lz:      { A: 131, Eth_S1: 5,    Eth_S2: 0.5,  exposure: 4.2,   bgIntrinsic: 0.001,  depth: 4300 },
+  ds20k:   { A: 40,  Eth_S1: 6,    Eth_S2: 0.5,  exposure: 200,   bgIntrinsic: 2.5e-5, depth: 3800 },
+  ds20ks2: { A: 40,  Eth_S1: 100,  Eth_S2: 0.3,  exposure: 17.4,  bgIntrinsic: 0.05,   depth: 3800 },
+  ds20ks2_10y: { A: 40, Eth_S1: 100, Eth_S2: 0.3, exposure: 174,  bgIntrinsic: 0.05,   depth: 3800 }
+};
+
+function applyPreset(key) {
+  const p = PRESETS[key];
+  if (!p) return;
+  state.A = p.A;
+  state.Eth_S1 = p.Eth_S1;
+  state.Eth_S2 = p.Eth_S2;
+  state.exposure = p.exposure;
+  state.bgIntrinsic = p.bgIntrinsic;
+  state.depth = p.depth;
+  document.getElementById("eth-s1-slider").value = ethToSlider(p.Eth_S1);
+  document.getElementById("eth-s2-slider").value = ethToSlider(p.Eth_S2);
+  document.getElementById("exp-slider").value    = expToSlider(p.exposure);
+  document.getElementById("bg-slider").value     = bgToSlider(p.bgIntrinsic);
+  document.getElementById("depth-slider").value  = depthToSlider(p.depth);
+  document.getElementById("target-ar").classList.toggle("active", p.A === 40);
+  document.getElementById("target-xe").classList.toggle("active", p.A === 131);
+  refresh();
+}
+
+document.querySelectorAll(".preset-btn").forEach(btn => {
+  btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+});
+
+// Reset-all → DS-50 baseline (matches the page's default narrative)
+document.getElementById("btn-reset").addEventListener("click", () => applyPreset("ds50"));
+
+// ── Per-pane "What does this plot show?" copy ─────────────────────────
+const PANE_EXPLAIN = {
+  "svg-lo": {
+    label: "Low mass (sub-GeV → 5 GeV)",
+    html: `<p><strong>Low-mass sensitivity.</strong> Spin-independent WIMP–nucleon cross-section that your experiment can <em>exclude</em> (90% C.L.) versus WIMP mass, from 40 MeV to 5 GeV. Below your "your experiment" curve is the cross-section space your detector can rule out; above it is still allowed.</p><p>The reference curves track the current leading-experiment envelope. <span style="color:#7a3a8a;">CRESST-III</span> (cryogenic calorimeters with sub-30 eV thresholds) leads below ~200 MeV/c²; <span style="color:#a36b3a; font-style:italic;">DarkSide-50 S2+Migdal</span> (argon, ionisation-only) leads from ~200 MeV to ~2.5 GeV; <span style="color:#2e4a8a;">PandaX-4T</span> (xenon, S2-only) takes over from ~2.5 to 5 GeV. <span style="color:#6b8a3c; font-style:italic;">DarkSide-20k S2</span> projections (1-yr and 10-yr) show the next generation. The shaded region beneath is the <em>neutrino fog</em>: cross-sections below it can only be reached at very high cost, since coherent ν scattering looks like a WIMP signal.</p>`
+  },
+  "svg-hi": {
+    label: "High mass (1 GeV → 10 TeV)",
+    html: `<p><strong>High-mass sensitivity.</strong> Same plot, extended out to 10 TeV. The canonical WIMP region (10 GeV – 1 TeV) is where <span style="color:#a36b3a;">DarkSide-50</span>, <span style="color:#4a6b7a;">LZ (4.2 t·yr)</span> and <span style="color:#6b8a3c;">DarkSide-20k</span> S1+S2 references all sit. The S1+S2 channel dominates here — pulse-shape discrimination keeps backgrounds low and exposure is the main lever.</p><p>The 5–9 GeV "gap" between low-threshold analyses and the classic LZ result is now bridged by <span style="color:#4a6b7a; font-style:italic;">LZ light-DM</span> (dashed, 5.7 t·yr WS2025), which also published the first 4.5σ evidence of ⁸B solar-ν CEνNS in xenon. The slope at the heaviest masses is set by number density falling as 1/M<sub>χ</sub>: heavier WIMPs are rarer, so the limit gradually rises. The bump in the ν fog near 30 GeV is the gap between the ⁸B floor at low mass and the atmospheric-ν floor at high mass.</p>`
+  }
+};
+
+// Show a given pane's explainer in the disclosure body + mark the right tab active.
+function showPaneExplainer(paneId) {
+  const info = PANE_EXPLAIN[paneId];
+  if (!info) return;
+  const body = document.getElementById("plot-explain-body");
+  const legend = document.getElementById("pane-legend-name");
+  if (body) body.innerHTML = info.html;
+  if (legend) legend.textContent = info.label;
+  document.querySelectorAll(".plot-explain-tabs [data-pane-explain]").forEach(tab => {
+    const active = tab.dataset.paneExplain === paneId;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", active ? "true" : "false");
+    tab.tabIndex = active ? 0 : -1;
+  });
+}
+
+// Tab clicks + arrow-key keyboard nav
+(function setupExplainTabs() {
+  const tabs = Array.from(document.querySelectorAll(".plot-explain-tabs [data-pane-explain]"));
+  if (!tabs.length) return;
+  tabs.forEach((t, idx) => {
+    t.addEventListener("click", () => showPaneExplainer(t.dataset.paneExplain));
+    t.addEventListener("keydown", ev => {
+      let target = null;
+      if (ev.key === "ArrowRight" || ev.key === "ArrowDown") target = tabs[(idx+1) % tabs.length];
+      else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") target = tabs[(idx-1+tabs.length) % tabs.length];
+      else if (ev.key === "Home") target = tabs[0];
+      else if (ev.key === "End")  target = tabs[tabs.length-1];
+      if (target) { ev.preventDefault(); target.click(); target.focus(); }
+    });
+  });
+})();
+
+// ── Mobile pane indicator ────────────────────────────────────────────
+// Tap a dot to scroll-snap to that pane; scroll position updates which
+// dot is active. Only meaningful on mobile (dots are display:none on
+// desktop via CSS), but the listeners are harmless on desktop.
+(function setupPaneDots() {
+  const row = document.getElementById("plot-row");
+  const dots = document.querySelectorAll(".pane-dot");
+  if (!row || dots.length === 0) return;
+
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      const target = document.getElementById(dot.dataset.paneTarget);
+      if (target) target.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    });
+  });
+
+  function updateActive() {
+    const center = row.scrollLeft + row.clientWidth / 2;
+    let active = 0;
+    const panes = row.querySelectorAll(".pane-svg");
+    panes.forEach((p, i) => {
+      if (p.offsetLeft <= center) active = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle("active", i === active));
+    const activePane = panes[active];
+    if (activePane) showPaneExplainer(activePane.id);
+  }
+  row.addEventListener("scroll", updateActive, { passive: true });
+  window.addEventListener("resize", updateActive);
+  updateActive();
+})();
+
+// ── Boot ──────────────────────────────────────────────────────────────
+// drawAxes() is cheap (empty grid + axis ticks); refresh() is the expensive
+// one (reference curves × 2 panes + user curve + status). Defer refresh() one
+// animation frame so the browser can paint the prose, "try this" panel,
+// controls and empty axes before running the (~50-65 ms) initial draw.
+drawAxes();
+requestAnimationFrame(refresh);
+</script>

@@ -1,0 +1,157 @@
+---
+layout: default
+---
+{% assign meta = "" %}
+{% for th in site.data.themes.list %}
+  {% if th.id == page.theme %}{% assign meta = th %}{% endif %}
+{% endfor %}
+{% assign tag = page.theme %}
+
+<section class="hero compact">
+  <div class="container wide">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; <a href="{{ '/research/' | relative_url }}">Research</a> &rsaquo; {{ meta.label }}</p>
+    <p class="eyebrow">Research theme</p>
+    <h1 class="display">{{ meta.label }}</h1>
+    {% if meta.blurb %}<p class="lede">{{ meta.blurb }}</p>{% endif %}
+  </div>
+</section>
+
+<section class="container">
+  {{ content }}
+</section>
+
+{% comment %} ---- Auto-seeded publications carrying this theme's tag ---- {% endcomment %}
+{% assign allpubs = site.data.publications.primary | concat: site.data.publications.editorial | concat: site.data.publications.proceedings %}
+{% assign pubs = allpubs | where_exp: "p", "p.tags contains tag" | sort: "year" | reverse %}
+{% if pubs.size > 0 %}
+<hr class="rule">
+<section class="container wide">
+  <h2 class="section-label">Selected publications</h2>
+  <ul class="pub-list">
+    {% for p in pubs limit: 6 %}{% include pub-entry.html pub=p %}{% endfor %}
+  </ul>
+  <p class="prose small"><a href="{{ '/research/publications/' | relative_url }}?tag={{ tag }}">All publications &rarr;</a></p>
+</section>
+{% endif %}
+
+{% comment %} ---- Recent talks carrying this theme's tag ---- {% endcomment %}
+{% assign talks = site.data.talks.entries | where_exp: "t", "t.tags contains tag" %}
+{% if talks.size > 0 %}
+<hr class="rule">
+<section class="container wide">
+  <h2 class="section-label">Recent talks</h2>
+  <ul class="talk-list">
+    {% for t in talks limit: 5 %}{% unless t.type == "internal" %}{% include talk-entry.html talk=t %}{% endunless %}{% endfor %}
+  </ul>
+  <p class="prose small"><a href="{{ '/research/presentations/' | relative_url }}">All presentations &rarr;</a></p>
+</section>
+{% endif %}
+
+{% comment %} ---- Related news ---- {% endcomment %}
+{% assign news = site.data.news.entries | where_exp: "n", "n.tags contains tag" %}
+{% if news.size > 0 %}
+<hr class="rule">
+<section class="container wide">
+  <h2 class="section-label">Related news</h2>
+  <ul class="news-list">
+    {% for n in news limit: 4 %}{% include news-entry.html news=n %}{% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% comment %} ---- People associated with this theme ---- {% endcomment %}
+{% comment %} Map theme ID to the display label(s) used in team.yml works_on / worked_on {% endcomment %}
+{% assign theme_labels = "" %}
+{% case page.theme %}
+  {% when "dark-matter" %}        {% assign theme_labels = "Dark matter,DarkSide" %}
+  {% when "electroweak" %}        {% assign theme_labels = "Electroweak,Electroweak physics" %}
+  {% when "qcd" %}                {% assign theme_labels = "QCD,Collider physics,Phenomenology" %}
+  {% when "b-physics" %}          {% assign theme_labels = "B-physics,B-physics & quarkonium" %}
+  {% when "neutrinos" %}          {% assign theme_labels = "Neutrinos" %}
+  {% when "instrumentation" %}    {% assign theme_labels = "Instrumentation" %}
+  {% when "levitating-sensors" %} {% assign theme_labels = "Levitating sensors" %}
+  {% when "ai-ml" %}              {% assign theme_labels = "ML/AI,AI" %}
+{% endcase %}
+{% assign theme_label_list = theme_labels | split: "," %}
+
+{% assign current_people = "" | split: "" %}
+{% for m in site.data.team.current %}
+  {% assign matched = false %}
+  {% for lbl in theme_label_list %}
+    {% if m.works_on contains lbl %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign current_people = current_people | push: m %}{% endif %}
+{% endfor %}
+
+{% assign alumni_people = "" | split: "" %}
+{% for a in site.data.team.alumni %}
+  {% assign matched = false %}
+  {% for lbl in theme_label_list %}
+    {% if a.worked_on contains lbl %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign alumni_people = alumni_people | push: a %}{% endif %}
+{% endfor %}
+
+{% if current_people.size > 0 or alumni_people.size > 0 %}
+<hr class="rule">
+<section class="container wide">
+  <h2 class="section-label">People</h2>
+
+  {% if current_people.size > 0 %}
+  {% if alumni_people.size > 0 %}<p class="section-sublabel">Current</p>{% endif %}
+  <div class="team-grid">
+    {% for m in current_people %}
+    <article class="member-card">
+      <div class="member-photo">
+        {% if m.photo %}<img src="{{ m.photo | relative_url }}" alt="{{ m.name }}">
+        {% else %}<span class="placeholder">{{ m.initials }}</span>{% endif %}
+      </div>
+      <div>
+        <h3>{{ m.name }}</h3>
+        <p class="role">{{ m.role }}</p>
+        {% if m.focus %}<p class="focus">{{ m.focus }}</p>{% endif %}
+        {% if m.works_on %}
+        <div class="taglist">
+          {% for w in m.works_on %}<span class="tag">{{ w }}</span>{% endfor %}
+        </div>
+        {% endif %}
+        {% if m.email or m.linkedin %}
+        <p class="links">
+          {% if m.email %}<a href="mailto:{{ m.email }}">Email</a>{% endif %}
+          {% if m.linkedin %}<a href="{{ m.linkedin }}" rel="noopener">LinkedIn</a>{% endif %}
+        </p>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if alumni_people.size > 0 %}
+  {% if current_people.size > 0 %}<p class="section-sublabel" style="margin-top:1.5rem;">Alumni</p>{% endif %}
+  <div class="alumni-grid">
+    {% for a in alumni_people %}
+    <article class="alumnus-card">
+      <h4>{{ a.name }}</h4>
+      <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
+      {% if a.worked_on %}
+      <div class="taglist">
+        {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      {% if a.now.label %}
+      <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <p class="prose small"><a href="{{ '/team/' | relative_url }}">Full team &rarr;</a></p>
+</section>
+{% endif %}
+
+<hr class="rule">
+<section class="container">
+  <p class="prose"><a href="{{ '/research/' | relative_url }}">&larr; All research themes</a></p>
+</section>

@@ -1,0 +1,18 @@
+<header class="site-header">
+  <div class="container wide header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.author.name }} home">
+      <span class="brand-mark">DP</span>
+      <span class="brand-name">{{ site.author.name }}</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      {% for item in site.nav %}
+        <a href="{{ item.url | relative_url }}"{% if page.url contains item.url and item.url != "/" %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

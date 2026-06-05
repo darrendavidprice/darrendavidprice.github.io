@@ -1,0 +1,41 @@
+# ============================================================
+#  bios.yml — ready-to-use biographies at three lengths, for
+#  media, event organisers and agencies to lift directly. The
+#  About page renders each with a "copy" button.
+#  >>> Drafts — edit freely. Keep the three lengths in sync.
+# ============================================================
+
+short: >-
+  Darren Price is Professor of Particle Physics and Data Intensive Science at
+  the University of Manchester. He searches for dark matter at the Large Hadron
+  Collider and with the DarkSide experiment, works across electroweak physics,
+  QCD, B-physics and neutrinos, and develops AI tools for scientific discovery.
+
+medium: >-
+  Darren Price is Professor of Particle Physics and Data Intensive Science at
+  the University of Manchester. His research spans dark matter — both at the
+  Large Hadron Collider and through the DarkSide direct-detection experiment —
+  electroweak physics, QCD, B-physics and neutrinos, alongside the development
+  of machine-learning tools for scientific discovery. He leads Manchester's
+  DarkSide group, directs the 4IR Centre for Doctoral Training in Data Intensive
+  Science, coordinates education and outreach for the ATLAS experiment at CERN,
+  and is a Turing Fellow at the Alan Turing Institute.
+
+long: >-
+  Darren Price is Professor of Particle Physics and Data Intensive Science at
+  the University of Manchester. He has worked at the frontier of experimental
+  particle physics for two decades, as part of the ATLAS, DØ and DarkSide
+  collaborations, and led the analysis team that discovered the first new
+  particle observed at the Large Hadron Collider. His research spans the hunt
+  for dark matter — both at colliders and through the DarkSide argon
+  direct-detection programme, which he established at Manchester — together with
+  electroweak physics, QCD, B-physics, neutrinos and detector instrumentation.
+  Across these areas he develops machine-learning and data-intensive methods for
+  scientific discovery as a Turing Fellow at the Alan Turing Institute. He has
+  held elected leadership roles of increasing seniority across major
+  international collaborations, advises UK research funders, directs a national
+  Centre for Doctoral Training, and leads education, outreach and public
+  engagement for the ATLAS experiment at CERN and across the Faculty of Science
+  and Engineering at Manchester. He works extensively with industry, civic and
+  public audiences, translating frontier science and data analysis into
+  real-world value.

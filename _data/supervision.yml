@@ -1,0 +1,37 @@
+# ============================================================
+#  supervision.yml — postgraduate supervision. Shown on Teaching
+#  (and optionally Team). Grouped by type.
+#  >>> Seeded from the CV. Update as students complete / join.
+# ============================================================
+phd:
+  - { name: "Conner Roberts", years: "2021–", topic: "Silicon photosensor instrumentation for next-generation dark matter searches." }
+  - { name: "Ben Wilson", years: "2020–", topic: "Novel probes of lepton number violation through electroweak interactions." }
+  - { name: "Ellen Sandford", years: "2019–", topic: "Non-standard dark matter searches with the DarkSide experiment." }
+  - { name: "Ben Honan", years: "2019–", topic: "Exploring new phenomena with model-independent tests of electroweak physics." }
+  - { name: "Candice Basson", years: "2017–2022", topic: "Standard Model backgrounds in the search for dark matter produced with b-quarks at ATLAS." }
+  - { name: "Rebecca Pickles", years: "2015–2019", topic: "Novel searches for new phenomena through electroweak boson fusion at ATLAS." }
+
+masters_research:
+  - { name: "Hayden Casey", years: "2022–2023", topic: "Sensitivity & design studies for a future LAr low-mass dark matter detector." }
+  - { name: "Huazhen Li", years: "2021–", topic: "Searches for new phenomena in photon-fusion with ATLAS/AFP." }
+  - { name: "Eleanor Bishop", years: "2021–", topic: "Low-mass dark matter and non-standard neutrino interactions with liquid-argon TPCs." }
+  - { name: "Sparshita Dey", years: "2019–2020", topic: "Sensitivity studies for next-generation direct dark matter detection." }
+  - { name: "Ishanee Pophale", years: "2018–2020", topic: "Supernova neutrino searches with the DarkSide experiment." }
+
+pdra:
+  - { name: "Volker Austrup", topic: "ATLAS / data-intensive analysis." }
+  - { name: "Stephen Menary", topic: "Machine learning for the physical sciences." }
+  - { name: "Sam Dysch", topic: "ATLAS analysis." }
+  - { name: "Agni Bethani", topic: "ATLAS B-physics." }
+  - { name: "Julia Iturbe", topic: "Electroweak Zjj production." }
+  - { name: "James Robinson", topic: "ML for scientific discovery." }
+  - { name: "Xiahou Sun", topic: "Collider physics." }
+
+# Selected MPhys (final-year) projects span dark matter, photon-fusion,
+# Majorana neutrinos, GANs for LAr simulation, and industrial data science
+# (HSBC). 37 supervised in total — see note on the Teaching page.
+mphys_note: >-
+  37 final-year MPhys research projects supervised since 2014, spanning
+  dark matter, photon-fusion searches, heavy Majorana neutrinos, generative
+  models for liquid-argon simulation, and industrial data-science projects
+  with partners including HSBC UK Asset Finance.

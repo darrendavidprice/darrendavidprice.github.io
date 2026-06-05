@@ -1,0 +1,2574 @@
+---
+layout: page
+title: "What Does Dark Matter Look Like in a Detector?"
+description: "An interactive tool exploring WIMP dark matter near Earth — the flux through your body, the velocity distribution in the halo, and the nuclear-recoil spectrum a detector actually records. Slide mass, density, speed, target and threshold and watch what arrives."
+permalink: /research/dark-matter/recoil-explorer/
+breadcrumb: "Research / Dark matter"
+eyebrow: "Interactive · Pedagogical tool"
+heading: "What does dark matter look like in a detector?"
+lede: "Dark matter is streaming through you right now — billions of particles a second. The hard part was never getting it into the detector; it's getting a single particle to recoil hard enough, often enough, above threshold, to notice. Slide the controls and watch what actually arrives — the flux through your hand, the spread of halo speeds, and the recoil spectrum a real detector records."
+wide: true
+---
+
+<style>
+/* ─── Recoil-explorer-scoped styles, layered on the site's Manuscript theme ─── */
+/* Shares the visual grammar of the sensitivity explorer (sticky full-width plot,
+   controls grid below, ctx-notes, status panel, presets) but the plot panes show
+   physical spectra rather than an exclusion curve, and there is a beginner/advanced
+   mode switch that reveals deep-halo controls and a third (σ–mass) pane. */
+
+.explorer-layout { display: block; margin: 2rem 0 3rem; }
+
+/* Plot card — sticky at the top of the viewport while scrolling the controls */
+.plot-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.25rem 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0 6px 20px -8px rgba(26, 23, 18, 0.18);
+  max-height: calc(100dvh - 1rem);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Plot row — panes side by side on desktop, swipe-able on mobile */
+.plot-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+.pane-svg {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  max-height: calc(100dvh - 3rem);
+}
+/* The σ–mass pane is only present in advanced mode */
+.pane-svg[data-pane="sig"] { display: none; }
+body.adv-mode .pane-svg[data-pane="sig"] { display: block; }
+
+/* Pane dots — only visible on mobile (scroll position indicator) */
+.pane-dots { display: none; }
+.pane-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+  border: none; padding: 0; cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.pane-dot.active { background: var(--accent); transform: scale(1.25); }
+.pane-dot:hover { background: var(--text-muted); }
+.pane-dot.active:hover { background: var(--accent); }
+/* The third dot only matters in advanced mode */
+.pane-dot[data-pane-target="svg-sig"] { display: none; }
+body.adv-mode .pane-dot[data-pane-target="svg-sig"] { display: inline-block; }
+
+@media (max-width: 720px) {
+  .plot-card { max-height: calc(100dvh - 1rem); padding: 0.75rem 0 0.5rem; }
+  .plot-row {
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0; scrollbar-width: none;
+  }
+  .plot-row::-webkit-scrollbar { display: none; }
+  .pane-svg {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    max-height: calc(100dvh - 6rem);
+    padding: 0 0.5rem; box-sizing: border-box;
+  }
+  .pane-dots { display: flex; justify-content: center; gap: 0.55rem; padding: 0.4rem 0 0.2rem; }
+}
+
+/* ─── SVG plot text + grid (shared grammar with the sensitivity explorer) ─── */
+.plot-svg .axis-label {
+  font-family: var(--font-mono); fill: var(--text-muted);
+  font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.plot-svg .axis-title {
+  font-family: var(--font-mono); fill: var(--text);
+  font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+}
+.plot-svg .pane-title {
+  font-family: var(--font-display); fill: var(--text-bright);
+  font-size: 20px; font-weight: 500; letter-spacing: 0.01em;
+}
+.plot-svg .pane-subtitle {
+  font-family: var(--font-mono); fill: var(--text-muted);
+  font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.plot-svg .curve-label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.03em;
+}
+.plot-svg .annot {
+  font-family: var(--font-body); font-size: 13px; fill: var(--text-muted); font-style: italic;
+}
+.plot-svg .grid-major { stroke: rgba(26, 23, 18, 0.10); stroke-width: 0.7; }
+.plot-svg .grid-minor { stroke: rgba(26, 23, 18, 0.04); stroke-width: 0.4; }
+.plot-svg .axis { stroke: var(--text-bright); stroke-width: 1.2; }
+.plot-svg .tick  { stroke: var(--text-bright); stroke-width: 0.9; }
+
+/* Velocity-distribution pane */
+.vdist-fill      { fill: rgba(170, 60, 50, 0.18); }      /* below threshold — lost */
+.vdist-fill-vis  { fill: rgba(60, 130, 70, 0.32); }      /* above threshold — visible */
+.vdist-line      { fill: none; stroke: #4a6b7a; stroke-width: 2.6; stroke-linejoin: round; }
+.vmin-line       { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 3; }
+
+/* Recoil-spectrum pane */
+.recoil-fill        { fill: rgba(60, 130, 70, 0.30); }    /* detected (ε-weighted) — green */
+.recoil-fill-lost   { fill: rgba(170, 60, 50, 0.22); }    /* lost to acceptance — red */
+.recoil-line {
+  fill: none; stroke: var(--accent); stroke-width: 3;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(140, 58, 43, 0.25));
+  transition: d 0.2s ease;
+}
+.recoil-line-smear { fill: none; stroke: #4a6b7a; stroke-width: 2; stroke-dasharray: 5 3; opacity: 0.85; }
+.thresh-line     { stroke: var(--text-bright); stroke-width: 1.6; stroke-dasharray: 5 4; }
+/* efficiency turn-on overlay + right-hand acceptance axis */
+.eff-curve       { fill: none; stroke: #3f7d86; stroke-width: 2.2; stroke-dasharray: 6 3; opacity: 0.95; transition: d 0.2s ease; }
+.eff-axis        { stroke: rgba(63, 125, 134, 0.55); stroke-width: 1; }
+.eff-tick        { stroke: rgba(63, 125, 134, 0.55); stroke-width: 1; }
+.eff-axis-label  { fill: #3f7d86; font: 600 11px var(--font-mono, monospace); }
+
+/* σ–mass pane (advanced) — reuses the sensitivity explorer's reference-curve colours */
+.curve-ds50      { fill: none; stroke: #a36b3a; stroke-width: 2.2; }
+.curve-lz        { fill: none; stroke: #4a6b7a; stroke-width: 2.2; }
+.curve-ds20k     { fill: none; stroke: #6b8a3c; stroke-width: 2.2; stroke-dasharray: 6 4; }
+.curve-fog-fill  { fill: rgba(40, 35, 28, 0.30); }
+.curve-fog-line  { fill: none; stroke: rgba(30, 25, 18, 0.7); stroke-width: 1.3; stroke-dasharray: 3 3; }
+.wimp-marker     { fill: var(--accent); stroke: var(--bg-card); stroke-width: 1.6; }
+.wimp-marker-ring { fill: none; stroke: var(--accent); stroke-width: 1.4; opacity: 0.5; }
+
+/* ─── Controls ─── */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem 2rem;
+  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-soft);
+}
+.control-group { border-bottom: 1px solid var(--rule-soft); padding-bottom: 1.25rem; }
+.control-group:last-child { border-bottom: none; }
+/* Advanced-only controls hide in beginner mode */
+.control-group.adv-only { display: none; }
+body.adv-mode .control-group.adv-only { display: block; }
+
+.controls-toolbar {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+  margin-bottom: 0.25rem;
+}
+.controls-toolbar h3 {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin: 0;
+}
+.toolbar-actions { display: flex; gap: 0.6rem; align-items: center; }
+.btn-reset, .btn-mode {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: transparent; border: 1px solid var(--rule); color: var(--text);
+  padding: 0.45rem 0.9rem; cursor: pointer; transition: all 0.15s ease;
+}
+.btn-reset:hover, .btn-mode:hover { border-color: var(--accent); color: var(--accent); }
+.btn-mode.active { background: var(--accent); color: var(--bg-card); border-color: var(--accent); }
+
+.control-label {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.control-label .name { color: var(--text-bright); }
+.control-label .value {
+  color: var(--accent); font-weight: 500; font-size: 0.85rem;
+  letter-spacing: 0.02em; text-transform: none;
+}
+.control-note {
+  font-family: var(--font-body); font-size: 0.85rem; color: var(--text-muted);
+  margin: 0.5rem 0 0; line-height: 1.45;
+}
+.control-note em {
+  font-family: var(--font-mono); font-style: normal; font-size: 0.78rem;
+  color: var(--text); letter-spacing: 0.02em;
+}
+.ctx-note {
+  margin: 0.6rem 0 0; padding: 0.55rem 0.75rem;
+  background: rgba(140, 58, 43, 0.04);
+  border-left: 2px solid rgba(140, 58, 43, 0.35);
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--text);
+  line-height: 1.5; letter-spacing: 0.01em; min-height: 1.2rem;
+}
+.ctx-note.warn { background: rgba(140, 58, 43, 0.10); border-left-color: var(--accent); color: var(--accent); }
+.ctx-note.ok { background: rgba(60, 100, 60, 0.06); border-left-color: rgba(60, 130, 60, 0.6); }
+.ctx-note .ctx-key { color: var(--text-bright); font-weight: 500; }
+.ctx-note .ctx-strong { color: var(--accent); font-weight: 500; }
+.ctx-note:empty { display: none; }
+
+/* Sliders */
+.slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; background: transparent; cursor: pointer; margin: 0.25rem 0;
+}
+.slider:focus { outline: none; }
+.slider::-webkit-slider-runnable-track { height: 2px; background: var(--rule); border: none; }
+.slider::-moz-range-track { height: 2px; background: var(--rule); border: none; }
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; background: var(--accent);
+  border: 2px solid var(--bg-card); border-radius: 0; margin-top: -7px;
+  cursor: pointer; box-shadow: 0 0 0 1px var(--accent); transition: transform 0.15s ease;
+}
+.slider::-moz-range-thumb {
+  width: 12px; height: 12px; background: var(--accent);
+  border: 2px solid var(--bg-card); border-radius: 0; cursor: pointer; box-shadow: 0 0 0 1px var(--accent);
+}
+.slider:hover::-webkit-slider-thumb { transform: scale(1.18); }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 1px var(--accent), 0 0 0 4px var(--accent-glow); }
+
+/* Target selector — a grid of small toggle buttons */
+.toggle-row { display: flex; gap: 0; margin: 0.5rem 0 0; border: 1px solid var(--rule); flex-wrap: wrap; }
+.toggle-row button {
+  flex: 1 1 0; min-width: 3.4rem; padding: 0.55rem 0.5rem;
+  background: transparent; border: none;
+  font-family: var(--font-mono); font-size: 0.74rem;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s ease; border-right: 1px solid var(--rule);
+}
+.toggle-row button:last-child { border-right: none; }
+.toggle-row button:hover { color: var(--accent); }
+.toggle-row button.active { background: var(--accent); color: var(--bg-card); }
+
+/* Flux readout — the headline number */
+.flux-panel {
+  margin: 2rem 0 2rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--accent);
+}
+.flux-eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.5rem;
+}
+.flux-big {
+  font-family: var(--font-display); font-size: 1.55rem;
+  font-variation-settings: "opsz" 36; color: var(--text-bright);
+  line-height: 1.4; margin: 0;
+}
+.flux-big .num { font-family: var(--font-mono); color: var(--accent); font-size: 0.9em; letter-spacing: 0.01em; }
+.flux-sub {
+  font-family: var(--font-body); font-size: 0.95rem; color: var(--text);
+  line-height: 1.5; margin: 0.7rem 0 0; font-style: italic;
+}
+
+/* Readout chips — small live numeric facts in a row */
+.readout-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem; margin: 1.5rem 0;
+}
+.readout-chip {
+  background: var(--bg-card); border: 1px solid var(--rule); padding: 0.85rem 1rem;
+}
+.readout-chip .chip-label {
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); margin: 0 0 0.35rem;
+}
+.readout-chip .chip-value {
+  font-family: var(--font-mono); font-size: 1.05rem; color: var(--accent); font-weight: 500;
+}
+.readout-chip .chip-value small { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; }
+
+/* Mass-matching meter */
+.match-meter { margin-top: 0.6rem; }
+.match-bar {
+  position: relative; height: 8px; background: var(--rule);
+  border: 1px solid var(--rule); overflow: hidden;
+}
+.match-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(140,58,43,0.4), var(--accent));
+  transition: width 0.2s ease;
+}
+.match-caption {
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);
+  margin-top: 0.35rem; letter-spacing: 0.02em;
+}
+
+/* Status / diagnostic panel */
+.status-panel { margin: 2rem 0 2rem; padding: 1.5rem 1.75rem; background: var(--bg-elevated); border-left: 3px solid var(--accent); }
+.status-eyebrow { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.5rem; }
+.status-text { font-family: var(--font-display); font-size: 1.15rem; font-variation-settings: "opsz" 24; color: var(--text-bright); line-height: 1.5; margin: 0; }
+.status-text .num { font-family: var(--font-mono); color: var(--accent); font-size: 0.95em; letter-spacing: 0.01em; }
+.diag-list { margin: 0.85rem 0 0; padding: 0; list-style: none; }
+.diag-list li {
+  font-family: var(--font-body); font-size: 0.92rem; color: var(--text);
+  line-height: 1.5; padding: 0.25rem 0 0.25rem 1.4rem; position: relative;
+}
+.diag-list li::before {
+  content: "›"; position: absolute; left: 0.3rem; top: 0.25rem;
+  color: var(--accent); font-family: var(--font-mono); font-weight: 600;
+}
+.diag-ok {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;
+  font-size: 0.78rem; color: rgba(60, 130, 60, 0.85); margin-top: 0.6rem;
+}
+
+/* Poisson "run the experiment" toy */
+.toy-panel { margin: 2rem 0 2rem; padding: 1.5rem 1.75rem; background: var(--bg-card); border: 1px solid var(--rule); }
+.toy-panel h3 {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted); margin: 0 0 0.5rem;
+}
+.toy-expect { font-family: var(--font-body); font-size: 0.95rem; color: var(--text); margin: 0 0 1rem; line-height: 1.5; }
+.toy-expect .num { font-family: var(--font-mono); color: var(--accent); }
+.toy-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.toy-btn {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--accent); color: var(--bg-card); border: 1px solid var(--accent);
+  padding: 0.6rem 1.1rem; cursor: pointer; transition: all 0.15s ease;
+}
+.toy-btn.secondary { background: transparent; color: var(--text); border-color: var(--rule); }
+.toy-btn:hover { transform: translateY(-1px); }
+.toy-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+.toy-result {
+  font-family: var(--font-display); font-size: 1.1rem; color: var(--text-bright);
+  line-height: 1.5; margin: 0; min-height: 1.5rem;
+}
+.toy-result .hit { color: var(--accent); font-weight: 600; }
+.toy-result .miss { color: var(--text-muted); }
+/* Histogram for "run 100×" */
+.toy-hist { display: flex; align-items: flex-end; gap: 2px; height: 90px; margin-top: 1rem; position: relative; }
+.toy-hist .bar { flex: 1 1 0; background: rgba(140,58,43,0.5); min-height: 1px; position: relative; }
+.toy-hist .bar.zero { background: var(--rule); }
+.toy-bg-line {
+  position: absolute;
+  top: -4px; bottom: 0;
+  width: 0;
+  border-left: 2px dashed #4a6b7a;
+  pointer-events: none;
+  z-index: 2;
+}
+.toy-bg-line span {
+  position: absolute;
+  top: -16px; left: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #4a6b7a;
+  background: rgba(243,239,230,0.92);
+  padding: 0 4px;
+  white-space: nowrap;
+}
+.toy-hist-labels { display: flex; gap: 2px; margin-top: 0.3rem; }
+.toy-hist-labels span { flex: 1 1 0; text-align: center; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); }
+
+/* Presets */
+.presets { margin: 2rem 0 3rem; }
+.presets h3 {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin: 0 0 0.85rem;
+}
+.preset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem; }
+.preset-btn {
+  padding: 0.85rem 1rem; background: var(--bg-card); border: 1px solid var(--rule);
+  font-family: var(--font-display); font-size: 0.95rem; color: var(--text-bright);
+  text-align: left; cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.preset-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.preset-btn .preset-sub {
+  display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem; font-weight: 400;
+}
+
+/* Explainer columns */
+.explainer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem 2.5rem; margin: 2.5rem 0; }
+.explainer-cell h4 {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); font-weight: 500; margin: 0 0 0.6rem;
+}
+.explainer-cell h4 span { color: var(--text-muted); margin-right: 0.5rem; }
+.explainer-cell p { font-family: var(--font-body); font-size: 0.95rem; color: var(--text); line-height: 1.6; margin: 0; }
+
+/* Cross-link to the sibling sensitivity explorer */
+.sibling-link {
+  display: block; margin: 2.5rem 0 1rem; padding: 1.25rem 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  color: var(--text); text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.sibling-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+.sibling-link .eyebrow { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.4rem; }
+.sibling-link strong { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-bright); font-weight: 400; }
+.sibling-link p { margin: 0.4rem 0 0; font-size: 0.92rem; color: var(--text-muted); }
+
+/* ─── New pedagogical components (try-this, disclosures, table, assumptions) ─── */
+
+/* "Try these three things" guided entry-point panel */
+.try-panel {
+  margin: 0 0 2rem; padding: 1.25rem 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+}
+.try-panel .eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 0.5rem;
+}
+.try-panel h3 {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.6rem;
+}
+.try-panel ol {
+  margin: 0; padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.55; color: var(--text);
+}
+.try-panel ol li { margin: 0.3rem 0; }
+.try-panel ol li em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+/* Reusable disclosure for "What does this show?" / per-control explainers /
+   model-assumptions accordion. Native <details> handles keyboard + a11y. */
+.explainer-drop {
+  margin: 0.65rem 0 0; padding: 0; border-top: 1px dashed var(--rule);
+}
+.explainer-drop summary {
+  list-style: none; cursor: pointer; padding: 0.45rem 0 0.4rem;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.15s ease;
+}
+.explainer-drop summary::-webkit-details-marker { display: none; }
+.explainer-drop summary::before {
+  content: "+"; display: inline-block; width: 1em; color: var(--accent);
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; line-height: 1;
+}
+.explainer-drop[open] summary::before { content: "−"; }
+.explainer-drop summary:hover, .explainer-drop summary:focus-visible { color: var(--accent); outline: none; }
+.explainer-drop summary:focus-visible { box-shadow: 0 0 0 2px var(--accent-soft); border-radius: 2px; }
+.explainer-drop .drop-body {
+  padding: 0.4rem 0 0.6rem; font-size: 0.9rem; line-height: 1.55;
+  color: var(--text); border: 0;
+}
+.explainer-drop .drop-body p { margin: 0 0 0.5rem; }
+.explainer-drop .drop-body p:last-child { margin-bottom: 0; }
+.explainer-drop .drop-body em { color: var(--accent); font-style: italic; }
+
+/* Plot-side disclosure variant — sits above/below the plot card */
+.plot-explain {
+  margin: 0.5rem 0 1.5rem; padding: 0 0.25rem;
+}
+.plot-explain summary {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); cursor: pointer;
+  padding: 0.35rem 0; list-style: none;
+}
+.plot-explain summary::-webkit-details-marker { display: none; }
+.plot-explain summary::before {
+  content: "?"; display: inline-block; width: 1.1em; height: 1.1em; margin-right: 0.5rem;
+  border: 1px solid var(--accent-soft); border-radius: 50%; text-align: center;
+  font-weight: 600; color: var(--accent); font-size: 0.7rem; line-height: 1.1em;
+}
+.plot-explain[open] summary::before { background: var(--accent-soft); }
+.plot-explain summary:hover, .plot-explain summary:focus-visible { color: var(--accent); outline: none; }
+.plot-explain .drop-body {
+  font-size: 0.92rem; line-height: 1.55; color: var(--text);
+  padding: 0.5rem 0 0.25rem; border-top: 1px dashed var(--rule);
+}
+.plot-explain .drop-body p { margin: 0 0 0.5rem; }
+.plot-explain .drop-body p:last-child { margin-bottom: 0; }
+
+/* Tabs inside the plot-explain disclosure to pick which pane's explainer to show */
+.plot-explain-tabs {
+  display: flex; flex-wrap: wrap; gap: 0; margin: 0.5rem 0 0;
+  border-top: 1px dashed var(--rule);
+  padding-top: 0.5rem;
+}
+.plot-explain-tabs button {
+  background: transparent; border: 1px solid var(--rule); border-right: none;
+  padding: 0.35rem 0.7rem; font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s ease, background 0.15s ease;
+}
+.plot-explain-tabs button:last-child { border-right: 1px solid var(--rule); }
+.plot-explain-tabs button:hover { color: var(--accent); }
+.plot-explain-tabs button.active {
+  background: var(--accent); color: var(--bg-card); border-color: var(--accent);
+}
+.plot-explain-tabs button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+/* Hide the σ-mass tab unless in advanced mode (recoil-only) */
+.plot-explain-tabs button[data-pane-explain="svg-sig"] { display: none; }
+body.adv-mode .plot-explain-tabs button[data-pane-explain="svg-sig"] { display: inline-block; }
+
+/* "What each control changes" cross-reference table */
+.controls-effects {
+  margin: 2.5rem 0 1.5rem; padding: 1.25rem 1.5rem;
+  background: var(--bg-elevated); border: 1px solid var(--rule);
+}
+.controls-effects h3 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.5rem;
+}
+.controls-effects .lede {
+  margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;
+}
+.controls-effects table {
+  width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.5;
+}
+.controls-effects th, .controls-effects td {
+  text-align: left; padding: 0.55rem 0.6rem; vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+.controls-effects th {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); font-weight: 600;
+  border-bottom: 1px solid var(--text-muted);
+}
+.controls-effects td:first-child {
+  font-family: var(--font-display); color: var(--text-bright); width: 38%;
+}
+.controls-effects td em { color: var(--accent); font-style: normal; font-weight: 500; }
+@media (max-width: 540px) {
+  .controls-effects table, .controls-effects tbody, .controls-effects tr, .controls-effects td { display: block; width: 100%; }
+  .controls-effects thead { display: none; }
+  .controls-effects tr { padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+  .controls-effects td { padding: 0.15rem 0; border: 0; }
+  .controls-effects td:first-child { width: 100%; font-size: 0.95rem; margin-bottom: 0.15rem; }
+  .controls-effects td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+}
+
+/* WIMP-as-shorthand aside (one-line note near mass control) */
+.wimp-aside {
+  margin: 0.6rem 0 0; padding: 0.5rem 0.7rem;
+  background: var(--bg-elevated); border-left: 2px solid var(--accent-soft);
+  font-size: 0.82rem; line-height: 1.5; color: var(--text-muted);
+}
+
+/* Mobile pane labels (visible legend above swipe dots on phones) */
+.pane-legend {
+  display: none; margin: 0.5rem 0 0; font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); text-align: center;
+}
+@media (max-width: 720px) {
+  .pane-legend { display: block; }
+  .pane-legend strong { color: var(--accent); font-weight: 600; }
+}
+
+/* Model & assumptions — collapsible audit-trail accordion */
+.assumptions { margin: 2rem 0 1rem; }
+.assumptions > h3 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+  color: var(--text-bright); margin: 0 0 0.8rem;
+}
+.assumptions details {
+  border-top: 1px solid var(--rule); margin: 0; padding: 0;
+}
+.assumptions details:last-of-type { border-bottom: 1px solid var(--rule); }
+.assumptions summary {
+  cursor: pointer; padding: 0.7rem 0; list-style: none;
+  font-family: var(--font-display); font-size: 1rem; color: var(--text-bright);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.assumptions summary::-webkit-details-marker { display: none; }
+.assumptions summary::before {
+  content: "+"; color: var(--accent); font-family: var(--font-mono);
+  font-weight: 700; width: 1em; display: inline-block;
+}
+.assumptions details[open] summary::before { content: "−"; }
+.assumptions summary:hover, .assumptions summary:focus-visible { color: var(--accent); outline: none; }
+.assumptions summary:focus-visible { box-shadow: 0 0 0 2px var(--accent-soft); border-radius: 2px; }
+.assumptions .assumption-body {
+  padding: 0 0 1rem; font-size: 0.92rem; line-height: 1.6; color: var(--text);
+}
+.assumptions .assumption-body p { margin: 0 0 0.6rem; }
+.assumptions .assumption-body p:last-child { margin-bottom: 0; }
+.assumptions .assumption-body em { font-style: italic; color: var(--accent); }
+.assumptions .assumption-body a { color: var(--accent); }
+
+/* Colour-blind-safe redundancy on red/green semantics:
+   pair the red/green pane labels with shape/character markers. */
+.legend-key { display: inline-flex; align-items: baseline; gap: 0.3rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; }
+.legend-key .swatch { display: inline-block; width: 0.7em; height: 0.7em; border: 1px solid currentColor; }
+.legend-key .swatch.detected { background: rgba(80,130,80,0.35); }
+.legend-key .swatch.lost { background: rgba(180,80,70,0.30); background-image: repeating-linear-gradient(45deg, transparent 0 3px, rgba(0,0,0,0.25) 3px 4px); }
+
+/* Significance-verdict styling in the toy */
+.toy-result .verdict-header { font-weight: 600; color: var(--text-bright); }
+.toy-result .Z-good { color: #4a6b7a; font-weight: 600; }
+.toy-result .Z-discovery { color: var(--accent); font-weight: 700; }
+.toy-result .Z-null { color: var(--text-muted); }
+.toy-result .terms { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.4rem; }
+.toy-result p { margin: 0 0 0.5rem; }
+.toy-result p:last-child { margin-bottom: 0; }
+</style>
+<noscript>
+  <div style="padding:1rem 1.25rem; margin:0 0 2rem; background:#fffaf0; border-left:3px solid #8c3a2b;">
+    <strong>This interactive page needs JavaScript.</strong>
+    The plots, sliders and Poisson toy below all run live in your browser — turn JavaScript on (or open the page in a JS-enabled browser) to use it.
+  </div>
+</noscript>
+
+<aside class="try-panel" aria-labelledby="try-panel-heading">
+  <p class="eyebrow">Start here</p>
+  <h3 id="try-panel-heading">Try these three things first</h3>
+  <ol>
+    <li>Drag the <em>WIMP mass</em> slider down toward 1 GeV — watch the fast-tail of the halo (left plot) shrink as fewer particles can deliver enough energy.</li>
+    <li>With low mass selected, drop the <em>lower energy cutoff</em> from 1 keV toward 0.1 keV — the detected recoil spectrum (middle plot) reappears.</li>
+    <li>Switch the <em>target</em> from xenon to silicon or helium — see why light targets win at low WIMP mass even though they lose the A² coherent boost.</li>
+  </ol>
+</aside>
+
+<div class="explorer-layout">
+  <!-- ───────────────── PLOTS ───────────────── -->
+  <div class="plot-card">
+    <div class="plot-row" id="plot-row" role="region" aria-label="Plots — swipe between velocity distribution, recoil spectrum, and sensitivity on mobile">
+      <svg class="plot-svg pane-svg" id="svg-vel" data-pane="vel" viewBox="0 0 540 560" role="img" aria-labelledby="svg-vel-title svg-vel-desc">
+        <title id="svg-vel-title">Lab-frame halo velocity distribution</title>
+        <desc id="svg-vel-desc">Probability density of dark-matter speeds in the lab frame. The whole distribution is shaded faintly; the portion fast enough to clear the recoil threshold is highlighted in green. A dashed vertical line marks the minimum speed that can produce a detectable recoil at the current mass and threshold.</desc>
+        <g class="grid-layer"></g>
+        <g class="curves-layer"></g>
+        <g class="axes-layer"></g>
+        <g class="labels-layer"></g>
+      </svg>
+      <svg class="plot-svg pane-svg" id="svg-rec" data-pane="rec" viewBox="0 0 540 560" role="img" aria-labelledby="svg-rec-title svg-rec-desc">
+        <title id="svg-rec-title">Nuclear-recoil energy spectrum</title>
+        <desc id="svg-rec-desc">Differential recoil rate dR per dE versus recoil energy on log-log axes. The raw spectrum is a falling curve; below the detector threshold, the lost portion is filled red with hatching, and above threshold the detector-acceptance-weighted detected portion is filled green. A teal dashed curve on the right-hand axis shows the selection-efficiency turn-on.</desc>
+        <g class="grid-layer"></g>
+        <g class="curves-layer"></g>
+        <g class="axes-layer"></g>
+        <g class="labels-layer"></g>
+      </svg>
+      <svg class="plot-svg pane-svg" id="svg-sig" data-pane="sig" viewBox="0 0 540 560" role="img" aria-labelledby="svg-sig-title svg-sig-desc">
+        <title id="svg-sig-title">Spin-independent cross-section versus WIMP mass</title>
+        <desc id="svg-sig-desc">Cross-section in cm-squared on log axes versus WIMP mass from 5 GeV to 10 TeV. Solid reference curves show published 90% C.L. limits for DarkSide-50, LZ and DarkSide-20k; the neutrino fog is the shaded band beneath them. A marker shows the user's current WIMP candidate.</desc>
+        <g class="grid-layer"></g>
+        <g class="curves-layer"></g>
+        <g class="axes-layer"></g>
+        <g class="labels-layer"></g>
+      </svg>
+    </div>
+    <div class="pane-dots" id="pane-dots" aria-hidden="true">
+      <button type="button" class="pane-dot active" data-pane-target="svg-vel" aria-label="Show velocity distribution"></button>
+      <button type="button" class="pane-dot" data-pane-target="svg-rec" aria-label="Show recoil spectrum"></button>
+      <button type="button" class="pane-dot" data-pane-target="svg-sig" aria-label="Show sensitivity curve"></button>
+    </div>
+    <p class="pane-legend" aria-live="polite" id="pane-legend">
+      Swipe: <strong id="pane-legend-name">Velocity distribution</strong> · Recoil spectrum · σ–mass
+    </p>
+    <details class="plot-explain" id="plot-explain-current">
+      <summary>What does this plot show?</summary>
+      <div class="plot-explain-tabs" role="tablist" aria-label="Choose which plot to explain">
+        <button type="button" role="tab" data-pane-explain="svg-vel" class="active" aria-selected="true">Velocity</button>
+        <button type="button" role="tab" data-pane-explain="svg-rec" aria-selected="false">Recoil spectrum</button>
+        <button type="button" role="tab" data-pane-explain="svg-sig" aria-selected="false">σ–mass</button>
+      </div>
+      <div class="drop-body" id="plot-explain-body">
+        <p><strong>Lab-frame velocity distribution.</strong> The probability that a halo particle is moving at a given speed past you on Earth — the rotation of the galaxy plus the Sun's orbit show up as a shifted Maxwellian, cut off at the galactic escape speed. Only particles in the fast tail (highlighted) carry enough energy to produce a recoil above the detector threshold; everything to the left of the dashed line is too slow to register.</p>
+        <p>Drag the WIMP mass slider down and the dashed line moves <em>right</em> — light particles need to be moving faster to deposit the same energy, and there are fewer of them out in the tail. That's the threshold cliff.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── CONTROLS ───────────────── -->
+  <aside class="controls" aria-label="Dark matter and detector parameters">
+
+    <div class="controls-toolbar">
+      <h3>Choose your dark matter &amp; detector</h3>
+      <div class="toolbar-actions">
+        <button type="button" id="btn-mode" class="btn-mode" aria-pressed="false">Advanced mode</button>
+        <button type="button" id="btn-reset" class="btn-reset" aria-label="Reset all controls to defaults">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- WIMP mass -->
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">WIMP mass</span>
+        <span class="value"><span id="mass-value">100</span></span>
+      </div>
+      <input type="range" class="slider" id="mass-slider" min="-1.4" max="4" step="0.01" value="2"
+             aria-label="WIMP mass">
+      <p class="control-note">
+        How heavy each dark-matter particle is. At fixed local density, heavier
+        WIMPs are rarer (fewer per cm³) but each carries more momentum.
+        <em>40 MeV &ndash; 10 TeV</em>
+      </p>
+      <p class="wimp-aside">
+        <em>“WIMP” is used here as shorthand</em> — the slider extends to 40 MeV, well outside the canonical thermal-relic <em>weakly</em>-interacting massive particle range. Below ~1 GeV the page is best read as exploring a generic spin-independent contact-interaction dark-matter particle, not a textbook WIMP.
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>Mass enters in three distinct places: it sets the <em>number density</em> n = ρ/m (so light particles are far more numerous at fixed energy density), the WIMP–nucleus <em>reduced mass</em> μ which controls how much energy each collision can transfer, and the <em>minimum halo speed</em> needed to produce a recoil above threshold (lighter particles need to be moving faster).</p>
+          <p>Cross-section is not in that list — moving mass <em>changes the shape</em> of the recoil spectrum; moving cross-section only changes the vertical scale.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-mass"></div>
+    </div>
+
+    <!-- Cross-section -->
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">WIMP&ndash;nucleon cross-section</span>
+        <span class="value"><span id="xsec-value">10⁻⁴⁵</span> cm²</span>
+      </div>
+      <input type="range" class="slider" id="xsec-slider" min="-49" max="-38" step="0.05" value="-45"
+             aria-label="WIMP-nucleon cross-section in cm squared">
+      <p class="control-note">
+        How likely a single dark-matter particle is to actually strike a nucleus.
+        This scales the whole recoil spectrum vertically &mdash; it doesn't change its shape.
+        <em>Current limits reach ~10⁻⁴⁷ &ndash; 10⁻⁴⁸ cm²</em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>The per-nucleon cross-section is the simplest knob in the model: the entire dR/dE curve moves up or down by the same factor. The shape — set by mass, target and halo — is unchanged.</p>
+          <p>That means cross-section <em>only</em> trades expected events against itself. To gain reach you almost always have to do something harder: lower threshold, more exposure, or change targets.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-xsec"></div>
+    </div>
+
+    <!-- Target -->
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Target nucleus</span>
+        <span class="value" id="target-value">Argon (A=40)</span>
+      </div>
+      <div class="toggle-row" role="radiogroup" aria-label="Target nucleus">
+        <button type="button" data-target="he" role="radio" aria-checked="false">He</button>
+        <button type="button" data-target="si" role="radio" aria-checked="false">Si</button>
+        <button type="button" data-target="ar" class="active" role="radio" aria-checked="true">Ar</button>
+        <button type="button" data-target="ge" role="radio" aria-checked="false">Ge</button>
+        <button type="button" data-target="xe" role="radio" aria-checked="false">Xe</button>
+      </div>
+      <p class="control-note">
+        Heavier nuclei get a stronger <em>A²</em> coherent boost for spin-independent
+        scattering, but a light WIMP can't make a heavy nucleus recoil much &mdash; like
+        a marble hitting a bowling ball. Light targets (He, Si) catch low-mass WIMPs better.
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>Target changes <em>everything</em> about the recoil spectrum: the kinematic ceiling (heavier nuclei accept smaller maximum recoil energies from a light projectile), the coherent A² enhancement (heavier wins for heavy WIMPs), the Helm form factor (heavier nuclei lose coherence faster as recoil energy rises), and the realistic detector acceptance turn-on shape (loaded per target in beginner mode).</p>
+          <p>The "right" target depends on what mass you want to catch. There is no universally best choice — which is why argon, xenon, silicon and germanium experiments coexist.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-target"></div>
+    </div>
+
+    <!-- Recoil threshold -->
+    <div class="control-group">
+      <div class="control-label">
+        <span class="name">Lower energy cutoff</span>
+        <span class="value"><span id="thresh-value">1</span> keV</span>
+      </div>
+      <input type="range" class="slider" id="thresh-slider" min="-1.5" max="1.9" step="0.01" value="0"
+             aria-label="Lower energy cutoff in keV">
+      <p class="control-note">
+        Where the detector's selection efficiency switches on. Below it, nothing is
+        recorded; just above it, acceptance is still climbing (see the ε curve on the
+        plot's right axis). The single sharpest lever on low-mass reach.
+        <em>DS-50 ≈ 13 keV ‖ LZ ≈ 5 keV ‖ cryogenic ≈ 0.05 keV</em>
+      </p>
+      <details class="explainer-drop">
+        <summary>How this control works</summary>
+        <div class="drop-body">
+          <p>The <em>lower energy cutoff</em> is where events first become selectable — efficiency is zero below it. The separate <em>halfway-to-plateau energy</em> (advanced mode) controls how <em>fast</em> the detector then becomes efficient: a lower halfway means a sharper turn-on, a higher one means the detector wakes up gradually. The two together define the shape of the acceptance ε(E) curve you see on the recoil plot.</p>
+          <p>In beginner mode they move together so the per-target acceptance shape stays realistic. Advanced mode lets you separate them, e.g. to model a detector with a soft turn-on tail extending below the nominal threshold.</p>
+        </div>
+      </details>
+      <div class="ctx-note" id="ctx-thresh"></div>
+    </div>
+
+    <!-- Halfway-to-plateau energy (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Halfway-to-plateau energy</span>
+        <span class="value"><span id="effhalf-value">8</span> keV</span>
+      </div>
+      <input type="range" class="slider" id="effhalf-slider" min="-1.3" max="2.0" step="0.01" value="0.9"
+             aria-label="Energy at which acceptance reaches half its plateau">
+      <p class="control-note">
+        Energy at which the acceptance reaches half its plateau — it sets how
+        gradually the turn-on rises from the cutoff. Must stay above the cutoff.
+        <em>Selecting a target loads its real turn-on; drag to explore.</em>
+      </p>
+      <div class="ctx-note" id="ctx-effhalf"></div>
+    </div>
+
+    <!-- Plateau efficiency (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Plateau efficiency</span>
+        <span class="value"><span id="effplat-value">90</span> %</span>
+      </div>
+      <input type="range" class="slider" id="effplat-slider" min="0" max="1" step="0.01" value="0.9"
+             aria-label="Maximum plateau selection efficiency">
+      <p class="control-note">
+        The best acceptance the detector ever reaches, well above the turn-on.
+        Cuts, fiducialisation and reconstruction losses keep this below 100%.
+        <em>Xenon TPCs ≈ 90% ‖ argon (DS-50-style) ≈ 30%</em>
+      </p>
+      <div class="ctx-note" id="ctx-effplat"></div>
+    </div>
+
+    <!-- Exposure (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Exposure</span>
+        <span class="value"><span id="exp-value">1</span> t·yr</span>
+      </div>
+      <input type="range" class="slider" id="exp-slider" min="-2" max="3.5" step="0.02" value="0"
+             aria-label="Exposure in tonne-years">
+      <p class="control-note">
+        Detector mass × running time. Sets how many recoils you expect to count.
+        <em>DS-50 ≈ 0.05 t·yr ‖ LZ ≈ 4.2 t·yr ‖ DS-20k ≈ 200 t·yr</em>
+      </p>
+      <div class="ctx-note" id="ctx-exp"></div>
+    </div>
+
+    <!-- Background (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Background rate</span>
+        <span class="value"><span id="bg-value">0.1</span> /(keV·t·yr)</span>
+      </div>
+      <input type="range" class="slider" id="bg-slider" min="-5" max="3" step="0.05" value="-1"
+             aria-label="Background rate in counts per keV per tonne per year">
+      <p class="control-note">
+        Events that look like a WIMP recoil but aren't &mdash; radio-impurities,
+        neutrons, neutrinos. Feeds the "run the experiment" toy below.
+      </p>
+      <div class="ctx-note" id="ctx-bg"></div>
+    </div>
+
+    <!-- Local density (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Local dark-matter density</span>
+        <span class="value"><span id="rho-value">0.3</span> GeV/cm³</span>
+      </div>
+      <input type="range" class="slider" id="rho-slider" min="0.1" max="0.6" step="0.01" value="0.3"
+             aria-label="Local dark matter density in GeV per cm cubed">
+      <p class="control-note">
+        The mass of dark matter per cm³ near the Sun. Number density follows as
+        <em>n = ρ / m</em>, so this sets the flux. <em>Measured ≈ 0.3–0.4 GeV/cm³</em>
+      </p>
+      <div class="ctx-note" id="ctx-rho"></div>
+    </div>
+
+    <!-- Mean speed v0 (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Halo speed (v₀)</span>
+        <span class="value"><span id="v0-value">220</span> km/s</span>
+      </div>
+      <input type="range" class="slider" id="v0-slider" min="180" max="280" step="1" value="220"
+             aria-label="Halo characteristic speed v0 in km per second">
+      <p class="control-note">
+        The width of the Maxwell-Boltzmann speed distribution (the rotation speed of the
+        galaxy here). Faster WIMPs carry more energy, raising the recoil tail.
+      </p>
+      <div class="ctx-note" id="ctx-v0"></div>
+    </div>
+
+    <!-- Escape velocity (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Galactic escape speed</span>
+        <span class="value"><span id="vesc-value">544</span> km/s</span>
+      </div>
+      <input type="range" class="slider" id="vesc-slider" min="450" max="650" step="2" value="544"
+             aria-label="Galactic escape velocity in km per second">
+      <p class="control-note">
+        The fastest a bound WIMP can move &mdash; the distribution is cut off here.
+        It sets the highest recoil energy possible at a given mass.
+      </p>
+      <div class="ctx-note" id="ctx-vesc"></div>
+    </div>
+
+    <!-- Form factor toggle (advanced) -->
+    <div class="control-group adv-only">
+      <div class="control-label">
+        <span class="name">Nuclear structure</span>
+        <span class="value" id="ff-value">On</span>
+      </div>
+      <div class="toggle-row" role="radiogroup" aria-label="Helm form factor">
+        <button type="button" data-ff="on" class="active" role="radio" aria-checked="true">Helm form factor</button>
+        <button type="button" data-ff="off" role="radio" aria-checked="false">Point nucleus</button>
+      </div>
+      <p class="control-note">
+        At high recoil energy the WIMP's de Broglie wavelength resolves the nucleus, so the
+        coherent <em>A²</em> enhancement fades (the Helm form factor). Turn it off to see the
+        idealised point-nucleus spectrum.
+      </p>
+      <div class="ctx-note" id="ctx-ff"></div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ───────────────── FLUX READOUT (the headline) ───────────────── -->
+<div class="flux-panel" role="status" aria-live="polite" aria-atomic="false">
+  <p class="flux-eyebrow">How much is passing through you</p>
+  <p class="flux-big" id="flux-big">Loading…</p>
+  <p class="flux-sub" id="flux-sub"></p>
+</div>
+
+<!-- ───────────────── LIVE READOUT CHIPS ───────────────── -->
+<div class="readout-row" id="readout-row" aria-live="polite" aria-atomic="false">
+  <div class="readout-chip">
+    <p class="chip-label">Number density</p>
+    <p class="chip-value" id="chip-ndens">—</p>
+  </div>
+  <div class="readout-chip">
+    <p class="chip-label">Reduced mass μ</p>
+    <p class="chip-value" id="chip-mu">—</p>
+  </div>
+  <div class="readout-chip">
+    <p class="chip-label">Max recoil energy</p>
+    <p class="chip-value" id="chip-emax">—</p>
+  </div>
+  <div class="readout-chip">
+    <p class="chip-label">Recoils detected (acceptance-weighted)</p>
+    <p class="chip-value" id="chip-frac">—</p>
+  </div>
+</div>
+
+<!-- ───────────────── MASS-MATCHING METER ───────────────── -->
+<div class="readout-chip" style="margin: 0 0 2rem;">
+  <p class="chip-label">Mass matching — WIMP vs nucleus</p>
+  <div class="match-meter">
+    <div class="match-bar"><div class="match-fill" id="match-fill" style="width: 50%;"></div></div>
+    <p class="match-caption" id="match-caption">—</p>
+  </div>
+</div>
+
+<!-- ───────────────── DIAGNOSTIC / STATUS ───────────────── -->
+<div class="status-panel" id="status-panel" role="status" aria-live="polite" aria-atomic="false">
+  <p class="status-eyebrow">Would this detector see it?</p>
+  <p class="status-text" id="status-text">Loading…</p>
+  <ul class="diag-list" id="diag-list"></ul>
+</div>
+
+<!-- ───────────────── CONTROLS-EFFECTS CROSS-REFERENCE ───────────────── -->
+<section class="controls-effects" aria-labelledby="controls-effects-h">
+  <h3 id="controls-effects-h">What each control changes</h3>
+  <p class="lede">A glance-table connecting the sliders to the physics. The shape of the recoil spectrum is set by mass, target and halo; cross-section is just a vertical scale. Threshold and exposure act on the detected counts, not the underlying spectrum.</p>
+  <table>
+    <thead><tr><th scope="col">Control</th><th scope="col">What it changes</th></tr></thead>
+    <tbody>
+      <tr><td>WIMP mass</td><td><em>Spectrum shape:</em> kinematic ceiling, peak position, low-energy fall-off. Plus the flux per kg of dark matter.</td></tr>
+      <tr><td>Cross-section</td><td><em>Vertical scaling only.</em> Up or down by the same factor at every energy — never the shape.</td></tr>
+      <tr><td>Target nucleus</td><td><em>Everything kinematic:</em> the A² coherent boost, the form-factor falloff, the maximum recoil energy, and the realistic acceptance turn-on shape.</td></tr>
+      <tr><td>Recoil threshold</td><td><em>The detected fraction only.</em> The underlying spectrum is unchanged; the threshold just decides where ε(E) switches on.</td></tr>
+      <tr><td>Exposure (advanced)</td><td><em>Counts only.</em> Total events scale linearly. Background and statistical noise scale with it too — see the toy below.</td></tr>
+      <tr><td>Background (advanced)</td><td><em>Discovery significance only.</em> Doesn't change signal at all; only how easy the signal is to <em>see</em> against noise.</td></tr>
+      <tr><td>Local density ρ (advanced)</td><td><em>Overall normalisation:</em> sets flux and rate. Doesn't affect spectrum <em>shape</em> at all.</td></tr>
+      <tr><td>Halo speeds v₀, v_esc (advanced)</td><td><em>Spectrum shape at the tail.</em> Faster halo widens the velocity distribution, fattens the recoil tail, and raises the kinematic ceiling.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ───────────────── POISSON TOY ───────────────── -->
+<div class="toy-panel">
+  <h3>Run the experiment</h3>
+  <p class="toy-expect" id="toy-expect" aria-live="polite" aria-atomic="true">—</p>
+  <details class="explainer-drop" style="margin-bottom: 0.8rem;">
+    <summary>What does 3σ / 5σ mean?</summary>
+    <div class="drop-body">
+      <p><em>Significance Z</em> measures how far the observed event count sits above what background alone would produce, in units of the background's own statistical noise: Z = (N<sub>obs</sub> − N<sub>bg</sub>) / √N<sub>bg</sub>. The bigger Z, the harder the observation is to explain as a fluctuation.</p>
+      <p>Particle physics uses two conventions: <em>Z ≥ 3σ</em> ("evidence" — roughly a 1-in-740 fluctuation, looking only at this measurement) and <em>Z ≥ 5σ</em> ("discovery" — roughly 1-in-3.5 million). Even a 5σ excess is only saying <em>something</em> is producing events beyond background. Telling a WIMP from a mis-modelled background or another rare process needs the recoil <em>energy spectrum</em> to match the prediction, and ideally a second independent experiment.</p>
+    </div>
+  </details>
+  <div class="toy-actions">
+    <button type="button" class="toy-btn" id="toy-run">Run once</button>
+    <button type="button" class="toy-btn secondary" id="toy-run100">Run 100×</button>
+  </div>
+  <div class="toy-result" id="toy-result" aria-live="polite" aria-atomic="true"><p>Press <em>Run once</em> to draw one experiment with this exposure.</p></div>
+  <div class="toy-hist" id="toy-hist" style="display:none;" aria-hidden="true"></div>
+  <div class="toy-hist-labels" id="toy-hist-labels" style="display:none;" aria-hidden="true"></div>
+</div>
+
+<!-- ───────────────── PRESETS ───────────────── -->
+<div class="presets">
+  <h3>Jump to a scenario</h3>
+  <div class="preset-grid">
+    <button type="button" class="preset-btn" data-preset="classic">
+      Classic WIMP
+      <span class="preset-sub">100 GeV · xenon · the textbook case</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="lowmass">
+      Low-mass WIMP
+      <span class="preset-sub">1 GeV · silicon · low threshold</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="heavy">
+      Heavy WIMP
+      <span class="preset-sub">5 TeV · xenon · big exposure</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="mismatch">
+      Too light for xenon
+      <span class="preset-sub">2 GeV · xenon · watch it vanish</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="cliff">
+      Below threshold
+      <span class="preset-sub">5 GeV · argon · threshold too high</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="darkside">
+      DarkSide-like
+      <span class="preset-sub">Argon · low threshold · deep</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="lz">
+      LZ-like
+      <span class="preset-sub">Xenon · 4 t·yr · classic WIMP reach</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="nufog">
+      Near the ν-fog
+      <span class="preset-sub">Quiet Xe · 30 GeV · σ at ~ν-floor</span>
+    </button>
+  </div>
+</div>
+
+<!-- ───────────────── SIBLING LINK ───────────────── -->
+<a class="sibling-link" href="{{ '/research/dark-matter/sensitivity-explorer/' | relative_url }}">
+  <p class="eyebrow">Companion tool</p>
+  <strong>How do we hunt for dark matter? &rarr;</strong>
+  <p>This page shows what <em>arrives</em>. The sensitivity explorer shows how deep a detector can reach — slide thresholds, exposure, background and depth against the world's leading limits.</p>
+</a>
+
+<!-- ───────────────── EDITORIAL EXPLAINERS ───────────────── -->
+<h2 class="heading">The story in six parts</h2>
+
+<div class="explainer-grid">
+  <div class="explainer-cell">
+    <h4><span>01</span>An enormous flux</h4>
+    <p>
+      With the local density fixed at ~0.3 GeV/cm³, a light WIMP means
+      <em>billions</em> of particles streaming through your hand every second. The
+      challenge was never getting dark matter into the detector — it's already
+      everywhere — it's getting one particle to interact.
+    </p>
+  </div>
+  <div class="explainer-cell">
+    <h4><span>02</span>Only the fast tail counts</h4>
+    <p>
+      The velocity-distribution plot shades the part of the halo fast enough to
+      produce a recoil above your threshold. Raise the threshold or lower the WIMP
+      mass and that shaded sliver shrinks — sometimes to nothing. That is why
+      low-mass dark matter is so hard.
+    </p>
+  </div>
+  <div class="explainer-cell">
+    <h4><span>03</span>The recoil spectrum</h4>
+    <p>
+      The central plot is the energy spectrum of nuclear recoils, dR/dE. It falls
+      steeply — most recoils are soft. The grey region sits below threshold and is
+      invisible; the cross-section slider scales the whole curve up and down without
+      changing its shape.
+    </p>
+  </div>
+  <div class="explainer-cell">
+    <h4><span>04</span>Mass matching</h4>
+    <p>
+      Energy transfer is governed by the WIMP–nucleus reduced mass. A light WIMP
+      barely nudges a heavy xenon nucleus; a heavy WIMP can recoil anything. The
+      mass-matching meter shows how well your WIMP and target are tuned to each other.
+    </p>
+  </div>
+  <div class="explainer-cell">
+    <h4><span>05</span>S1, S2 and what a detector records</h4>
+    <p>
+      A nucleus struck by a WIMP recoils and deposits energy. How that energy is
+      <em>read out</em> depends on the detector: a dual-phase argon or xenon TPC sees
+      prompt scintillation (S1) and delayed ionisation (S2), and their ratio
+      separates nuclear from electron recoils; cryogenic germanium and silicon read
+      phonons plus ionisation instead. The recoil spectrum is the same physics —
+      the signatures differ by technology.
+    </p>
+  </div>
+  <div class="explainer-cell">
+    <h4><span>06</span>One event isn't a discovery</h4>
+    <p>
+      Press <em>Run the experiment</em> and the expected counts become a random
+      Poisson draw of signal and background. Run it a hundred times and watch the
+      spread. A single event proves nothing — that statistical fluctuation is why
+      claiming a discovery takes far more than seeing one recoil.
+    </p>
+  </div>
+</div>
+
+<section class="assumptions" aria-labelledby="assumptions-h">
+  <h3 id="assumptions-h">Model &amp; assumptions</h3>
+
+  <details>
+    <summary>Physics model used</summary>
+    <div class="assumption-body">
+      <p>Calculations use the Standard Halo Model (a truncated Maxwell-Boltzmann speed distribution with the Earth's motion through the halo and a galactic escape cut-off), Helm nuclear form factors, and standard spin-independent WIMP–nucleus recoil kinematics. The same engine drives the companion sensitivity explorer, so the two pages stay physically consistent.</p>
+      <p>The differential rate dR/dE, the flux, the number density n = ρ/m, the maximum recoil energy and the acceptance-weighted detected fraction are all computed live from the slider values.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Detector acceptance ε(E)</summary>
+    <div class="assumption-body">
+      <p>Each target carries a selection-efficiency turn-on ε(E): zero below a lower cutoff, rising through a halfway energy as a smooth error-function (erf), and flattening to a plateau — the three numbers advanced mode exposes. This is what stops the model from over-counting the soft recoils a real detector never actually selects.</p>
+      <p>The per-target baselines load automatically in beginner mode (xenon ≈ LZ-like, argon ≈ DarkSide-50-like and reused for DarkSide-20k, He/Si/Ge as cryogenic-style sharp turn-ons). Advanced mode lets you separate cutoff, halfway energy and plateau to study how a soft turn-on tail or a low plateau affect reach.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Normalisation: semi-empirical, not first-principles</summary>
+    <div class="assumption-body">
+      <p>The <em>spectral shape</em> dR/dE is computed from standard recoil kinematics and halo assumptions. The <em>absolute normalisation</em> is a calibrated constant (<em>K_RATE</em> in the code), anchored so that an LZ-like configuration on xenon recovers the published 2.1×10⁻⁴⁸ cm² minimum at 40 GeV (<a href="https://arxiv.org/abs/2410.17036">arXiv:2410.17036</a>, 4.2 t·yr). Per-target acceptance baselines are tuned in the same spirit.</p>
+      <p>This is therefore a <em>semi-empirical</em> rate engine, not an independent absolute-rate calculation. Absolute event counts should be read as pedagogical scale estimates. With those anchors in place, the model's recovered 90% C.L. cross-section tracks published limits at key masses: LZ within a factor of 2.3× from 10 GeV to 1 TeV, DarkSide-20k within 1.4× of its projection, and DarkSide-50 within ~2×. Exposure, threshold and target scalings all reproduce the expected trends (limit ∝ 1/exposure when background-free, the low-mass threshold cliff, the A² and light-target preferences).</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>What this does <em>not</em> include</summary>
+    <div class="assumption-body">
+      <p>The page models a single <em>spin-independent contact interaction</em>. Spin-dependent, light-mediator, momentum- or velocity-suppressed operators all give different recoil-spectrum shapes for the same nominal cross-section and are out of scope here.</p>
+      <p>The recoil pane shows the <em>true</em> recoil-energy spectrum convolved with detector acceptance, but not with energy resolution. The "Run the experiment" toy treats signal and background as Poisson counts in one energy bin — i.e. it ignores spectral-shape information that a real analysis would use to separate signal from background. Profile-likelihood, S2-only / Migdal channels and annual modulation are also outside scope; the sensitivity explorer covers the first two.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Why real analyses differ from this counting model</summary>
+    <div class="assumption-body">
+      <p>Published limits and projections use shape-likelihood fits that exploit the full predicted dR/dE versus a background model with its own spectral shape — that distinguishes signal from background <em>per event</em>, not just by counting. At the DS-20k preset the counting model here sits within a factor of ~1.4× of the published projection at high mass; at sub-GeV mass in dedicated S2-only / Migdal analyses the gap can be larger because shape information becomes very powerful.</p>
+      <p>The qualitative lessons this page is built to convey — the huge flux, the steep recoil spectrum, the acceptance turn-on, the threshold cliff, WIMP–nucleus mass matching, and the role of statistical fluctuation — are robust to these refinements.</p>
+    </div>
+  </details>
+</section>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════════
+   WHAT DOES DARK MATTER LOOK LIKE IN A DETECTOR?
+   Physics: Standard Halo Model + Helm form factor + truncated MB velocity
+   integral + SI WIMP-nucleus recoil kinematics. Shares the engine with the
+   sensitivity explorer so the two pages stay physically consistent.
+   ════════════════════════════════════════════════════════════════════════ */
+
+// ── Physical constants ─────────────────────────────────────────────────
+const C_KMS   = 299792.458;   // km/s
+const M_NUC   = 0.9315;       // GeV — average nucleon mass
+const HBARC   = 0.197327;     // GeV·fm
+const VEARTH  = 232;          // km/s — Earth speed through the halo
+const AVOGADRO = 6.02214e23;
+
+// ── Targets ─────────────────────────────────────────────────────────────
+// A = mass number, label for display, molar mass g/mol for density-to-number.
+const TARGETS = {
+  he: { A: 4,   sym: "He", name: "Helium",    molar: 4.0,   readout: "phonon / scintillation" },
+  si: { A: 28,  sym: "Si", name: "Silicon",   molar: 28.1,  readout: "phonons + ionisation (cryogenic)" },
+  ar: { A: 40,  sym: "Ar", name: "Argon",     molar: 40.0,  readout: "S1 scintillation + S2 ionisation (dual-phase TPC)" },
+  ge: { A: 73,  sym: "Ge", name: "Germanium", molar: 72.6,  readout: "phonons + ionisation (cryogenic)" },
+  xe: { A: 131, sym: "Xe", name: "Xenon",     molar: 131.3, readout: "S1 scintillation + S2 ionisation (dual-phase TPC)" }
+};
+
+// ── Math helpers ──────────────────────────────────────────────────────
+function erf(x) {
+  const sign = Math.sign(x);
+  x = Math.abs(x);
+  const a1=0.254829592, a2=-0.284496736, a3=1.421413741,
+        a4=-1.453152027, a5=1.061405429, p=0.3275911;
+  const t = 1 / (1 + p*x);
+  const y = 1 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t * Math.exp(-x*x);
+  return sign * y;
+}
+
+// ── Helm form factor (squared). ff=false returns 1 (point nucleus). ─────
+function helmF2(ER_keV, A, useFF) {
+  if (!useFF) return 1;
+  if (ER_keV <= 0) return 1;
+  const ER_GeV = ER_keV * 1e-6;
+  const MN = A * M_NUC;
+  const q  = Math.sqrt(2 * MN * ER_GeV);
+  const qfm = q / HBARC;
+  const s = 0.9, a = 0.52;
+  const cp = 1.23 * Math.pow(A, 1/3) - 0.6;
+  const R1 = Math.sqrt(cp*cp + (7/3)*Math.PI*Math.PI*a*a - 5*s*s);
+  const x = qfm * R1;
+  if (x < 1e-4) return 1;
+  const j1 = (Math.sin(x) - x*Math.cos(x)) / (x*x);
+  const F = 3 * j1 / x * Math.exp(-(qfm*s)*(qfm*s)/2);
+  return F*F;
+}
+
+// ── v_min(E_R) in km/s — min WIMP speed to make recoil E_R ──────────────
+function vMin(ER_keV, Mchi, A) {
+  const MN  = A * M_NUC;
+  const mu  = Mchi * MN / (Mchi + MN);
+  const ER  = ER_keV * 1e-6;
+  return Math.sqrt(MN * ER / (2 * mu * mu)) * C_KMS;
+}
+
+// ── Truncated Maxwell-Boltzmann velocity integral g(v_min) = ⟨1/v⟩ above
+//    v_min, in (km/s)⁻¹, with Earth motion + escape cut. Now parameterised
+//    by v0 and vesc (halo sliders). ────────────────────────────────────
+function gOfVmin(vmin, v0, vesc) {
+  const x = vmin   / v0;
+  const y = VEARTH / v0;
+  const z = vesc   / v0;
+  const Nesc = erf(z) - 2/Math.sqrt(Math.PI) * z * Math.exp(-z*z);
+  if (x >= z + y) return 0;
+  const sqrtPi = Math.sqrt(Math.PI);
+  let res;
+  if (x < z - y) {
+    res = 1/(2*y*v0) * (erf(x + y) - erf(x - y)) - 2/(sqrtPi * v0) * Math.exp(-z*z);
+  } else {
+    res = 1/(2*y*v0) * (erf(z) - erf(x - y)) - (z + y - x)/(sqrtPi * y * v0) * Math.exp(-z*z);
+  }
+  if (!isFinite(res) || res < 0) return 0;
+  return res / Nesc;
+}
+
+// ── Lab-frame speed distribution f(v) (for the velocity histogram) ──────
+// Shifted, escape-truncated Maxwellian, integrated over angles:
+//   f(v) ∝ v/(v0·vE) · [exp(-(v-vE)²/v0²) - exp(-(v+vE)²/v0²)]  for v<vesc+vE,
+// with a flat exp(-vesc²/v0²) subtraction near the cutoff. We use the
+// standard Lewin-Smith truncated form, returns an UN-normalised shape.
+function fLab(v, v0, vesc, vE) {
+  if (v <= 0) return 0;
+  const vmax = vesc + vE;
+  if (v >= vmax) return 0;
+  const term1 = Math.exp(-((v - vE)*(v - vE)) / (v0*v0));
+  const term2 = Math.exp(-((v + vE)*(v + vE)) / (v0*v0));
+  let shape;
+  if (v < vesc - vE) {
+    shape = term1 - term2;
+  } else {
+    // near the truncation edge: subtract the constant escape pedestal
+    const peda = Math.exp(-(vesc*vesc)/(v0*v0));
+    shape = term1 - peda;
+  }
+  shape = Math.max(0, shape);
+  return (v / (v0 * vE)) * shape;
+}
+
+// ── Differential recoil rate shape dR/dE_R ──────────────────────────────
+// Returns events /(keV·kg·yr) per unit σ_n[cm²], given local density rho,
+// halo params, target A, and form-factor flag. Standard spin-independent
+// rate: dR/dE ∝ (ρ/Mχ) · σ_n · A² · F²(E) / μ_n² · ⟨1/v⟩, with the nucleus
+// entering only through A², F², and v_min(E; Mχ, m_N) — NOT an extra μ_N².
+// K_RATE folds the unit bookkeeping; it is fixed by anchoring the recovered
+// LZ 90% CL limit to its published minimum (2.1×10⁻⁴⁸ cm² at 40 GeV).
+const K_RATE = 20.0;   // anchored so LZ-config recovers 2.1e-48 @ 40 GeV (see validation)
+
+function dRdER(ER_keV, Mchi, A, rho, v0, vesc, sigma_n, useFF) {
+  const mu_n = Mchi * M_NUC / (Mchi + M_NUC);
+  const F2   = helmF2(ER_keV, A, useFF);
+  const g    = gOfVmin(vMin(ER_keV, Mchi, A), v0, vesc);     // (km/s)⁻¹
+  const kin  = (A*A) * F2 / (mu_n*mu_n);
+  // The trailing /A is the per-detector-mass conversion: there are
+  // N_T = N_A / (A · m_u) target nuclei per kg of detector, so heavier
+  // nuclei mean *fewer* nuclei per kg. With the A² coherent enhancement,
+  // the rate per kg of detector mass scales as A·F²/μ_n² overall —
+  // the /A here is the molar-mass weighting, absorbed into K_RATE's
+  // empirical normalisation. NOT a stray divisor.
+  return K_RATE * (rho / Mchi) * (sigma_n / 1e-45) * kin * g / A;
+}
+
+// ── Selection / acceptance efficiency ε(E) ──────────────────────────────
+// Smooth erf turn-on: zero below the lower cutoff `start`, ε = plateau/2
+// at `half`, approaching `plateau` cleanly within a few σ above. Width set
+// by the gap, so (start, half, plateau) fully define the shape. erf (vs
+// arctan) drops to near-zero by `start` and reaches plateau without the
+// long heavy tail, which matches published NR acceptance shapes better
+// and renders sharply on the log-E recoil axis.
+function efficiency(E, start, half, plateau) {
+  if (E <= start) return 0;
+  const sigma = Math.max(1e-4, (half - start) / 2.5);
+  const v = plateau * 0.5 * (1 + erf((E - half) / (Math.SQRT2 * sigma)));
+  return Math.max(0, Math.min(plateau, v));
+}
+
+// ── Per-target acceptance baselines (keVnr) and analysis ROI upper bound ──
+// Validated so the recovered 90% CL limits track published curves at key
+// masses (LZ, DarkSide-50, DarkSide-20k). Argon uses a DarkSide-50-shaped
+// acceptance (high threshold, modest plateau), reused for DS-20k per spec.
+const TARGET_EFF = {
+  he: { start: 0.02, half: 0.10, plateau: 0.80 },
+  si: { start: 0.04, half: 0.20, plateau: 0.85 },
+  ar: { start: 13.0, half: 60.0, plateau: 0.30 },
+  ge: { start: 0.05, half: 0.30, plateau: 0.88 },
+  xe: { start: 5.0,  half: 8.0,  plateau: 0.90 }
+};
+const ROI_HI = { he: 30, si: 25, ar: 100, ge: 50, xe: 55 };  // keVnr analysis upper bound
+
+// ── Integrate the recoil rate between [Elo, Ehi] (events/kg/yr per setup) ─
+// If `eff` ({start,half,plateau}) is supplied, the integrand is weighted by
+// the acceptance ε(E); pass null for the raw (true) recoil rate.
+function rateBetween(Mchi, A, rho, v0, vesc, sigma_n, useFF, Elo, Ehi, eff) {
+  if (Elo <= 0 || Ehi <= Elo) return 0;
+  const N = 180;
+  const logLo = Math.log(Elo), logHi = Math.log(Ehi);
+  const dlog = (logHi - logLo) / N;
+  const wOf = (E) => eff ? efficiency(E, eff.start, eff.half, eff.plateau) : 1;
+  let sum = 0;
+  let prevE = Elo;
+  let prev = dRdER(Elo, Mchi, A, rho, v0, vesc, sigma_n, useFF) * wOf(Elo);
+  for (let i = 1; i <= N; i++) {
+    const E = Math.exp(logLo + i * dlog);
+    const curr = dRdER(E, Mchi, A, rho, v0, vesc, sigma_n, useFF) * wOf(E);
+    sum += 0.5 * (prev + curr) * (E - prevE);
+    prev = curr; prevE = E;
+  }
+  return sum;
+}
+
+// ── Maximum recoil energy (head-on, fastest bound WIMP) in keV ──────────
+function maxRecoil(Mchi, A, vesc) {
+  const MN  = A * M_NUC;
+  const mu  = Mchi * MN / (Mchi + MN);
+  const vmax = (vesc + VEARTH) / C_KMS;        // dimensionless β
+  const ER_GeV = 2 * mu * mu * vmax * vmax / MN;
+  return ER_GeV * 1e6;                          // keV
+}
+
+// ── Number density n = rho/Mchi (particles / cm³) ───────────────────────
+function numberDensity(rho, Mchi) { return rho / Mchi; }
+
+// ── Flux through an area A_cm2 (cm²): n · v̄ · A  particles / s ──────────
+// Mean speed in the lab ≈ sqrt(v0² + ... ); use a representative mean.
+function fluxThrough(rho, Mchi, v0, A_cm2) {
+  const n = numberDensity(rho, Mchi);            // /cm³
+  const vbar_cms = (v0 + 0.0) * 1e5 * 1.15;      // km/s → cm/s, ×~mean factor
+  return n * vbar_cms * A_cm2;                    // particles / s
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════════════════
+// Eth is the lower energy cutoff (= efficiency `start`); effHalf is the
+// halfway-to-plateau energy; effPlateau is the maximum plateau acceptance.
+const DEFAULTS = {
+  Mchi: 100, sigma_n: 1e-45, target: "ar", Eth: 13.0,
+  effHalf: 60.0, effPlateau: 0.30,
+  exposure: 1.0, bg: 0.1, rho: 0.3, v0: 220, vesc: 544, useFF: true
+};
+const state = Object.assign({}, DEFAULTS);
+let advMode = false;
+
+const EFF_MARGIN = 1.15;   // effHalf must sit at least this × above the cutoff
+
+// Load the selected target's published-style acceptance baseline into state
+// (lower cutoff, halfway energy, plateau). Called on target change / reset.
+function loadTargetBaseline(s) {
+  const b = TARGET_EFF[s.target] || TARGET_EFF.xe;
+  s.Eth = b.start;
+  s.effHalf = Math.max(b.half, s.Eth * EFF_MARGIN);
+  s.effPlateau = b.plateau;
+}
+
+// Current efficiency descriptor from live state.
+function effOf(s) { return { start: s.Eth, half: s.effHalf, plateau: s.effPlateau }; }
+
+// ── Slider <-> physical mappings (log where noted) ──────────────────────
+function massFromSlider(v)  { return Math.pow(10, parseFloat(v)); }
+function massToSlider(x)     { return Math.log10(x); }
+function xsecFromSlider(v)  { return Math.pow(10, parseFloat(v)); }
+function xsecToSlider(x)     { return Math.log10(x); }
+function ethFromSlider(v)   { return Math.pow(10, parseFloat(v)); }
+function ethToSlider(x)      { return Math.log10(x); }
+function expFromSlider(v)   { return Math.pow(10, parseFloat(v)); }
+function expToSlider(x)      { return Math.log10(x); }
+function bgFromSlider(v)    { return Math.pow(10, parseFloat(v)); }
+function bgToSlider(x)       { return Math.log10(x); }
+
+// ── Formatting helpers ──────────────────────────────────────────────────
+function fmtMass(x) {
+  if (x >= 1000) return (x/1000).toFixed(x >= 10000 ? 0 : 1) + " TeV";
+  if (x >= 10)   return x.toFixed(0) + " GeV";
+  if (x >= 1)    return x.toFixed(1) + " GeV";
+  return (x * 1000).toFixed(0) + " MeV";
+}
+function fmtSci(x) {
+  if (x === 0) return "0";
+  if (!isFinite(x)) return "∞";
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  const m = x / Math.pow(10, e);
+  const sup = supScript(e);
+  const mant = (Math.abs(m - 1) < 0.05) ? "" : m.toFixed(1) + "×";
+  return mant + "10" + sup;
+}
+function supScript(e) {
+  const map = {"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+  return String(e).split("").map(c => map[c] || c).join("");
+}
+function fmtBigCount(x) {
+  // Human-friendly large-number phrasing
+  if (x >= 1e12) return (x/1e12).toFixed(1) + " trillion";
+  if (x >= 1e9)  return (x/1e9).toFixed(1) + " billion";
+  if (x >= 1e6)  return (x/1e6).toFixed(1) + " million";
+  if (x >= 1e3)  return (x/1e3).toFixed(1) + " thousand";
+  if (x >= 1)    return x.toFixed(x < 10 ? 1 : 0);
+  return x.toPrecision(2);
+}
+function fmtEnergy(x) {
+  if (x >= 1000) return (x/1000).toFixed(1) + " MeV";
+  if (x >= 1)    return x.toFixed(1) + " keV";
+  if (x >= 0.001) return (x*1000).toFixed(0) + " eV";
+  return x.toExponential(1) + " keV";
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// PLOT GEOMETRY
+// ════════════════════════════════════════════════════════════════════════
+const PLOT = { x: 78, y: 56, w: 432, h: 430 };   // inner plot box, shared
+
+function svgEl(id) { return document.getElementById(id); }
+function layerOf(svgId, cls) { return document.querySelector("#" + svgId + " ." + cls); }
+
+// Linear x mapping for velocity pane; log for recoil & sigma panes.
+function xLin(vmin, vmax, val) {
+  const t = (val - vmin) / (vmax - vmin);
+  return PLOT.x + t * PLOT.w;
+}
+function xLog(lo, hi, val) {
+  const t = (Math.log10(val) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo));
+  return PLOT.x + t * PLOT.w;
+}
+function yLin(lo, hi, val) {
+  const t = (val - lo) / (hi - lo);
+  return PLOT.y + PLOT.h - t * PLOT.h;
+}
+function yLog(lo, hi, val) {
+  if (val <= 0) return PLOT.y + PLOT.h + 50;
+  const t = (Math.log10(val) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo));
+  return PLOT.y + PLOT.h - t * PLOT.h;
+}
+
+// ─── Generic axis frame drawing ───
+function frameSVG(opts) {
+  // opts: {title, subtitle, xlabel, ylabel, xticks:[{v,label}], yticks:[{v,label}]}
+  const px0 = PLOT.x, py0 = PLOT.y, px1 = PLOT.x + PLOT.w, py1 = PLOT.y + PLOT.h;
+  let g = "", a = "", l = "";
+  for (const xt of opts.xticks) {
+    g += `<line class="grid-major" x1="${xt.x}" y1="${py0}" x2="${xt.x}" y2="${py1}" />`;
+    a += `<line class="tick" x1="${xt.x}" y1="${py1}" x2="${xt.x}" y2="${py1+5}" />`;
+    l += `<text class="axis-label" x="${xt.x}" y="${py1+22}" text-anchor="middle">${xt.label}</text>`;
+  }
+  for (const yt of opts.yticks) {
+    g += `<line class="grid-major" x1="${px0}" y1="${yt.y}" x2="${px1}" y2="${yt.y}" />`;
+    a += `<line class="tick" x1="${px0-5}" y1="${yt.y}" x2="${px0}" y2="${yt.y}" />`;
+    l += `<text class="axis-label" x="${px0-9}" y="${yt.y+5}" text-anchor="end">${yt.label}</text>`;
+  }
+  a += `<line class="axis" x1="${px0}" y1="${py1}" x2="${px1}" y2="${py1}" />`;
+  a += `<line class="axis" x1="${px0}" y1="${py0}" x2="${px0}" y2="${py1}" />`;
+  l += `<text class="pane-title" x="${px0}" y="${py0-28}">${opts.title}</text>`;
+  l += `<text class="pane-subtitle" x="${px0}" y="${py0-11}">${opts.subtitle}</text>`;
+  l += `<text class="axis-title" transform="rotate(-90 ${px0-58} ${py0+PLOT.h/2})" x="${px0-58}" y="${py0+PLOT.h/2}" text-anchor="middle">${opts.ylabel}</text>`;
+  l += `<text class="axis-title" x="${px0+PLOT.w/2}" y="${py1+48}" text-anchor="middle">${opts.xlabel}</text>`;
+  return { g, a, l };
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// PANE 1 — VELOCITY DISTRIBUTION
+// ════════════════════════════════════════════════════════════════════════
+function drawVelocity(s) {
+  const vmax = s.vesc + VEARTH + 50;
+  const VLO = 0, VHI = Math.min(900, Math.ceil(vmax/100)*100);
+  // sample f(v)
+  const NS = 200;
+  const pts = [];
+  let fpeak = 0;
+  for (let i = 0; i <= NS; i++) {
+    const v = VLO + (VHI - VLO) * i / NS;
+    const f = fLab(v, s.v0, s.vesc, VEARTH);
+    pts.push([v, f]);
+    if (f > fpeak) fpeak = f;
+  }
+  const FHI = fpeak * 1.12 || 1;
+
+  // v_min for the chosen threshold → the visible (detectable) tail
+  const T = TARGETS[s.target];
+  const vthresh = vMin(s.Eth, s.Mchi, T.A);
+
+  // x ticks every 100 km/s
+  const xticks = [];
+  for (let v = 0; v <= VHI; v += 100) xticks.push({ v, x: xLin(VLO, VHI, v), label: v });
+  // y ticks: just a few
+  const yticks = [];
+
+  const frame = frameSVG({
+    title: "Halo speed distribution", subtitle: "In the lab frame · km/s",
+    xlabel: "WIMP speed (km/s)", ylabel: "rel. number",
+    xticks, yticks
+  });
+
+  // Build TWO non-overlapping fills: below vthresh = lost (red), above = visible (green).
+  let dLost = "";
+  const lostPts = pts.filter(p => p[0] <= vthresh);
+  if (lostPts.length > 1 && vthresh > 0) {
+    dLost = `M ${xLin(VLO,VHI,lostPts[0][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} `;
+    for (const [v,f] of lostPts) dLost += `L ${xLin(VLO,VHI,v).toFixed(1)} ${yLin(0,FHI,f).toFixed(1)} `;
+    dLost += `L ${xLin(VLO,VHI,lostPts[lostPts.length-1][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} Z`;
+  } else if (vthresh <= 0) {
+    // no threshold cut — fall back to filling the whole distribution as visible (green)
+  }
+
+  let dVis = "";
+  const visPts = pts.filter(p => p[0] >= vthresh);
+  if (visPts.length > 0 && vthresh < VHI) {
+    dVis = `M ${xLin(VLO,VHI,visPts[0][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} `;
+    for (const [v,f] of visPts) dVis += `L ${xLin(VLO,VHI,v).toFixed(1)} ${yLin(0,FHI,f).toFixed(1)} `;
+    dVis += `L ${xLin(VLO,VHI,visPts[visPts.length-1][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} Z`;
+  }
+
+  let dLine = "";
+  pts.forEach(([v,f],i) => { dLine += (i===0?"M":"L") + xLin(VLO,VHI,v).toFixed(1) + " " + yLin(0,FHI,f).toFixed(1) + " "; });
+
+  let curves = "";
+  if (dLost) curves += `<path class="vdist-fill" d="${dLost}" />`;
+  if (dVis) curves += `<path class="vdist-fill-vis" d="${dVis}" />`;
+  curves += `<path class="vdist-line" d="${dLine}" />`;
+
+  // threshold marker line
+  if (vthresh > 0 && vthresh < VHI) {
+    const vx = xLin(VLO, VHI, vthresh);
+    curves += `<line class="vmin-line" x1="${vx.toFixed(1)}" y1="${PLOT.y}" x2="${vx.toFixed(1)}" y2="${PLOT.y+PLOT.h}" />`;
+    curves += `<text class="curve-label" x="${(vx+6).toFixed(1)}" y="${(PLOT.y+16).toFixed(1)}" style="fill:var(--accent);">min speed to clear threshold</text>`;
+  } else if (vthresh >= VHI) {
+    curves += `<text class="annot" x="${PLOT.x + PLOT.w/2}" y="${PLOT.y + PLOT.h/2}" text-anchor="middle" style="fill:var(--accent);">No WIMP is fast enough to clear the threshold</text>`;
+  }
+
+  // visible-fraction label
+  layerOf("svg-vel","grid-layer").innerHTML = frame.g;
+  layerOf("svg-vel","axes-layer").innerHTML = frame.a;
+  layerOf("svg-vel","labels-layer").innerHTML = frame.l;
+  layerOf("svg-vel","curves-layer").innerHTML = curves;
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// PANE 2 — RECOIL SPECTRUM
+// ════════════════════════════════════════════════════════════════════════
+function drawRecoil(s) {
+  const T = TARGETS[s.target];
+  const Emax = maxRecoil(s.Mchi, T.A, s.vesc);
+  const ELO = 0.01;
+  const EHI = Math.max(2, Math.pow(10, Math.ceil(Math.log10(Math.max(Emax*1.5, 2)))));
+
+  // sample dR/dE on a log-E grid
+  const NS = 180;
+  const pts = [];
+  let rpeak = 0;
+  for (let i = 0; i <= NS; i++) {
+    const E = Math.pow(10, Math.log10(ELO) + (Math.log10(EHI)-Math.log10(ELO))*i/NS);
+    const r = dRdER(E, s.Mchi, T.A, s.rho, s.v0, s.vesc, s.sigma_n, s.useFF);
+    pts.push([E, r]);
+    if (r > rpeak && isFinite(r)) rpeak = r;
+  }
+
+  // ── Y-axis: locked to a Mchi/v0/vesc-independent reference so it doesn't
+  // jitter when the user moves the WIMP-mass or halo-speed sliders. The
+  // reference is dR/dE for a 1 TeV WIMP on the current target with baseline
+  // halo (220/544 km/s), which sets a tall, broad-spectrum scale. The axis
+  // does scale with σ and ρ because dR/dE is linear in both. y-min is fixed
+  // six decades below y-max.
+  function refRateMax(target, sigma_n, rho, useFF) {
+    const A = TARGETS[target].A;
+    let pk = 0;
+    const N = 60;
+    for (let i = 0; i <= N; i++) {
+      const E = Math.pow(10, -2 + 4*i/N);   // 0.01 → 100 keV
+      const r = dRdER(E, 1000, A, rho, 220, 544, sigma_n, useFF);
+      if (isFinite(r) && r > pk) pk = r;
+    }
+    return pk;
+  }
+  let RHI, RLO;
+  const refPk = refRateMax(s.target, s.sigma_n, s.rho, s.useFF);
+  if (refPk <= 0) { RHI = 1; RLO = 1e-6; }
+  else {
+    RHI = Math.pow(10, Math.ceil(Math.log10(refPk * 3)));
+    RLO = RHI / 1e6;
+  }
+
+  // x ticks (decades)
+  const xticks = [];
+  for (let p = Math.ceil(Math.log10(ELO)); p <= Math.log10(EHI); p++) {
+    const E = Math.pow(10, p);
+    let lbl = E >= 1000 ? (E/1000)+" MeV" : (E >= 1 ? E+" keV" : (E*1000)+" eV");
+    xticks.push({ v:E, x: xLog(ELO,EHI,E), label: lbl });
+  }
+  const yticks = [];
+  for (let p = Math.log10(RLO); p <= Math.log10(RHI)+0.001; p++) {
+    yticks.push({ v: Math.pow(10,p), y: yLog(RLO,RHI,Math.pow(10,p)), label: "10"+supScript(p) });
+  }
+
+  const frame = frameSVG({
+    title: "Recoil-energy spectrum", subtitle: "Events per keV · log scale",
+    xlabel: "Nuclear-recoil energy", ylabel: "dR/dE (/keV/kg/yr)",
+    xticks, yticks
+  });
+
+  // spectrum line + filled area, with the below-threshold region greyed
+  function lineFrom(arr) {
+    let d = "", started = false;
+    for (const [E,r] of arr) {
+      if (!isFinite(r) || r <= 0) { started=false; continue; }
+      const y = yLog(RLO,RHI,r);
+      if (r < RLO*0.5) { started=false; continue; }
+      d += (started?"L":"M") + xLog(ELO,EHI,E).toFixed(1) + " " + Math.min(PLOT.y+PLOT.h, y).toFixed(1) + " ";
+      started = true;
+    }
+    return d.trim();
+  }
+  const eff = effOf(s);
+  const roiHi = ROI_HI[s.target] || 200;
+
+  // Detected spectrum = raw dR/dE × ε(E), clipped to the analysis ROI. This
+  // is what the detector actually selects — the filled region below.
+  const detPts = pts.map(([E, r]) => {
+    const w = (E <= roiHi) ? efficiency(E, eff.start, eff.half, eff.plateau) : 0;
+    return [E, r * w];
+  });
+
+  // filled "detected" area (green, ε-weighted) — what the detector keeps
+  let dDetFill = "";
+  {
+    const valid = detPts.filter(p => isFinite(p[1]) && p[1] > RLO*0.5);
+    if (valid.length > 1) {
+      dDetFill = `M ${xLog(ELO,EHI,valid[0][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} `;
+      for (const [E,r] of valid) dDetFill += `L ${xLog(ELO,EHI,E).toFixed(1)} ${Math.min(PLOT.y+PLOT.h,yLog(RLO,RHI,r)).toFixed(1)} `;
+      dDetFill += `L ${xLog(ELO,EHI,valid[valid.length-1][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} Z`;
+    }
+  }
+
+  // "Lost" area (red) — between the detected curve (bottom) and the raw
+  // spectrum (top). Each x-slice represents recoils that physics produces
+  // but the detector throws away to acceptance / ROI cuts.
+  let dLostFill = "";
+  {
+    const pairs = [];
+    for (let i = 0; i < pts.length; i++) {
+      const E = pts[i][0], rRaw = pts[i][1], rDet = detPts[i][1];
+      if (!isFinite(rRaw) || rRaw <= RLO*0.5) continue;
+      if (rDet >= rRaw * 0.999) continue;                   // no visible gap
+      const x = xLog(ELO,EHI,E);
+      const yRaw = Math.min(PLOT.y+PLOT.h, yLog(RLO,RHI,rRaw));
+      const yDet = (rDet > RLO*0.5) ? Math.min(PLOT.y+PLOT.h, yLog(RLO,RHI,rDet)) : (PLOT.y+PLOT.h);
+      pairs.push([x, yRaw, yDet]);
+    }
+    if (pairs.length > 1) {
+      // forward along the raw spectrum (top edge of the lost band)
+      dLostFill = `M ${pairs[0][0].toFixed(1)} ${pairs[0][1].toFixed(1)} `;
+      for (let i = 1; i < pairs.length; i++) dLostFill += `L ${pairs[i][0].toFixed(1)} ${pairs[i][1].toFixed(1)} `;
+      // back along the detected curve (bottom edge)
+      for (let i = pairs.length-1; i >= 0; i--) dLostFill += `L ${pairs[i][0].toFixed(1)} ${pairs[i][2].toFixed(1)} `;
+      dLostFill += "Z";
+    }
+  }
+
+  let curves = "";
+  if (dDetFill) curves += `<path class="recoil-fill" d="${dDetFill}" />`;
+  if (dLostFill) curves += `<path class="recoil-fill-lost" d="${dLostFill}" />`;
+  const dLine = lineFrom(pts);                       // raw (true) recoil spectrum
+  if (dLine) curves += `<path class="recoil-line" d="${dLine}" />`;
+
+  // ── efficiency curve ε(E) on a right-hand 0–100% axis ──
+  const yEff = (e) => PLOT.y + PLOT.h - Math.max(0, Math.min(1, e)) * PLOT.h;
+  let dEff = "", startedE = false;
+  for (let i = 0; i <= NS; i++) {
+    const E = Math.pow(10, Math.log10(ELO) + (Math.log10(EHI)-Math.log10(ELO))*i/NS);
+    if (E > roiHi) break;
+    const e = efficiency(E, eff.start, eff.half, eff.plateau);
+    dEff += (startedE ? "L" : "M") + xLog(ELO,EHI,E).toFixed(1) + " " + yEff(e).toFixed(1) + " ";
+    startedE = true;
+  }
+  if (dEff) curves += `<path class="eff-curve" d="${dEff.trim()}" />`;
+  const rx = PLOT.x + PLOT.w;
+  curves += `<line class="eff-axis" x1="${rx}" y1="${PLOT.y}" x2="${rx}" y2="${PLOT.y+PLOT.h}" />`;
+  for (const f of [0, 0.5, 1]) {
+    curves += `<line class="eff-tick" x1="${rx}" y1="${yEff(f).toFixed(1)}" x2="${(rx+4).toFixed(1)}" y2="${yEff(f).toFixed(1)}" />`;
+    curves += `<text class="eff-axis-label" x="${(rx+6).toFixed(1)}" y="${(yEff(f)+3.5).toFixed(1)}">${(f*100).toFixed(0)}</text>`;
+  }
+  curves += `<text class="eff-axis-label" x="${(rx+6).toFixed(1)}" y="${(PLOT.y-6).toFixed(1)}">ε%</text>`;
+  // label the efficiency curve near its plateau
+  {
+    const lblE = Math.min(roiHi, EHI*0.8);
+    curves += `<text class="curve-label" x="${xLog(ELO,EHI,lblE).toFixed(1)}" y="${(yEff(eff.plateau)-5).toFixed(1)}" text-anchor="end" style="fill:#3f7d86;">efficiency</text>`;
+  }
+
+  // lower-cutoff marker (start of the turn-on)
+  if (s.Eth > ELO && s.Eth < EHI) {
+    const tx = xLog(ELO,EHI,s.Eth);
+    curves += `<line class="thresh-line" x1="${tx.toFixed(1)}" y1="${PLOT.y}" x2="${tx.toFixed(1)}" y2="${PLOT.y+PLOT.h}" />`;
+    curves += `<text class="curve-label" x="${(tx+5).toFixed(1)}" y="${(PLOT.y+14).toFixed(1)}" style="fill:var(--text-bright);">cutoff</text>`;
+  }
+  if (rpeak <= 0) {
+    curves += `<text class="annot" x="${PLOT.x+PLOT.w/2}" y="${PLOT.y+PLOT.h/2}" text-anchor="middle" style="fill:var(--accent);">No recoils — WIMP too light for this target</text>`;
+  }
+
+  layerOf("svg-rec","grid-layer").innerHTML = frame.g;
+  layerOf("svg-rec","axes-layer").innerHTML = frame.a;
+  layerOf("svg-rec","labels-layer").innerHTML = frame.l;
+  layerOf("svg-rec","curves-layer").innerHTML = curves;
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// PANE 3 — σ vs MASS (advanced). Reference curves approximate published 90% CL.
+// ════════════════════════════════════════════════════════════════════════
+const REF_DS50 = [[14,2e-43],[20,5e-44],[30,2.3e-44],[50,1.4e-44],[80,1.15e-44],[100,1.15e-44],[200,1.6e-44],[500,3.6e-44],[1000,7e-44],[10000,7e-43]];
+const REF_LZ   = [[9,1e-44],[15,2e-45],[30,9e-47],[40,2.2e-48],[60,3e-48],[100,5e-48],[200,9e-48],[1000,4e-47],[10000,4e-46]];
+const REF_DS20K= [[20,5e-46],[40,2e-47],[80,3e-48],[150,1e-48],[300,1.3e-48],[1000,4e-48],[10000,4e-47]];
+const REF_FOG  = [[5,1.5e-45],[8,2e-46],[15,8e-48],[30,2e-49],[60,1e-48],[200,4e-48],[1000,2e-47],[10000,2e-46]];
+
+function drawSigma(s) {
+  const XLO = 5, XHI = 10000;          // GeV; lower bound = where the published Ar/Xe S1+S2 limits & ν fog stop being meaningful
+  const YLO = 1e-49, YHI = 1e-42;      // cm²
+  const xticks = [];
+  // x ticks: 10, 100, 1000, 10000 GeV (and a 5 GeV minor at the edge handled by label)
+  for (let p = 1; p <= 4; p++) {
+    const M = Math.pow(10,p);
+    if (M < XLO) continue;
+    let lbl = M>=1000 ? (M/1000)+" TeV" : M+" GeV";
+    xticks.push({ v:M, x: xLog(XLO,XHI,M), label: lbl });
+  }
+  const yticks = [];
+  for (let p = -49; p <= -42; p++) yticks.push({ v:Math.pow(10,p), y: yLog(YLO,YHI,Math.pow(10,p)), label:"10"+supScript(p) });
+
+  const frame = frameSVG({
+    title: "Where your WIMP sits", subtitle: "Cross-section vs mass",
+    xlabel: "WIMP mass", ylabel: "σ (cm²)",
+    xticks, yticks
+  });
+
+  function refPath(arr) {
+    let d="", started=false;
+    for (const [M,sig] of arr) {
+      if (M<XLO||M>XHI) { started=false; continue; }
+      if (sig<YLO*0.5||sig>YHI*2) { started=false; continue; }
+      d += (started?"L":"M") + xLog(XLO,XHI,M).toFixed(1) + " " + yLog(YLO,YHI,sig).toFixed(1) + " ";
+      started=true;
+    }
+    return d.trim();
+  }
+  function fogFill(arr) {
+    const f = arr.filter(p=>p[0]>=XLO&&p[0]<=XHI);
+    if (!f.length) return "";
+    let d = `M ${xLog(XLO,XHI,f[0][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} `;
+    for (const [M,sig] of f) d += `L ${xLog(XLO,XHI,M).toFixed(1)} ${Math.max(PLOT.y,Math.min(PLOT.y+PLOT.h,yLog(YLO,YHI,sig))).toFixed(1)} `;
+    d += `L ${xLog(XLO,XHI,f[f.length-1][0]).toFixed(1)} ${(PLOT.y+PLOT.h).toFixed(1)} Z`;
+    return d;
+  }
+
+  let curves = "";
+  curves += `<path class="curve-fog-fill" d="${fogFill(REF_FOG)}" />`;
+  curves += `<path class="curve-fog-line" d="${refPath(REF_FOG)}" />`;
+  curves += `<path class="curve-ds50" d="${refPath(REF_DS50)}" />`;
+  curves += `<path class="curve-lz" d="${refPath(REF_LZ)}" />`;
+  curves += `<path class="curve-ds20k" d="${refPath(REF_DS20K)}" />`;
+  // labels
+  curves += `<text class="curve-label" x="${xLog(XLO,XHI,500)+6}" y="${yLog(YLO,YHI,3.6e-44)}" style="fill:#a36b3a;">DS-50</text>`;
+  curves += `<text class="curve-label" x="${xLog(XLO,XHI,40)+6}" y="${yLog(YLO,YHI,2.2e-48)-4}" style="fill:#4a6b7a;">LZ</text>`;
+  curves += `<text class="curve-label" x="${xLog(XLO,XHI,150)+6}" y="${yLog(YLO,YHI,1e-48)+12}" style="fill:#6b8a3c;">DS-20k</text>`;
+  curves += `<text class="annot" x="${xLog(XLO,XHI,30)}" y="${yLog(YLO,YHI,2e-49)+2}" text-anchor="middle">ν fog</text>`;
+
+  // standing note: where lighter WIMPs would sit, and a heads-up that we
+  // don't model the dedicated low-mass searches.
+  curves += `<text class="annot" x="${(PLOT.x+8).toFixed(1)}" y="${(PLOT.y+PLOT.h-6).toFixed(1)}" style="fill:var(--text-muted);font-size:10px;">← M&lt;5 GeV: dedicated S2-only / Migdal / cryogenic analyses extend reach (not shown)</text>`;
+
+  // user's WIMP marker
+  if (s.Mchi>=XLO && s.Mchi<=XHI && s.sigma_n>=YLO && s.sigma_n<=YHI) {
+    const mx = xLog(XLO,XHI,s.Mchi), my = yLog(YLO,YHI,s.sigma_n);
+    curves += `<circle class="wimp-marker-ring" cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="11" />`;
+    curves += `<circle class="wimp-marker" cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="5.5" />`;
+    curves += `<text class="curve-label" x="${(mx+12).toFixed(1)}" y="${(my-8).toFixed(1)}" style="fill:var(--accent);font-weight:600;">your WIMP</text>`;
+  } else {
+    let where;
+    if (s.Mchi < XLO) where = `to the left at ${fmtMass(s.Mchi)} — the low-mass region this plot doesn't cover`;
+    else if (s.Mchi > XHI) where = `to the right of the plot (very heavy WIMP)`;
+    else if (s.sigma_n > YHI) where = `above the top of the plot (very large cross-section)`;
+    else if (s.sigma_n < YLO) where = `below the bottom (smaller than any experiment can reach)`;
+    else where = `outside the range shown`;
+    curves += `<text class="annot" x="${PLOT.x+PLOT.w/2}" y="${PLOT.y+22}" text-anchor="middle" style="fill:var(--accent);">Your WIMP sits ${where}</text>`;
+  }
+
+  layerOf("svg-sig","grid-layer").innerHTML = frame.g;
+  layerOf("svg-sig","axes-layer").innerHTML = frame.a;
+  layerOf("svg-sig","labels-layer").innerHTML = frame.l;
+  layerOf("svg-sig","curves-layer").innerHTML = curves;
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// LIVE READOUTS, FLUX, DIAGNOSTIC, POISSON TOY
+// ════════════════════════════════════════════════════════════════════════
+
+// Areas in cm²: thumbnail ~1.5, palm ~100, whole body front ~9000
+const AREA_THUMB = 1.5, AREA_PALM = 100, AREA_BODY = 9000;
+
+function updateFlux(s) {
+  const palmRate = fluxThrough(s.rho, s.Mchi, s.v0, AREA_PALM); // /s
+  let part, area, rate, perWhat = "second";
+  if (palmRate > 5e9) { part = "thumbnail"; area = AREA_THUMB; }
+  else if (palmRate < 200) { part = "whole body"; area = AREA_BODY; }
+  else { part = "palm"; area = AREA_PALM; }
+  rate = fluxThrough(s.rho, s.Mchi, s.v0, area);
+
+  // if even the body rate is tiny, switch to per-minute / per-hour
+  if (part === "whole body" && rate < 1) {
+    if (rate*60 >= 1) { rate *= 60; perWhat = "minute"; }
+    else if (rate*3600 >= 1) { rate *= 3600; perWhat = "hour"; }
+    else { rate *= 86400; perWhat = "day"; }
+  }
+
+  document.getElementById("flux-big").innerHTML =
+    `About <span class="num">${fmtBigCount(rate)}</span> dark-matter particles pass through your ${part} every ${perWhat}.`;
+
+  const n = numberDensity(s.rho, s.Mchi);
+  let sub;
+  if (rate > 1e9) {
+    sub = `A torrent — and essentially none of them will ever touch a single atom of you. At ${fmtMass(s.Mchi)} the halo holds about ${fmtBigCount(n)} particles per cm³.`;
+  } else if (part === "whole body") {
+    sub = `Heavy WIMPs are rare: at ${fmtMass(s.Mchi)} there are only about ${n.toExponential(1)} per cm³, so the flux is modest even across your whole body.`;
+  } else {
+    sub = `At ${fmtMass(s.Mchi)} the local halo holds about ${fmtBigCount(n)} particles per cm³ (n = ρ/m).`;
+  }
+  document.getElementById("flux-sub").textContent = sub;
+}
+
+function updateReadouts(s) {
+  const T = TARGETS[s.target];
+  const n = numberDensity(s.rho, s.Mchi);
+  document.getElementById("chip-ndens").innerHTML =
+    (n >= 1 ? fmtBigCount(n) : n.toExponential(1)) + " <small>/cm³</small>";
+
+  const MN = T.A * M_NUC;
+  const mu = s.Mchi * MN / (s.Mchi + MN);
+  document.getElementById("chip-mu").innerHTML = mu.toFixed(mu<1?2:1) + " <small>GeV</small>";
+
+  const Emax = maxRecoil(s.Mchi, T.A, s.vesc);
+  document.getElementById("chip-emax").innerHTML = fmtEnergy(Emax);
+
+  // Detected fraction = acceptance-weighted recoils / all recoils. This now
+  // folds the full ε(E) turn-on, so soft recoils below/around the cutoff are
+  // correctly lost — it collapses toward zero for low-mass WIMPs.
+  const eff = effOf(s);
+  const roiHi = ROI_HI[s.target] || 200;
+  const rTot = rateBetween(s.Mchi, T.A, s.rho, s.v0, s.vesc, s.sigma_n, s.useFF, 0.005, Math.max(Emax,0.01), null);
+  const rSeen = rateBetween(s.Mchi, T.A, s.rho, s.v0, s.vesc, s.sigma_n, s.useFF, 0.005, Math.max(Math.min(roiHi,Emax),0.011), eff);
+  let frac = (rTot > 0) ? (rSeen / rTot) : 0;
+  frac = Math.max(0, Math.min(1, frac));
+  document.getElementById("chip-frac").innerHTML = (frac*100).toFixed(frac<0.01?2:0) + " <small>%</small>";
+
+  // mass matching meter: peak transfer when mu/MN is near its max (mu≈MN/2 at Mchi=MN)
+  // efficiency η = 4·Mchi·MN/(Mchi+MN)² (max 1 when matched)
+  const eta = 4 * s.Mchi * MN / ((s.Mchi+MN)*(s.Mchi+MN));
+  document.getElementById("match-fill").style.width = (eta*100).toFixed(0) + "%";
+  let cap;
+  if (eta > 0.85) cap = `Excellent match — ${fmtMass(s.Mchi)} transfers energy efficiently to ${T.name}.`;
+  else if (eta > 0.5) cap = `Reasonable match between ${fmtMass(s.Mchi)} and ${T.name}.`;
+  else if (s.Mchi < MN) cap = `Poor — a ${fmtMass(s.Mchi)} WIMP is too light to make ${T.name} (A=${T.A}) recoil much. Try a lighter target.`;
+  else cap = `A ${fmtMass(s.Mchi)} WIMP overpowers ${T.name}; energy transfer is limited by the light nucleus.`;
+  document.getElementById("match-caption").textContent = cap;
+
+  return { frac, Emax, rSeen };
+}
+
+// Expected counts in the analysis window for the toy
+function expectedCounts(s) {
+  const T = TARGETS[s.target];
+  const Emax = maxRecoil(s.Mchi, T.A, s.vesc);
+  const roiHi = ROI_HI[s.target] || 200;
+  const Ehi = Math.max(0.02, Math.min(roiHi, Emax * 1.05));
+  const eff = effOf(s);
+  // Acceptance-weighted signal: integrate ε(E)·dR/dE from just above zero (ε
+  // handles the lower cutoff) up to the analysis ROI bound.
+  const rateSig = rateBetween(s.Mchi, T.A, s.rho, s.v0, s.vesc, s.sigma_n, s.useFF, 0.005, Ehi, eff); // /kg/yr
+  const sig = rateSig * s.exposure * 1000;   // exposure t·yr → kg·yr
+  // background: bg rate /(keV·t·yr) × window width × exposure
+  const windowKeV = Math.max(0.1, Ehi - s.Eth);
+  const bgCounts = s.bg * windowKeV * s.exposure;
+  return { sig: Math.max(0,sig), bg: Math.max(0,bgCounts), Elo: s.Eth, Ehi };
+}
+
+function updateDiagnostic(s, ro) {
+  const { sig, bg } = expectedCounts(s);
+  const T = TARGETS[s.target];
+  const total = sig;
+  const stxt = document.getElementById("status-text");
+  const dl = document.getElementById("diag-list");
+
+  let head;
+  if (total >= 10) head = `Strong signal — about <span class="num">${total.toFixed(total<100?1:0)}</span> WIMP recoils expected over ${fmtMass(s.Mchi)==fmtMass(s.Mchi)?"":""}${s.exposure>=1?s.exposure.toFixed(s.exposure<10?1:0):s.exposure.toFixed(2)} t·yr.`;
+  else if (total >= 1) head = `A handful of events — about <span class="num">${total.toFixed(1)}</span> WIMP recoils expected.`;
+  else if (total >= 0.05) head = `Marginal — only <span class="num">${total.toFixed(2)}</span> WIMP recoils expected.`;
+  else head = `This detector would almost certainly see <span class="num">nothing</span> — fewer than ${total > 0 ? total.toExponential(1) : "0"} recoils expected.`;
+  stxt.innerHTML = head;
+
+  // diagnostic reasons (only when signal is weak)
+  const reasons = [];
+  const MN = T.A * M_NUC;
+  const eta = 4 * s.Mchi * MN / ((s.Mchi+MN)*(s.Mchi+MN));
+  const Emax = ro.Emax;
+  if (Emax < s.Eth) {
+    reasons.push(`Your lower cutoff (${fmtEnergy(s.Eth)}) is above the <em>highest possible</em> recoil (${fmtEnergy(Emax)}) — no recoil can clear it. Lower the cutoff or pick a lighter target.`);
+  } else if (ro.frac < 0.05) {
+    reasons.push(`Only ${(ro.frac*100).toFixed(ro.frac<0.01?2:1)}% of recoils survive the detector's acceptance — almost all land below the turn-on, where the selection efficiency is near zero. Lower the cutoff and halfway energy, or pick a target with a softer turn-on.`);
+  }
+  if (eta < 0.3 && s.Mchi < MN) {
+    reasons.push(`${fmtMass(s.Mchi)} is too light for ${T.name} (A=${T.A}) — a marble can't shove a bowling ball. A lighter target (He, Si) would catch it better.`);
+  }
+  if (s.exposure < 0.1 && total < 1) {
+    reasons.push(`The exposure (${s.exposure.toFixed(2)} t·yr) is small — a bigger detector or longer run scales the count up.`);
+  }
+  if (bg > 3*Math.max(sig,1e-9) && sig < 5) {
+    reasons.push(`Background (${bg.toFixed(1)} events) outnumbers signal (${sig.toFixed(2)}) — a signal this small would be lost in the noise.`);
+  }
+  if (s.sigma_n < 1e-47 && total < 1) {
+    reasons.push(`The cross-section (${fmtSci(s.sigma_n)} cm²) is tiny — at this coupling even huge detectors expect almost no events.`);
+  }
+
+  if (total >= 1 && reasons.length === 0) {
+    dl.innerHTML = `<li class="diag-ok">Healthy configuration — signal well above one event.</li>`;
+  } else if (reasons.length === 0) {
+    dl.innerHTML = `<li>The expected count is just low for this combination of mass, cross-section, exposure and threshold.</li>`;
+  } else {
+    dl.innerHTML = reasons.map(r => `<li>${r}</li>`).join("");
+  }
+}
+
+// ── Significance / verdict thresholds for the "run the experiment" toy ──
+// Z = (n_obs − n_bg) / √n_bg  is the textbook S/√B significance, the simplest
+// honest measure of how surprising the observed total is under background-only.
+// (For very small bg we floor √n_bg at 1 — see significanceZ.)
+//
+// A counting analysis like this one can only say "I saw an excess". Identifying
+// such an excess as dark matter — rather than mis-modelled background or another
+// rare process — needs the recoil <em>energy spectrum</em> to match the prediction,
+// plus (eventually) a second independent experiment, annual modulation, etc.
+// The verdict text below states this explicitly at the 3σ / 5σ tiers.
+const Z_EVIDENCE  = 3;   // 3σ — "evidence" in particle-physics convention
+const Z_DISCOVERY = 5;   // 5σ — "discovery" threshold
+const MIN_EXCESS_EVENTS = 5;   // an absolute floor on extra events above bg —
+                               // a Z of "5σ" off 0.01 expected background is
+                               // statistically pathological at 2 events; require
+                               // at least this many before treating Z as meaningful.
+
+function significanceZ(nObs, bExp) {
+  // S/√B with a 1-event floor under the square root to avoid the divergence
+  // at vanishing background. For bExp ≥ 1 this is the standard textbook form.
+  const denom = Math.sqrt(Math.max(bExp, 1));
+  return (nObs - bExp) / denom;
+}
+
+function classifyOutcome(nObs, bExp) {
+  const excess = nObs - bExp;
+  const Z = significanceZ(nObs, bExp);
+  if (excess <= 0) return { kind: 'null',           Z, excess };
+  if (excess < MIN_EXCESS_EVENTS && Z < Z_EVIDENCE)
+                     return { kind: 'mild_excess',   Z, excess };
+  if (excess < MIN_EXCESS_EVENTS)
+                     return { kind: 'small_excess',  Z, excess };
+  if (Z >= Z_DISCOVERY) return { kind: 'discovery_excess', Z, excess };
+  if (Z >= Z_EVIDENCE)  return { kind: 'evidence_excess',  Z, excess };
+  return { kind: 'mild_excess', Z, excess };
+}
+
+function updateToy(s) {
+  const { sig, bg } = expectedCounts(s);
+  const bSigma = Math.sqrt(Math.max(bg, 1));
+  const Zexp = sig / bSigma;
+  const Zfmt = Zexp < 0.1 ? "≈0" : Zexp.toFixed(1);
+  document.getElementById("toy-expect").innerHTML =
+    `Over <span class="num">${s.exposure.toFixed(s.exposure<10?1:0)} t·yr</span> this setup expects <span class="num">${sig.toFixed(sig<10?2:0)}</span> WIMP recoils on top of <span class="num">${bg.toFixed(bg<10?1:0)}</span> background events — expected significance <span class="num">Z ≈ ${Zfmt}σ</span>. Each <em>Run once</em> draws one experiment with this exposure; in a real experiment only the total is observed.`;
+  toyExpected = { sig, bg };
+}
+
+// Poisson draw (Knuth) — fine for the modest λ values here
+function poisson(lambda) {
+  if (lambda <= 0) return 0;
+  if (lambda > 60) { // normal approx for large λ
+    return Math.max(0, Math.round(lambda + Math.sqrt(lambda) * gauss()));
+  }
+  const L = Math.exp(-lambda);
+  let k = 0, p = 1;
+  do { k++; p *= Math.random(); } while (p > L);
+  return k - 1;
+}
+function gauss() {
+  let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+}
+
+let toyExpected = { sig: 0, bg: 0 };
+
+function runToyOnce() {
+  const sObs = poisson(toyExpected.sig);
+  const bObs = poisson(toyExpected.bg);
+  const total = sObs + bObs;
+  const bExp = toyExpected.bg;
+  const sExp = toyExpected.sig;
+  const bSigma = Math.sqrt(Math.max(bExp, 1));
+  const out = classifyOutcome(total, bExp);
+
+  // Formatting helpers
+  const bFmt = bExp < 0.05 ? bExp.toExponential(1) : (bExp < 10 ? bExp.toFixed(1) : bExp.toFixed(0));
+  const sigFmt = Math.sqrt(Math.max(bExp,0)) < 0.05 ? "<1" :
+                 (Math.sqrt(Math.max(bExp,0)) < 10 ? bSigma.toFixed(1) : bSigma.toFixed(0));
+  const Zfmt = Math.abs(out.Z) < 0.1 ? "≈0" : (out.Z > 0 ? "+" : "") + out.Z.toFixed(1);
+  const ev = (n) => n === 1 ? "event" : "events";
+  const Zclass = out.kind === 'discovery_excess' ? 'Z-discovery'
+               : out.kind === 'evidence_excess' ? 'Z-good'
+               : 'Z-null';
+  const header = `<span class="verdict-header">${total} ${ev(total)} observed</span> — expected ≈ ${bFmt} background (±${sigFmt}). Significance <span class="${Zclass}">Z = ${Zfmt}σ</span>.`;
+
+  let verdict;
+  switch (out.kind) {
+    case 'null':
+      verdict = bExp < 0.5
+        ? `Consistent with background. With so little expected background, a quiet result is the most likely outcome — nothing here points to a signal.`
+        : `Consistent with background. The observed total sits at or below what background alone would give — a downward Poisson fluctuation, nothing more.`;
+      break;
+    case 'mild_excess':
+      verdict = `A mild upward fluctuation. By particle-physics convention you need <em>Z ≥ 3σ</em> for "evidence" and <em>Z ≥ 5σ</em> for "discovery". This is neither — exactly the kind of bump that would <em>not</em> survive a careful look at backgrounds.`;
+      break;
+    case 'small_excess':
+      verdict = `Only ${out.excess.toFixed(1)} events above the expected background — formally Z = ${Zfmt}σ, but with so few extra events the result is fragile: a small mis-estimate of the background would absorb it. A real claim needs both a high Z <em>and</em> a comfortable absolute number of excess events.`;
+      break;
+    case 'evidence_excess':
+      verdict = `Past the <em>3σ "evidence"</em> threshold. The counting analysis says <em>something</em> is producing events above the expected background — but that's all it says. Identifying it as dark matter (rather than an under-estimated background or a mis-modelled rare process) needs the recoil-<em>energy spectrum</em> to match the WIMP prediction, ideally backed by a second experiment with a different target.`;
+      break;
+    case 'discovery_excess':
+      verdict = `Past the <em>5σ "discovery"</em> threshold. The observed count is highly inconsistent with background-only. Even so, this is not yet a WIMP discovery: it is a discovery-class <em>excess of events</em>. WIMP <em>identification</em> needs the recoil-energy spectrum to fit the WIMP hypothesis, the same excess to appear in independent experiments with different targets, and ultimately a direction- or time-dependent signature (annual modulation, directional detection).`;
+      break;
+  }
+  const el = document.getElementById("toy-result");
+  el.innerHTML = `<p>${header}</p><p>${verdict}</p>`;
+  document.getElementById("toy-hist").style.display = "none";
+  document.getElementById("toy-hist-labels").style.display = "none";
+}
+
+function runToy100() {
+  const draws = [];
+  for (let i = 0; i < 100; i++) draws.push(poisson(toyExpected.sig) + poisson(toyExpected.bg));
+  const expectedTot = toyExpected.sig + toyExpected.bg;
+  const expectedBg = toyExpected.bg;
+  const bSigma = Math.sqrt(Math.max(expectedBg, 1));
+
+  // x-range must bracket BOTH the spread of draws AND the expected-bg marker
+  const dMin = Math.min(...draws);
+  const dMax = Math.max(...draws);
+  const lo = Math.max(0, Math.floor(Math.min(dMin, expectedBg - 1)));
+  const hiRaw = Math.max(dMax, Math.ceil(expectedBg + 2*bSigma));
+  let binLo = lo, binHi = hiRaw;
+  if (hiRaw - lo > 15) {
+    const sigma = Math.sqrt(Math.max(expectedTot, 1));
+    binLo = Math.max(0, Math.floor(Math.min(expectedBg, expectedTot) - 3*sigma));
+    binHi = Math.ceil(Math.max(expectedBg + 2*bSigma, expectedTot + 3*sigma));
+  }
+  const nBins = Math.min(16, Math.max(1, binHi - binLo + 1));
+  const step = Math.max(1, Math.ceil((binHi - binLo + 1) / nBins));
+  const buckets = new Array(nBins).fill(0);
+  for (const v of draws) {
+    let idx = Math.floor((v - binLo) / step);
+    if (idx < 0) idx = 0; if (idx >= nBins) idx = nBins - 1;
+    buckets[idx]++;
+  }
+  const maxBar = Math.max(...buckets, 1);
+  const hist = document.getElementById("toy-hist");
+  const labels = document.getElementById("toy-hist-labels");
+
+  const totalSpan = nBins * step;
+  const bgFrac = (expectedBg - binLo) / totalSpan;
+  const bgPct = Math.max(0, Math.min(1, bgFrac)) * 100;
+
+  let bars = "", labs = "";
+  for (let i = 0; i < nBins; i++) {
+    const c = buckets[i];
+    const h = Math.round(c / maxBar * 100);
+    const binStart = binLo + i*step;
+    const lblTxt = step === 1 ? String(binStart) : (binStart + "–" + (binStart+step-1));
+    bars += `<div class="bar ${c===0?'zero':''}" style="height:${h}%" title="${c} of 100 experiments saw ${lblTxt}"></div>`;
+    labs += `<span>${(i===0||i===nBins-1||i===Math.floor(nBins/2))?lblTxt:''}</span>`;
+  }
+  const bgLineHTML = (bgFrac >= 0 && bgFrac <= 1)
+    ? `<div class="toy-bg-line" style="left:${bgPct.toFixed(1)}%;"><span>bg ≈ ${expectedBg < 10 ? expectedBg.toFixed(1) : expectedBg.toFixed(0)}</span></div>`
+    : "";
+  hist.innerHTML = bars + bgLineHTML;
+  labels.innerHTML = labs;
+  hist.style.display = "flex"; labels.style.display = "flex";
+
+  // ── Tally outcomes by significance (with min-excess gate) ──
+  // The min-excess gate prevents pathological "5σ" verdicts that come from
+  // 2 events on a ~0 background — exactly the same logic as runToyOnce.
+  let nEvidence = 0, nDiscovery = 0, nNull = 0;
+  for (const d of draws) {
+    const c = classifyOutcome(d, expectedBg);
+    if (c.kind === 'evidence_excess') nEvidence++;
+    else if (c.kind === 'discovery_excess') { nEvidence++; nDiscovery++; }
+    else if (c.kind === 'null' || c.kind === 'mild_excess') nNull++;
+  }
+  const Zexp = toyExpected.sig / bSigma;
+  const ZexpFmt = Zexp < 0.1 ? "≈0" : Zexp.toFixed(1);
+
+  let summary;
+  if (toyExpected.sig < 0.3) {
+    summary = `<p><strong>100 simulated experiments — pure background.</strong> Expected Z ≈ 0σ. ${nEvidence} of 100 happened to look like ≥3σ excesses anyway, ${nDiscovery} crossed 5σ — that's the Poisson spread of background alone. A real claim has to be far enough above this noise that random fluctuations can't fake it.</p>`;
+  } else if (Zexp >= Z_DISCOVERY) {
+    summary = `<p><strong>100 simulated experiments.</strong> Expected Z ≈ ${ZexpFmt}σ — <em>${nEvidence} reached ≥3σ "evidence", ${nDiscovery} crossed ≥5σ "discovery"</em>. At this configuration almost every individual experiment would be inconsistent with background. The dashed line marks the expected background; the bulk of the histogram sits clearly to its right.</p><p class="terms">Remember: an excess this size is a discovery-class <em>signal of new events</em>, not a confirmed WIMP signal — identifying the source requires the recoil-energy spectrum to fit, plus independent confirmation.</p>`;
+  } else if (Zexp >= Z_EVIDENCE) {
+    summary = `<p><strong>100 simulated experiments.</strong> Expected Z ≈ ${ZexpFmt}σ — sitting around the 3σ "evidence" tier. <em>${nEvidence}/100 reached ≥3σ, ${nDiscovery}/100 crossed ≥5σ.</em> This is what marginal detection looks like: some experiments would see it, others wouldn't, and the same data could go either way for a more rigorous (profile-likelihood) treatment.</p>`;
+  } else if (Zexp >= 1) {
+    summary = `<p><strong>100 simulated experiments.</strong> Expected Z ≈ ${ZexpFmt}σ. Most experiments produce mild excesses; <em>${nEvidence}/100 reach ≥3σ "evidence", ${nDiscovery}/100 cross ≥5σ "discovery"</em>. A signal this small needs much more exposure (or a quieter detector) before it can reliably stand out from background.</p>`;
+  } else {
+    summary = `<p><strong>100 simulated experiments.</strong> Expected Z ≈ ${ZexpFmt}σ — signal is far below the Poisson noise of background. <em>${nEvidence}/100 cross ≥3σ by chance, ${nDiscovery}/100 cross ≥5σ</em>. The histogram's overlap with the dashed background line is exactly why a single experiment can't claim much.</p>`;
+  }
+  document.getElementById("toy-result").innerHTML = summary;
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// REFRESH + WIRING
+// ════════════════════════════════════════════════════════════════════════
+function refresh() {
+  drawVelocity(state);
+  drawRecoil(state);
+  if (advMode) drawSigma(state);
+  updateFlux(state);
+  const ro = updateReadouts(state);
+  updateDiagnostic(state, ro);
+  updateToy(state);
+  updateCtxNotes(state);
+}
+
+// ── Contextual notes under sliders ──────────────────────────────────────
+function setCtx(id, html, cls) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = "ctx-note" + (cls ? " " + cls : "");
+  el.innerHTML = html || "";
+}
+
+// Mass-regime classifier — assumes standard SHM, elastic, isospin-conserving
+// contact SI DM–nucleon scattering. The regime boundaries follow the current
+// experimental landscape (see Model & Assumptions on this page):
+//
+//   subFortyMeV  M < 40 MeV   — NO clean elastic SI direct-detection limit.
+//                               constraints in this window depend on non-
+//                               standard assumptions (extreme Migdal modelling,
+//                               boosted DM, Earth-shielding, collective
+//                               excitations) and are highly model-dependent.
+//   ultraLow     40–200 MeV   — DarkSide-50 Migdal (down to 40 MeV) + CRESST-III
+//                               ultra-low-threshold cryogenic calorimeters
+//                               (down to ~73 MeV) lead. Light targets matter.
+//   lowMass      0.2–2.5 GeV  — DarkSide-50 Migdal / ionisation-only dominates,
+//                               world-leading SI constraint below ~3.6 GeV.
+//   pandax       2.5–5 GeV    — PandaX-4T S2-only / low-threshold (1.04 t·yr)
+//                               is the SI leader here.
+//   transition   5–9 GeV      — Multiple analyses overlap (DarkSide-50,
+//                               PandaX-4T low-threshold, edge of LZ).
+//   classic      9 GeV–1 TeV  — LZ 4.2 t·yr is the leader (>4× improvement
+//                               on prior best above 9 GeV).
+//   heavy        >1 TeV       — same xenon experiments lead but n = ρ/M
+//                               drops so per-event reach degrades.
+function massRegime(M) {
+  if (M < 0.04)  return "subFortyMeV";
+  if (M < 0.2)   return "ultraLow";
+  if (M < 2.5)   return "lowMass";
+  if (M < 5)     return "pandax";
+  if (M < 9)     return "transition";
+  if (M < 1000)  return "classic";
+  return "heavy";
+}
+
+// Per-regime σ bands for the cross-section verdict text. Order: σExcluded
+// (above is ruled out), σFrontier (between is historically probed),
+// σFloor (between σFrontier and σFloor is "near current frontier", below is
+// sub-floor / heading to ν fog). Rough values anchored on published limits
+// at the *typical* mass in each bin — exact value will under/overshoot at
+// the edges of each bin, which is fine for prose context.
+const XSEC_BANDS = {
+  ultraLow:   { excluded: 1e-36, frontier: 1e-38, floor: 1e-40 },
+  lowMass:    { excluded: 1e-40, frontier: 1e-42, floor: 1e-44 },
+  pandax:     { excluded: 1e-43, frontier: 1e-45, floor: 1e-47 },
+  transition: { excluded: 1e-44, frontier: 1e-46, floor: 1e-48 },
+  classic:    { excluded: 1e-44, frontier: 1e-47, floor: 1e-49 },
+  heavy:      { excluded: 1e-43, frontier: 1e-46, floor: 1e-48 }
+};
+
+function updateCtxNotes(s) {
+  const T = TARGETS[s.target];
+  const regime = massRegime(s.Mchi);
+
+  // ── Mass commentary — same regime binning, plus a kinematics tag ──
+  const massText = {
+    subFortyMeV: { html: `Below 40 MeV — <em>outside the range of standard elastic SI direct detection</em>. Constraints here depend on non-standard assumptions (extreme Migdal, boosted DM, Earth-shielding, collective excitations).`, cls: "warn" },
+    ultraLow:    { html: `Ultra-low-mass (40–200 MeV) — the realm of <em>DarkSide-50 Migdal</em> and <em>CRESST-III</em> cryogenic calorimeters. Light targets and sub-keV thresholds matter most.`, cls: "warn" },
+    lowMass:     { html: `Low mass (0.2–2.5 GeV) — <em>DarkSide-50 Migdal / ionisation-only</em> is world-leading here.` },
+    pandax:      { html: `Sub-5 GeV mass (2.5–5 GeV) — <em>PandaX-4T</em>'s S2-only / low-threshold analysis is the SI leader in this window.` },
+    transition:  { html: `5–9 GeV transition region — LZ's standard search starts at 9 GeV; low-threshold analyses (DarkSide-50, PandaX-4T) cover below 5 GeV. Multiple experiments overlap here with no single clean winner.` },
+    classic:     { html: `The classic WIMP window (9 GeV–1 TeV) — where <em>LZ 4.2 t·yr</em> sits, having improved on previous best SI exclusions by 4× above 9 GeV.`, cls: "ok" },
+    heavy:       { html: `Very heavy WIMP (&gt;1 TeV). Rare (n = ρ/M is small), so the flux is low even though each recoil is energetic.` }
+  }[regime];
+  setCtx("ctx-mass", massText.html, massText.cls);
+
+  // ── Cross-section commentary — regime-aware ──
+  // The "sub-40 MeV" case is special: NO clean elastic SI limit exists, so we
+  // don't talk about "excluded" or "ruled out" at any σ.
+  if (regime === "subFortyMeV") {
+    if (s.sigma_n > 1e-36)
+      setCtx("ctx-xsec", `Below 40 MeV there is <em>no clean elastic SI direct-detection limit</em>. The constraints that do exist depend on non-standard assumptions, so calling a coupling this large "excluded" is misleading — it's better described as <em>not addressed by standard direct detection</em>.`);
+    else
+      setCtx("ctx-xsec", `Below 40 MeV, standard elastic SI direct detection is essentially blind — recoil energies are far below conventional thresholds. Cross-sections this small would in any case sit well below the model-dependent constraints that exist here.`);
+    return;
+  }
+
+  // For the other six regimes, use the σ bands + a per-regime verdict table.
+  const bands = XSEC_BANDS[regime];
+  let tier;
+  if      (s.sigma_n > bands.excluded) tier = "excluded";
+  else if (s.sigma_n > bands.frontier) tier = "probed";
+  else if (s.sigma_n > bands.floor)    tier = "frontier";
+  else                                 tier = "subFloor";
+
+  const xsecText = {
+    ultraLow: {
+      excluded: `Above current limits below 200 MeV. <em>DarkSide-50 Migdal</em> reaches down to 40 MeV; <em>CRESST-III</em> ultra-low-threshold calorimeters reach ~73 MeV — both rule out couplings this large in this window.`,
+      probed:   `In the historically-probed range below 200 MeV. <em>DarkSide-50 Migdal</em> and <em>CRESST-III</em> are the leading experiments at this mass.`,
+      frontier: `Near the current frontier for 40–200 MeV — set by DarkSide-50 Migdal and CRESST-III. Genuinely new territory if a detector could reach this with reliable selection.`,
+      subFloor: `Below current published limits in the 40–200 MeV window. The path forward is cryogenic detectors with ever-lower thresholds, not bigger noble-liquid TPCs.`
+    },
+    lowMass: {
+      excluded: `Above current low-mass direct-detection limits. From 0.2–2.5 GeV, <em>DarkSide-50</em>'s Migdal / ionisation-only analyses are world-leading.`,
+      probed:   `In the historically-probed low-mass range. <em>DarkSide-50 Migdal</em> dominates here — world-leading below ~3.6 GeV at publication.`,
+      frontier: `Near the current frontier for low-mass SI — set by <em>DarkSide-50 Migdal</em>.`,
+      subFloor: `Below DarkSide-50's published low-mass reach. The path forward is <em>DarkSide-20k</em> S2+Migdal and dedicated cryogenic experiments.`
+    },
+    pandax: {
+      excluded: `Above PandaX-4T's published low-threshold limit. From 2.5–5 GeV, <em>PandaX-4T</em>'s S2-only analysis (1.04 t·yr exposure) is the SI leader.`,
+      probed:   `In the historically-probed 2.5–5 GeV range. <em>PandaX-4T</em>'s low-threshold S2-only analysis is the current leader; DS-50 and other low-threshold analyses also overlap here.`,
+      frontier: `Near PandaX-4T's published frontier for 2.5–5 GeV.`,
+      subFloor: `Below current published limits in the 2.5–5 GeV window. Pushing here requires both the largest exposures and the lowest practical thresholds.`
+    },
+    transition: {
+      excluded: `Above current limits in the 5–9 GeV transition window — multiple analyses (DarkSide-50, PandaX-4T low-threshold, edge of LZ) overlap and rule out couplings this large.`,
+      probed:   `In the historically-probed 5–9 GeV transition range. LZ's published result starts at 9 GeV; low-threshold analyses optimise below 5 GeV — neither dominates cleanly here.`,
+      frontier: `Near the current frontier in the 5–9 GeV transition window — DarkSide-50, PandaX-4T low-threshold and the LZ low-mass edge all probe similar cross-sections here.`,
+      subFloor: `Below current limits in the 5–9 GeV transition window — territory not yet directly probed by any single experiment.`
+    },
+    classic: {
+      excluded: `Above current limits in the classic WIMP-mass region. <em>LZ</em>'s 4.2 t·yr result improves on previous best SI exclusions by 4× above 9 GeV.`,
+      probed:   `In the historically-probed classic WIMP range. <em>LZ</em> 4.2 t·yr is the current leader; earlier xenon experiments have ruled much of this out.`,
+      frontier: `Near LZ's published frontier — the classic WIMP-mass region. LZ reaches 2.1×10⁻⁴⁸ cm² at 40 GeV.`,
+      subFloor: `Below LZ's published frontier, heading toward the ν fog floor. This is where future DARWIN/XLZD and DarkSide-20k aim.`
+    },
+    heavy: {
+      excluded: `Above current heavy-WIMP limits. LZ and DarkSide-20k still probe here but lose statistical reach as n = ρ/M falls.`,
+      probed:   `In the historically-probed heavy-WIMP range — LZ and DarkSide-20k continue to constrain this region.`,
+      frontier: `Near the current heavy-WIMP frontier.`,
+      subFloor: `Below current heavy-WIMP limits — approaching the atmospheric-ν floor for heavy masses.`
+    }
+  };
+  const tone = (tier === "excluded" || tier === "subFloor") ? "warn"
+             : (tier === "frontier" ? "ok" : null);
+  setCtx("ctx-xsec", xsecText[regime][tier], tone);
+  // target
+  setCtx("ctx-target", `<span class="ctx-key">${T.name}</span> (A=${T.A}). Read out via ${T.readout}.`);
+  // threshold
+  const Emax = maxRecoil(s.Mchi, T.A, s.vesc);
+  if (s.Eth > Emax) setCtx("ctx-thresh", `Your cutoff is <span class="ctx-strong">above the maximum possible recoil</span> (${fmtEnergy(Emax)}) — this detector is blind to this WIMP.`, "warn");
+  else if (s.Eth < 0.1) setCtx("ctx-thresh", `Sub-100 eV cutoff — cryogenic / quantum-sensor territory. Opens up genuine low-mass reach.`, "ok");
+  else if (s.Eth < 1) setCtx("ctx-thresh", `Low cutoff, like a modern S2-only argon or xenon analysis.`);
+  else setCtx("ctx-thresh", `A higher cutoff cuts straight into the soft-recoil bulk — fine for heavy WIMPs, fatal for light ones.`);
+
+  // efficiency turn-on context (advanced)
+  const spanHalf = s.effHalf / Math.max(s.Eth, 1e-6);
+  if (spanHalf < 1.4) setCtx("ctx-effhalf", `A near-vertical turn-on — acceptance snaps from zero to plateau just above the cutoff. Optimistic for a real detector.`, "warn");
+  else if (spanHalf < 4) setCtx("ctx-effhalf", `A crisp turn-on, typical of a well-characterised detector.`, "ok");
+  else setCtx("ctx-effhalf", `A gradual turn-on — efficiency is still climbing well above the cutoff, so soft recoils are heavily down-weighted.`);
+  if (s.effPlateau >= 0.85) setCtx("ctx-effplat", `High acceptance, like a xenon TPC that keeps most surviving recoils.`, "ok");
+  else if (s.effPlateau >= 0.4) setCtx("ctx-effplat", `Moderate acceptance — a sizeable fraction of good recoils is still lost to cuts.`);
+  else if (s.effPlateau > 0.02) setCtx("ctx-effplat", `Harsh acceptance, like argon's tight nuclear-recoil selection — most events are thrown away even at full energy.`, "warn");
+  else setCtx("ctx-effplat", `Essentially blind — at this plateau the detector keeps almost nothing.`, "warn");
+  // advanced
+  setCtx("ctx-exp", s.exposure >= 200 ? `DarkSide-20k scale (~200 t·yr).` : s.exposure >= 4 ? `LZ scale (a few t·yr).` : s.exposure < 0.1 ? `Small, DS-50-like exposure.` : `A moderate exposure.`);
+  // background — always close on the toy note; prefix flavour where useful
+  if (s.bg < 1e-4) setCtx("ctx-bg", `Touching the neutrino fog — you can't clean below this. This rate feeds the "run the experiment" toy below.`, "ok");
+  else if (s.bg > 100) setCtx("ctx-bg", `A noisy, surface-lab-like background. This rate still feeds the "run the experiment" toy below — buried under it, signal hunting is hopeless.`, "warn");
+  else setCtx("ctx-bg", `This rate feeds the "run the experiment" toy below.`);
+  setCtx("ctx-rho", s.rho < 0.25 ? `On the low side of measurements.` : s.rho > 0.45 ? `On the high side — boosts the flux and rate.` : `Within the measured range (~0.3–0.4 GeV/cm³).`);
+  // v₀: Sun's circular speed around the galactic centre
+  if (s.v0 < 195 || s.v0 > 250) setCtx("ctx-v0", `Outside the measured range (~200–245 km/s from stellar dynamics and Gaia astrometry) — physically unusual. Higher v₀ pushes more WIMPs above threshold and lifts the recoil tail.`, "warn");
+  else setCtx("ctx-v0", `The Sun orbits the galactic centre at ~220 km/s; modern measurements (Gaia, stellar dynamics) sit in ~200–245 km/s. Higher v₀ lifts the recoil tail.`);
+  // v_esc: Milky Way escape speed at the solar position
+  if (s.vesc < 500 || s.vesc > 620) setCtx("ctx-vesc", `Outside the Milky Way's measured escape speed (~528–600 km/s from high-velocity stars in RAVE / Gaia) — at this value you're effectively modelling a different galaxy. It sets the fastest bound WIMP, and so the hardest possible recoil.`, "warn");
+  else setCtx("ctx-vesc", `RAVE and Gaia put the Milky Way's escape speed at the solar position at ~528–600 km/s, measured from the tails of nearby stellar velocities. It sets the fastest bound WIMP, and so the hardest possible recoil.`);
+  setCtx("ctx-ff", s.useFF ? `Coherence loss included — the high-energy tail is suppressed for heavy nuclei.` : `Point nucleus — idealised; the spectrum tail is harder than reality.`);
+}
+
+// ── Sync display labels ────────────────────────────────────────────────
+function syncLabels() {
+  document.getElementById("mass-value").textContent = fmtMass(state.Mchi);
+  document.getElementById("xsec-value").innerHTML = fmtSci(state.sigma_n);
+  document.getElementById("target-value").textContent = TARGETS[state.target].name + " (A=" + TARGETS[state.target].A + ")";
+  document.getElementById("thresh-value").textContent = state.Eth < 1 ? state.Eth.toFixed(2) : state.Eth.toFixed(1);
+  const eh = state.effHalf;
+  document.getElementById("effhalf-value").textContent = eh < 1 ? eh.toFixed(2) : eh.toFixed(1);
+  document.getElementById("effplat-value").textContent = (state.effPlateau*100).toFixed(0);
+  document.getElementById("exp-value").textContent = state.exposure < 1 ? state.exposure.toFixed(2) : state.exposure.toFixed(state.exposure<10?1:0);
+  document.getElementById("bg-value").textContent = state.bg < 0.01 ? state.bg.toExponential(0) : state.bg.toFixed(state.bg<1?2:0);
+  document.getElementById("rho-value").textContent = state.rho.toFixed(2);
+  document.getElementById("v0-value").textContent = state.v0.toFixed(0);
+  document.getElementById("vesc-value").textContent = state.vesc.toFixed(0);
+  document.getElementById("ff-value").textContent = state.useFF ? "On" : "Off";
+}
+
+function syncSliders() {
+  document.getElementById("mass-slider").value = massToSlider(state.Mchi);
+  document.getElementById("xsec-slider").value = xsecToSlider(state.sigma_n);
+  document.getElementById("thresh-slider").value = ethToSlider(state.Eth);
+  document.getElementById("effhalf-slider").value = ethToSlider(state.effHalf);
+  document.getElementById("effplat-slider").value = state.effPlateau;
+  document.getElementById("exp-slider").value = expToSlider(state.exposure);
+  document.getElementById("bg-slider").value = bgToSlider(state.bg);
+  document.getElementById("rho-slider").value = state.rho;
+  document.getElementById("v0-slider").value = state.v0;
+  document.getElementById("vesc-slider").value = state.vesc;
+  // target buttons
+  document.querySelectorAll("[data-target]").forEach(b => {
+    const on = b.dataset.target === state.target;
+    b.classList.toggle("active", on); b.setAttribute("aria-checked", on);
+  });
+  document.querySelectorAll("[data-ff]").forEach(b => {
+    const on = (b.dataset.ff === "on") === state.useFF;
+    b.classList.toggle("active", on); b.setAttribute("aria-checked", on);
+  });
+}
+
+// ── rAF-throttled refresh: coalesces rapid slider drags into one redraw
+//    per animation frame. Same idea as the standard debounce-on-rAF pattern;
+//    massively smoother on mobile, indistinguishable on fast desktops.
+let _refreshScheduled = false;
+function scheduleRefresh() {
+  if (_refreshScheduled) return;
+  _refreshScheduled = true;
+  requestAnimationFrame(() => { _refreshScheduled = false; refresh(); });
+}
+
+function wire() {
+  document.getElementById("mass-slider").addEventListener("input", e => { state.Mchi = massFromSlider(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("xsec-slider").addEventListener("input", e => { state.sigma_n = xsecFromSlider(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("thresh-slider").addEventListener("input", e => {
+    state.Eth = ethFromSlider(e.target.value);
+    if (!advMode) {
+      // beginner: keep the baseline shape — drag the halfway point with the
+      // cutoff so the curve translates rather than growing a long flat tail.
+      const b = TARGET_EFF[state.target] || TARGET_EFF.xe;
+      const ratio = b.half / Math.max(b.start, 1e-6);
+      state.effHalf = state.Eth * ratio;
+      document.getElementById("effhalf-slider").value = ethToSlider(state.effHalf);
+    } else if (state.effHalf < state.Eth * EFF_MARGIN) {
+      // advanced: independent control, but never let halfway invert below cutoff
+      state.effHalf = state.Eth * EFF_MARGIN;
+      document.getElementById("effhalf-slider").value = ethToSlider(state.effHalf);
+    }
+    syncLabels(); scheduleRefresh();
+  });
+  document.getElementById("effhalf-slider").addEventListener("input", e => {
+    let v = ethFromSlider(e.target.value);
+    v = Math.max(v, state.Eth * EFF_MARGIN);       // clamp: halfway ≥ cutoff + margin
+    state.effHalf = v;
+    if (ethFromSlider(e.target.value) < v) e.target.value = ethToSlider(v);
+    syncLabels(); scheduleRefresh();
+  });
+  document.getElementById("effplat-slider").addEventListener("input", e => {
+    state.effPlateau = Math.max(0, Math.min(1, parseFloat(e.target.value)));
+    syncLabels(); scheduleRefresh();
+  });
+  document.getElementById("exp-slider").addEventListener("input", e => { state.exposure = expFromSlider(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("bg-slider").addEventListener("input", e => { state.bg = bgFromSlider(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("rho-slider").addEventListener("input", e => { state.rho = parseFloat(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("v0-slider").addEventListener("input", e => { state.v0 = parseFloat(e.target.value); syncLabels(); scheduleRefresh(); });
+  document.getElementById("vesc-slider").addEventListener("input", e => { state.vesc = parseFloat(e.target.value); syncLabels(); scheduleRefresh(); });
+
+  document.querySelectorAll("[data-target]").forEach(b => b.addEventListener("click", () => { state.target = b.dataset.target; loadTargetBaseline(state); syncSliders(); syncLabels(); refresh(); }));
+  document.querySelectorAll("[data-ff]").forEach(b => b.addEventListener("click", () => { state.useFF = (b.dataset.ff === "on"); syncSliders(); syncLabels(); refresh(); }));
+
+  // ── Radiogroup keyboard navigation (arrow keys move focus + selection)
+  document.querySelectorAll('.toggle-row[role="radiogroup"]').forEach(group => {
+    const radios = Array.from(group.querySelectorAll('[role="radio"]'));
+    // Roving tabindex: only the active radio is tabbable (or the first if none active)
+    function syncTab() {
+      const activeIdx = Math.max(0, radios.findIndex(r => r.classList.contains("active")));
+      radios.forEach((r,i) => r.tabIndex = (i === activeIdx) ? 0 : -1);
+    }
+    syncTab();
+    group.addEventListener("click", syncTab);   // keep in sync after clicks
+    radios.forEach((r, idx) => {
+      r.addEventListener("keydown", ev => {
+        let target = null;
+        if (ev.key === "ArrowRight" || ev.key === "ArrowDown") target = radios[(idx+1) % radios.length];
+        else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") target = radios[(idx-1+radios.length) % radios.length];
+        else if (ev.key === "Home") target = radios[0];
+        else if (ev.key === "End")  target = radios[radios.length-1];
+        if (target) { ev.preventDefault(); target.click(); target.focus(); }
+      });
+    });
+  });
+
+  document.getElementById("toy-run").addEventListener("click", runToyOnce);
+  document.getElementById("toy-run100").addEventListener("click", runToy100);
+
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    Object.assign(state, DEFAULTS);
+    loadTargetBaseline(state);
+    syncSliders(); syncLabels(); refresh();
+  });
+
+  const modeBtn = document.getElementById("btn-mode");
+  modeBtn.addEventListener("click", () => {
+    advMode = !advMode;
+    document.body.classList.toggle("adv-mode", advMode);
+    modeBtn.classList.toggle("active", advMode);
+    modeBtn.setAttribute("aria-pressed", advMode ? "true" : "false");
+    modeBtn.textContent = advMode ? "Beginner mode" : "Advanced mode";
+    refresh();
+    setupPaneDots();   // re-evaluate dot count
+  });
+
+  // presets — target acceptance baselines load automatically; a preset may
+  // override the cutoff/halfway/plateau where it wants to make a teaching point.
+  const PRESETS = {
+    classic:  { Mchi:100, sigma_n:1e-45, target:"xe", exposure:1, bg:0.1 },
+    lowmass:  { Mchi:1,   sigma_n:1e-42, target:"si", exposure:0.1, bg:1 },
+    heavy:    { Mchi:5000,sigma_n:1e-45, target:"xe", exposure:50, bg:0.01 },
+    mismatch: { Mchi:2,   sigma_n:1e-43, target:"xe", exposure:1, bg:0.1 },
+    cliff:    { Mchi:5,   sigma_n:1e-43, target:"ar", exposure:0.05, bg:0.1, Eth:30, effHalf:75 },
+    darkside: { Mchi:50,  sigma_n:1e-45, target:"ar", exposure:200, bg:1e-3 },
+    lz:       { Mchi:40,  sigma_n:1e-47, target:"xe", exposure:4, bg:1e-3 },
+    // "Near the ν-fog" — quiet xenon at the mass where the ⁸B–atmospheric
+    // ν-fog valley sits (~30 GeV), with σ set near the Ar-fog floor scale.
+    // Pedagogically: even a noise-free huge detector hits a hard limit here.
+    nufog:    { Mchi:30,  sigma_n:1e-48, target:"xe", exposure:200, bg:1e-5 }
+  };
+  document.querySelectorAll("[data-preset]").forEach(b => b.addEventListener("click", () => {
+    const p = PRESETS[b.dataset.preset];
+    if (!p) return;
+    Object.assign(state, DEFAULTS, p);
+    loadTargetBaseline(state);                 // realistic acceptance for the target
+    if (p.Eth !== undefined) state.Eth = p.Eth; // honour explicit teaching overrides
+    if (p.effHalf !== undefined) state.effHalf = p.effHalf;
+    if (p.effPlateau !== undefined) state.effPlateau = p.effPlateau;
+    state.effHalf = Math.max(state.effHalf, state.Eth * EFF_MARGIN);
+    syncSliders(); syncLabels(); refresh();
+    document.querySelector(".plot-card").scrollIntoView({ behavior:"smooth", block:"start" });
+  }));
+}
+
+// ── Per-pane "What does this plot show?" copy (visible mobile + desktop)
+const PANE_EXPLAIN = {
+  "svg-vel": {
+    label: "Velocity distribution",
+    html: `<p><strong>Lab-frame velocity distribution.</strong> The probability that a halo particle is moving at a given speed past you on Earth — the rotation of the galaxy plus the Sun's orbit show up as a shifted Maxwellian, cut off at the galactic escape speed. The shaded fast-tail (green) is what's actually fast enough to produce a recoil above threshold; everything to the left of the dashed line is too slow to register.</p><p>Drag the WIMP mass down and the dashed line moves right — light particles need to be faster to deposit the same energy, and the tail thins out. That's the threshold cliff in halo-velocity form.</p>`
+  },
+  "svg-rec": {
+    label: "Recoil spectrum",
+    html: `<p><strong>The recoil energy spectrum dR/dE.</strong> The line is the raw differential rate — every nucleus that recoils. Below the threshold the spectrum is filled red (lost to acceptance); above it the spectrum is filled green and weighted by the detector efficiency ε(E), shown as the dashed teal curve on the right axis.</p><p>The cross-section slider rescales the whole curve up or down; mass and target reshape it. The y-axis is locked to a stable reference so the spectrum stays comparable as you sweep the other controls.</p>`
+  },
+  "svg-sig": {
+    label: "σ–mass",
+    html: `<p><strong>Cross-section vs WIMP mass</strong> (advanced mode). Shows where your current WIMP candidate sits relative to published 90% C.L. limits from LZ, DarkSide-50 and DarkSide-20k, plus the neutrino-fog shaded floor.</p><p>This is the same plane the sensitivity explorer maps in detail. Here it's a placement tool: are you above the published limits (excluded), beneath them (still allowed), or down in the fog (where progress slows to a crawl)?</p>`
+  }
+};
+
+// Show a given pane's explainer in the disclosure body + mark the right tab active.
+// Single source of truth for "what's selected" — used by both tab clicks and mobile swipe sync.
+function showPaneExplainer(paneId) {
+  const info = PANE_EXPLAIN[paneId];
+  if (!info) return;
+  const body = document.getElementById("plot-explain-body");
+  const legend = document.getElementById("pane-legend-name");
+  if (body) body.innerHTML = info.html;
+  if (legend) legend.textContent = info.label;
+  document.querySelectorAll(".plot-explain-tabs [data-pane-explain]").forEach(tab => {
+    const active = tab.dataset.paneExplain === paneId;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", active ? "true" : "false");
+    tab.tabIndex = active ? 0 : -1;
+  });
+}
+
+// Wire tab clicks + arrow-key navigation. Independent of mobile swipe — clicking
+// a tab just shows that pane's explainer in place; it does NOT scroll the plot row.
+(function setupExplainTabs() {
+  const tabs = Array.from(document.querySelectorAll(".plot-explain-tabs [data-pane-explain]"));
+  if (!tabs.length) return;
+  tabs.forEach((t, idx) => {
+    t.addEventListener("click", () => showPaneExplainer(t.dataset.paneExplain));
+    t.addEventListener("keydown", ev => {
+      let target = null;
+      if (ev.key === "ArrowRight" || ev.key === "ArrowDown") target = tabs[(idx+1) % tabs.length];
+      else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") target = tabs[(idx-1+tabs.length) % tabs.length];
+      else if (ev.key === "Home") target = tabs[0];
+      else if (ev.key === "End")  target = tabs[tabs.length-1];
+      if (target) {
+        // Skip tabs hidden by adv-mode (σ–mass when beginner)
+        const visible = (el) => el.offsetParent !== null;
+        if (!visible(target)) {
+          // try next/prev visible
+          const dir = (ev.key === "ArrowLeft" || ev.key === "ArrowUp") ? -1 : 1;
+          let n = tabs.indexOf(target);
+          for (let k = 0; k < tabs.length; k++) {
+            n = (n + dir + tabs.length) % tabs.length;
+            if (visible(tabs[n])) { target = tabs[n]; break; }
+          }
+        }
+        ev.preventDefault();
+        target.click();
+        target.focus();
+      }
+    });
+  });
+})();
+
+// ── Mobile pane dots ────────────────────────────────────────────────────
+function setupPaneDots() {
+  const row = document.getElementById("plot-row");
+  const dots = Array.from(document.querySelectorAll(".pane-dot"));
+  if (!row || !dots.length) return;
+  dots.forEach(dot => {
+    dot.onclick = () => {
+      const target = document.getElementById(dot.dataset.paneTarget);
+      if (target) target.scrollIntoView({ behavior:"smooth", inline:"center", block:"nearest" });
+    };
+  });
+  function updateActive() {
+    const center = row.scrollLeft + row.clientWidth/2;
+    const panes = Array.from(row.querySelectorAll(".pane-svg")).filter(p => p.offsetParent !== null);
+    let active = 0;
+    panes.forEach((p,i) => { if (p.offsetLeft <= center) active = i; });
+    dots.forEach((d,i) => d.classList.toggle("active", i === active));
+    // Mobile swipe also drives the explainer tab — keep them in sync.
+    const activePane = panes[active];
+    if (activePane) showPaneExplainer(activePane.id);
+  }
+  row.onscroll = updateActive;
+  window.addEventListener("resize", updateActive);
+  updateActive();
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────
+// Defer the first refresh() + setupPaneDots() one animation frame so the
+// browser can paint the controls, prose, "try this" panel and pre-built
+// SVG skeletons before we run the (~80-125 ms) initial draw. Cuts perceived
+// first-paint cost; total interactive time is unchanged.
+wire();
+syncSliders();
+syncLabels();
+requestAnimationFrame(() => {
+  refresh();
+  setupPaneDots();
+});
+</script>

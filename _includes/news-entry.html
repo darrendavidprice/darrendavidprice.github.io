@@ -1,0 +1,25 @@
+{% assign n = include.news %}
+{% assign catmap = "award:Award,grant:Grant,role:Role,result:Result,media:Media,milestone:Milestone" %}
+{% assign catlabel = n.category %}
+{% for pair in catmap | split: "," %}
+  {% assign kv = pair | split: ":" %}
+  {% if kv[0] == n.category %}{% assign catlabel = kv[1] %}{% endif %}
+{% endfor %}
+<li class="news f-item" data-cat="{{ n.category }}" data-tags="{{ n.tags | join: ' ' }}">
+  <span class="meta">{{ n.date }} &middot; {{ catlabel }}</span>
+  <span class="news-title">{{ n.title }}</span>
+  {% if n.body %}<span class="news-body">{{ n.body }}</span>{% endif %}
+  {% if n.link %}
+    {% if n.link.url %}
+      <span class="news-link"><a href="{{ n.link.url }}" rel="noopener">{{ n.link.label | default: "Read more" }} &nearr;</a></span>
+    {% else %}
+      <span class="news-link"><a href="{{ n.link }}" rel="noopener">Read more &nearr;</a></span>
+    {% endif %}
+  {% endif %}
+  {% if n.explainer %}
+  <details class="news-explainer">
+    <summary>More context</summary>
+    <p>{{ n.explainer }}</p>
+  </details>
+  {% endif %}
+</li>

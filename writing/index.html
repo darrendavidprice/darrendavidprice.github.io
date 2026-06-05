@@ -1,0 +1,49 @@
+---
+layout: default
+title: "Writing"
+description: "Occasional long-form writing on higher education, research policy, science, and AI."
+filters: true
+---
+<section class="hero compact">
+  <div class="container wide">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; Writing</p>
+    <p class="eyebrow">Writing</p>
+    <h1 class="display">Writing</h1>
+    <p class="lede">Occasional long-form writing on higher education, research policy, science, and AI &mdash; usually when something I want to say takes more than a tweet's worth of room.</p>
+    <p class="prose small"><a href="{{ '/feed.xml' | relative_url }}">Subscribe (RSS / Atom)</a></p>
+  </div>
+</section>
+
+<section class="container">
+  {% assign all_posts = site.posts %}
+  {% assign all_tags = "" | split: "" %}
+  {% for p in all_posts %}{% for t in p.tags %}{% unless all_tags contains t %}{% assign all_tags = all_tags | push: t %}{% endunless %}{% endfor %}{% endfor %}
+  {% assign all_tags = all_tags | sort %}
+
+  {% if all_tags.size > 0 %}
+  <div class="filterbar" data-controls="writing-list">
+    <div class="filter-group" data-group="tags" data-mode="any">
+      <span class="glabel">Filter</span>
+      {% for t in all_tags %}
+      <button class="chip" data-value="{{ t }}">{{ t | replace: "-", " " | capitalize }}</button>
+      {% endfor %}
+      <button class="chip reset">Reset</button>
+      <span class="filter-count"></span>
+    </div>
+  </div>
+  {% endif %}
+
+  <ul class="writing-list" id="writing-list">
+    {% for post in all_posts %}
+    <li class="writing-item f-item" data-tags="{{ post.tags | join: ' ' }}">
+      <span class="date">{{ post.date | date: "%-d %B %Y" }}</span>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      {% if post.subtitle %}<p class="excerpt">{{ post.subtitle }}</p>
+      {% elsif post.excerpt %}<p class="excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>{% endif %}
+      {% include tag-chips.html tags=post.tags %}
+    </li>
+    {% else %}
+    <li class="writing-item"><p class="excerpt"><em>The first piece is on its way &mdash; check back soon.</em></p></li>
+    {% endfor %}
+  </ul>
+</section>
