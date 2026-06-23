@@ -324,8 +324,21 @@ a.talk-title:hover { color: var(--accent); }
 @media (min-width: 860px) { .alumni-grid { grid-template-columns: 1fr 1fr 1fr; } }
 .alumnus-card {
   padding: 0.85rem 1rem; border: 1px solid var(--rule); background: var(--bg-elevated);
-  border-radius: 3px; display: flex; flex-direction: column; gap: 0.25rem;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0.85rem;
+  align-items: start;
 }
+.alumnus-photo {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  display: block;
+}
+.alumnus-body { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
 .alumnus-card h4 { font-family: var(--font-display); font-size: 0.97rem; color: var(--text-bright); margin: 0; font-weight: 500; font-variation-settings: "opsz" 20; }
 .alumnus-card .role { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
 .alumnus-card .focus { font-size: 0.85rem; line-height: 1.4; color: var(--text); margin: 0.25rem 0 0; }
@@ -673,3 +686,42 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   .engagement-entry > details > summary { grid-template-columns: 1fr; gap: 0.2rem; }
   .engagement-body { padding-left: 0; }
 }
+
+/* ============================================================
+   Research theme pages — hero banner + figure gallery
+   ============================================================ */
+.theme-hero {
+  margin: 0 0 1.5rem;
+  max-width: 1280px;
+  padding: 0 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.theme-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+}
+.theme-hero figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+.theme-hero figcaption .credit { display: block; font-size: 0.72rem; opacity: 0.8; margin-top: 0.1rem; }
+
+.theme-figures {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 760px) { .theme-figures { grid-template-columns: 1fr 1fr; } }
+.theme-figure { margin: 0; }
+.theme-figure img { width: 100%; height: auto; display: block; border-radius: 2px; border: 1px solid var(--rule); }
+.theme-figure figcaption { font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-top: 0.45rem; line-height: 1.4; letter-spacing: 0.02em; }

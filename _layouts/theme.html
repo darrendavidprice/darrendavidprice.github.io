@@ -6,6 +6,7 @@ layout: default
   {% if th.id == page.theme %}{% assign meta = th %}{% endif %}
 {% endfor %}
 {% assign tag = page.theme %}
+{% assign heroset = site.data.theme_heroes[page.theme] %}
 
 <section class="hero compact">
   <div class="container wide">
@@ -16,9 +17,32 @@ layout: default
   </div>
 </section>
 
+{% if heroset.hero %}
+<figure class="theme-hero">
+  <img src="{{ heroset.hero.image | relative_url }}" alt="{{ heroset.hero.alt }}" loading="lazy">
+  {% if heroset.hero.caption or heroset.hero.credit %}
+  <figcaption>
+    {% if heroset.hero.caption %}{{ heroset.hero.caption }}{% endif %}
+    {% if heroset.hero.credit %}<span class="credit">{{ heroset.hero.credit }}</span>{% endif %}
+  </figcaption>
+  {% endif %}
+</figure>
+{% endif %}
+
 <section class="container">
   {{ content }}
 </section>
+
+{% if heroset.figures %}
+<section class="container theme-figures">
+  {% for f in heroset.figures %}
+  <figure class="theme-figure">
+    <img src="{{ f.image | relative_url }}" alt="{{ f.alt }}" loading="lazy">
+    {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endfor %}
+</section>
+{% endif %}
 
 {% comment %} ---- Auto-seeded publications carrying this theme's tag ---- {% endcomment %}
 {% assign allpubs = site.data.publications.primary | concat: site.data.publications.editorial | concat: site.data.publications.proceedings %}
@@ -132,17 +156,20 @@ layout: default
   <div class="alumni-grid">
     {% for a in alumni_people %}
     <article class="alumnus-card">
-      <h4>{{ a.name }}</h4>
-      <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
-      {% if a.focus %}<p class="focus">{{ a.focus }}</p>{% endif %}
-      {% if a.worked_on %}
-      <div class="taglist">
-        {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+      <img class="alumnus-photo" src="{{ a.photo | default: '/assets/images/people/silhouette.svg' | relative_url }}" alt="{{ a.name }}" loading="lazy">
+      <div class="alumnus-body">
+        <h4>{{ a.name }}</h4>
+        <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
+        {% if a.focus %}<p class="focus">{{ a.focus }}</p>{% endif %}
+        {% if a.worked_on %}
+        <div class="taglist">
+          {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+        </div>
+        {% endif %}
+        {% if a.now.label %}
+        <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
+        {% endif %}
       </div>
-      {% endif %}
-      {% if a.now.label %}
-      <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
-      {% endif %}
     </article>
     {% endfor %}
   </div>

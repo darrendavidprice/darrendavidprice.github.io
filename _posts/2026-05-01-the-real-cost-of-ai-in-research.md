@@ -3,7 +3,6 @@ title: "The real cost of AI in research"
 subtitle: "What we get wrong when we treat machine learning as a cheap shortcut to scientific discovery."
 date: 2026-05-01
 tags: [higher-education, research-policy, ai, skills]
-published: false   # EDIT — example post hidden; remove this line to publish
 ---
 
 Universities are awash with talk of artificial intelligence — most of it

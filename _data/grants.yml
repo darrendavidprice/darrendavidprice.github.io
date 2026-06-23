@@ -1,32 +1,24 @@
 # ============================================================
 #  grants.yml — research funding, newest first. Shown on the
 #  CV / Leadership & service page. role: PI | Co-I | etc.
-#  Individual values intentionally not displayed; combined
-#  totals live in the CV page header text.
+#  >>> Seeded from the CV (to Jan 2023). Update as needed.
 # ============================================================
-totals:
-  attributable: "£6.2M"
-  total_value: "£25.5M"
-
 entries:
-  - { year: "2025–27", title: "Particle Physics Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
-  - { year: "2024–27", title: "DarkSide-UK project grant", role: "PI", funder: "STFC" }
-  - { year: "2023–25", title: "UKRI Boulby Laboratory infrastructure development project", role: "PI", funder: "UKRI" }
-  - { year: "2023–24", title: "DarkSide-UK project grant", role: "PI", funder: "STFC" }
-  - { year: "2023–24", title: "Data Intensive Science CDT funding", role: "PI", funder: "STFC" }
-  - { year: "2023–26", title: "Experiment Responsive RA Grant", role: "Co-I", funder: "STFC" }
-  - { year: "2022",    title: "IRIS Digital Research Infrastructure grant", role: "PI" }
-  - { year: "2022–25", title: "Particle Physics Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
-  - { year: "2021",    title: "4IR CDT Impact Acceleration Account award", role: "PI" }
-  - { year: "2021–24", title: "PPRP DarkSide project grant", role: "Co-I (UK) / PI (UoM)", funder: "STFC" }
-  - { year: "2020–24", title: "Training Grant (Industrial CASE)", role: "PI", funder: "STFC" }
-  - { year: "2020",    title: "CDT award (NPIF talent funding)", role: "PI", funder: "STFC" }
-  - { year: "2019–21", title: "Turing Project Award — “Towards machine learning-enabled scientific discovery”", role: "PI", funder: "Alan Turing Institute" }
-  - { year: "2019–23", title: "DarkSide Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
-  - { year: "2019–22", title: "Manchester Consolidated Grant", role: "Co-I", funder: "STFC" }
-  - { year: "2017–21", title: "CDT award — “From Steam Engines to Data Engines: big science and the fourth industrial revolution (4IR)”", role: "PI", funder: "STFC" }
-  - { year: "2017–19", title: "ATLAS Upgrade R&D research grant", role: "Co-I", funder: "STFC" }
-  - { year: "2016–20", title: "PPGP Capital Equipment grant", role: "Co-I" }
-  - { year: "2015–21", title: "Senior Experimental Fellowship award", role: "PI", funder: "IPPP Durham" }
-  - { year: "2015–20", title: "Ernest Rutherford Fellowship — “Using the LHC as an electroweak boson collider”", role: "PI", funder: "STFC" }
-  - { year: "2013–15", title: "Marie Curie IEF — “A path to understanding: precision studies through Weak Boson Fusion”", role: "PI", funder: "EU FP7" }
+  - { year: "2022–25", title: "DarkSide-UK project grant", value: "£94k", role: "PI", funder: "STFC" }
+  - { year: "2023–24", title: "Data Intensive Science CDT funding", value: "£30k", role: "PI", funder: "STFC" }
+  - { year: "2023–26", title: "Experiment Responsive RA Grant", value: "£569k", role: "Co-I", funder: "STFC" }
+  - { year: "2022",    title: "IRIS Digital Research Infrastructure grant", value: "£22k", role: "PI" }
+  - { year: "2022–25", title: "Particle Physics Experimental Consolidated Grant", value: "£4.51M", role: "Co-I", funder: "STFC" }
+  - { year: "2021",    title: "4IR CDT Impact Acceleration Account award", value: "£50k", role: "PI" }
+  - { year: "2021–25", title: "PPRP DarkSide project grant", value: "£865k (UK bid); £115k UoM", role: "Co-I (UK) / PI (UoM part)", funder: "STFC" }
+  - { year: "2020–24", title: "Training Grant (Industrial CASE)", value: "£192k", role: "PI", funder: "STFC" }
+  - { year: "2020",    title: "CDT award (NPIF talent funding)", value: "£100k", role: "PI", funder: "STFC" }
+  - { year: "2019–21", title: "Turing Project Award — “Towards machine learning-enabled scientific discovery”", value: "£223k", role: "PI", funder: "Alan Turing Institute" }
+  - { year: "2019–23", title: "DarkSide Experimental Consolidated Grant", value: "£67k", role: "Co-I", funder: "STFC" }
+  - { year: "2019–22", title: "Manchester Consolidated Grant", value: "£5.64M", role: "Co-I", funder: "STFC" }
+  - { year: "2017–25", title: "CDT award — “From Steam Engines to Data Engines: big science and the fourth industrial revolution (4IR)”", value: "£1.66M", role: "PI", funder: "STFC" }
+  - { year: "2017–19", title: "ATLAS Upgrade R&D research grant", value: "£191k", role: "Co-I", funder: "STFC" }
+  - { year: "2016–20", title: "PPGP Capital Equipment grant", value: "£719k", role: "Co-I" }
+  - { year: "2015–20", title: "Senior Experimental Fellowship award", value: "£10k", role: "PI", funder: "IPPP Durham" }
+  - { year: "2015–20", title: "Ernest Rutherford Fellowship — “Using the LHC as an electroweak boson collider”", value: "£517k", role: "PI", funder: "STFC" }
+  - { year: "2013–15", title: "Marie Curie IEF — “A path to understanding: precision studies through Weak Boson Fusion”", value: "€222k", role: "PI", funder: "EU FP7" }

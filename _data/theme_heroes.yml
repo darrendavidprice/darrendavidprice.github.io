@@ -1,0 +1,59 @@
+# ============================================================
+#  theme_heroes.yml — per-theme hero banner + optional inline
+#  figures. Drives the hero strip at the top of a research
+#  theme page, and an optional figure gallery below the body.
+#
+#  Schema:
+#    <theme-id>:
+#      hero:
+#        image:   "/assets/images/heroes/<theme>.jpg"   # 1600×720 ideal
+#        alt:     "..."
+#        caption: "..."        # optional, displayed below hero
+#        credit:  "..."        # optional, small grey credit line
+#      figures:                # optional, rendered after page body
+#        - { image: "...", alt: "...", caption: "..." }
+#        - ...
+#
+#  Theme IDs follow `_data/themes.yml`. Themes with no entry
+#  here render without a hero, exactly as before.
+# ============================================================
+
+dark-matter:
+  hero:
+    image: /assets/images/heroes/dark-matter.jpg
+    alt: "Darren in front of the DarkSide-20k veto vessel during assembly"
+    caption: "DarkSide-20k veto vessel during construction at LNGS, Italy."
+  figures:
+    - image:   /assets/images/themes/dark-matter-boulby.jpg
+      alt:     "Visiting the Boulby Underground Laboratory"
+      caption: >-
+        Boulby Underground Laboratory, 1,100 m beneath the North Sea — host
+        site for the proposed DarkSide-LowMass detector.
+
+instrumentation:
+  hero:
+    image: /assets/images/heroes/instrumentation.jpg
+    alt: "Underside of a DarkSide vPDU showing the gold-plated PCB"
+    caption: >-
+      Underside of a DarkSide veto Photon Detector Unit (vPDU) — gold-plated
+      readout PCB designed and assembled at Manchester.
+  figures:
+    - image:   /assets/images/themes/instrumentation-vpdu-assembly.jpg
+      alt:     "Assembling a vPDU module with silicon photosensor tiles"
+      caption: >-
+        Assembling a vPDU module from silicon photosensor tiles in the
+        Manchester cleanroom.
+    - image:   /assets/images/themes/instrumentation-levitating.jpg
+      alt:     "Optomechanical levitating-sensor vacuum chamber and optics table"
+      caption: >-
+        Vacuum chamber and laser optics for an optomechanical
+        levitated-sensor — a complementary detection technology now under
+        development at Manchester.
+
+levitating-sensors:
+  hero:
+    image: /assets/images/heroes/levitating-sensors.jpg
+    alt: "Optomechanical levitating-sensor vacuum chamber and optics table"
+    caption: >-
+      The Manchester optomechanical levitated-sensor experiment — vacuum
+      chamber and laser optics table.

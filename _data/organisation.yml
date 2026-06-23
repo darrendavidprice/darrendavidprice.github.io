@@ -2,24 +2,29 @@
 #  organisation.yml — organisation of conferences & workshops,
 #  newest first. Shown on the CV / Leadership & service page.
 #  >>> Seeded from the CV. Update as needed.
+#  (Attendee sizes intentionally omitted.)
 # ============================================================
 entries:
-  - { year: 2023, role: "Chair", event: "ATLAS-UK collaboration meeting", location: "Manchester, UK", size: "~300" }
-  - { year: 2022, role: "Organising committee", event: "Lepton Photon 2021 (held 2022)", location: "Manchester, UK", size: "~400" }
-  - { year: 2021, role: "Organising committee", event: "Quarkonia As Tools", location: "Virtual", size: "122" }
+  - { year: 2026, role: "Chair", event: "DarkSide Collaboration meeting", location: "Manchester, UK" }
+  - { year: 2025, role: "Chair", event: "DarkSide-UK Collaboration meeting", location: "Manchester, UK" }
+  - { year: 2023, role: "Chair", event: "ATLAS-UK collaboration meeting", location: "Manchester, UK" }
+  - { year: 2023, role: "Organising committee", event: "International Workshop on Multiple Parton Interactions at the LHC", location: "Manchester, UK" }
+  - { year: 2022, role: "Organising committee", event: "Lepton Photon 2021 (held 2022)", location: "Manchester, UK" }
+  - { year: 2021, role: "Organising committee", event: "Quarkonia As Tools", location: "Virtual" }
   - { year: 2021, role: "Chair", event: "UK HEP Public Engagement Conference", location: "Rutherford Appleton Laboratory, UK" }
   - { year: 2021, role: "International Scientific Committee", event: "Light Detection in Noble Elements" }
-  - { year: 2019, role: "Chair", event: "Data science physics & astronomy scoping workshop", location: "Alan Turing Institute, UK", size: "~60" }
-  - { year: 2019, role: "Organising committee", event: "Light Detection in Noble Elements", location: "Manchester, UK", size: "80" }
-  - { year: 2019, role: "Chair", event: "Dark Matter UK community meeting", location: "Manchester, UK", size: "~50" }
-  - { year: 2019, role: "Local organising committee", event: "PASCOS 2019", location: "Manchester, UK", size: "185" }
-  - { year: 2019, role: "Organising committee", event: "Quarkonia As Tools", location: "Aussois, France", size: "~40" }
-  - { year: 2018, role: "Organiser", event: "Effective Field Theory Hackathon (5-day workshop)", location: "IPPP Durham, UK", size: "~20" }
-  - { year: 2017, role: "Working group convener", event: "LHC Chapter 2: The Run for New Physics", location: "IIP-UFRN Natal, Brazil", size: "~50" }
-  - { year: 2016, role: "Organiser", event: "Future of Vector Boson Fusion measurements (workshop)", location: "IPPP Durham, UK", size: "~50" }
-  - { year: 2015, role: "Convener & organiser", event: "QCD sessions, EPS-HEP 2015", location: "Vienna, Austria", size: "~600" }
-  - { year: 2015, role: "Organising committee", event: "IoP High Energy Particle Physics Annual Meeting", location: "Manchester, UK", size: "~350" }
-  - { year: 2014, role: "Organising committee", event: "Quarkonium2014: Probing QCD at the LHC", location: "CERN, Geneva", size: "~200" }
-  - { year: 2013, role: "Organiser", event: "ATLAS workshop on Vector Boson Fusion", location: "Manchester, UK", size: "~20" }
-  - { year: 2013, role: "Scientific organising committee", event: "Young Experimentalist & Theorist Institute on HEP", location: "Durham, UK", size: "~80" }
-  - { year: 2012, role: "Convener", event: "QCD sessions, Hadron Collider Physics Symposium", location: "Kyoto, Japan", size: "~300" }
+  - { year: 2019, role: "Chair", event: "Data science physics & astronomy scoping workshop", location: "Alan Turing Institute, UK" }
+  - { year: 2019, role: "Organising committee", event: "Light Detection in Noble Elements", location: "Manchester, UK" }
+  - { year: 2019, role: "Chair", event: "Dark Matter UK community meeting", location: "Manchester, UK" }
+  - { year: 2019, role: "Local organising committee", event: "PASCOS 2019", location: "Manchester, UK" }
+  - { year: 2019, role: "Organising committee", event: "Quarkonia As Tools", location: "Aussois, France" }
+  - { year: 2018, role: "Organiser", event: "Effective Field Theory Hackathon (5-day workshop)", location: "IPPP Durham, UK" }
+  - { year: 2017, role: "Working group convener", event: "LHC Chapter 2: The Run for New Physics", location: "IIP-UFRN Natal, Brazil" }
+  - { year: 2016, role: "Organiser", event: "Future of Vector Boson Fusion measurements (workshop)", location: "IPPP Durham, UK" }
+  - { year: 2015, role: "Convener & organiser", event: "QCD sessions, EPS-HEP 2015", location: "Vienna, Austria" }
+  - { year: 2015, role: "Organising committee", event: "IoP High Energy Particle Physics Annual Meeting", location: "Manchester, UK" }
+  - { year: 2014, role: "Organising committee", event: "Quarkonium2014: Probing QCD at the LHC", location: "CERN, Geneva" }
+  - { year: 2013, role: "Organiser", event: "ATLAS workshop on Vector Boson Fusion", location: "Manchester, UK" }
+  - { year: 2013, role: "Scientific organising committee", event: "Young Experimentalist & Theorist Institute on HEP", location: "Durham, UK" }
+  - { year: 2013, role: "Organiser", event: "Experimental-theory workshop on new physics opportunities with vector boson plus quarkonium production", location: "CERN, Geneva" }
+  - { year: 2012, role: "Convener", event: "QCD sessions, Hadron Collider Physics Symposium", location: "Kyoto, Japan" }

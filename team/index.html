@@ -17,8 +17,7 @@ wide: true
   {% for m in site.data.team.current %}
   <article class="member-card">
     <div class="member-photo">
-      {% if m.photo %}<img src="{{ m.photo | relative_url }}" alt="{{ m.name }}">
-      {% else %}<span class="placeholder">{{ m.initials }}</span>{% endif %}
+      <img src="{{ m.photo | default: '/assets/images/people/silhouette.svg' | relative_url }}" alt="{{ m.name }}">
     </div>
     <div>
       <h3>{{ m.name }}</h3>
@@ -46,17 +45,20 @@ wide: true
 <div class="alumni-grid">
   {% for a in site.data.team.alumni %}
   <article class="alumnus-card">
-    <h4>{{ a.name }}</h4>
-    <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
-    {% if a.focus %}<p class="focus">{{ a.focus }}</p>{% endif %}
-    {% if a.worked_on %}
-    <div class="taglist">
-      {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+    <img class="alumnus-photo" src="{{ a.photo | default: '/assets/images/people/silhouette.svg' | relative_url }}" alt="{{ a.name }}" loading="lazy">
+    <div class="alumnus-body">
+      <h4>{{ a.name }}</h4>
+      <p class="role">{{ a.role }}{% if a.years and a.years != "—" %} &middot; {{ a.years }}{% endif %}</p>
+      {% if a.focus %}<p class="focus">{{ a.focus }}</p>{% endif %}
+      {% if a.worked_on %}
+      <div class="taglist">
+        {% for w in a.worked_on %}<span class="tag">{{ w }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      {% if a.now.label %}
+      <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
+      {% endif %}
     </div>
-    {% endif %}
-    {% if a.now.label %}
-    <p class="nowat">Now {% if a.now.url %}<a href="{{ a.now.url }}" rel="noopener">{{ a.now.label }}</a>{% else %}{{ a.now.label }}{% endif %}</p>
-    {% endif %}
   </article>
   {% endfor %}
 </div>
@@ -64,4 +66,7 @@ wide: true
 <hr class="rule">
 
 <h2 class="section-label">The group</h2>
-<div class="placeholder-fig">PLACEHOLDER — group photo</div>
+<figure class="page-fig">
+  <img src="{{ '/assets/images/team-group-2022.jpg' | relative_url }}" alt="The Manchester DarkSide and ATLAS group at a social, July 2022" loading="lazy">
+  <figcaption>Part of the group at a social in Manchester, July 2022. Group photos rotate as new members join.</figcaption>
+</figure>

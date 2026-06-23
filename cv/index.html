@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Leadership & service"
+title: "Leadership, governance & service"
 eyebrow: "CV"
-heading: "Leadership & service"
-lede: "An informal CV: leadership and management roles, research funding, conference organisation, and professional service. The full publication record is at INSPIRE-HEP."
-breadcrumb: '<a href="/">Home</a> &rsaquo; Leadership &amp; service'
+heading: "Leadership, governance & service"
+lede: "Selected leadership, governance and advisory roles spanning international research collaborations, national funding and fellowship panels, university strategy and interdisciplinary research programmes, together with research funding and conference organisation activities."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Leadership, governance &amp; service'
 wide: true
 ---
 
@@ -31,12 +31,12 @@ wide: true
 <hr class="rule">
 
 <h2 class="section-label" id="grants">Research grants</h2>
-<p class="prose small">Combined grant income attributable to me (CoI credit split) of <strong>{{ site.data.grants.totals.attributable }}</strong>, with a total grant value of <strong>{{ site.data.grants.totals.total_value }}</strong>.</p>
+<p class="prose small">Sustained external funding attributable to me of £4.1M (CoI credit split), total grant value £15.7M.</p>
 <ul class="roles-list">
   {% for gr in site.data.grants.entries %}
   <li class="role-item">
     <span class="yr">{{ gr.year }}</span>
-    <span class="what"><strong>{{ gr.title }}</strong>{% if gr.role %} &middot; {{ gr.role }}{% endif %}{% if gr.funder %} &middot; {{ gr.funder }}{% endif %}</span>
+    <span class="what"><strong>{{ gr.title }}</strong> — {{ gr.value }}{% if gr.role %} &middot; {{ gr.role }}{% endif %}{% if gr.funder %} &middot; {{ gr.funder }}{% endif %}</span>
   </li>
   {% endfor %}
 </ul>

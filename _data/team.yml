@@ -2,11 +2,12 @@
 #  team.yml — current Manchester group + alumni.
 #  alumni schema: name, role, years, worked_on (tags), focus
 #  (one-line project description, mirrors current[].focus),
-#  optional now: { label, url }.
+#  optional photo: (/assets/images/people/...; falls back to
+#  silhouette.svg when empty), optional now: { label, url }.
 # ============================================================
 current:
 - initials: DP
-  photo: ''
+  photo: /assets/images/people/darren-price.jpg
   name: Prof. Darren Price
   role: Principal Investigator
   focus: Works across dark matter at colliders and in direct detection, phenomenology, instrumentation, and the deployment of AI techniques.
@@ -83,7 +84,7 @@ current:
   - Levitating sensors
   - ML/AI
 - initials: CR
-  photo: ''
+  photo: /assets/images/people/conner-roberts.jpg
   name: Conner Roberts
   role: PhD student (2021–)
   focus: Silicon photosensor instrumentation for next-generation dark matter searches.
@@ -135,6 +136,7 @@ alumni:
     label: ''
     url: ''
   focus: ATLAS analysis — electroweak and Higgs measurements.
+  photo: /assets/images/people/sam-dysch.jpg
 - name: Dr. James Robinson
   role: Postdoctoral Research Associate
   years: —
@@ -155,6 +157,7 @@ alumni:
     label: ''
     url: ''
   focus: Expressive density models and machine learning for the physical sciences.
+  photo: /assets/images/people/stephen-menary.jpg
 - name: Dr. Agni Bethani
   role: Postdoctoral Research Associate
   years: —
@@ -184,6 +187,7 @@ alumni:
     label: Research fellow, Hong Kong
     url: ''
   focus: Determination of the electroweak Zjj production cross-section at ATLAS.
+  photo: /assets/images/people/julia-iturbe.jpg
 - name: Mark Langstaff
   role: Electronics Technician
   years: —
@@ -194,6 +198,7 @@ alumni:
     label: ''
     url: ''
   focus: Electronics for silicon photosensor systems on DarkSide.
+  photo: /assets/images/people/mark-langstaff.jpg
 - name: Ben Wilson
   role: PhD student
   years: 2020–2024
@@ -204,6 +209,7 @@ alumni:
     label: ''
     url: ''
   focus: Novel probes of lepton number violation through electroweak interactions.
+  photo: /assets/images/people/ben-wilson.jpg
 - name: Dr. Ellen Sandford
   role: PhD student
   years: 2019–2023
@@ -214,6 +220,7 @@ alumni:
     label: ''
     url: ''
   focus: Non-standard dark matter searches with the DarkSide experiment.
+  photo: /assets/images/people/ellen-sandford.jpg
 - name: Dr. Candice Basson
   role: PhD student
   years: 2017–2022
@@ -224,6 +231,7 @@ alumni:
     label: ''
     url: ''
   focus: Standard Model backgrounds in the search for dark matter produced in association with b-quarks at ATLAS.
+  photo: /assets/images/people/candice-basson.jpg
 - name: Dr. Rebecca Pickles
   role: PhD student
   years: 2015–2019
@@ -234,6 +242,7 @@ alumni:
     label: ''
     url: ''
   focus: Novel searches for new phenomena through electroweak boson fusion measurements at ATLAS.
+  photo: /assets/images/people/rebecca-pickles.jpg
 - name: Conor Sheehan
   role: PhD student
   years: —
@@ -244,6 +253,7 @@ alumni:
     label: Data Scientist, Peak
     url: ''
   focus: EDIT ME — research focus to add.
+  photo: /assets/images/people/conor-sheehan.jpg
 - name: Dr. Yaadav Bhauruth
   role: PhD student
   years: 2013–2017
@@ -261,6 +271,7 @@ alumni:
     label: Postdoc, University of Oregon (ATLAS)
     url: ''
   focus: Observation of electroweak W+jets production and kinematic tests of vector boson fusion.
+  photo: /assets/images/people/aparajita-dattagupta.jpg
 - name: Dr. Yi Yang
   role: PhD student (Indiana University)
   years: 2008–2012
@@ -271,6 +282,7 @@ alumni:
     label: Faculty, Nat'l Cheng Kung University (AMS)
     url: ''
   focus: Di-muons near the Upsilon resonances in ATLAS.
+  photo: /assets/images/people/yi-yang.jpg
 - name: Eleanor Bishop
   role: MScR student
   years: 2021–2022
@@ -278,6 +290,7 @@ alumni:
   - Dark matter
   - Neutrinos
   focus: Prospects for DarkSide-20k to probe non-standard neutrino interactions from solar neutrino sources.
+  photo: /assets/images/people/eleanor-bishop.jpg
 - name: Huazhen Li
   role: MScR student
   years: 2021–2022
@@ -498,6 +511,7 @@ alumni:
   - Collider physics
   - Electroweak
   focus: Sensitivity studies for new ATLAS searches for heavy sterile Majorana neutrinos.
+  photo: /assets/images/people/mohamed-aly.jpg
 - name: Emily Hampshire
   role: Summer research intern
   years: '2019'
