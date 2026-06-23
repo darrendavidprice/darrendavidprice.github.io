@@ -2,7 +2,7 @@
 
 <!--
 ================================================================
- SITE INTERNAL VERSION — v3.2.0   (2026-06)
+ SITE INTERNAL VERSION — v3.3.0   (2026-06)
  Not displayed on the rendered site. Bump on each shipped batch
  so chats / zip files can be reconciled across sessions:
    MAJOR  — site-wide restructure, theme overhaul, breaking schema
@@ -10,6 +10,21 @@
             new page types, accessibility / SEO landings)
    PATCH  — content corrections, small visual fixes, typo passes
  History (top = newest):
+   v3.3.0  CV grants + roles overhaul. Grants: per-grant £ values
+           removed from data AND template (never displayed again),
+           strapline totals corrected to £6.2M attributable / £25.5M
+           total + Breakthrough (2025) & EPS (2013) prizes, full
+           21-grant list. Roles regrouped to CV-excerpt headings
+           (international collaborations / national projects / funding
+           agencies / University of Manchester) plus Professional
+           service and Fellowships & prizes; added JBCE board, Senate,
+           Public & Civic Engagement Group, UKRI-STFC Projects Peer
+           Review Panel, EPS Prize; IPPOG moved to international;
+           dropped the duplicated Turing project-management role.
+           Bundles two build hotfixes: exclude HANDOFF.md/TODO.md from
+           Jekyll (Liquid example broke the GitHub Pages build), and
+           the conference [N attendees] reserved-word fix (o.size →
+           o.attendees).
    v3.2.0  CV refresh (roles/grants/organisation: new DarkSide
            coordinator + IAB roles, Associate Dean for Engagement,
            Faculty Leadership Team, 2025 Breakthrough Prize, year

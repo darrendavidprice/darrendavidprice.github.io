@@ -1,59 +1,66 @@
 # ============================================================
-#  roles.yml — leadership, management and professional-service
-#  roles, grouped into sections for the CV / Leadership & service
-#  page. Newest first within each group.
-#  >>> Seeded from the CV. Update as needed.
+#  roles.yml — leadership, governance and service roles,
+#  grouped to match the CV headings. Newest first within each
+#  group. Rendered on the CV / Leadership, governance & service
+#  page (group `name` becomes an <h3> heading).
 # ============================================================
 groups:
 
-  - name: "DarkSide & dark matter"
+  - name: "Within international scientific collaborations"
+    items:
+      - { year: "2025–", what: "**Member, DarkSide experiment International Advisory Board, LNGS** — one of six board members advising on policy and strategic matters for the >€100M DarkSide project (70 institutions, 14 countries)." }
+      - { year: "2022–24", what: "**Coordinator, ATLAS Education & Outreach group, CERN** — elected by 181 institutes; reports to the ATLAS spokesperson; managed a core team of ~20." }
+      - { year: "2021–23", what: "**Editorial Board member, DarkSide international project, LNGS** — executive oversight and planning of the physics programme, strategy and outputs." }
+      - { year: "2020–", what: "Member, DarkSide Collaboration Institutional Board, LNGS." }
+      - { year: "2019–22", what: "**Co-leader, DarkSide Outer Detector Readout Electronics project** — overseeing development and installation of a key detector subsystem (500 collaborators, 14 countries)." }
+      - { year: "2017–24", what: "UK representative, International Particle Physics Outreach Group (IPPOG) Collaboration Board." }
+      - { year: "2017–18", what: "Chair, ATLAS B-Physics trigger data-stream taskforce, CERN." }
+      - { year: "2016–19", what: "LHC liaison, Quarkonium Working Group Collaboration (~250 researchers)." }
+      - { year: "2014–16", what: "**Leader, ATLAS B-Physics & Light States research group, CERN** — one of seven ATLAS physics groups; set research strategy for several hundred researchers and managed eight subgroup leaders." }
+      - { year: "2013–", what: "Editorial Board chair for ATLAS physics analyses." }
+      - { year: "2010–14", what: "Leader, Quarkonium & b-Production research subgroup at ATLAS (~30 researchers)." }
+      - { year: "2010–14", what: "Leader, Monte Carlo generator algorithms group at DØ, Fermilab (~25 researchers)." }
+      - { year: "2010–12", what: "Signature coordinator, B-trigger algorithms group at ATLAS (~20 researchers)." }
+
+  - name: "Within national scientific projects"
     items:
       - { year: "2026–", what: "**DarkSide-UK Physics Coordinator** — coordinating UK activities for science exploitation of DarkSide-20k during installation, commissioning and initial data-taking." }
-      - { year: "2025–", what: "**Member, DarkSide experiment International Advisory Board** — one of six board members advising on policy and strategic matters for the >€100M DarkSide project." }
-      - { year: "2021–23", what: "**Editorial Board member, DarkSide international project** — executive oversight of the physics programme, strategy and outputs." }
-      - { year: "2019–22", what: "**Co-leader, DarkSide Outer Detector Readout Electronics project** — overseeing development and installation of a key detector subsystem." }
+      - { year: "2021–", what: "**Work strand lead, signal-processing electronics, DarkSide-UK** — one of three top-level work strands, spanning five UK institutes." }
       - { year: "2020–", what: "**Chair, Institutional Board, DarkSide-UK** — cost/schedule reviews and leadership appointments across 15 institutes." }
-      - { year: "2020–", what: "**Work strand lead, signal-processing electronics, DarkSide-UK** — spanning five UK institutes." }
-      - { year: "2020–", what: "Member, DarkSide Collaboration Institutional Board." }
-      - { year: "2017–", what: "**Team leader, Manchester DarkSide research group** — initiated the research area and secured Manchester's membership and UK funding." }
+      - { year: "2019–21", what: "Convener, ATLAS-UK B-Physics group (20 institutes)." }
+      - { year: "2013–15", what: "Convener, ATLAS-UK Standard Model physics group (20 institutes)." }
 
-  - name: "ATLAS, DØ & international collaborations"
+  - name: "Within funding agencies"
     items:
-      - { year: "2022–24", what: "**Coordinator, ATLAS Education & Outreach group** — elected by 181 institutes; reports to the ATLAS spokesperson." }
-      - { year: "2019–21", what: "Convener, ATLAS-UK B-Physics group (16 institutes)." }
-      - { year: "2017–18", what: "Chair, ATLAS B-Physics trigger data-stream taskforce." }
-      - { year: "2016–19", what: "LHC liaison, Quarkonium Working Group Collaboration (~250 researchers)." }
-      - { year: "2014–16", what: "**Convener, ATLAS B-Physics & Light States group** — one of seven ATLAS physics groups; led research strategy and managed eight subgroup conveners." }
-      - { year: "2013–15", what: "Convener, ATLAS-UK Standard Model physics group (16 institutes)." }
-      - { year: "2013–", what: "Editorial Board chair for ATLAS physics analyses." }
-      - { year: "2010–14", what: "Convener, quarkonium & b-production physics group at ATLAS (~30 researchers)." }
-      - { year: "2010–12", what: "Signature coordinator, B-trigger algorithms group at ATLAS (~20 researchers)." }
-      - { year: "2010–14", what: "Convener, Monte Carlo generator algorithms group at DØ (~25 researchers)." }
+      - { year: "2026–", what: "**Appointed member, UKRI-STFC Projects Peer Review Panel** — expert evaluation and strategic advice on major UKRI-STFC project proposals across particle physics, particle astrophysics, nuclear physics and astronomy." }
+      - { year: "2025–", what: "Royal Society University Research Fellowships extended research appointment panel (astronomy, cosmology, physics, earth & environmental sciences)." }
+      - { year: "2022–24", what: "**Chair, UKRI-STFC GridPP7 Peer Review Panel** — UK computing for experimental particle physics and the WLCG; refocused R&D toward sustainable computing." }
+      - { year: "2019–", what: "**Member, UKRI-STFC Particle Physics Grants Panel** — assessment of all UK particle-physics grant applications, ~£100M per cycle (reappointed 2022; again 2025–27)." }
+      - { year: "2018–", what: "Individual grant/fellowship review-panel member: UKRI Talent Peer Review College; Royal Society URFs; STFC Ernest Rutherford Fellowships; Alan Turing Institute programmes; Austrian Science Fund (FWF); National Science Centre (Poland)." }
 
-  - name: "University of Manchester & data-intensive science"
+  - name: "Within the organisational structure of the University of Manchester"
     items:
+      - { year: "2026–", what: "Member, Jodrell Bank Centre for Engagement (JBCE) Programme Advisory Board." }
+      - { year: "2025–", what: "Member of Senate, University of Manchester." }
+      - { year: "2025–", what: "Member, UoM Public and Civic Engagement Group." }
+      - { year: "2024–", what: "Member, Faculty Extended Leadership Team, Faculty of Science & Engineering." }
       - { year: "2024–", what: "**Associate Dean for Engagement (public, civic, outreach), Faculty of Science & Engineering** — strategic leadership of the FSE Engagement strand; reconfigured the function into an income-generating unit securing >£400k external funding in the first year." }
-      - { year: "2024–", what: "**Member, Faculty Leadership Team**, Faculty of Science & Engineering." }
-      - { year: "2017–25", what: "**Director, 4IR STFC Centre for Doctoral Training in Data Intensive Science** — consortium across Manchester (lead), Lancaster and Sheffield." }
+      - { year: "2017–25", what: "**Director, 4IR STFC Centre for Doctoral Training in Data Intensive Science** — consortium across Manchester (lead), Lancaster and Sheffield; 28 PhD students." }
+      - { year: "2017–", what: "**Leader, Manchester dark matter research group** — founded the research area; central role in the successful UK DarkSide funding bid; delivered 25% of the DarkSide-20k silicon photosensor instrumentation." }
       - { year: "2016–25", what: "**Postgraduate Coordinator for Particle Physics** — admissions, training, pastoral support and finance for over 120 research students across the role; over 65 at any one time." }
-      - { year: "2019–21", what: "Management of an Alan Turing Institute project on ML-enabled experimental design and scientific discovery." }
-      - { year: "2015–20", what: "Member, Department Equality & Diversity and Juno committees (Athena SWAN Silver / IoP Juno Champion)." }
+      - { year: "2015–20", what: "Member, Department of Physics & Astronomy Equality & Diversity and Juno committees (Athena SWAN / IoP Juno Champion period)." }
 
-  - name: "National & professional service"
+  - name: "Professional service"
     items:
-      - { year: "2022–", what: "**Chair, UKRI-STFC GridPP Peer Review Panel** — UK computing for experimental particle physics and the WLCG." }
-      - { year: "2019–", what: "**Member, UKRI-STFC Particle Physics Grants Panel** (reappointed 2022)." }
-      - { year: "2017–24", what: "UK representative, International Particle Physics Outreach Group (IPPOG) Collaboration Board." }
-      - { year: "2023–", what: "Peer review, Royal Society University Research Fellowships." }
-      - { year: "2021–", what: "UKRI Talent Peer Review College; STFC Ernest Rutherford Fellowship panel." }
       - { year: "2011–", what: "Journal referee — PRL, JHEP, EPJC, NJP, Rev. Mod. Phys., Phys. Lett. B." }
       - { year: "2009–", what: "Chair/member of sixteen Editorial Review Boards within ATLAS and DØ." }
 
-  - name: "Fellowships"
+  - name: "Fellowships & prizes"
     items:
       - { year: "2025", what: "Co-awardee, Breakthrough Prize in Fundamental Physics." }
-      - { year: "2019–23", what: "Turing Fellowship / Turing AI Fellowship, Alan Turing Institute." }
       - { year: "2020–24", what: "University Presidential Fellowship, University of Manchester." }
+      - { year: "2019–23", what: "Turing Fellowship / Turing AI Fellowship, Alan Turing Institute." }
       - { year: "2015", what: "Ernest Rutherford Fellowship, UKRI-STFC." }
       - { year: "2015", what: "Senior Experimental Fellowship, IPPP, University of Durham." }
+      - { year: "2013", what: "Co-awardee, European Physical Society High Energy and Particle Physics Prize." }
       - { year: "2013", what: "EU Marie Curie IEF Fellowship, European Commission." }
