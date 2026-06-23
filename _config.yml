@@ -63,6 +63,8 @@ permalink: pretty
 
 exclude:
   - README.md
+  - HANDOFF.md
+  - TODO.md
   - Gemfile
   - Gemfile.lock
   - vendor
