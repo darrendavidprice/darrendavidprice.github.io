@@ -48,7 +48,7 @@ wide: true
   {% for o in site.data.organisation.entries %}
   <li class="role-item">
     <span class="yr">{{ o.year }}</span>
-    <span class="what"><strong>{{ o.role }}</strong> — {{ o.event }}{% if o.location %}, {{ o.location }}{% endif %}{% if o.size %} <span class="prose small">[{{ o.size }} attendees]</span>{% endif %}</span>
+    <span class="what"><strong>{{ o.role }}</strong> — {{ o.event }}{% if o.location %}, {{ o.location }}{% endif %}{% if o.attendees %} <span class="prose small">[{{ o.attendees }} attendees]</span>{% endif %}</span>
   </li>
   {% endfor %}
 </ul>
