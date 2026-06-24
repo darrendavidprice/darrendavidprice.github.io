@@ -1,0 +1,71 @@
+---
+layout: page
+title: "Teaching"
+eyebrow: "Teaching & learning"
+heading: "Teaching"
+lede: "Undergraduate and postgraduate teaching, research-led project supervision, and the design of training that puts real research data into students' hands."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Teaching'
+wide: true
+---
+
+<h2 class="heading">Courses &amp; curriculum</h2>
+<p class="prose">
+  I have lectured particle-physics and new-physics courses at Manchester
+  (“Frontiers of Particle Physics: Searches for New Physics”; “Special Topics:
+  Particle Physics”) and contributed to syllabus development for introductory
+  data science. I am an undergraduate tutor and a third-year laboratory
+  demonstrator.
+</p>
+
+<h2 class="heading">Real data in the lab</h2>
+<p class="prose">
+  I have built undergraduate laboratory and project work around open research
+  data released by the ATLAS Collaboration, so students analyse genuine data
+  from a running experiment. This grew from a final-year project into lab
+  courses, and into a fully remote-capable model using Jupyter notebook servers.
+</p>
+
+<h2 class="heading">Doctoral training</h2>
+<p class="prose">
+  As Director of the 4IR Centre for Doctoral Training in Data Intensive Science,
+  I designed and deliver a programme of fifteen postgraduate training courses
+  across Manchester, Lancaster and Sheffield — including industry-led training
+  and fully-online provision developed with the HEP Software Foundation and the
+  Software Sustainability Institute.
+</p>
+
+<hr class="rule">
+
+<h2 class="section-label">PhD supervision</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.phd %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what"><strong>{{ s.name }}</strong> — {{ s.topic }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">Master's by research</h2>
+<ul class="roles-list">
+  {% for s in site.data.supervision.masters_research %}
+  <li class="role-item"><span class="yr">{{ s.years }}</span><span class="what"><strong>{{ s.name }}</strong> — {{ s.topic }}</span></li>
+  {% endfor %}
+</ul>
+
+<h2 class="section-label">Postdoctoral researchers supervised</h2>
+<p class="prose">
+  {% assign names = site.data.supervision.pdra | map: "name" | join: ", " %}{{ names }}.
+</p>
+
+<h2 class="section-label">MPhys projects</h2>
+{%- assign mphys_count = 0 -%}
+{%- for s in site.data.team.current -%}{%- if s.role contains "MPhys" -%}{%- assign parts = s.name | split: " & " -%}{%- assign mphys_count = mphys_count | plus: parts.size -%}{%- endif -%}{%- endfor -%}
+{%- for s in site.data.team.alumni -%}{%- if s.role contains "MPhys" -%}{%- assign parts = s.name | split: " & " -%}{%- assign mphys_count = mphys_count | plus: parts.size -%}{%- endif -%}{%- endfor -%}
+<p class="prose">{{ mphys_count }} final-year MPhys research projects supervised since 2014, spanning {{ site.data.supervision.mphys_note }}</p>
+
+<h2 class="section-label">Examining</h2>
+<p class="prose">
+  External examiner of PhD vivas and MPhil/MSc dissertations at the University of
+  Liverpool, University of Edinburgh, University College London, University of
+  Warwick, Royal Holloway University of London, University of Sheffield, Lancaster
+  University, University of Durham, University of Cape Town, and University of
+  Zürich; internal examiner at the University of Manchester.
+</p>

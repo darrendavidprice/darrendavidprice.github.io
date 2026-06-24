@@ -1,0 +1,53 @@
+---
+layout: default
+title: "News & achievements"
+description: "A filterable timeline of awards, grants, roles, results and media for Darren Price."
+filters: true
+---
+<section class="hero compact">
+  <div class="container wide">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; <a href="{{ '/research/' | relative_url }}">Research</a> &rsaquo; News &amp; achievements</p>
+    <p class="eyebrow">Research</p>
+    <h1 class="display">News &amp; achievements</h1>
+    <p class="lede">Awards, fellowships, grants, leadership appointments, key results and media — filterable by category and topic.</p>
+  </div>
+</section>
+
+<section class="container wide">
+  {% include section-nav.html current="achievements" %}
+
+  {% assign news = site.data.news.entries | sort: "iso" | reverse %}
+  {% assign years = news | map: "year" | uniq %}
+
+  <div class="filterbar" data-controls="newslist">
+    <div class="filter-group" data-group="cat" data-mode="any">
+      <span class="glabel">Category</span>
+      <button class="chip" data-value="award">Award</button>
+      <button class="chip" data-value="grant">Grant</button>
+      <button class="chip" data-value="role">Role</button>
+      <button class="chip" data-value="result">Result</button>
+      <button class="chip" data-value="media">Media</button>
+      <button class="chip" data-value="milestone">Milestone</button>
+    </div>
+    <div class="filter-group" data-group="tags" data-mode="any">
+      <span class="glabel">Topic</span>
+      {% for tag in site.data.tags.list %}
+      <button class="chip" data-value="{{ tag.id }}">{{ tag.label }}</button>
+      {% endfor %}
+      <button class="chip reset">Reset</button>
+      <span class="filter-count"></span>
+    </div>
+  </div>
+
+  <div id="newslist">
+    {% for year in years %}
+    <div class="year-group">
+      <h3 class="year-head">{{ year }}</h3>
+      <ul class="news-list">
+        {% assign yn = news | where: "year", year %}
+        {% for n in yn %}{% include news-entry.html news=n %}{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>

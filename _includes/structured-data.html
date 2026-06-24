@@ -1,0 +1,133 @@
+{%- comment -%}
+  structured-data.html — schema.org JSON-LD (single @graph) for SEO + entity disambiguation.
+
+  Principles (after hawksley.dev "JSON-LD Explained for Personal Websites"):
+    • ONE <script type="application/ld+json"> per page, here in <head>.
+    • Shared @id anchors (#website, #person) so crawlers merge a node's properties
+      across pages. But single-page scrapers (LLMs) do NOT merge — so the key
+      context (Person) is emitted on EVERY page, not just home.
+    • WebSite full on the homepage only; slimmed (id/url/name) on every other page.
+    • BreadcrumbList intentionally omitted — site paths are already short, so it is
+      a minor gain (per the same guide). Revisit only if deep paths appear.
+
+  Per-page front matter hooks:
+    jsonld_type: ProfilePage        -> emits a ProfilePage node (used on /about/)
+    jsonld_software:                -> emits a SoftwareApplication node (the explorers)
+      name:        "..."
+      description: "..."
+      applicationCategory: "EducationalApplication"   # optional; this is the default
+      url:         "https://..."                       # optional; defaults to page URL
+    layout: post + site.enable_blog_jsonld == true -> emits a BlogPosting node
+      (flag stays OFF in _config.yml until real Writing posts exist)
+
+  Person.sameAs is driven by the curated `site.author.same_as` list in _config.yml —
+  the disambiguation payload tying ORCID / Scholar / INSPIRE / Bluesky / GitHub /
+  LinkedIn / X / Manchester staff page to one knowledge-graph entity. Keep it complete.
+{%- endcomment -%}
+{%- assign root = site.url | append: site.baseurl | default: 'https://darrendavidprice.github.io' -%}
+{%- assign _last = root | slice: -1, 1 -%}
+{%- if _last == '/' -%}{%- assign _n = root | size | minus: 1 -%}{%- assign root = root | slice: 0, _n -%}{%- endif -%}
+{%- assign person_name = site.author.name | default: 'Darren Price' -%}
+{%- assign person_img = site.author.image | default: '/assets/images/darren-price.jpg' -%}
+{%- assign person_title = site.author.jobtitle | default: 'Professor of Particle Physics and Associate Dean' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ root }}/#website",
+      "url": "{{ root }}/",
+      "name": {{ site.title | default: 'Darren Price' | jsonify }}{% if page.url == '/' %},
+      "alternateName": ["darrendavidprice.github.io", "Darren D. Price"],
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "{{ root }}/#person" },
+      "description": {{ site.description | strip_newlines | jsonify }}{% endif %}
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ root }}/#person",
+      "url": "{{ root }}/",
+      "name": {{ person_name | jsonify }},
+      "givenName": "Darren",
+      "familyName": "Price",
+      "jobTitle": {{ person_title | jsonify }},
+      "knowsLanguage": "en-GB",
+      "worksFor": {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Manchester",
+        "url": "https://www.manchester.ac.uk",
+        "sameAs": [
+          "https://www.wikidata.org/wiki/Q230899",
+          "https://en.wikipedia.org/wiki/University_of_Manchester"
+        ]
+      },
+      "knowsAbout": [
+        "Dark matter",
+        "Dark matter direct detection",
+        "Particle physics",
+        "Electroweak physics",
+        "Quantum chromodynamics",
+        "B-physics",
+        "Neutrino physics",
+        "Detector instrumentation",
+        "Machine learning for the physical sciences",
+        "DarkSide experiment",
+        "ATLAS experiment",
+        "Large Hadron Collider"
+      ],
+      "image": {
+        "@type": "ImageObject",
+        "@id": "{{ root }}/#person-image",
+        "url": "{{ root }}{{ person_img }}",
+        "caption": {{ person_name | jsonify }}
+      }{% if site.author.same_as %},
+      "sameAs": {{ site.author.same_as | jsonify }}{% endif %}
+    }{% if page.jsonld_type == 'ProfilePage' %},
+    {
+      "@type": "ProfilePage",
+      "@id": "{{ root }}{{ page.url }}#webpage",
+      "url": "{{ root }}{{ page.url }}",
+      "name": {{ page.title | default: 'About Darren Price' | jsonify }},
+      "isPartOf": { "@id": "{{ root }}/#website" },
+      "inLanguage": "en-GB",
+      "mainEntity": { "@id": "{{ root }}/#person" }
+    }{% elsif page.jsonld_software %},
+    {
+      "@type": "SoftwareApplication",
+      "@id": "{{ root }}{{ page.url }}#app",
+      "url": {{ page.jsonld_software.url | default: page.url | prepend: root | jsonify }},
+      "name": {{ page.jsonld_software.name | default: page.title | jsonify }},
+      "applicationCategory": {{ page.jsonld_software.applicationCategory | default: 'EducationalApplication' | jsonify }},
+      "operatingSystem": "Any (web browser)",
+      "isPartOf": { "@id": "{{ root }}/#website" },
+      "creator": { "@id": "{{ root }}/#person" },
+      "offers": { "@type": "Offer", "price": 0, "priceCurrency": "GBP" }{% if page.jsonld_software.description %},
+      "description": {{ page.jsonld_software.description | jsonify }}{% endif %}
+    }{% elsif page.layout == 'post' and site.enable_blog_jsonld %},
+    {
+      "@type": "BlogPosting",
+      "@id": "{{ root }}{{ page.url }}#blogposting",
+      "url": "{{ root }}{{ page.url }}",
+      "mainEntityOfPage": { "@id": "{{ root }}{{ page.url }}#webpage" },
+      "headline": {{ page.title | jsonify }},
+      "inLanguage": "en-GB",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+      "author": { "@id": "{{ root }}/#person" },
+      "publisher": { "@id": "{{ root }}/#person" },
+      "image": "{{ '/assets/images/og-card.png' | absolute_url }}"{% if page.description %},
+      "description": {{ page.description | strip_newlines | jsonify }}{% endif %}{% if page.tags %},
+      "keywords": {{ page.tags | join: ', ' | jsonify }}{% endif %}
+    }{% elsif page.url != '/' %},
+    {
+      "@type": "WebPage",
+      "@id": "{{ root }}{{ page.url }}#webpage",
+      "url": "{{ root }}{{ page.url }}",
+      "name": {{ page.title | default: site.title | jsonify }},
+      "isPartOf": { "@id": "{{ root }}/#website" },
+      "inLanguage": "en-GB"
+    }{% endif %}
+  ]
+}
+</script>

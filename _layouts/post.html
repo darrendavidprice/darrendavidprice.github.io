@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<article>
+  <header class="post-hero">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; <a href="{{ '/writing/' | relative_url }}">Writing</a></p>
+    <p class="date">{{ page.date | date: "%-d %B %Y" }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}<p class="lede">{{ page.subtitle }}</p>{% endif %}
+    {% include tag-chips.html tags=page.tags %}
+  </header>
+
+  <div class="post">
+    {{ content }}
+  </div>
+
+  {% assign posts = site.posts %}
+  {% assign idx = -1 %}
+  {% for p in posts %}{% if p.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+  {% assign prev_idx = idx | plus: 1 %}
+  {% assign next_idx = idx | minus: 1 %}
+  {% assign prev_post = posts[prev_idx] %}
+  {% assign next_post = nil %}
+  {% if next_idx >= 0 %}{% assign next_post = posts[next_idx] %}{% endif %}
+
+  <nav class="post-nav" aria-label="Post navigation">
+    <div>
+      {% if prev_post %}
+      <a href="{{ prev_post.url | relative_url }}">
+        <span class="label">&larr; Older</span>
+        {{ prev_post.title }}
+      </a>
+      {% endif %}
+    </div>
+    <div class="pn-next">
+      {% if next_post %}
+      <a href="{{ next_post.url | relative_url }}">
+        <span class="label">Newer &rarr;</span>
+        {{ next_post.title }}
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

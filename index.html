@@ -1,0 +1,106 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="container wide">
+    <div class="hero-split">
+      <div>
+        <p class="eyebrow">Particle Physics &middot; The University of Manchester</p>
+        <h1 class="display">Chasing the<br><em>invisible</em> — at colliders, underground, and in the data.</h1>
+        <p class="lede">
+          I'm Darren Price, a particle physicist at the University of Manchester.
+          I search for dark matter at the Large Hadron Collider and with the
+          DarkSide experiment, work across electroweak physics, QCD, B-physics
+          and neutrinos, and build AI tools for scientific discovery — working
+          across several research communities at once.
+        </p>
+        <p class="hero-meta">
+          <a href="{{ '/research/' | relative_url }}">Research</a> &middot;
+          <a href="{{ '/about/' | relative_url }}">About</a> &middot;
+          <a href="{{ '/consultancy/' | relative_url }}">Consultancy</a>
+        </p>
+      </div>
+      <figure class="hero-figure">
+        <img src="{{ '/assets/images/darren-price.jpg' | relative_url }}" alt="Darren Price">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="container wide">
+  <h2 class="section-label">Research themes</h2>
+  <div class="card-grid">
+    {% assign themes = site.data.themes.list | sort: "order" %}
+    {% for th in themes %}
+    <a class="card" href="{{ '/research/' | append: th.id | append: '/' | relative_url }}">
+      <h3>{{ th.label }}</h3>
+      <p>{{ th.blurb | truncatewords: 22 }}</p>
+      <span class="more">Explore &rarr;</span>
+    </a>
+    {% endfor %}
+  </div>
+  <p class="prose small"><a href="{{ '/research/' | relative_url }}">All research &rarr;</a></p>
+</section>
+
+<hr class="rule">
+
+<section class="container wide">
+  <h2 class="section-label">Recent</h2>
+  <div class="recent-grid">
+
+    <div class="recent-col">
+      <h3>News &amp; achievements</h3>
+      <ul>
+        {% assign news = site.data.news.entries | sort: "iso" | reverse %}
+        {% for n in news limit: 4 %}
+        <li><span class="meta">{{ n.date }}</span>{{ n.title }}</li>
+        {% endfor %}
+      </ul>
+      <p class="prose small"><a href="{{ '/research/achievements/' | relative_url }}">All news &rarr;</a></p>
+    </div>
+
+    <div class="recent-col">
+      <h3>Publications</h3>
+      <ul>
+        {% assign pubs = site.data.publications.primary | sort: "year" | reverse %}
+        {% for p in pubs limit: 4 %}
+        <li><span class="meta">{{ p.year }}</span><em>{{ p.title | truncatewords: 14 }}</em></li>
+        {% endfor %}
+      </ul>
+      <p class="prose small"><a href="{{ '/research/publications/' | relative_url }}">All publications &rarr;</a></p>
+    </div>
+
+    <div class="recent-col">
+      <h3>Talks</h3>
+      <ul>
+        {% assign talks = site.data.talks.entries | where_exp: "t", "t.type != 'internal'" | sort: "iso" | reverse %}
+        {% for t in talks limit: 4 %}
+        <li><span class="meta">{{ t.date }}</span>{{ t.title | truncatewords: 12 }}</li>
+        {% endfor %}
+      </ul>
+      <p class="prose small"><a href="{{ '/research/presentations/' | relative_url }}">All talks &rarr;</a></p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="container wide">
+  <h2 class="section-label">Latest writing</h2>
+  <ul class="writing-list">
+    {% for post in site.posts limit: 2 %}
+    <li class="writing-item">
+      <span class="date">{{ post.date | date: "%-d %B %Y" }}</span>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      {% if post.subtitle %}<p class="excerpt">{{ post.subtitle }}</p>{% endif %}
+      {% include tag-chips.html tags=post.tags %}
+    </li>
+    {% else %}
+    <li class="writing-item"><p class="excerpt"><em>First piece coming soon.</em></p></li>
+    {% endfor %}
+  </ul>
+  <p class="prose small"><a href="{{ '/writing/' | relative_url }}">All writing &rarr;</a></p>
+</section>

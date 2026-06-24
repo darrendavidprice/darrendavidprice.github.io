@@ -1,0 +1,86 @@
+# ============================================================
+#  Site configuration — Darren Price personal academic site
+#  After editing this file you must restart `jekyll serve`.
+# ============================================================
+
+title: "Darren Price"
+tagline: "Particle physicist · University of Manchester"
+description: >-
+  Darren Price — experimental particle physicist and Professor at the
+  University of Manchester. Dark matter, electroweak physics, QCD,
+  B-physics, neutrinos, instrumentation and machine learning across
+  collider and direct-detection communities; data-intensive science and AI.
+
+url: "https://darrendavidprice.github.io"
+baseurl: ""
+
+author:
+  name: "Darren Price"
+  email: "darren.price@manchester.ac.uk"
+  inspire: "https://inspirehep.net/author/profile/D.D.Price.1"
+  orcid: "https://orcid.org/0000-0003-2750-9977"
+  scholar: "https://scholar.google.co.uk/citations?user=PrWdd5cAAAAJ&hl=en"
+  github: "https://github.com/darrendavidprice"
+  gitlab: ""                                       # CERN GitLab (dprice) is behind SSO — omitted from public socials
+  linkedin: "https://www.linkedin.com/in/darrendavidprice/"
+  twitter: "https://x.com/darrenprice"
+  bluesky: "https://bsky.app/profile/darrenprice.bsky.social"
+  phone: "+44 161 275 4193"
+  # Curated knowledge-graph identity list — drives Person.sameAs in the JSON-LD.
+  # Keep complete; this is the disambiguation payload for a common name.
+  same_as:
+    - "https://orcid.org/0000-0003-2750-9977"
+    - "https://scholar.google.co.uk/citations?user=PrWdd5cAAAAJ&hl=en"
+    - "https://inspirehep.net/author/profile/D.D.Price.1"
+    - "https://github.com/darrendavidprice"
+    - "https://www.linkedin.com/in/darrendavidprice/"
+    - "https://x.com/darrenprice"
+    - "https://bsky.app/profile/darrenprice.bsky.social"
+    - "https://www.research.manchester.ac.uk/portal/darren.price.html"
+
+# JSON-LD: leave OFF until the Writing section has real posts (gates Blog/BlogPosting).
+enable_blog_jsonld: false
+
+# Primary navigation (11 top-level items)
+nav:
+  - { title: "About",       url: "/about/" }
+  - { title: "Research",    url: "/research/" }
+  - { title: "Team",        url: "/team/" }
+  - { title: "Teaching",    url: "/teaching/" }
+  - { title: "CV",          url: "/cv/" }
+  - { title: "Writing",     url: "/writing/" }
+  - { title: "Engagement",  url: "/engagement/" }
+  - { title: "Consultancy", url: "/consultancy/" }
+  - { title: "Media",       url: "/media/" }
+  - { title: "Join",        url: "/join/" }
+  - { title: "Contact",     url: "/contact/" }
+
+plugins:
+  - jekyll-feed                # generates /feed.xml (Atom)
+  - jekyll-sitemap             # generates /sitemap.xml automatically
+
+feed:
+  path: feed.xml
+  collections:
+    - posts
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /writing/:title/
+
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - README.md
+  - HANDOFF.md
+  - TODO.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .gitignore
+  - .ruby-version

@@ -1,0 +1,28 @@
+# ============================================================
+#  grants.yml — research funding, newest first. Shown on the
+#  CV / Leadership, governance & service page. role: PI | Co-I | etc.
+#  >>> Per-grant £ values are deliberately NOT stored or shown.
+#      Totals live in the grants strapline in cv/index.html.
+# ============================================================
+entries:
+  - { year: "2025–27", title: "Particle Physics Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
+  - { year: "2024–27", title: "DarkSide-UK project grant", role: "PI", funder: "STFC" }
+  - { year: "2023–25", title: "Boulby Laboratory infrastructure development project", role: "PI", funder: "UKRI" }
+  - { year: "2023–26", title: "Experiment Responsive RA Grant", role: "Co-I", funder: "STFC" }
+  - { year: "2023–24", title: "Data Intensive Science CDT funding", role: "PI", funder: "STFC" }
+  - { year: "2022–25", title: "DarkSide-UK project grant", role: "PI", funder: "STFC" }
+  - { year: "2022",    title: "IRIS Digital Research Infrastructure grant", role: "PI", funder: "STFC" }
+  - { year: "2022–25", title: "Particle Physics Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
+  - { year: "2021",    title: "4IR CDT Impact Acceleration Account award", role: "PI", funder: "STFC" }
+  - { year: "2021–25", title: "PPRP DarkSide project grant", role: "Co-I (UK) / PI (UoM part)", funder: "STFC" }
+  - { year: "2020–24", title: "Training Grant (Industrial CASE)", role: "PI", funder: "STFC" }
+  - { year: "2020",    title: "CDT award (NPIF talent funding)", role: "PI", funder: "STFC" }
+  - { year: "2019–21", title: "Turing AI Project Award — “Towards machine learning-enabled scientific discovery”", role: "PI", funder: "Alan Turing Institute" }
+  - { year: "2019–23", title: "DarkSide Experimental Consolidated Grant", role: "Co-I", funder: "STFC" }
+  - { year: "2019–22", title: "Manchester Consolidated Grant", role: "Co-I", funder: "STFC" }
+  - { year: "2017–25", title: "CDT award — “From Steam Engines to Data Engines: big science and the fourth industrial revolution (4IR)”", role: "PI", funder: "STFC" }
+  - { year: "2017–19", title: "ATLAS Upgrade R&D research grant", role: "Co-I", funder: "STFC" }
+  - { year: "2016–20", title: "PPGP Capital Equipment grant", role: "Co-I", funder: "STFC" }
+  - { year: "2015–20", title: "Senior Experimental Fellowship award", role: "PI", funder: "IPPP Durham" }
+  - { year: "2015–20", title: "Ernest Rutherford Fellowship — “Using the LHC as an electroweak boson collider”", role: "PI", funder: "STFC" }
+  - { year: "2013–15", title: "Marie Curie IEF — “A path to understanding: precision studies through Weak Boson Fusion”", role: "PI", funder: "EU FP7" }

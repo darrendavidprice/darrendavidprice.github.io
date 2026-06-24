@@ -1,0 +1,61 @@
+---
+layout: default
+title: "Presentations"
+description: "Full presentations record for Darren Price — invited and conference talks, seminars, public lectures and posters, filterable by type and topic."
+filters: true
+---
+<section class="hero compact">
+  <div class="container wide">
+    <p class="breadcrumb"><a href="{{ '/' | relative_url }}">Home</a> &rsaquo; <a href="{{ '/research/' | relative_url }}">Research</a> &rsaquo; Presentations</p>
+    <p class="eyebrow">Research</p>
+    <h1 class="display">Presentations</h1>
+    <p class="lede">Invited and conference talks, seminars, public lectures and posters. Internal working-meeting talks are <strong>hidden by default</strong> — switch on “Working meetings” to include them. Where available, titles link to the agenda and a PDF icon links to the slides.</p>
+  </div>
+</section>
+
+<section class="container wide">
+  {% include section-nav.html current="presentations" %}
+
+  <div class="filterbar" data-controls="talklist">
+    <div class="filter-group" data-group="type" data-mode="include">
+      <span class="glabel">Type</span>
+      <button class="chip active" data-value="invited"  data-default="on">Invited / conference</button>
+      <button class="chip active" data-value="seminar"  data-default="on">Seminars &amp; colloquia</button>
+      <button class="chip active" data-value="public"   data-default="on">Public lectures</button>
+      <button class="chip active" data-value="poster"   data-default="on">Posters</button>
+      <button class="chip"        data-value="internal" data-default="off">Working meetings</button>
+    </div>
+    <div class="filter-group" data-group="tags" data-mode="any">
+      <span class="glabel">Topic</span>
+      {% for tag in site.data.tags.list %}
+      <button class="chip" data-value="{{ tag.id }}">{{ tag.label }}</button>
+      {% endfor %}
+      <button class="chip reset">Reset</button>
+      <span class="filter-count"></span>
+    </div>
+  </div>
+
+  {% assign talks = site.data.talks.entries | sort: "iso" | reverse %}
+  {% assign years = talks | map: "year" | uniq %}
+
+  <nav class="jumpnav" aria-label="Jump to year">
+    <span class="glabel">Jump to</span>
+    {% for year in years %}<a href="#t{{ year }}">{{ year }}</a>{% endfor %}
+  </nav>
+
+  <div id="talklist">
+    {% for year in years %}
+    <div class="year-group">
+      <h3 class="year-head" id="t{{ year }}">{{ year }}</h3>
+      <ul class="talk-list">
+        {% assign yt = talks | where: "year", year %}
+        {% for t in yt %}{% include talk-entry.html talk=t %}{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+
+  <p class="prose small" style="margin-top:2rem">
+    Type and topic tags here were derived semi-automatically from the talk record and may be refined over time.
+  </p>
+</section>

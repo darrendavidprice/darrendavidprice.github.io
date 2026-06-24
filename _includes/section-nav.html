@@ -1,0 +1,31 @@
+{% comment %}
+  4-box section-nav strip used under the hero on:
+  Research landing · Publications · Presentations · Achievements.
+  Pass `current` = "themes" | "publications" | "presentations" | "achievements"
+  to grey out the current page's box.
+{% endcomment %}
+<nav class="section-nav" aria-label="Section navigation">
+  {% if include.current == "themes" %}
+    <span class="here">Research themes<span class="sub">You are here</span></span>
+  {% else %}
+    <a href="{{ '/research/#themes' | relative_url }}">Research themes<span class="sub">8 themes</span></a>
+  {% endif %}
+
+  {% if include.current == "publications" %}
+    <span class="here">Publications<span class="sub">You are here</span></span>
+  {% else %}
+    <a href="{{ '/research/publications/' | relative_url }}">Publications<span class="sub">papers & notes</span></a>
+  {% endif %}
+
+  {% if include.current == "presentations" %}
+    <span class="here">Presentations<span class="sub">You are here</span></span>
+  {% else %}
+    <a href="{{ '/research/presentations/' | relative_url }}">Presentations<span class="sub">talks & posters</span></a>
+  {% endif %}
+
+  {% if include.current == "achievements" %}
+    <span class="here">News &amp; achievements<span class="sub">You are here</span></span>
+  {% else %}
+    <a href="{{ '/research/achievements/' | relative_url }}">News &amp; achievements<span class="sub">timeline</span></a>
+  {% endif %}
+</nav>

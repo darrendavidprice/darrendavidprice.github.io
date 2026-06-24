@@ -1,0 +1,14 @@
+{% comment %}
+  Render a row of tag chips for a paper/talk/post.
+  Pass `tags` = a list of tag ids (strings).
+  Looks up labels from _data/tags.yml; falls back to the id if unknown.
+{% endcomment %}
+{% if include.tags and include.tags.size > 0 %}
+<div class="taglist">
+  {% for tid in include.tags %}
+    {% assign label = tid %}
+    {% for t in site.data.tags.list %}{% if t.id == tid %}{% assign label = t.label %}{% endif %}{% endfor %}
+    <span class="tag">{{ label }}</span>
+  {% endfor %}
+</div>
+{% endif %}

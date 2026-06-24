@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<section class="hero compact">
+  <div class="container wide">
+    {% if page.breadcrumb %}<p class="breadcrumb">{{ page.breadcrumb }}</p>{% endif %}
+    {% if page.eyebrow %}<p class="eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1 class="display">{{ page.heading | default: page.title }}</h1>
+    {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+  </div>
+</section>
+<section class="container{% if page.wide %} wide{% endif %}">
+  {{ content }}
+</section>

@@ -1,0 +1,4786 @@
+# ============================================================
+#  talks.yml — full presentations record
+#  Re-parsed from Presentations.html: years 2004-2023, with
+#  agenda/slides/recording links preserved where present.
+#  type: invited | seminar | public | internal | poster
+#  internal (working meetings) are HIDDEN by default on page.
+# ============================================================
+entries:
+  - id: t2023-000
+    type: internal
+    title: "ATLAS results on exotic hadronic resonances"
+    venue: "Lepton Photon 2023"
+    location: "Melbourne, Australia"
+    year: 2023
+    iso: "2023-07"
+    date: "Jul 2023"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1114856/timetable/?view=standard#19-atlas-results-on-exotic-had"
+  - id: t2023-001
+    type: internal
+    title: "Search for narrow low-mass resonances in the four-muon final state"
+    venue: "ATLAS PAM"
+    location: "CERN"
+    year: 2023
+    iso: "2023-07"
+    date: "Jul 2023"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1296711/"
+  - id: t2023-002
+    type: internal
+    title: "ATLAS outreach and education: activities and opportunities"
+    venue: "ATLAS week"
+    location: "Vancouver, Canada"
+    year: 2023
+    iso: "2023-06"
+    date: "Jun 2023"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1180455/timetable/?view=standard"
+  - id: t2023-003
+    type: internal
+    title: "Search for narrow low-mass resonances in the four-muon final state"
+    venue: "ATLAS Weekly"
+    location: "CERN"
+    year: 2023
+    iso: "2023-06"
+    date: "Jun 2023"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1296711/"
+  - id: t2023-004
+    type: internal
+    title: "Outreach M&O-A"
+    venue: "ATLAS M&O-A meeting with the Scrutiny Group"
+    location: "June 19th ’23"
+    year: 2023
+    iso: "2023-06"
+    date: "Jun 2023"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1287639/"
+  - id: t2023-005
+    type: internal
+    title: "A vision for ATLAS open data for research"
+    venue: "ATLAS open data planning meeting"
+    location: "May 26th ’23"
+    year: 2023
+    iso: "2023-05"
+    date: "May 2023"
+    tags: [open-data, collider]
+  - id: t2023-006
+    type: internal
+    title: "Search for narrow low-mass resonances in the four-muon final state at ATLAS"
+    venue: "ATLAS-UK Standard Model and B-Physics meeting"
+    location: "UCL London"
+    year: 2023
+    iso: "2023-05"
+    date: "May 2023"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1249575/"
+  - id: t2023-007
+    type: public
+    title: "Discovering the unknown with the Large Hadron Collider"
+    venue: "New Scientist tour"
+    location: "Geneva"
+    year: 2023
+    iso: "2023-05"
+    date: "May 2023"
+    tags: [collider]
+  - id: t2023-008
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "March 27th ’23"
+    year: 2023
+    iso: "2023-03"
+    date: "Mar 2023"
+    tags: [open-data, collider]
+  - id: t2023-009
+    type: public
+    title: "Particle Physics: exploring the Universe with the Large Hadron Collider"
+    venue: "Manchester Undergraduate Offer Holder Taster Day"
+    location: "March 22nd ’23"
+    year: 2023
+    iso: "2023-03"
+    date: "Mar 2023"
+    tags: [collider]
+  - id: t2023-010
+    type: internal
+    title: "ATLAS Outreach and Education activities/opportunities"
+    venue: "ATLAS Induction Day"
+    location: "CERN"
+    year: 2023
+    iso: "2023-03"
+    date: "Mar 2023"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1237886/timetable/?view=standard"
+  - id: t2023-011
+    type: invited
+    title: "Prospects and needs for future argon dark matter experiments at the Boulby Underground Laboratory"
+    venue: "Boulby Development Project workshop"
+    location: "INOX Sheffield"
+    year: 2023
+    iso: "2023-02"
+    date: "Feb 2023"
+    tags: [dark-matter]
+  - id: t2023-012
+    type: internal
+    title: "ATLAS Open Data: organisation and goals"
+    venue: "ATLAS Open Data kick-off meeting"
+    location: "CERN"
+    year: 2023
+    iso: "2023-02"
+    date: "Feb 2023"
+    tags: [open-data, collider]
+  - id: t2022-013
+    type: internal
+    title: "From ATLAS to the DarkSide"
+    venue: "Particle Physics Group Christmas Meeting"
+    location: "December 20th '22"
+    year: 2022
+    iso: "2022-12"
+    date: "Dec 2022"
+    tags: [dark-matter, collider]
+  - id: t2022-014
+    type: internal
+    title: "ATLAS Outreach and Education activities/opportunities"
+    venue: "ATLAS Induction Day"
+    location: "CERN"
+    year: 2022
+    iso: "2022-11"
+    date: "Nov 2022"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1209931/"
+  - id: t2022-015
+    type: internal
+    title: "ATLAS Open Data: planning for a new era"
+    venue: "ATLAS Week Outreach Session"
+    location: "Lisbon"
+    year: 2022
+    iso: "2022-10"
+    date: "Oct 2022"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1198104/"
+  - id: t2022-016
+    type: public
+    title: "Discovering the unknown with the Large Hadron Collider"
+    venue: "New Scientist tour"
+    location: "Geneva"
+    year: 2022
+    iso: "2022-09"
+    date: "Sep 2022"
+    tags: [collider]
+  - id: t2022-017
+    type: internal
+    title: "ATLAS Outreach and Education activities/opportunities"
+    venue: "ATLAS Induction Day"
+    location: "CERN"
+    year: 2022
+    iso: "2022-06"
+    date: "Jun 2022"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1159574/timetable/"
+  - id: t2022-018
+    type: internal
+    title: "ATLAS Outreach and Education News"
+    venue: "ATLAS Outreach Parallel"
+    location: "ATLAS Week, CERN"
+    year: 2022
+    iso: "2022-06"
+    date: "Jun 2022"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1162429/"
+  - id: t2022-019
+    type: invited
+    title: "A low mass dark matter experiment at the Boulby Underground Laboratory"
+    venue: "DarkSide STFC Oversight Committee"
+    location: "May 27th ’22"
+    year: 2022
+    iso: "2022-05"
+    date: "May 2022"
+    tags: [dark-matter]
+  - id: t2022-020
+    type: internal
+    title: "DarkSide-UK collaboration science sensitivity studies: toward a common workflow & documentation"
+    venue: "DarkSide-UK Collaboration Meeting"
+    location: "April 27th ’22"
+    year: 2022
+    iso: "2022-04"
+    date: "Apr 2022"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.cern.ch/event/1137283/timetable/#20220427.detailed"
+  - id: t2022-021
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "March 30th ’22"
+    year: 2022
+    iso: "2022-03"
+    date: "Mar 2022"
+    tags: [open-data, collider]
+  - id: t2022-022
+    type: public
+    title: "Status and needs for outreach event displays"
+    venue: "ATLAS event display workshop"
+    location: "March 17th ’22"
+    year: 2022
+    iso: "2022-03"
+    date: "Mar 2022"
+    tags: [open-data, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1128033/"
+  - id: t2022-023
+    type: invited
+    title: "Expanding the science case of the DarkSide experiment: new sensitivity studies"
+    venue: "DarkSide-UK Science Meeting"
+    location: "January 24th ’22"
+    year: 2022
+    iso: "2022-01"
+    date: "Jan 2022"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.cern.ch/event/1116939/"
+  - id: t2021-024
+    type: internal
+    title: "Introduction to postgraduate research in the Manchester Particle Physics group"
+    venue: "HEP PGR Induction Meeting"
+    location: "Sept 27th ’21"
+    year: 2021
+    iso: "2021-09"
+    date: "Sep 2021"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1078722/"
+  - id: t2021-025
+    type: internal
+    title: "Overview of results from the four-muon search analysis"
+    venue: "ATLAS analysis meeting"
+    location: "Aug 27th ’21"
+    year: 2021
+    iso: "2021-08"
+    date: "Aug 2021"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1067534/"
+  - id: t2021-026
+    type: internal
+    title: "Updates in the four-muon search analysis"
+    venue: "ATLAS Onia subgroup meeting"
+    location: "Aug 4th ’21"
+    year: 2021
+    iso: "2021-08"
+    date: "Aug 2021"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1061570/"
+  - id: t2021-027
+    type: invited
+    title: "vPDM Assembly Procedure & Mechanical Specifications"
+    venue: "DarkSide-UK production meeting"
+    location: "Aug 3rd ’21"
+    year: 2021
+    iso: "2021-08"
+    date: "Aug 2021"
+    tags: [dark-matter, instrumentation]
+  - id: t2021-028
+    type: internal
+    title: "New results in the search for new low mass resonances in the four-muon final state"
+    venue: "Manchester ATLAS meeting"
+    location: "Jul 23rd ’21"
+    year: 2021
+    iso: "2021-07"
+    date: "Jul 2021"
+    tags: [dark-matter, b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/category/888/"
+  - id: t2021-029
+    type: invited
+    title: "Direct dark matter detection and photosensor R&D"
+    venue: "Manchester HEP strategy meeting"
+    location: "Jul 7th ’21"
+    year: 2021
+    iso: "2021-07"
+    date: "Jul 2021"
+    tags: [dark-matter, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/1056113/"
+  - id: t2021-030
+    type: invited
+    title: "Developing machine learning-enabled tools for scientific discovery in the physical sciences"
+    venue: "Turing Fellowship Project Presentation"
+    location: "Alan Turing Institute"
+    year: 2021
+    iso: "2021-06"
+    date: "Jun 2021"
+    tags: [ai-ml]
+    links:
+      recording: "https://www.youtube.com/watch?v=OmJmEPnFE8s&t=3074s"
+  - id: t2021-031
+    type: internal
+    title: "Boulby Underground Laboratory as a potential site for DarkSide-LowMass"
+    venue: "DarkSide-LowMass working meeting"
+    location: "June 18th ’21"
+    year: 2021
+    iso: "2021-06"
+    date: "Jun 2021"
+    tags: [dark-matter]
+    links:
+      agenda: "https://agenda.infn.it/event/27475/"
+  - id: t2021-032
+    type: invited
+    title: "Life on the DarkSide: opportunities for dark matter and neutrino physics"
+    venue: "Manchester Summer Student welcome event"
+    location: "June 16th ’21"
+    year: 2021
+    iso: "2021-06"
+    date: "Jun 2021"
+    tags: [dark-matter, neutrinos]
+    links:
+      agenda: "https://indico.cern.ch/event/1040986/"
+  - id: t2021-033
+    type: invited
+    title: "DarkSide-LowMass: requirements for siting a dedicated experiment at Boulby"
+    venue: "Boulby Underground Laboratory Development Feasibility Meeting"
+    location: "March 12th ’21"
+    year: 2021
+    iso: "2021-03"
+    date: "Mar 2021"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.kcl.ac.uk/event/154/"
+  - id: t2021-034
+    type: invited
+    title: "Particle Physics postgraduate admissions status and news"
+    venue: "Manchester Academics Meeting"
+    location: "March 3rd ’21"
+    year: 2021
+    iso: "2021-03"
+    date: "Mar 2021"
+    tags: [collider]
+  - id: t2021-035
+    type: invited
+    title: "DarkSide-LowMass: feasibility for discovering light dark matter at Boulby"
+    venue: "Boulby Underground Laboratory Development Feasibility Meeting"
+    location: "February 26th ’21"
+    year: 2021
+    iso: "2021-02"
+    date: "Feb 2021"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.kcl.ac.uk/event/152/"
+  - id: t2020-036
+    type: invited
+    title: "DarkSide experiment plans and prospects"
+    venue: "Particle Physics Group Christmas Meeting"
+    location: "December 18th '20"
+    year: 2020
+    iso: "2020-12"
+    date: "Dec 2020"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.cern.ch/event/983451/"
+  - id: t2020-037
+    type: internal
+    title: "Summary of new results from the B-Physics and Light States group"
+    venue: "ATLAS Physics and Performance Plenary"
+    location: "November 20th '20"
+    year: 2020
+    iso: "2020-11"
+    date: "Nov 2020"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/966784/"
+  - id: t2020-038
+    type: invited
+    title: "Design by intelligent committee: use of machine learning as a scientific advisor"
+    venue: "IML Machine Learning Workshop"
+    location: "October 21st '20"
+    year: 2020
+    iso: "2020-10"
+    date: "Oct 2020"
+    tags: [ai-ml]
+    links:
+      agenda: "https://indico.cern.ch/event/852553/timetable/"
+  - id: t2020-039
+    type: public
+    title: "Introduction to the CDT placements and business engagement opportunities"
+    venue: "4IR CDT industrial placement event"
+    location: "June 15th '20"
+    year: 2020
+    iso: "2020-06"
+    date: "Jun 2020"
+    tags: [open-data]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5875"
+  - id: t2020-040
+    type: invited
+    title: "Towards a fast simulation of light detection in LAr TPCs with deep learning techniques"
+    venue: "ECHEP simulation meeting"
+    location: "May 23rd '20"
+    year: 2020
+    iso: "2020-05"
+    date: "May 2020"
+    tags: [dark-matter, ai-ml, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/919221/"
+  - id: t2020-041
+    type: internal
+    title: "Sensitivity study and selection cut update"
+    venue: "VBS heavy Majorana neutrino analysis meeting"
+    location: "April 16th '20"
+    year: 2020
+    iso: "2020-04"
+    date: "Apr 2020"
+    tags: [electroweak, neutrinos]
+    links:
+      agenda: "https://indico.cern.ch/event/909324/"
+  - id: t2020-042
+    type: invited
+    title: "VBS Heavy Neutral Lepton search"
+    venue: "Exotics LPX group meeting"
+    location: "April 3rd '20"
+    year: 2020
+    iso: "2020-04"
+    date: "Apr 2020"
+    tags: [electroweak, neutrinos]
+    links:
+      agenda: "https://indico.cern.ch/event/902306/"
+  - id: t2020-043
+    type: invited
+    title: "Development of muon Trigger Level Analysis (TLA)"
+    venue: "BLS group meeting"
+    location: "March 26th '20"
+    year: 2020
+    iso: "2020-03"
+    date: "Mar 2020"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/900101/"
+  - id: t2020-044
+    type: internal
+    title: "A new approach to the search for heavy Majorana Neutrinos at ATLAS"
+    venue: "ATLAS Majorana neutrino search working meeting"
+    location: "March 11th '20"
+    year: 2020
+    iso: "2020-03"
+    date: "Mar 2020"
+    tags: [neutrinos, collider]
+  - id: t2019-045
+    type: internal
+    title: "My year in physics"
+    venue: "Manchester Xmas Meeting"
+    location: "December 19th '19"
+    year: 2019
+    iso: "2019-12"
+    date: "Dec 2019"
+    tags: [collider]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5834"
+  - id: t2019-046
+    type: invited
+    title: "Machine learning in physics"
+    venue: "Physics in the spotlight"
+    location: "Institute of Physics, London"
+    year: 2019
+    iso: "2019-10"
+    date: "Oct 2019"
+    tags: [ai-ml]
+    links:
+      agenda: "http://spotlight2019.iopconfs.org/Home"
+  - id: t2019-047
+    type: internal
+    title: "MET+X BSM model interpretations and models status"
+    venue: "MET+X working meeting"
+    location: "Manchester"
+    year: 2019
+    iso: "2019-10"
+    date: "Oct 2019"
+    tags: [collider]
+  - id: t2019-048
+    type: internal
+    title: "bb+MET Z+jets corrections and plans"
+    venue: "bbMET working meeting"
+    location: "September 5th '19"
+    year: 2019
+    iso: "2019-09"
+    date: "Sep 2019"
+    tags: [qcd]
+    links:
+      agenda: "https://indico.cern.ch/event/838891/"
+  - id: t2019-049
+    type: internal
+    title: "VBS Wgamma analysis planning"
+    venue: "VBS Wgamma working meeting"
+    location: "August 12th '19"
+    year: 2019
+    iso: "2019-08"
+    date: "Aug 2019"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/840666/"
+  - id: t2019-050
+    type: invited
+    title: "Advice and personal reflections for early career fellowship applications"
+    venue: "Early Career Researcher Workshop"
+    location: "University of Manchester"
+    year: 2019
+    iso: "2019-07"
+    date: "Jul 2019"
+    tags: [collider]
+    links:
+      agenda: "https://www.eventbrite.com/e/early-career-fellowship-workshop-tickets-64417616826"
+  - id: t2019-051
+    type: public
+    title: "Particle Physics: the latest from the Large Hadron Collider at CERN"
+    venue: "Trafford Schools Event"
+    location: "Altrincham Grammar School for Boys"
+    year: 2019
+    iso: "2019-07"
+    date: "Jul 2019"
+    tags: [open-data, collider]
+  - id: t2019-052
+    type: internal
+    title: "Differential cross-section extractions and effective field theory fits"
+    venue: "ATLAS same-sign WW scattering working group meeting"
+    location: "June 18th '19"
+    year: 2019
+    iso: "2019-06"
+    date: "Jun 2019"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/category/2886/"
+  - id: t2019-053
+    type: invited
+    title: "DarkSide UK computing proposal"
+    venue: "DarkSide-20k Computing Meeting"
+    location: "June 11th '19"
+    year: 2019
+    iso: "2019-06"
+    date: "Jun 2019"
+    tags: [dark-matter]
+    links:
+      agenda: "https://agenda.infn.it/event/19483/"
+  - id: t2019-054
+    type: invited
+    title: "DarkSide WP1: veto photosensor production"
+    venue: "DarkSide-UK meeting"
+    location: "June 3rd '19"
+    year: 2019
+    iso: "2019-06"
+    date: "Jun 2019"
+    tags: [dark-matter, instrumentation]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5462"
+  - id: t2019-055
+    type: internal
+    title: "Wgamma Vector Boson Scattering plans"
+    venue: "ATLAS SM electroweak group meeting"
+    location: "May 24th '19"
+    year: 2019
+    iso: "2019-05"
+    date: "May 2019"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/795710/"
+  - id: t2019-056
+    type: invited
+    title: "Direct dark matter detection with the DarkSide experiment: UK status and plans"
+    venue: "Dark Matter UK meeting"
+    location: "King’s College London"
+    year: 2019
+    iso: "2019-04"
+    date: "Apr 2019"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.fnal.gov/event/19947/other-view?view=standard"
+  - id: t2019-057
+    type: invited
+    title: "Discovering and characterising new physics with detector-corrected data"
+    venue: "Re)interpreting the results of new physics searches at the LHC"
+    location: "Imperial College, London"
+    year: 2019
+    iso: "2019-04"
+    date: "Apr 2019"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/795041/timetable/?view=standard"
+  - id: t2019-058
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "March 25th ’19"
+    year: 2019
+    iso: "2019-03"
+    date: "Mar 2019"
+    tags: [open-data, collider]
+  - id: t2019-059
+    type: invited
+    title: "Data Science / AI research challenges in particle physics: priorities and new initiatives"
+    venue: "Data Science for Science Physics Workshop"
+    location: "Alan Turing Institute, London"
+    year: 2019
+    iso: "2019-03"
+    date: "Mar 2019"
+    tags: [ai-ml]
+    links:
+      agenda: "http://www.turing.ac.uk/"
+  - id: t2019-060
+    type: invited
+    title: "Ideas for Run 3: BLS"
+    venue: "P&P Physics Plenary: new ideas for Run 3 triggers"
+    location: "January 25th '19"
+    year: 2019
+    iso: "2019-01"
+    date: "Jan 2019"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/792123/"
+  - id: t2019-061
+    type: invited
+    title: "Run-3 BLS plans: introduction and status"
+    venue: "Run-3 BLS planning meeting"
+    location: "January 22nd '19"
+    year: 2019
+    iso: "2019-01"
+    date: "Jan 2019"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/789187/"
+  - id: t2019-062
+    type: invited
+    title: "Quarkonia as tools: production studies and prospects in pp/ep/ee collisions"
+    venue: "Quarkonia as Tools workshop"
+    location: "Aussois, France"
+    year: 2019
+    iso: "2019-01"
+    date: "Jan 2019"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/745939/timetable/?view=standard"
+  - id: t2018-063
+    type: invited
+    title: "Prospects for distributed computing in DarkSide-20k"
+    venue: "DarkSide-20k Computing Meeting"
+    location: "December 18th ‘18"
+    year: 2018
+    iso: "2018-12"
+    date: "Dec 2018"
+    tags: [dark-matter]
+    links:
+      agenda: "https://agenda.infn.it/conferenceDisplay.py?confId=17736"
+  - id: t2018-064
+    type: internal
+    title: "My year in physics"
+    venue: "Manchester Xmas Meeting"
+    location: "December 17th '18"
+    year: 2018
+    iso: "2018-12"
+    date: "Dec 2018"
+    tags: [collider]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5400"
+  - id: t2018-065
+    type: invited
+    title: "4IR CDT introduction and industrial placements"
+    venue: "4IR CDT in Data Intensive Science Annual Meeting"
+    location: "December 14th ‘18"
+    year: 2018
+    iso: "2018-12"
+    date: "Dec 2018"
+    tags: [ai-ml]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5409"
+  - id: t2018-066
+    type: invited
+    title: "Experience with Dirac for DarkSide-20k distributed computing and plans"
+    venue: "DarkSide-20k Computing Meeting"
+    location: "December 12th ‘18"
+    year: 2018
+    iso: "2018-12"
+    date: "Dec 2018"
+    tags: [dark-matter]
+    links:
+      agenda: "https://agenda.infn.it/conferenceDisplay.py?confId=17446"
+  - id: t2018-067
+    type: internal
+    title: "Trigger and analysis planning for Run-3"
+    venue: "BLS plenary meeting"
+    location: "December 5th ’18"
+    year: 2018
+    iso: "2018-12"
+    date: "Dec 2018"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/776375/"
+  - id: t2018-068
+    type: invited
+    title: "Trigger strategies and ideas for Run-3"
+    venue: "B-trigger meeting"
+    location: "November 30th ’18"
+    year: 2018
+    iso: "2018-11"
+    date: "Nov 2018"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/category/2671/"
+  - id: t2018-069
+    type: seminar
+    title: "Quarkonium production in the era of the LHC"
+    venue: "Particle Physics Seminar"
+    location: "IPNO Orsay / Paris XI, France"
+    year: 2018
+    iso: "2018-08"
+    date: "Aug 2018"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://ipnwww.in2p3.fr/Seminars,966"
+  - id: t2018-070
+    type: internal
+    title: "ATLAS dark matter searches and interpretation"
+    venue: "Rencontres du Vietnam"
+    location: "Quy Nhon, Vietnam"
+    year: 2018
+    iso: "2018-08"
+    date: "Aug 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "http://vietnam.in2p3.fr/"
+  - id: t2018-071
+    type: internal
+    title: "Distributed computing for the DarkSide-20k Collaboration"
+    venue: "DarkSide-20k Computing Meeting"
+    location: "July 25th ’18"
+    year: 2018
+    iso: "2018-07"
+    date: "Jul 2018"
+    tags: [dark-matter]
+    links:
+      agenda: "https://agenda.infn.it/conferenceDisplay.py?confId=16115"
+  - id: t2018-072
+    type: invited
+    title: "Overview of dark matter searches at colliders"
+    venue: "DMUK meeting"
+    location: "IPPP, Durham"
+    year: 2018
+    iso: "2018-07"
+    date: "Jul 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://conference.ippp.dur.ac.uk/event/692/timetable/?view=standard"
+  - id: t2018-073
+    type: internal
+    title: "Instrumenting the DarkSide-20k liquid argon veto system"
+    venue: "DarkSide Collaboration Meeting"
+    location: "Sardinia, Italy"
+    year: 2018
+    iso: "2018-06"
+    date: "Jun 2018"
+    tags: [dark-matter, instrumentation]
+    links:
+      agenda: "https://agenda.infn.it/conferenceOtherViews.py?confId=15620&view=standard"
+  - id: t2018-074
+    type: internal
+    title: "Re-interpretable dark matter searches: design, implementation, and results"
+    venue: "ATLAS-UK SUSY-Exotics + SM meeting"
+    location: "UCL, London"
+    year: 2018
+    iso: "2018-06"
+    date: "Jun 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/721863/"
+  - id: t2018-075
+    type: invited
+    title: "Manchester same-sign WW vector boson scattering plans"
+    venue: "SM Electroweak group meeting"
+    location: "May 25th ’18"
+    year: 2018
+    iso: "2018-05"
+    date: "May 2018"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/722796/"
+  - id: t2018-076
+    type: invited
+    title: "MET+X signal region overlap and strategy"
+    venue: "Unfolded MET + X categorised analysis"
+    location: "Heidelberg"
+    year: 2018
+    iso: "2018-05"
+    date: "May 2018"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/705361/"
+  - id: t2018-077
+    type: public
+    title: "The invisible plan: shedding light on dark matter"
+    venue: "Manchester Pint Of Science Festival"
+    location: "May 14th ’18"
+    year: 2018
+    iso: "2018-05"
+    date: "May 2018"
+    tags: [dark-matter]
+    links:
+      agenda: "https://pintofscience.co.uk/event/invisible-forces"
+  - id: t2018-078
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "April 25th ’18"
+    year: 2018
+    iso: "2018-04"
+    date: "Apr 2018"
+    tags: [open-data, collider]
+  - id: t2018-079
+    type: internal
+    title: "Vector-like charged lepton searches with AFP"
+    venue: "ATLAS forward physics and detector workshop contribution"
+    location: "CERN"
+    year: 2018
+    iso: "2018-03"
+    date: "Mar 2018"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/708037/manage/timetable/#20180315.s3191853"
+  - id: t2018-080
+    type: internal
+    title: "Doubly-charged Higgs searches in photon fusion with AFP"
+    venue: "ATLAS forward physics and detector workshop contribution"
+    location: "CERN"
+    year: 2018
+    iso: "2018-03"
+    date: "Mar 2018"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/708037/manage/timetable/#20180315.s3191853"
+  - id: t2018-081
+    type: internal
+    title: "Low mass searches in ultra-peripheral collisions"
+    venue: "ATLAS forward physics and detector workshop contribution"
+    location: "CERN"
+    year: 2018
+    iso: "2018-03"
+    date: "Mar 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/708037/manage/timetable/#20180315.s3191853"
+  - id: t2018-082
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "University of Edinburgh"
+    year: 2018
+    iso: "2018-01"
+    date: "Jan 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://www.ph.ed.ac.uk/particle-physics-experiment/seminars"
+  - id: t2018-083
+    type: invited
+    title: "Probing dark matter with new detector-independent measurements at colliders"
+    venue: "Open UK Meeting on Dark Matter"
+    location: "University of Bristol"
+    year: 2018
+    iso: "2018-01"
+    date: "Jan 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/672881/timetable/?view=standard"
+  - id: t2018-084
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "University of Oxford"
+    year: 2018
+    iso: "2018-01"
+    date: "Jan 2018"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://www2.physics.ox.ac.uk/research/seminars/series/experimental-particle-physics-seminar"
+  - id: t2017-085
+    type: internal
+    title: "B, SM, and BSM physics at the LHC and beyond"
+    venue: "Manchester Xmas Meeting"
+    location: "December 17th '17"
+    year: 2017
+    iso: "2017-12"
+    date: "Dec 2017"
+    tags: [collider]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5293"
+  - id: t2017-086
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "Rutherford Appleton Laboratory"
+    year: 2017
+    iso: "2017-12"
+    date: "Dec 2017"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://www.ppd.stfc.ac.uk/Pages/Seminars.aspx"
+  - id: t2017-087
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "University of Manchester"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [dark-matter, collider]
+  - id: t2017-088
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "University of Birmingham"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "http://talks.bham.ac.uk/show/index/59"
+  - id: t2017-089
+    type: invited
+    title: "Reinterpreting SM measurements for BSM searches: recommendations and future work"
+    venue: "LHC Chapter 2: The Run for New Physics"
+    location: "IIP-UFRN Natal, Brazil"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [collider]
+    links:
+      agenda: "https://drive.google.com/open?id=1UAmkRfh13cS9SRHQCO68bdss_tQ4m8a4"
+  - id: t2017-090
+    type: invited
+    title: "YouTube link Reinterpreting Standard Model measurements as BSM searches"
+    venue: "LHC Chapter 2: The Run for New Physics"
+    location: "IIP-UFRN Natal, Brazil"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [collider]
+    links:
+      agenda: "https://sites.google.com/site/lhcchapter2workshop/home/topics-and-working-groups"
+      recording: "https://www.youtube.com/watch?v=dDXDQzNwN4c"
+  - id: t2017-091
+    type: invited
+    title: "YouTube link Interpretations of the Run II LHC analyses and implications for BSM physics"
+    venue: "LHC Chapter 2: The Run for New Physics"
+    location: "IIP-UFRN Natal, Brazil"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [collider]
+    links:
+      agenda: "https://sites.google.com/site/lhcchapter2workshop/home/program"
+      recording: "https://www.youtube.com/watch?v=FwNKSVf3Pf4"
+  - id: t2017-092
+    type: internal
+    title: "YouTube link Manchester contributions to Dark Matter Monojet CONF note"
+    venue: "ATLAS JDM: Jet+MET kick-off meeting"
+    location: "Manchester"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [dark-matter, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/674055/"
+      recording: "https://www.youtube.com/watch?v=cLb2Lm8Lc5A"
+  - id: t2017-093
+    type: invited
+    title: "Public engagement highlights from the UK"
+    venue: "14th IPPOG Meeting"
+    location: "CERN"
+    year: 2017
+    iso: "2017-11"
+    date: "Nov 2017"
+    tags: [open-data]
+    links:
+      agenda: "https://indico.cern.ch/event/674777/timetable/?view=standard"
+  - id: t2017-094
+    type: invited
+    title: "Introduction to Data Intensive Science and the 4IR CDT"
+    venue: "4IR Centre for Doctoral Training kick-off meeting"
+    location: "Manchester"
+    year: 2017
+    iso: "2017-10"
+    date: "Oct 2017"
+    tags: [ai-ml]
+  - id: t2017-095
+    type: internal
+    title: "Probing vector-like quark models in multi-lepton channels"
+    venue: "ATLAS unfolded MET + X categorised analysis: face-to-face meeting"
+    location: "Manchester"
+    year: 2017
+    iso: "2017-10"
+    date: "Oct 2017"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/675025/"
+  - id: t2017-096
+    type: internal
+    title: "Combining inputs for BSM limit setting"
+    venue: "ATLAS unfolded MET + X categorised analysis: face-to-face meeting"
+    location: "Manchester"
+    year: 2017
+    iso: "2017-10"
+    date: "Oct 2017"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/675025/"
+  - id: t2017-097
+    type: seminar
+    title: "Measuring the invisible: new approaches to dark matter searches at colliders"
+    venue: "Particle Physics Seminar"
+    location: "Lancaster University"
+    year: 2017
+    iso: "2017-10"
+    date: "Oct 2017"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://#/"
+  - id: t2017-098
+    type: invited
+    title: "Status of electroweak constraints from the LHC"
+    venue: "Effective field theory workshop"
+    location: "IPPP Durham"
+    year: 2017
+    iso: "2017-09"
+    date: "Sep 2017"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/663240/"
+  - id: t2017-099
+    type: invited
+    title: "Associated production of heavy flavour at the LHC"
+    venue: "UK Flavour 2017"
+    location: "IPPP Durham"
+    year: 2017
+    iso: "2017-09"
+    date: "Sep 2017"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "https://conference.ippp.dur.ac.uk/event/573/other-view?view=standard"
+  - id: t2017-100
+    type: invited
+    title: "Results on VBF-V Production (including aTGCs) from the LHC"
+    venue: "Multi-Boson Interactions 2017"
+    location: "Karlsruhe, Germany"
+    year: 2017
+    iso: "2017-08"
+    date: "Aug 2017"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/625573/overview"
+  - id: t2017-101
+    type: internal
+    title: "Unfolded BSM searches: report on past practice and current activities"
+    venue: "ATLAS new physics reinterpretation workshop"
+    location: "CERN"
+    year: 2017
+    iso: "2017-07"
+    date: "Jul 2017"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/647568/"
+  - id: t2017-102
+    type: invited
+    title: "Advice on applying for STFC fellowships"
+    venue: "Physics and Astronomy PDRA fellowship workshop"
+    location: "July 11th ’17"
+    year: 2017
+    iso: "2017-07"
+    date: "Jul 2017"
+    tags: [collider]
+    links:
+      agenda: "http://#/"
+  - id: t2017-103
+    type: invited
+    title: "Update from B-physics Stream Task Force"
+    venue: "Offline Activity Coordination Board"
+    location: "May 8th ’17"
+    year: 2017
+    iso: "2017-05"
+    date: "May 2017"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/636135/"
+  - id: t2017-104
+    type: internal
+    title: "Experimental overview of estimation of V+jets backgrounds to BSM searches at ATLAS"
+    venue: "Illuminating Standard Candles at the LHC"
+    location: "Imperial College London"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/624982/timetable/?view=standard"
+  - id: t2017-105
+    type: invited
+    title: "Search for weak boson fusion production of Z’"
+    venue: "Exotics: Lepton + X meeting"
+    location: "April 25th ’17"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/628635/"
+  - id: t2017-106
+    type: invited
+    title: "Limit studies for the MET+jj paper and discussion"
+    venue: "Monojet/VBF MET+j(j) face-to-face meeting"
+    location: "University College London, London"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/612594/"
+  - id: t2017-107
+    type: invited
+    title: "Plans with Run-2 Z’ analyses"
+    venue: "Exotics: Lepton + X meeting"
+    location: "April 11th ’17"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/628633/"
+  - id: t2017-108
+    type: invited
+    title: "Feedback from BLS groups on B-Physics stream"
+    venue: "B Physics Stream Taskforce Meeting"
+    location: "April 11th ’17"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/630047/"
+  - id: t2017-109
+    type: internal
+    title: "Status report on BLS trigger taskforce"
+    venue: "B-Physics and Light States plenary meeting"
+    location: "April 5th ’17"
+    year: 2017
+    iso: "2017-04"
+    date: "Apr 2017"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/623434/"
+  - id: t2017-110
+    type: internal
+    title: "New interpretations in terms of general VBF EFT"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "March 28th ’17"
+    year: 2017
+    iso: "2017-03"
+    date: "Mar 2017"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/612297/"
+  - id: t2017-111
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "March 10th ’17"
+    year: 2017
+    iso: "2017-03"
+    date: "Mar 2017"
+    tags: [open-data, collider]
+  - id: t2017-112
+    type: invited
+    title: "Initial report of B-physics Stream Task Force"
+    venue: "Offline Activity Coordination Board"
+    location: "March 6th ’17"
+    year: 2017
+    iso: "2017-03"
+    date: "Mar 2017"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/618310/"
+  - id: t2017-113
+    type: internal
+    title: "Updated interpretation results and cross-checks"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "February 28th ’17"
+    year: 2017
+    iso: "2017-02"
+    date: "Feb 2017"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/612293/"
+  - id: t2017-114
+    type: invited
+    title: "Survey of B-Physics analysis TLA, PEB, and delayed stream potential use-cases"
+    venue: "B Physics Stream Taskforce Meeting"
+    location: "February 28th ’17"
+    year: 2017
+    iso: "2017-02"
+    date: "Feb 2017"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/615804/"
+  - id: t2017-115
+    type: invited
+    title: "MET+j(j) monojet and Higgs dark matter limits"
+    venue: "Monojet/VBF MET+j(j) face-to-face meeting"
+    location: "Manchester"
+    year: 2017
+    iso: "2017-01"
+    date: "Jan 2017"
+    tags: [dark-matter, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/602690/"
+  - id: t2017-116
+    type: internal
+    title: "New searches for low mass states in ATLAS"
+    venue: "ATLAS-UK 2017"
+    location: "University of Liverpool, UK"
+    year: 2017
+    iso: "2017-01"
+    date: "Jan 2017"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/567771/other-view?view=standard"
+  - id: t2016-117
+    type: internal
+    title: "B, SM, and BSM physics at the LHC"
+    venue: "Manchester Xmas Meeting"
+    location: "December 15th '16"
+    year: 2016
+    iso: "2016-12"
+    date: "Dec 2016"
+    tags: [collider]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=5098"
+  - id: t2016-118
+    type: internal
+    title: "MET+j(j) dark matter search limits/interpretations"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "December 13th ’16"
+    year: 2016
+    iso: "2016-12"
+    date: "Dec 2016"
+    tags: [dark-matter, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/594915/"
+  - id: t2016-119
+    type: internal
+    title: "ATLAS & CMS Standard Model measurements and re-use for constraining BSM"
+    venue: "Re)interpreting the results of new physics searches at the LHC"
+    location: "CERN"
+    year: 2016
+    iso: "2016-12"
+    date: "Dec 2016"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/571190/timetable/"
+  - id: t2016-120
+    type: invited
+    title: "MET+j(j) dark matter search limits and interpretations"
+    venue: "EXOT-2016-03 editorial board meeting"
+    location: "December 7th ’16"
+    year: 2016
+    iso: "2016-12"
+    date: "Dec 2016"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/592669/"
+  - id: t2016-121
+    type: internal
+    title: "MET+j(j) dark matter search interpretations"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "December 6th ’16"
+    year: 2016
+    iso: "2016-12"
+    date: "Dec 2016"
+    tags: [dark-matter, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/592527/"
+  - id: t2016-122
+    type: invited
+    title: "MET+j(j) dark matter search unblinded results and limits"
+    venue: "Exotics Jet plus Dark Matter (JDM) meeting"
+    location: "November 25th ’16"
+    year: 2016
+    iso: "2016-11"
+    date: "Nov 2016"
+    tags: [dark-matter, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/578858/"
+  - id: t2016-123
+    type: invited
+    title: "Applying for Marie Curie Fellowships"
+    venue: "MCnet grant writing training event"
+    location: "MCnet network meeting, CERN"
+    year: 2016
+    iso: "2016-11"
+    date: "Nov 2016"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/572320/"
+  - id: t2016-124
+    type: internal
+    title: "Statistical tests between data and theory expectation"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "Nov 15th ’16"
+    year: 2016
+    iso: "2016-11"
+    date: "Nov 2016"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/588714/"
+  - id: t2016-125
+    type: internal
+    title: "8 TeV analysis updates"
+    venue: "BLS BPHY-2016-02 analysis meeting"
+    location: "Oct 21st ’16"
+    year: 2016
+    iso: "2016-10"
+    date: "Oct 2016"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/578723/"
+  - id: t2016-126
+    type: internal
+    title: "Limit setting and presentation of results"
+    venue: "Monojet/VBF MET+j(j) analysis meeting"
+    location: "Sept 27th ’16"
+    year: 2016
+    iso: "2016-09"
+    date: "Sep 2016"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/572371/"
+  - id: t2016-127
+    type: internal
+    title: "Extracting fiducial production cross-sections"
+    venue: "BLS 2016-02 analysis meeting"
+    location: "Sept 12th ’16"
+    year: 2016
+    iso: "2016-09"
+    date: "Sep 2016"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/568983/"
+  - id: t2016-128
+    type: invited
+    title: "B-Physics and Light States 2016/17 publication plans"
+    venue: "Physics Coordination meeting"
+    location: "Sept 12th ’16"
+    year: 2016
+    iso: "2016-09"
+    date: "Sep 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/568996/"
+  - id: t2016-129
+    type: invited
+    title: "The latest news from the LHC"
+    venue: "Teacher Development Session"
+    location: "Institute for Research in Schools, Manchester"
+    year: 2016
+    iso: "2016-07"
+    date: "Jul 2016"
+    tags: [collider]
+    links:
+      agenda: "http://www.researchinschools.org/events.html"
+  - id: t2016-130
+    type: internal
+    title: "Overview of ATLAS B-Physics and Light States group analyses"
+    venue: "ATLAS Physics Plenary"
+    location: "Council Chamber, CERN"
+    year: 2016
+    iso: "2016-07"
+    date: "Jul 2016"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/544954/"
+  - id: t2016-131
+    type: invited
+    title: "MET+j(j) Dark Matter signal models"
+    venue: "Exotics Jet plus Dark Matter (JDM) meeting"
+    location: "July 1st ’16"
+    year: 2016
+    iso: "2016-07"
+    date: "Jul 2016"
+    tags: [dark-matter, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/518000/"
+  - id: t2016-132
+    type: internal
+    title: "Search for new physics in rare and semi-rare decays of B-mesons at ATLAS"
+    venue: "14th International Workshop on Meson Production"
+    location: "Properties and Interactions, Krakow, Poland"
+    year: 2016
+    iso: "2016-06"
+    date: "Jun 2016"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://meson.if.uj.edu.pl/indico/event/3/timetable/#all.detailed"
+  - id: t2016-133
+    type: seminar
+    title: "The LHC as an electroweak boson collider: the cutting edge and future prospects"
+    venue: "Lancaster University Experimental Particle Physics Seminar"
+    location: "Lancaster University"
+    year: 2016
+    iso: "2016-05"
+    date: "May 2016"
+    tags: [electroweak, collider]
+    links:
+      agenda: "http://www.physics.lancs.ac.uk/events/seminars-by-group.php"
+  - id: t2016-134
+    type: internal
+    title: "Introduction and news"
+    venue: "B-Physics and Light States plenary meeting"
+    location: "May 13th ’16"
+    year: 2016
+    iso: "2016-05"
+    date: "May 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/522417/"
+  - id: t2016-135
+    type: invited
+    title: "B-Physics and Light States Summer 2016 plans"
+    venue: "Physics Coordination meeting"
+    location: "May 9th ’16"
+    year: 2016
+    iso: "2016-05"
+    date: "May 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/527543/"
+  - id: t2016-136
+    type: seminar
+    title: "The LHC as an electroweak boson collider: the cutting edge and future prospects"
+    venue: "Institute for Particle Physics Phenomenology Seminar"
+    location: "University of Durham"
+    year: 2016
+    iso: "2016-04"
+    date: "Apr 2016"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://conference.ippp.dur.ac.uk/event/531/"
+  - id: t2016-137
+    type: internal
+    title: "Status and prospects for flavour physics measurements in ATLAS and CMS"
+    venue: "11th Franco-Italian Meeting on B-Physics"
+    location: "LPNHE-Paris, France"
+    year: 2016
+    iso: "2016-04"
+    date: "Apr 2016"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/456947/other-view?view=standard"
+  - id: t2016-138
+    type: seminar
+    title: "The LHC physics programme so far and future potential"
+    venue: "Particle Theory and Quantum Gravity Group Seminar"
+    location: "University of Nottingham"
+    year: 2016
+    iso: "2016-03"
+    date: "Mar 2016"
+    tags: [collider]
+    links:
+      agenda: "https://www.nottingham.ac.uk/~ppzphy7/webpages/seminars/"
+  - id: t2016-139
+    type: public
+    title: "Exploring the unknown with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "March 16th ’16"
+    year: 2016
+    iso: "2016-03"
+    date: "Mar 2016"
+    tags: [open-data, collider]
+  - id: t2016-140
+    type: internal
+    title: "QCD and electroweak Zjj production at 13 TeV"
+    venue: "SM Electroweak group plenary meeting"
+    location: "March 11th ’16"
+    year: 2016
+    iso: "2016-03"
+    date: "Mar 2016"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/505095/"
+  - id: t2016-141
+    type: internal
+    title: "Weak boson fusion W production measurements"
+    venue: "ATLAS Manchester group meeting"
+    location: "March 11th ’16"
+    year: 2016
+    iso: "2016-03"
+    date: "Mar 2016"
+    tags: [electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/category/888/"
+  - id: t2016-142
+    type: invited
+    title: "Double parton scattering in associated quarkonium production with vector bosons"
+    venue: "ECT* Workshop: New Observables in Quarkonium Production"
+    location: "Trento, Italy"
+    year: 2016
+    iso: "2016-03"
+    date: "Mar 2016"
+    tags: [b-physics, qcd]
+    links:
+      agenda: "https://indico.cern.ch/event/453040/other-view?view=standard"
+  - id: t2016-143
+    type: invited
+    title: "VBF/Monojet MET+j(j) ratio dark matter update"
+    venue: "Exotics Jet plus Dark Matter meeting"
+    location: "February 26th ’16"
+    year: 2016
+    iso: "2016-02"
+    date: "Feb 2016"
+    tags: [dark-matter, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/470835/"
+  - id: t2016-144
+    type: invited
+    title: "B-Physics and Light States ICHEP plans"
+    venue: "Physics Coordination meeting"
+    location: "February 8th ’16"
+    year: 2016
+    iso: "2016-02"
+    date: "Feb 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/495022/"
+  - id: t2016-145
+    type: invited
+    title: "B-Physics and Light States Monte Carlo needs"
+    venue: "Physics Coordination meeting"
+    location: "February 1st ’16"
+    year: 2016
+    iso: "2016-02"
+    date: "Feb 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/492277/"
+  - id: t2016-146
+    type: internal
+    title: "Introduction and news"
+    venue: "B-Physics and Light States plenary meeting"
+    location: "January 29th ’16"
+    year: 2016
+    iso: "2016-01"
+    date: "Jan 2016"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/481357/"
+  - id: t2015-147
+    type: internal
+    title: "B, SM, and BSM physics at the LHC"
+    venue: "Manchester Xmas Meeting"
+    location: "December 21st '15"
+    year: 2015
+    iso: "2015-12"
+    date: "Dec 2015"
+    tags: [collider]
+    links:
+      agenda: "https://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=4879"
+  - id: t2015-148
+    type: invited
+    title: "Run-1 VBF W status update"
+    venue: "Standard Model Electroweak group meeting"
+    location: "December 9th ’15"
+    year: 2015
+    iso: "2015-12"
+    date: "Dec 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/466923/"
+  - id: t2015-149
+    type: internal
+    title: "Introduction and news"
+    venue: "B-Physics and Light States plenary meeting"
+    location: "November 27th ’15"
+    year: 2015
+    iso: "2015-11"
+    date: "Nov 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/357267/"
+  - id: t2015-150
+    type: invited
+    title: "EFT DM model kinematics and rates"
+    venue: "VBF Dark Matter face-to-face meeting"
+    location: "Manchester"
+    year: 2015
+    iso: "2015-11"
+    date: "Nov 2015"
+    tags: [dark-matter, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/452324/"
+  - id: t2015-151
+    type: invited
+    title: "B-Physics and Light States physics results"
+    venue: "Physics Coordination meeting"
+    location: "November 23rd ’15"
+    year: 2015
+    iso: "2015-11"
+    date: "Nov 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/463692/"
+  - id: t2015-152
+    type: invited
+    title: "B-Physics and Light States readiness for EOYE"
+    venue: "Physics Coordination meeting"
+    location: "November 16th ’15"
+    year: 2015
+    iso: "2015-11"
+    date: "Nov 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/460764/"
+  - id: t2015-153
+    type: internal
+    title: "B-Physics Run-2 results"
+    venue: "ATLAS Physics Jamboree"
+    location: "October 30th ’15"
+    year: 2015
+    iso: "2015-10"
+    date: "Oct 2015"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/452775/"
+  - id: t2015-154
+    type: invited
+    title: "In-situ dijet Jet Energy Resolution"
+    venue: "In-situ analyses for jet calibration and resolution"
+    location: "October 22nd ’15"
+    year: 2015
+    iso: "2015-10"
+    date: "Oct 2015"
+    tags: [qcd, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/456464/"
+  - id: t2015-155
+    type: internal
+    title: "Introduction and news"
+    venue: "B-Physics and Light States plenary meeting"
+    location: "September 11th ’15"
+    year: 2015
+    iso: "2015-09"
+    date: "Sep 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/357266/"
+  - id: t2015-156
+    type: invited
+    title: "Electroweak differential Wjj cross-sections"
+    venue: "VBF W workshop"
+    location: "September 10th ’15"
+    year: 2015
+    iso: "2015-09"
+    date: "Sep 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/443040/"
+  - id: t2015-157
+    type: invited
+    title: "B-Physics and Light States group status"
+    venue: "Physics Coordination meeting"
+    location: "September 7th ’15"
+    year: 2015
+    iso: "2015-09"
+    date: "Sep 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/442524/"
+  - id: t2015-158
+    type: internal
+    title: "Measurements of V+charm/beauty jet production at DZero"
+    venue: "QCD@LHC2015"
+    location: "London, UK"
+    year: 2015
+    iso: "2015-09"
+    date: "Sep 2015"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/381832/other-view?view=nicecompact"
+  - id: t2015-159
+    type: internal
+    title: "Wjj integrated cross-sections and EWK CR contamination"
+    venue: "VBF W working meeting"
+    location: "August 17th ’15"
+    year: 2015
+    iso: "2015-08"
+    date: "Aug 2015"
+    tags: [electroweak]
+    links:
+      agenda: "http://livepage.apple.com/"
+  - id: t2015-160
+    type: internal
+    title: "First look at the EWK-only Wjj cross-sections"
+    venue: "VBF W working meeting"
+    location: "August 10th ’15"
+    year: 2015
+    iso: "2015-08"
+    date: "Aug 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/438147/"
+  - id: t2015-161
+    type: internal
+    title: "Integrated and differential QCD+EWK Wjj x-sec (combined data)"
+    venue: "VBF W working meeting"
+    location: "August 6th ’15"
+    year: 2015
+    iso: "2015-08"
+    date: "Aug 2015"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/437632/"
+  - id: t2015-162
+    type: internal
+    title: "QCD+EWK Wjj integrated cross-sections and differential lepton channel comparisons"
+    venue: "VBF W working meeting"
+    location: "August 4th ’15"
+    year: 2015
+    iso: "2015-08"
+    date: "Aug 2015"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/303102/"
+  - id: t2015-163
+    type: internal
+    title: "Measurement of vector boson + heavy flavour jet production at DZero"
+    venue: "EPS-HEP 2015"
+    location: "Vienna, Austria"
+    year: 2015
+    iso: "2015-07"
+    date: "Jul 2015"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/356420/other-view?view=standard"
+  - id: t2015-164
+    type: invited
+    title: "EvtGen tuning, modelling issues, and considerations"
+    venue: "EvtGen planning meeting"
+    location: "July 8th ’15"
+    year: 2015
+    iso: "2015-07"
+    date: "Jul 2015"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/402976"
+  - id: t2015-165
+    type: invited
+    title: "VBF W measurements"
+    venue: "VBF W EdBoard meeting"
+    location: "July 1st ’15"
+    year: 2015
+    iso: "2015-07"
+    date: "Jul 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/403779/"
+  - id: t2015-166
+    type: internal
+    title: "Electroweak signal extraction from jet veto efficiency measurements"
+    venue: "VBF W working meeting"
+    location: "June 30th ’15"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [qcd, electroweak, instrumentation]
+    links:
+      slides: "https://indico.cern.ch/event/303102/contribution/12/material/slides/0.pdf"
+  - id: t2015-167
+    type: invited
+    title: "Measurement of anomalous triple gauge couplings from unfolded VBF spectra"
+    venue: "VBF W workshop"
+    location: "CERN, Geneva"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/403181/"
+  - id: t2015-168
+    type: invited
+    title: "Unfolded VBF W cross-sections"
+    venue: "VBF W workshop"
+    location: "CERN, Geneva"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/403181/"
+  - id: t2015-169
+    type: public
+    title: "Exploring the unknown at the Large Hadron Collider"
+    venue: "STFC Particle Physics Masterclass"
+    location: "Wrexham"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [open-data, collider]
+  - id: t2015-170
+    type: invited
+    title: "B-Physics analysis and performance results for EPS-2015"
+    venue: "Physics Coordination meeting"
+    location: "June 22nd ’15"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/402686/"
+  - id: t2015-171
+    type: internal
+    title: "13 TeV J/psi cross-section measurements"
+    venue: "Run-2 J/psi analysis meeting"
+    location: "June 10th ’15"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/400434/"
+  - id: t2015-172
+    type: invited
+    title: "Recent QCD and electroweak results from the Tevatron"
+    venue: "Rencontres de Blois 2015"
+    location: "Loire Valley, France"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/359229/other-view?view=standard"
+  - id: t2015-173
+    type: invited
+    title: "B-Physics results with first commissioning data and plans for early Run-2"
+    venue: "Physics Coordination meeting"
+    location: "June 1st ’15"
+    year: 2015
+    iso: "2015-06"
+    date: "Jun 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/396095"
+  - id: t2015-174
+    type: internal
+    title: "First look at B-Physics data with 13 TeV pp collisions"
+    venue: "Manchester ATLAS meeting"
+    location: "May 28th ’15"
+    year: 2015
+    iso: "2015-05"
+    date: "May 2015"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/category/888/"
+  - id: t2015-175
+    type: internal
+    title: "Dark matter EFT signal models"
+    venue: "Dark matter analysis meeting"
+    location: "UCL, London"
+    year: 2015
+    iso: "2015-05"
+    date: "May 2015"
+    tags: [dark-matter]
+    links:
+      agenda: "https://indico.cern.ch/event/394542/"
+  - id: t2015-176
+    type: invited
+    title: "Preparations for early B-Physics results with first Run-2 data"
+    venue: "B-Physics conveners meeting"
+    location: "May 25th ’15"
+    year: 2015
+    iso: "2015-05"
+    date: "May 2015"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/396023/"
+  - id: t2015-177
+    type: invited
+    title: "VBF W unfolding of differential cross-sections"
+    venue: "VBF W EdBoard meeting"
+    location: "May 20th ’15"
+    year: 2015
+    iso: "2015-05"
+    date: "May 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/393291/"
+  - id: t2015-178
+    type: invited
+    title: "VBF W unfolding status update"
+    venue: "VBF W working group meeting"
+    location: "April 23rd ’15"
+    year: 2015
+    iso: "2015-04"
+    date: "Apr 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/389861/"
+  - id: t2015-179
+    type: invited
+    title: "Unfolded differential WBF W distributions"
+    venue: "VBF W working group meeting"
+    location: "April 16th ’15"
+    year: 2015
+    iso: "2015-04"
+    date: "Apr 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/388436/"
+  - id: t2015-180
+    type: invited
+    title: "Unfolded distributions for electroweak Wjj production"
+    venue: "VBF W working group meeting"
+    location: "April 2nd ’15"
+    year: 2015
+    iso: "2015-04"
+    date: "Apr 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/385851/"
+  - id: t2015-181
+    type: invited
+    title: "Manchester contribution to VBF Z at 13 TeV"
+    venue: "VBF Z-->l+l- analysis kick-off meeting"
+    location: "March 27th ’15"
+    year: 2015
+    iso: "2015-03"
+    date: "Mar 2015"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/383691/"
+  - id: t2015-182
+    type: public
+    title: "Finding the unknown at the Large Hadron Collider"
+    venue: "Manchester Schools Masterclass"
+    location: "March 26th ’15"
+    year: 2015
+    iso: "2015-03"
+    date: "Mar 2015"
+    tags: [open-data, collider]
+  - id: t2015-183
+    type: invited
+    title: "Dark matter model rates/kinematics"
+    venue: "Monojet/VBF MET+j(j) meeting"
+    location: "January 12th '15"
+    year: 2015
+    iso: "2015-01"
+    date: "Jan 2015"
+    tags: [dark-matter, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/479516/"
+  - id: t2015-184
+    type: invited
+    title: "Run-2 preparation status: B-Phys"
+    venue: "Physics Coordination meeting"
+    location: "January 26th ’15"
+    year: 2015
+    iso: "2015-01"
+    date: "Jan 2015"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/368567/"
+  - id: t2015-185
+    type: internal
+    title: "Opportunities for links between heavy flavour and SM/Higgs/Exotic physics in LHC Run-2"
+    venue: "ATLAS-UK 2015"
+    location: "University of Sussex, UK"
+    year: 2015
+    iso: "2015-01"
+    date: "Jan 2015"
+    tags: [b-physics, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/335868/other-view?view=standard"
+  - id: t2014-186
+    type: internal
+    title: "Prospects for quarkonium and heavy flavour physics with the upgraded ATLAS detector"
+    venue: "Second Sapore-Gravis Workshop"
+    location: "Padua, Italy"
+    year: 2014
+    iso: "2014-12"
+    date: "Dec 2014"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/305164/other-view?view=standard"
+  - id: t2014-187
+    type: internal
+    title: "B-Physics introduction and news"
+    venue: "B-Physics plenary meeting"
+    location: "December 4th ’14"
+    year: 2014
+    iso: "2014-12"
+    date: "Dec 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/354740/"
+  - id: t2014-188
+    type: invited
+    title: "B-Physics Run-1 publication plans"
+    venue: "Physics Coordination meeting"
+    location: "November 24th ’14"
+    year: 2014
+    iso: "2014-11"
+    date: "Nov 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/354668/"
+  - id: t2014-189
+    type: internal
+    title: "Heavy flavour production: Run-2 goals and requirements"
+    venue: "ATLAS Physics Workshop - Ready for Run-2"
+    location: "Aix-les-Bains, France"
+    year: 2014
+    iso: "2014-11"
+    date: "Nov 2014"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/301300/other-view?view=standard"
+  - id: t2014-190
+    type: seminar
+    title: "Searching for the unexpected at the LHC"
+    venue: "Random Walks In Physics Colloquium"
+    location: "Manchester, UK"
+    year: 2014
+    iso: "2014-10"
+    date: "Oct 2014"
+    tags: [collider]
+  - id: t2014-191
+    type: internal
+    title: "VBF W unfolded distributions"
+    venue: "ATLAS VBF W workshop"
+    location: "Wuppertal, Germany"
+    year: 2014
+    iso: "2014-10"
+    date: "Oct 2014"
+    tags: [electroweak, collider]
+  - id: t2014-192
+    type: internal
+    title: "ATLAS-UK Run-2 physics and performance planning"
+    venue: "ATLAS UK Run 2 workshop"
+    location: "Birmingham, UK"
+    year: 2014
+    iso: "2014-10"
+    date: "Oct 2014"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/336090/other-view?view=standard"
+  - id: t2014-193
+    type: invited
+    title: "VBF W boson unfolding status"
+    venue: "VBF W working group meeting"
+    location: "October 2nd ’14"
+    year: 2014
+    iso: "2014-10"
+    date: "Oct 2014"
+    tags: [electroweak]
+  - id: t2014-194
+    type: internal
+    title: "Onia subgroup status report"
+    venue: "B-Physics meeting"
+    location: "ATLAS P&P week"
+    year: 2014
+    iso: "2014-09"
+    date: "Sep 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/337327/"
+  - id: t2014-195
+    type: invited
+    title: "Large eta taskforce and Run-2 plans"
+    venue: "Onia subgroup meeting"
+    location: "August 27th ’14"
+    year: 2014
+    iso: "2014-08"
+    date: "Aug 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/336058/"
+  - id: t2014-196
+    type: internal
+    title: "Investigating signal-background interference in the production of dijets in association with a W/Z boson"
+    venue: "VBF W analysis meeting"
+    location: "August 14th '14"
+    year: 2014
+    iso: "2014-08"
+    date: "Aug 2014"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/336446/"
+  - id: t2014-197
+    type: invited
+    title: "Onia subgroup report"
+    venue: "B-Physics conveners meeting"
+    location: "August 4th '14"
+    year: 2014
+    iso: "2014-08"
+    date: "Aug 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/296104/"
+  - id: t2014-198
+    type: public
+    title: "Introduction to hadron collider physics"
+    venue: "Lecture course at the Hadron Collider School ( HASCO )"
+    location: "Georg-August-Universtät Göttingen"
+    year: 2014
+    iso: "2014-07"
+    date: "Jul 2014"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/event/292887/other-view?view=standard"
+  - id: t2014-199
+    type: internal
+    title: "Comments to the W->munu PbPb analysis"
+    venue: "Public Reading on ATLAS-HION-2013-05-002"
+    location: "July 3rd '14"
+    year: 2014
+    iso: "2014-07"
+    date: "Jul 2014"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/category/2635/"
+  - id: t2014-200
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "June 25th '14"
+    year: 2014
+    iso: "2014-06"
+    date: "Jun 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/326374/"
+  - id: t2014-201
+    type: internal
+    title: "Production and spectroscopy of quarkonia states at the ATLAS experiment"
+    venue: "LHCP"
+    location: "New York City, USA"
+    year: 2014
+    iso: "2014-06"
+    date: "Jun 2014"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/279518/timetable/#all.detailed"
+  - id: t2014-202
+    type: public
+    title: "Hands-on: real LHC data. How do we get from collisions to physics?"
+    venue: "Manchester Schools masterclass"
+    location: "April 24--25th '14"
+    year: 2014
+    iso: "2014-04"
+    date: "Apr 2014"
+    tags: [open-data, collider]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+  - id: t2014-203
+    type: seminar
+    title: "Quarkonium production in the era of the LHC: past, present, and future"
+    venue: "Niels Bohr Seminar"
+    location: "University of Manchester"
+    year: 2014
+    iso: "2014-03"
+    date: "Mar 2014"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.hep.manchester.ac.uk/categoryDisplay.py?categId=20"
+  - id: t2014-204
+    type: internal
+    title: "psi(2S)-->J/psi pi pi production"
+    venue: "ATLAS Open Presentation"
+    location: "February 21st '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/302144/"
+  - id: t2014-205
+    type: internal
+    title: "Measurement of prompt and non-prompt psi(2S) production"
+    venue: "ATLAS Weekly meeting"
+    location: "February 18th '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/event/286450/"
+  - id: t2014-206
+    type: internal
+    title: "Quarkonium sub-group report"
+    venue: "B-Physics meeting"
+    location: "February 11th '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/301265/"
+  - id: t2014-207
+    type: invited
+    title: "J/psi+lepton administration and planning"
+    venue: "J/psi+lepton final state kick-off meeting"
+    location: "Feb 7th '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/299608/"
+  - id: t2014-208
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "Feb 5th '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/event/298729/"
+  - id: t2014-209
+    type: invited
+    title: "Planned Manchester electroweak measurements in 8 TeV and 14 TeV data"
+    venue: "Manchester Electroweak meeting"
+    location: "Feb 4th '14"
+    year: 2014
+    iso: "2014-02"
+    date: "Feb 2014"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/event/299925/"
+  - id: t2014-210
+    type: internal
+    title: "Overview of physics with quarkonia at ATLAS"
+    venue: "ATLAS UK 2014"
+    location: "University of Edinburgh"
+    year: 2014
+    iso: "2014-01"
+    date: "Jan 2014"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=275386"
+  - id: t2013-211
+    type: internal
+    title: "Vector bosons, jets and quarkonia at ATLAS/DØ"
+    venue: "Manchester Xmas Meeting"
+    location: "December 17/18th '13"
+    year: 2013
+    iso: "2013-12"
+    date: "Dec 2013"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "http://agenda.hep.manchester.ac.uk/conferenceDisplay.py?confId=4224"
+  - id: t2013-212
+    type: internal
+    title: "Unfolded differential distributions for EWK/VBF W+jets ATLAS VBF W workshop, University of Manchester, Dec 6th '13) 8 TeV CJV/OLV VBF optimisation ATLAS VBF W workshop, University of Manchester, Dec 5th '13) Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "November 27th '13"
+    year: 2013
+    iso: "2013-11"
+    date: "Nov 2013"
+    tags: [b-physics, qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=284143"
+  - id: t2013-213
+    type: invited
+    title: "To-do list and plans for VBF workshop"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "November 21st '13"
+    year: 2013
+    iso: "2013-11"
+    date: "Nov 2013"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=284675"
+  - id: t2013-214
+    type: internal
+    title: "Common selections, trigger and reconstruction efficiency handling"
+    venue: "Di-Onia and W/Z/gamma+Onia one-day ATLAS workshop"
+    location: "November 14th '13"
+    year: 2013
+    iso: "2013-11"
+    date: "Nov 2013"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=276655"
+  - id: t2013-215
+    type: internal
+    title: "Introduction to the workshop and aims"
+    venue: "Di-Onia and W/Z/gamma+Onia one-day ATLAS workshop"
+    location: "November 14th '13"
+    year: 2013
+    iso: "2013-11"
+    date: "Nov 2013"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=276655"
+  - id: t2013-216
+    type: invited
+    title: "Production and spectroscopy of conventional charmonium and bottomonium states at hadron colliders"
+    venue: "XV International Conference on Hadron Spectroscopy [Hadron 2013]"
+    location: "Nara, Japan"
+    year: 2013
+    iso: "2013-11"
+    date: "Nov 2013"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://kds.kek.jp/conferenceOtherViews.py?view=standard&confId=13819"
+  - id: t2013-217
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "October 23rd '13"
+    year: 2013
+    iso: "2013-10"
+    date: "Oct 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=278549"
+  - id: t2013-218
+    type: invited
+    title: "Jet veto considerations in VBF-W"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "October 10th '13"
+    year: 2013
+    iso: "2013-10"
+    date: "Oct 2013"
+    tags: [qcd, electroweak, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=277403"
+  - id: t2013-219
+    type: internal
+    title: "VBF-like measurements and new phenomena searches PhD student inductions, University of Manchester, Sept 23rd '13) Muon reconstruction efficiency studies B-Physics working group meeting, Sept 12th '13) Unfolded differential distributions for EWK/VBF W+jets ATLAS VBF W workshop, University of Oxford, Sept 10th '13) Optimisation of 8 TeV VBF-W analysis selection ATLAS VBF W workshop, University of Oxford, Sept 9th '13) W-VBF overview"
+    venue: "SM Electroweak group meeting"
+    location: "August 23rd '13"
+    year: 2013
+    iso: "2013-08"
+    date: "Aug 2013"
+    tags: [b-physics, qcd, electroweak, instrumentation, collider]
+    links:
+      agenda: "http://indico.hep.manchester.ac.uk/conferenceDisplay.py?confId=4196"
+  - id: t2013-220
+    type: invited
+    title: "Z-VBF overview"
+    venue: "SM Electroweak group meeting"
+    location: "August 23rd '13"
+    year: 2013
+    iso: "2013-08"
+    date: "Aug 2013"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=268202"
+  - id: t2013-221
+    type: invited
+    title: "Selection studies for W-VBF"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "August 15th '13"
+    year: 2013
+    iso: "2013-08"
+    date: "Aug 2013"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251790"
+  - id: t2013-222
+    type: invited
+    title: "Prompt and non-prompt kinematic distributions in di-Jpsi"
+    venue: "Onia subgroup meeting"
+    location: "August 7th '13"
+    year: 2013
+    iso: "2013-08"
+    date: "Aug 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=264624"
+  - id: t2013-223
+    type: invited
+    title: "Di-jpsi angular correlation distributions in 2012 data"
+    venue: "Onia subgroup meeting"
+    location: "July 31st '13"
+    year: 2013
+    iso: "2013-07"
+    date: "Jul 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=264622"
+  - id: t2013-224
+    type: invited
+    title: "Measurements of jet veto and jet multiplicity in W+jets production at the Tevatron"
+    venue: "Workshop on Jet Vetoes and Jet Multiplicity Observables at the LHC"
+    location: "IPPP Durham"
+    year: 2013
+    iso: "2013-07"
+    date: "Jul 2013"
+    tags: [qcd, instrumentation, collider]
+    links:
+      agenda: "http://www.ippp.dur.ac.uk/Workshops/13/JetVetoes/"
+  - id: t2013-225
+    type: public
+    title: "QCD and jet physics [Slides: Part-1 | Part-2 ]"
+    venue: "Lecture course at the Hadron Collider School ( HASCO )"
+    location: "Georg-August-Universtät Göttingen"
+    year: 2013
+    iso: "2013-07"
+    date: "Jul 2013"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceTimeTable.py?confId=232639"
+  - id: t2013-226
+    type: internal
+    title: "Status of 2011 and 2012 muon reconstruction efficiency measurements"
+    venue: "B-Physics group meeting"
+    location: "June 18th '13"
+    year: 2013
+    iso: "2013-06"
+    date: "Jun 2013"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=257908"
+  - id: t2013-227
+    type: invited
+    title: "Dijet mass signal+background fits and cut optimisation"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "June 13th '13"
+    year: 2013
+    iso: "2013-06"
+    date: "Jun 2013"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251781"
+  - id: t2013-228
+    type: internal
+    title: "Dijet mass fits for signal cut optimisation"
+    venue: "ATLAS IU-VBF meeting"
+    location: "June 11th '13"
+    year: 2013
+    iso: "2013-06"
+    date: "Jun 2013"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=257055"
+  - id: t2013-229
+    type: invited
+    title: "Cut optimisation studies for VBF-W"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "June 6th '13"
+    year: 2013
+    iso: "2013-06"
+    date: "Jun 2013"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251780"
+  - id: t2013-230
+    type: invited
+    title: "Update on QCD multijet modelling and cut optimisation in the muon channel"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "May 30th '13"
+    year: 2013
+    iso: "2013-05"
+    date: "May 2013"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251779"
+  - id: t2013-231
+    type: invited
+    title: "QCD multijet determination and VBF cut optimisation"
+    venue: "Vector Boson Fusion working group meeting"
+    location: "May 16th '13"
+    year: 2013
+    iso: "2013-05"
+    date: "May 2013"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251777"
+  - id: t2013-232
+    type: internal
+    title: "Progress on QCD multijet modelling and VBF cut optimisation"
+    venue: "ATLAS IU-VBF meeting"
+    location: "May 14th '13"
+    year: 2013
+    iso: "2013-05"
+    date: "May 2013"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=252439"
+  - id: t2013-233
+    type: invited
+    title: "Muon reconstruction efficiency measurements"
+    venue: "Joint MCP+MATF weekly meeting"
+    location: "May 8th '13"
+    year: 2013
+    iso: "2013-05"
+    date: "May 2013"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=251141"
+  - id: t2013-234
+    type: internal
+    title: "Production of quarkonium states in ATLAS"
+    venue: "XXI International Workshop on Deep-Inelastic Scattering and Related Subjects"
+    location: "DIS2013, Marseille, France"
+    year: 2013
+    iso: "2013-04"
+    date: "Apr 2013"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=184503"
+  - id: t2013-235
+    type: invited
+    title: "QCD measurements from the Tevatron"
+    venue: "SM@LHC 2013"
+    location: "Albert-Ludwigs-Universität Freiburg"
+    year: 2013
+    iso: "2013-04"
+    date: "Apr 2013"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=220429"
+  - id: t2013-236
+    type: internal
+    title: "Report of the quarkonium subgroup"
+    venue: "B-Physics group meeting"
+    location: "March 21st '13"
+    year: 2013
+    iso: "2013-03"
+    date: "Mar 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=242517"
+  - id: t2013-237
+    type: internal
+    title: "VBF-W unfolding status and W+jets MC production for Rivet"
+    venue: "ATLAS IU-VBF meeting"
+    location: "March 19th '13"
+    year: 2013
+    iso: "2013-03"
+    date: "Mar 2013"
+    tags: [qcd, electroweak, collider]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+  - id: t2013-238
+    type: invited
+    title: "QCD studies at the Tevatron"
+    venue: "XXVII Rencontres de Physique de la Vallée d'Aoste"
+    location: "La Thuile, Italy"
+    year: 2013
+    iso: "2013-02"
+    date: "Feb 2013"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://agenda.infn.it/conferenceOtherViews.py?confId=5540&view=standard"
+  - id: t2013-239
+    type: invited
+    title: "Muon reconstruction efficiencies for 2012 data"
+    venue: "Onia subgroup meeting"
+    location: "February 13th '13"
+    year: 2013
+    iso: "2013-02"
+    date: "Feb 2013"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=231337"
+  - id: t2013-240
+    type: invited
+    title: "Inclusive di-J/psi in 2012 data"
+    venue: "Onia subgroup meeting"
+    location: "February 13th '13"
+    year: 2013
+    iso: "2013-02"
+    date: "Feb 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=231337"
+  - id: t2013-241
+    type: internal
+    title: "W+jets production"
+    venue: "D0 Winter Workshop"
+    location: "February 4th"
+    year: 2013
+    iso: "2013-01"
+    date: "Jan 2013"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.fnal.gov/conferenceDisplay.py?confId=6251"
+  - id: t2013-242
+    type: invited
+    title: "Low-pt muon reconstruction efficiencies for 2012 data"
+    venue: "Weekly MCP combined performance meeting"
+    location: "January 30th"
+    year: 2013
+    iso: "2013-01"
+    date: "Jan 2013"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=232769"
+  - id: t2013-243
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "January 23rd '13"
+    year: 2013
+    iso: "2013-01"
+    date: "Jan 2013"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=223538"
+  - id: t2013-244
+    type: internal
+    title: "Measurements of W+jets production at the Tevatron"
+    venue: "All-DZero meeting"
+    location: "January 11th"
+    year: 2013
+    iso: "2013-01"
+    date: "Jan 2013"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.fnal.gov/conferenceDisplay.py?confId=6244"
+  - id: t2013-245
+    type: invited
+    title: "W+jets production measurements"
+    venue: "EB038 review meeting"
+    location: "January 3rd '13"
+    year: 2013
+    iso: "2013-01"
+    date: "Jan 2013"
+    tags: [qcd]
+    links:
+      agenda: "https://indico.fnal.gov/conferenceDisplay.py?confId=D0_a121075"
+  - id: t2012-246
+    type: internal
+    title: "Quarkonia, vector bosons, jets and other animals"
+    venue: "Manchester Xmas Meeting"
+    location: "December 19th '12"
+    year: 2012
+    iso: "2012-12"
+    date: "Dec 2012"
+    tags: [b-physics, qcd]
+    links:
+      agenda: "http://agenda.hep.manchester.ac.uk/conferenceDisplay.py?confId=3946"
+  - id: t2012-247
+    type: internal
+    title: "Discussion on lower tracking reconstruction thresholds"
+    venue: "B-Physics group meeting"
+    location: "December 11th '12"
+    year: 2012
+    iso: "2012-12"
+    date: "Dec 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=220870"
+  - id: t2012-248
+    type: invited
+    title: "Chair of Heavy Flavour sessions"
+    venue: "Hadron Collider Physics Symposium 2012"
+    location: "Kyoto, Japan"
+    year: 2012
+    iso: "2012-11"
+    date: "Nov 2012"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "http://kds.kek.jp/conferenceDisplay.py?confId=10807"
+  - id: t2012-249
+    type: invited
+    title: "W+jets production measurements"
+    venue: "QCD Workshop"
+    location: "October 16th '12"
+    year: 2012
+    iso: "2012-10"
+    date: "Oct 2012"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a12889"
+  - id: t2012-250
+    type: invited
+    title: "Acceptance corrections for onia plus dipion final states"
+    venue: "Onia subgroup meeting"
+    location: "October 10th '12"
+    year: 2012
+    iso: "2012-10"
+    date: "Oct 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=209309"
+  - id: t2012-251
+    type: internal
+    title: "B-Physics overview"
+    venue: "ATLAS Week Plenary Session"
+    location: "Montreux, Switzerland"
+    year: 2012
+    iso: "2012-10"
+    date: "Oct 2012"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=175938"
+  - id: t2012-252
+    type: invited
+    title: "Input for Trigger Workshop"
+    venue: "B-trigger group meeting"
+    location: "September 27th '12"
+    year: 2012
+    iso: "2012-09"
+    date: "Sep 2012"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=206526"
+  - id: t2012-253
+    type: internal
+    title: "Report from the Onia subgroup"
+    venue: "B-Physics group meeting"
+    location: "August 31st '12"
+    year: 2012
+    iso: "2012-08"
+    date: "Aug 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=205715"
+  - id: t2012-254
+    type: internal
+    title: "Update on muon efficiency studies"
+    venue: "B-Physics group meeting"
+    location: "August 31st '12"
+    year: 2012
+    iso: "2012-08"
+    date: "Aug 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=205715"
+  - id: t2012-255
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "August 15th '12"
+    year: 2012
+    iso: "2012-08"
+    date: "Aug 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=203330"
+  - id: t2012-256
+    type: internal
+    title: "Prospects for quarkonium polarisation measurements at DZero"
+    venue: "DZero Summer Workshop 2012"
+    location: "Lancaster, UK"
+    year: 2012
+    iso: "2012-07"
+    date: "Jul 2012"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a12689"
+  - id: t2012-257
+    type: internal
+    title: "Physics Prospects for vector boson plus jets measurements at DZero"
+    venue: "DZero Summer Workshop 2012"
+    location: "Lancaster, UK"
+    year: 2012
+    iso: "2012-07"
+    date: "Jul 2012"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a12683"
+  - id: t2012-258
+    type: invited
+    title: "J/psi production cross-section analysis in pp collisions at 2.76 TeV and global B-fraction fit"
+    venue: "Heavy Ion group meeting"
+    location: "June 28th '12"
+    year: 2012
+    iso: "2012-06"
+    date: "Jun 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/categoryDisplay.py?categId=3878"
+  - id: t2012-259
+    type: invited
+    title: "Approval of dimuon trigger efficiencies"
+    venue: "Trigger General Meeting"
+    location: "June 27th '12"
+    year: 2012
+    iso: "2012-06"
+    date: "Jun 2012"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=172046"
+  - id: t2012-260
+    type: internal
+    title: "Recent QCD physics results from DZero"
+    venue: "Physics at the LHC (PLHC) 2012"
+    location: "Vancouver, BC"
+    year: 2012
+    iso: "2012-06"
+    date: "Jun 2012"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=164272"
+  - id: t2012-261
+    type: invited
+    title: "Onia acceptance generator update and onia news"
+    venue: "Onia subgroup meeting"
+    location: "May 30th '12"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=191734"
+  - id: t2012-262
+    type: internal
+    title: "VBF measurement status"
+    venue: "IU VBF working meeting"
+    location: "May 22nd '12"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [electroweak]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=191839"
+  - id: t2012-263
+    type: invited
+    title: "W+jets measurements"
+    venue: "EB038 review meeting"
+    location: "May 18th '12"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a12504"
+  - id: t2012-264
+    type: invited
+    title: "W+jets production measurements and comparisons with theory"
+    venue: "V+jets group meeting"
+    location: "DZero Collaboration Week, Fermilab"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a12104#2012-05-16"
+  - id: t2012-265
+    type: internal
+    title: "W+jets production measurements"
+    venue: "DZero Physics Workshop"
+    location: "Fermilab"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a12496"
+  - id: t2012-266
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "May 2nd '12"
+    year: 2012
+    iso: "2012-05"
+    date: "May 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=187876"
+  - id: t2012-267
+    type: internal
+    title: "Quarkonium physics at ATLAS"
+    venue: "Presentation to the NSF and DOE LHC Research Program Managers"
+    location: "CERN"
+    year: 2012
+    iso: "2012-04"
+    date: "Apr 2012"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.bnl.gov/conferenceDisplay.py?confId=506"
+  - id: t2012-268
+    type: invited
+    title: "Upsilon cross-section update"
+    venue: "Upsilon EdBoard meeting"
+    location: "Mar 2nd '12"
+    year: 2012
+    iso: "2012-03"
+    date: "Mar 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=180674"
+  - id: t2012-269
+    type: invited
+    title: "B-trigger status"
+    venue: "B-Physics Working Group meeting"
+    location: "Mar 2nd '12"
+    year: 2012
+    iso: "2012-03"
+    date: "Mar 2012"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=179304"
+  - id: t2012-270
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "Feb 22nd '12"
+    year: 2012
+    iso: "2012-02"
+    date: "Feb 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=177791"
+  - id: t2012-271
+    type: invited
+    title: "Prompt di-Onia production"
+    venue: "Di-onia half-day workshop"
+    location: "Feb 10th '12"
+    year: 2012
+    iso: "2012-02"
+    date: "Feb 2012"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=174354"
+  - id: t2012-272
+    type: internal
+    title: "Discovery of the chi_b(3P) at ATLAS"
+    venue: "blackboard presentation"
+    location: "no slides"
+    year: 2012
+    iso: "2012-01"
+    date: "Jan 2012"
+    tags: [b-physics, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=190042"
+  - id: t2012-273
+    type: invited
+    title: "Barrel trigger scenarios for B-Physics in 2012 data-taking"
+    venue: "Trigger General Meeting"
+    location: "February 7th"
+    year: 2012
+    iso: "2012-01"
+    date: "Jan 2012"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=172026"
+  - id: t2012-274
+    type: internal
+    title: "W+jets production measurements"
+    venue: "DZero Winter Physics Workshop"
+    location: "February 6th"
+    year: 2012
+    iso: "2012-01"
+    date: "Jan 2012"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a12112"
+  - id: t2012-275
+    type: invited
+    title: "B-trigger status and news"
+    venue: "B-Physics working group meeting"
+    location: "January 31st"
+    year: 2012
+    iso: "2012-01"
+    date: "Jan 2012"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=173364"
+  - id: t2011-276
+    type: invited
+    title: "Onia subgroup report"
+    venue: "B-Physics working group meeting"
+    location: "Dec 15th '11"
+    year: 2011
+    iso: "2011-12"
+    date: "Dec 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=166403"
+  - id: t2011-277
+    type: invited
+    title: "Muon reconstruction efficiency determination in 2011"
+    venue: "Low pT muon performance group"
+    location: "Dec 13th '11"
+    year: 2011
+    iso: "2011-12"
+    date: "Dec 2011"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=166448"
+  - id: t2011-278
+    type: invited
+    title: "W+jets production measurements"
+    venue: "QCD group meeting"
+    location: "DZero Collaboration Week"
+    year: 2011
+    iso: "2011-12"
+    date: "Dec 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a111852"
+  - id: t2011-279
+    type: invited
+    title: "B-trigger menu for 2012 running"
+    venue: "TDAQ week Trigger session"
+    location: "Nov 30th '11"
+    year: 2011
+    iso: "2011-11"
+    date: "Nov 2011"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=112741#2011-11-30"
+  - id: t2011-280
+    type: invited
+    title: "W/Z properties and V+jets production at the Tevatron"
+    venue: "Hadron Collider Physics Symposium 2011"
+    location: "Paris"
+    year: 2011
+    iso: "2011-11"
+    date: "Nov 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://hcp2011.lpnhe.in2p3.fr/"
+  - id: t2011-281
+    type: invited
+    title: "Overview of Onia group activities"
+    venue: "B-Physics working group meeting"
+    location: "Nov 10th '11"
+    year: 2011
+    iso: "2011-11"
+    date: "Nov 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=161773"
+  - id: t2011-282
+    type: invited
+    title: "B-Physics input to 2012 trigger menu"
+    venue: "Trigger General meeting"
+    location: "Oct 26th '11"
+    year: 2011
+    iso: "2011-10"
+    date: "Oct 2011"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=129134"
+  - id: t2011-283
+    type: invited
+    title: "Status of W+jets production measurements"
+    venue: "QCD group meeting"
+    location: "DZero Collaboration Week"
+    year: 2011
+    iso: "2011-09"
+    date: "Sep 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a111450"
+  - id: t2011-284
+    type: invited
+    title: "W/Z+jets measurement update"
+    venue: "V+jets working group meeting"
+    location: "DZero Collaboration Week"
+    year: 2011
+    iso: "2011-09"
+    date: "Sep 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a111485"
+  - id: t2011-285
+    type: invited
+    title: "Chi_c analysis planning and agenda"
+    venue: "Chi_c analysis planning meeting"
+    location: "Sept 2nd '11"
+    year: 2011
+    iso: "2011-09"
+    date: "Sep 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=152760"
+  - id: t2011-286
+    type: invited
+    title: "Mixed egamma/muon multilepton triggers for B-Physics"
+    venue: "B-trigger group meeting"
+    location: "Sept 1st '11"
+    year: 2011
+    iso: "2011-09"
+    date: "Sep 2011"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=152537"
+  - id: t2011-287
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "Aug 31st '11"
+    year: 2011
+    iso: "2011-08"
+    date: "Aug 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=152147"
+  - id: t2011-288
+    type: invited
+    title: "Summary of yield/efficiency changes in the MU4 fill"
+    venue: "Trigger General meeting"
+    location: "Aug 31st '11"
+    year: 2011
+    iso: "2011-08"
+    date: "Aug 2011"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=129126"
+  - id: t2011-289
+    type: invited
+    title: "4D/2D quarkonium acceptance corrections"
+    venue: "Onia subgroup meeting"
+    location: "Aug 17th '11"
+    year: 2011
+    iso: "2011-08"
+    date: "Aug 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=149107"
+  - id: t2011-290
+    type: internal
+    title: "Results on heavy quark and vector boson production in pp collisions at 7 TeV and from Pb-Pb collisions at 2.76 TeV with the ATLAS detector"
+    venue: "Characterization of the Quark Gluon Plasma with Heavy Quarks"
+    location: "[ 486th WE-Heraeus-Seminar ], Physikzentrum Bad Honnef, Germany"
+    year: 2011
+    iso: "2011-07"
+    date: "Jul 2011"
+    tags: [collider]
+    links:
+      agenda: "http://alice-serv1.physi.uni-heidelberg.de/indico/conferenceDisplay.py?confId=34"
+  - id: t2011-291
+    type: internal
+    title: "Differential W+jet cross-section measurements"
+    venue: "DZero Collaboration Summer Workshop"
+    location: "Princeton"
+    year: 2011
+    iso: "2011-06"
+    date: "Jun 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://physics.princeton.edu/indico/internalPage.py?pageId=7&confId=120"
+  - id: t2011-292
+    type: invited
+    title: "Production of W/Z bosons and of W/Z+jets at the Tevatron"
+    venue: "Standard Model Benchmarks at High-Energy Hadron Colliders"
+    location: "DESY Zeuthen"
+    year: 2011
+    iso: "2011-06"
+    date: "Jun 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://indico.desy.de/conferenceOtherViews.py?view=standard&confId=3577"
+  - id: t2011-293
+    type: invited
+    title: "Update on J/psi production cross-section analysis at 2.76 TeV and global B-fraction fit"
+    venue: "Onia subgroup meeting"
+    location: "June 1st '11"
+    year: 2011
+    iso: "2011-06"
+    date: "Jun 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=140103"
+  - id: t2011-294
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "June 1st '11"
+    year: 2011
+    iso: "2011-06"
+    date: "Jun 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=140103"
+  - id: t2011-295
+    type: invited
+    title: "Triggers for L=2e33--5e33 in B-Physics"
+    venue: "Trigger General Meeting"
+    location: "June 1st '11"
+    year: 2011
+    iso: "2011-06"
+    date: "Jun 2011"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=129113"
+  - id: t2011-296
+    type: invited
+    title: "Heavy flavour simulation/tuning issues"
+    venue: "MC Tuning task force meeting"
+    location: "May 27th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [b-physics, qcd, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=138978"
+  - id: t2011-297
+    type: invited
+    title: "Triggering on tri- and quad- muon signatures in B-Phys HLT"
+    venue: "B-trigger group meeting"
+    location: "May 19th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=140101"
+  - id: t2011-298
+    type: invited
+    title: "Measurements of di-J/psi continuum production at 7 TeV"
+    venue: "Onia subgroup meeting"
+    location: "May 18th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=138210"
+  - id: t2011-299
+    type: invited
+    title: "J/psi production in proton-proton collisions at 2.76 TeV"
+    venue: "Onia subgroup meeting"
+    location: "May 18th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=138210"
+  - id: t2011-300
+    type: invited
+    title: "Priorities for quarkonia triggers above 1e33"
+    venue: "B-trigger slice meeting"
+    location: "May 12th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=138716"
+  - id: t2011-301
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "May 4th '11"
+    year: 2011
+    iso: "2011-05"
+    date: "May 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=136024"
+  - id: t2011-302
+    type: invited
+    title: "BPhys trigger rulebook and rates for 1e33"
+    venue: "B-trigger slice meeting"
+    location: "February 8th '11"
+    year: 2011
+    iso: "2011-02"
+    date: "Feb 2011"
+    tags: [instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=126450"
+  - id: t2011-303
+    type: invited
+    title: "W+jets distributions as input to lvjj background modelling"
+    venue: "V+jets working group"
+    location: "Aug 23rd"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a111159#2011-08-23"
+  - id: t2011-304
+    type: invited
+    title: "Measurement of W+jet angular and leptonic observables"
+    venue: "QCD Physics working group"
+    location: "July 20th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a111055#2011-07-20"
+  - id: t2011-305
+    type: internal
+    title: "B-physics trigger menu options"
+    venue: "B-Physics group meeting"
+    location: "June 9th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=141999"
+  - id: t2011-306
+    type: internal
+    title: "B-physics trigger menus at higher luminosities"
+    venue: "ATLAS Trigger General Meeting"
+    location: "May 18th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=129111"
+  - id: t2011-307
+    type: internal
+    title: "Quarkonium subgroup report"
+    venue: "B-Physics group meeting"
+    location: "May 6th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=137659"
+  - id: t2011-308
+    type: invited
+    title: "Prompt and non-prompt J/psi differential production cross sections in proton-proton collisions at sqrt(s) = 7 TeV"
+    venue: "Quarkonium production 2011: Probing QCD at the LHC"
+    location: "Vienna University of Technology, Austria, April 18th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics, qcd, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceOtherViews.py?view=cdsagenda&confId=114069"
+  - id: t2011-309
+    type: internal
+    title: "Vector Boson plus Jets measurements at DZero"
+    venue: "XIX International Workshop on Deep-Inelastic Scattering and Related Subjects"
+    location: "DIS2011, Newport News, VA USA, April 11th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "https://wiki.bnl.gov/conferences/index.php/DIS-2011"
+  - id: t2011-310
+    type: internal
+    title: "Quarkonium subgroup report"
+    venue: "B-Physics group meeting"
+    location: "March 31st"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "https://indico.cern.ch/conferenceDisplay.py?confId=133314"
+  - id: t2011-311
+    type: internal
+    title: "Measurements of inclusive W+jets production as a function of jet transverse momentum with the D0 experiment"
+    venue: "All-DZero meeting"
+    location: "March 25th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a11487#2011-03-25"
+  - id: t2011-312
+    type: internal
+    title: "Additional di-muon triggers for 2011: rates and efficiencies"
+    venue: "ATLAS Trigger General Meeting"
+    location: "March 16th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [instrumentation, collider]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+  - id: t2011-313
+    type: invited
+    title: "Measurement of prompt and non-prompt J/psi cross sections"
+    venue: "Open Discussion of the measurement of prompt and non-prompt J/psi cross sections"
+    location: "February 23rd"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=125949"
+  - id: t2011-314
+    type: invited
+    title: "W+jets angular distributions and future plans"
+    venue: "QCD group meeting"
+    location: "DZero Collaboration Week, February 9th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a11209"
+  - id: t2011-315
+    type: internal
+    title: "W+jets publication and future plans"
+    venue: "DZero Winter Physics Workshop"
+    location: "February 7th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a11137"
+  - id: t2011-316
+    type: internal
+    title: "Quarkonium subgroup report"
+    venue: "B-Physics group meeting"
+    location: "February 3rd"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=124920"
+  - id: t2011-317
+    type: invited
+    title: "Ongoing, planned and future analyses in the Quarkonium group"
+    venue: "Onia subgroup meeting"
+    location: "January 26th '11"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=120874"
+  - id: t2011-318
+    type: invited
+    title: "J/psi cross-section and B-fraction publication update"
+    venue: "B-Physics Editorial Board meeting"
+    location: "January 14th"
+    year: 2011
+    iso: "2011-01"
+    date: "Jan 2011"
+    tags: [b-physics]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+  - id: t2010-319
+    type: internal
+    title: "Measuring J/psi production at ATLAS"
+    venue: "US ATLAS Physics and Performance meeting"
+    location: "September 7th '10"
+    year: 2010
+    iso: "2010-09"
+    date: "Sep 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=106605"
+  - id: t2010-320
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "September 1st '10"
+    year: 2010
+    iso: "2010-09"
+    date: "Sep 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=105228"
+  - id: t2010-321
+    type: invited
+    title: "Introduction and onia news"
+    venue: "Onia subgroup meeting"
+    location: "August 18th '10"
+    year: 2010
+    iso: "2010-08"
+    date: "Aug 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=103865"
+  - id: t2010-322
+    type: internal
+    title: "Overview of V+jets measurements at DZero"
+    venue: "DZero Workshop Marseille 2010"
+    location: "August 3rd '10"
+    year: 2010
+    iso: "2010-08"
+    date: "Aug 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a101096#2010-08-03"
+  - id: t2010-323
+    type: internal
+    title: "Overview of MC generators status"
+    venue: "DZero Workshop Marseille 2010"
+    location: "August 3rd '10"
+    year: 2010
+    iso: "2010-08"
+    date: "Aug 2010"
+    tags: [collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a101096#2010-08-03"
+  - id: t2010-324
+    type: invited
+    title: "Experimental issues of quarkonium polarisation and acceptance"
+    venue: "Workshop on Quarkonium Production in pp and pA collisions"
+    location: "July 30th '10"
+    year: 2010
+    iso: "2010-07"
+    date: "Jul 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://www.cpht.polytechnique.fr/twiki/bin/view/Main/Agenda"
+  - id: t2010-325
+    type: internal
+    title: "Latest J/psi production cross-section results from ATLAS"
+    venue: "Workshop on Quarkonium Production in pp and pA collisions"
+    location: "July 29th '10"
+    year: 2010
+    iso: "2010-07"
+    date: "Jul 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://www.cpht.polytechnique.fr/twiki/bin/view/Main/Agenda"
+  - id: t2010-326
+    type: internal
+    title: "J/psi cross-section and indirect-to-prompt production ratio"
+    venue: "ATLAS Physics Plenary for Approval of Results"
+    location: "July 12th '10"
+    year: 2010
+    iso: "2010-07"
+    date: "Jul 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=101091"
+  - id: t2010-327
+    type: invited
+    title: "J/psi double-differential production cross-sections and non-prompt fraction measurement"
+    venue: "B-Physics approval meeting"
+    location: "December 20th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=116737"
+  - id: t2010-328
+    type: internal
+    title: "Status report of the quarkonium working group"
+    venue: "B-Physics group meeting"
+    location: "December 10th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=115917"
+  - id: t2010-329
+    type: internal
+    title: "W+jets jet pT cross-sections"
+    venue: "DZero EB038 meeting"
+    location: "December 7th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a102054"
+  - id: t2010-330
+    type: internal
+    title: "B-Physics triggers"
+    venue: "ATLAS Trigger General Meeting"
+    location: "December 1st"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=74214"
+  - id: t2010-331
+    type: internal
+    title: "B-Physics trigger menu input"
+    venue: "ATLAS Trigger General Meeting"
+    location: "November 24th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=74213"
+  - id: t2010-332
+    type: invited
+    title: "Overview of W+jets measurement"
+    venue: "QCD group meeting"
+    location: "DZero collaboration meeting, November 11th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a101883"
+  - id: t2010-333
+    type: invited
+    title: "J/psi publication status"
+    venue: "Onia subgroup meeting"
+    location: "October 13th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=109961"
+  - id: t2010-334
+    type: invited
+    title: "Onia status and future analysis plans"
+    venue: "Onia subgroup meeting"
+    location: "October 13th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=109961"
+  - id: t2010-335
+    type: invited
+    title: "J/psi cross-section and B-fraction publication status"
+    venue: "B-Physics Editorial Board meeting"
+    location: "October 12th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=110405"
+  - id: t2010-336
+    type: internal
+    title: "NLO/NNLO* predictions for ATLAS J/psi data"
+    venue: "Onia subgroup meeting"
+    location: "September 15th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=106877"
+  - id: t2010-337
+    type: invited
+    title: "W+jets analysis and publication status"
+    venue: "QCD Physics working group"
+    location: "September 15th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a101484#2010-09-15"
+  - id: t2010-338
+    type: internal
+    title: "Quarkonium subgroup status report"
+    venue: "B-physics group meeting"
+    location: "September 9th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=106420"
+  - id: t2010-339
+    type: internal
+    title: "Progress toward Upsilon CONF note"
+    venue: "B-physics group meeting"
+    location: "September 9th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=106420"
+  - id: t2010-340
+    type: internal
+    title: "Progress toward J/psi publication"
+    venue: "B-physics group meeting"
+    location: "September 9th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=106420"
+  - id: t2010-341
+    type: internal
+    title: "Production of Charm and Charmonium with the ATLAS detector at 7 TeV"
+    venue: "Rencontres de Blois 2010"
+    location: "July 18th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://confs.obspm.fr/Blois2010/index.htm"
+  - id: t2010-342
+    type: invited
+    title: "Upsilon status and plans for CONF note"
+    venue: "B-Physics Upsilon meeting"
+    location: "July 6th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=100389"
+  - id: t2010-343
+    type: invited
+    title: "Plans and status of the Upsilon->mu+mu- note"
+    venue: "B-Physics daily meeting"
+    location: "June 8th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=97917"
+  - id: t2010-344
+    type: internal
+    title: "Status of J/psi and Upsilon measurements with first ATLAS data"
+    venue: "ATLAS Weekly meeting"
+    location: "June 8th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=72816"
+  - id: t2010-345
+    type: internal
+    title: "Acceptance corrections for J/psi cross-section and ratio measurement"
+    venue: "Quarkonium working meeting"
+    location: "June 4th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=96835"
+  - id: t2010-346
+    type: invited
+    title: "W+jets measurement update"
+    venue: "V+jets working group"
+    location: "May 25th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a1096#2010-05-25"
+  - id: t2010-347
+    type: invited
+    title: "News and status of Pythia tunes"
+    venue: "Monte Carlo working group"
+    location: "May 24th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a10916#2010-05-24"
+  - id: t2010-348
+    type: invited
+    title: "Status update on W+jets publication"
+    venue: "QCD Physics working group"
+    location: "May 5th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a10843#2010-05-05"
+  - id: t2010-349
+    type: internal
+    title: "Monte Carlo discussions for 7 TeV data"
+    venue: "Quarkonium working meeting"
+    location: "April 23rd"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=92432"
+  - id: t2010-350
+    type: internal
+    title: "Summary of MC4LHC 2010 workshop"
+    venue: "DZero Joint Algorithms/Physics convenors meeting"
+    location: "April 16th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [collider]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+  - id: t2010-351
+    type: internal
+    title: "Quarkonium and background MC for 7 TeV data"
+    venue: "Quarkonium working meeting"
+    location: "April 15th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=91314"
+  - id: t2010-352
+    type: internal
+    title: "Towards first B-physics results"
+    venue: "ATLAS Open Executive Board"
+    location: "April 13th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=69069"
+  - id: t2010-353
+    type: invited
+    title: "J/psi(mumu): summary of 7 TeV results"
+    venue: "J/psi(mumu) & J/psi(ee) approval meeting"
+    location: "April 12th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=91091"
+  - id: t2010-354
+    type: internal
+    title: "Global J/psi and Upsilon analysis preparations and systematics"
+    venue: "B-physics working meeting"
+    location: "March 25th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=88628"
+  - id: t2010-355
+    type: invited
+    title: "Latest jet results from the Tevatron"
+    venue: "Rencontres de Moriond QCD 2010"
+    location: "March 16th"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://moriond.in2p3.fr/QCD/2010/MorQCD10Prog.html"
+  - id: t2010-356
+    type: internal
+    title: "W+jets cross-sections"
+    venue: "DZero Collaboration Week [QCD Session]"
+    location: "February 3rd"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a10164"
+  - id: t2010-357
+    type: internal
+    title: "Update on W+jets measurements"
+    venue: "DZero Collaboration Week [V+jets Session]"
+    location: "February 3rd"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a10225"
+  - id: t2010-358
+    type: internal
+    title: "W+jets results"
+    venue: "DZero Winter Physics Workshop"
+    location: "February 1st"
+    year: 2010
+    iso: "2010-01"
+    date: "Jan 2010"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a092030"
+  - id: t2009-359
+    type: internal
+    title: "W+(n)jet comparisons to theory"
+    venue: "V+jets working meeting"
+    location: "December 15th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091373#2009-12-15"
+  - id: t2009-360
+    type: internal
+    title: "Pythia tunes and Alpgen+Pythia considerations"
+    venue: "DZero Collaboration Week [MC generators Session]"
+    location: "December 9th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a091449"
+  - id: t2009-361
+    type: internal
+    title: "W+jets cross-sections"
+    venue: "DZero Collaboration Week [QCD Session]"
+    location: "December 9th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a091934"
+  - id: t2009-362
+    type: internal
+    title: "Jet vertex confirmation in QCD analyses"
+    venue: "DZero Collaboration Week [JetID Session]"
+    location: "December 9th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091990#2009-12-09"
+  - id: t2009-363
+    type: seminar
+    title: "Measurements of vector boson production in association with jets at DZero"
+    venue: "Indiana University HEP seminar"
+    location: "November 30th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://hep.physics.indiana.edu/%7Eelunghi/current.html"
+  - id: t2009-364
+    type: invited
+    title: "W+jets ensemble & closure tests"
+    venue: "QCD Physics working group"
+    location: "November 25th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a091895"
+  - id: t2009-365
+    type: internal
+    title: "Proposal for further changes to Pythia"
+    venue: "V+jets working meeting"
+    location: "November 17th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091369#2009-11-17"
+  - id: t2009-366
+    type: invited
+    title: "Onia rates and distributions with L1 single muon triggers"
+    venue: "Quarkonium working group"
+    location: "October 22nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=71507"
+  - id: t2009-367
+    type: internal
+    title: "W+jets cross-sections"
+    venue: "DZero Collaboration Week [QCD Session]"
+    location: "September 30th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl/fullAgenda.php?ida=a091557#2009-09-30"
+  - id: t2009-368
+    type: internal
+    title: "Alpgen jet angular reweightings"
+    venue: "DZero V+jets modelling workshop"
+    location: "September 28th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091522#2009-09-28"
+  - id: t2009-369
+    type: internal
+    title: "V+jets modelling workshop [Organiser & chair]"
+    venue: "DZero V+jets modelling workshop"
+    location: "September 28th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091522#2009-09-28"
+  - id: t2009-370
+    type: internal
+    title: "W+(n)jets studies"
+    venue: "V+jets working meeting"
+    location: "September 22nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091361#2009-09-22"
+  - id: t2009-371
+    type: invited
+    title: "W+jets analysis update"
+    venue: "QCD Physics working group"
+    location: "September 16th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091479#2009-09-16"
+  - id: t2009-372
+    type: internal
+    title: "Analysis readiness walkthrough: quarkonium production"
+    venue: "ATLAS Physics Co-ordination walkthrough meeting"
+    location: "August 31st"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=67059"
+  - id: t2009-373
+    type: invited
+    title: "Another look at the Upsilon system for early data studies"
+    venue: "Quarkonium working group"
+    location: "August 12th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=66045"
+  - id: t2009-374
+    type: invited
+    title: "Systematics in J/psi ratio measurement"
+    venue: "Quarkonium working group"
+    location: "August 12th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=66045"
+  - id: t2009-375
+    type: invited
+    title: "Search for standard model Higgs in WH-> lnubb at the Tevatron"
+    venue: "Meeting of the Division of Particles and Fields (DPF) 2009"
+    location: "July 27th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [electroweak, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceOtherViews.py?view=standard&confId=41044"
+  - id: t2009-376
+    type: invited
+    title: "Status of W+jets preliminary result"
+    venue: "QCD Physics working group"
+    location: "July 22nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091174#2009-07-22"
+  - id: t2009-377
+    type: invited
+    title: "Status of W+jets preliminary result"
+    venue: "QCD Physics working group"
+    location: "July 15th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091128#2009-07-15"
+  - id: t2009-378
+    type: internal
+    title: "W+(n)jet production at D0"
+    venue: "DZero Summer Physics Workshop"
+    location: "July 14th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, collider]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091069#2009-07-14"
+  - id: t2009-379
+    type: invited
+    title: "Common reweightings and associated systematics"
+    venue: "Low Mass Higgs meeting"
+    location: "July 2nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [dark-matter, electroweak]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a091064#2009-07-02"
+  - id: t2009-380
+    type: invited
+    title: "Update on W+(n)jets differential cross-section measurement"
+    venue: "QCD Physics session"
+    location: "DZero Summer Workshop, June 24th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl//fullAgenda.php?ida=a09990"
+  - id: t2009-381
+    type: invited
+    title: "Results for multi-channel Alpgen jet reweightings"
+    venue: "General Higgs meeting"
+    location: "June 11th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd, electroweak]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09959#2009-06-11"
+  - id: t2009-382
+    type: internal
+    title: "Update on global Alpgen jet reweightings"
+    venue: "V+jets working meeting"
+    location: "June 2nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09896#2009-06-02"
+  - id: t2009-383
+    type: internal
+    title: "Alpgen jet reweighting factors"
+    venue: "V+jets working meeting"
+    location: "May 26th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09320#2009-05-26"
+  - id: t2009-384
+    type: internal
+    title: "Common Alpgen treatment/re-weightings"
+    venue: "Low Mass Higgs working meeting"
+    location: "May 21st"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [dark-matter, electroweak]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09844#2009-05-21"
+  - id: t2009-385
+    type: invited
+    title: "Towards a W+(n)jets differential cross-section measurement"
+    venue: "QCD Physics meeting"
+    location: "May 13th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09802#2009-05-13"
+  - id: t2009-386
+    type: internal
+    title: "Physics studies with J/psi and Upsilon in early ATLAS data"
+    venue: "Berkeley Workshop on Physics Opportunities with the First LHC Data"
+    location: "May 7th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=55994"
+  - id: t2009-387
+    type: invited
+    title: "Investigating jets failing vertex confirmation in W+jet(s) events"
+    venue: "CALGO working group"
+    location: "April 22nd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09680#2009-04-22"
+  - id: t2009-388
+    type: invited
+    title: "JetID and vertex confirmation studies in W+jet(s) events"
+    venue: "JetID meeting"
+    location: "April 17th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09642#2009-04-17"
+  - id: t2009-389
+    type: invited
+    title: "Plans for common Alpgen systematic uncertainties and corrections"
+    venue: "General Higgs Meeting"
+    location: "April 16th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [electroweak]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09639#2009-04-16"
+  - id: t2009-390
+    type: invited
+    title: "Alpgen+Pythia parameter systematics studies"
+    venue: "V+Jets group meeting"
+    location: "April 7th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09313#2009-04-07"
+  - id: t2009-391
+    type: invited
+    title: "Alpgen W+jets systematics studies"
+    venue: "V+Jets group meeting"
+    location: "March 31st"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [qcd]
+    links:
+      agenda: "http://www-d0.hef.ru.nl///fullAgenda.php?ida=a09312#2009-03-31"
+  - id: t2009-392
+    type: invited
+    title: "Onia software development and future plans [PDF]"
+    venue: "Onia subgroup meeting"
+    location: "March 23rd"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=2&resId=0&materialId=slides&confId=54078"
+  - id: t2009-393
+    type: invited
+    title: "Studies of the Upsilon(1,2,3S) system and backgrounds in MC08 data [PPT] [PDF]"
+    venue: "Onia subgroup meeting"
+    location: "February 26th"
+    year: 2009
+    iso: "2009-01"
+    date: "Jan 2009"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=3&resId=1&materialId=slides&confId=51263"
+  - id: t2008-394
+    type: invited
+    title: "Status and validation of Pythia in 14.2.0.1"
+    venue: "Monte Carlo working group"
+    location: "July 28th '08"
+    year: 2008
+    iso: "2008-07"
+    date: "Jul 2008"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=36347"
+  - id: t2008-395
+    type: invited
+    title: "HLT B-trigger offline monitoring status [PPT]"
+    venue: "B-Physics working group"
+    location: "July 24th '08"
+    year: 2008
+    iso: "2008-07"
+    date: "Jul 2008"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=6&resId=1&materialId=slides&confId=38167"
+  - id: t2008-396
+    type: invited
+    title: "A method for single muon efficiency determination in data-taking with Onia [PDF]"
+    venue: "Muon reconstruction meeting"
+    location: "July 3rd '08"
+    year: 2008
+    iso: "2008-07"
+    date: "Jul 2008"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=1&resId=0&materialId=slides&confId=37164"
+  - id: t2008-397
+    type: invited
+    title: "B-Physics and Onia for ID performance with early data [PPT]"
+    venue: "ID performance session"
+    location: "Inner Detector Week"
+    year: 2008
+    iso: "2008-07"
+    date: "Jul 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=95&sessionId=1&resId=0&materialId=slides&confId=22936"
+  - id: t2008-398
+    type: invited
+    title: "Problems with Upsilon in FDR-2 [PPT] [PDF]"
+    venue: "B-Physics working group"
+    location: "June 30th '08"
+    year: 2008
+    iso: "2008-06"
+    date: "Jun 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=3&resId=0&materialId=slides&confId=36475"
+  - id: t2008-399
+    type: invited
+    title: "Atlfast II validation for B-Physics [PDF]"
+    venue: "Simulation Strategy Meeting"
+    location: "May 29th '08"
+    year: 2008
+    iso: "2008-05"
+    date: "May 2008"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=13&resId=1&materialId=slides&confId=34499"
+  - id: t2008-400
+    type: internal
+    title: "Status and validation of Pythia (sample B) [PDF]"
+    venue: "ATLAS Monte Carlo Meeting"
+    location: "May 13th '08"
+    year: 2008
+    iso: "2008-05"
+    date: "May 2008"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=4&resId=1&materialId=slides&confId=33598"
+  - id: t2008-401
+    type: invited
+    title: "Muon reconstruction/trigger in Upsilon in FDR-I"
+    venue: "Muon Reconstruction Meeting"
+    location: "May 8th '08"
+    year: 2008
+    iso: "2008-05"
+    date: "May 2008"
+    tags: [b-physics, instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=29062"
+  - id: t2008-402
+    type: internal
+    title: "ID performance monitoring and DNA/GXF/KF Jpsi(ee) comparison studies with quarkonia[PPT]"
+    venue: "ATLAS Software Workshop"
+    location: "April 29th '08"
+    year: 2008
+    iso: "2008-04"
+    date: "Apr 2008"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=61&sessionId=8&resId=0&materialId=slides&confId=22136"
+  - id: t2008-403
+    type: invited
+    title: "Inner Detector studies of Jpsi with FDR-I [PPT]"
+    venue: "Inner Detector Tracking Performance meeting"
+    location: "April 24th '08"
+    year: 2008
+    iso: "2008-04"
+    date: "Apr 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=5&resId=1&materialId=slides&confId=25839"
+  - id: t2008-404
+    type: invited
+    title: "Pythia status and validation (release 14) [PDF]"
+    venue: "Monte Carlo Working Group"
+    location: "April 7th '08"
+    year: 2008
+    iso: "2008-04"
+    date: "Apr 2008"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=15&resId=2&materialId=slides&confId=24524"
+  - id: t2008-405
+    type: internal
+    title: "Quarkonium production and polarisation in early data at ATLAS [Conf. www [PDF]]"
+    venue: "IoP HEPP Group Annual Meeting"
+    location: "April '08"
+    year: 2008
+    iso: "2008-04"
+    date: "Apr 2008"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=12&sessionId=11&resId=1&materialId=slides&confId=27799"
+  - id: t2008-406
+    type: internal
+    title: "Quarkonium production and polarisation with early data at ATLAS [Conf. www [PDF]] [ATL-SLIDE-2008-016 [PDF]]"
+    venue: "Plenary talk"
+    location: "Lake Louise Winter Institute"
+    year: 2008
+    iso: "2008-02"
+    date: "Feb 2008"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://thwaite.phys.ualberta.ca/indico-0.94/getFile.py/access?contribId=26&sessionId=7&resId=0&materialId=slides&confId=0"
+  - id: t2008-407
+    type: invited
+    title: "Comparison of MC08 quarkonia to CSC/FDR [PDF]"
+    venue: "Onia subgroup meeting"
+    location: "December 11th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=2&resId=0&materialId=slides&confId=46418"
+  - id: t2008-408
+    type: seminar
+    title: "Quarkonia in physics and detector studies with early ATLAS data"
+    venue: "Indiana University HEP seminar"
+    location: "October 27th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://hep.physics.indiana.edu/%7Eelunghi/fall2008.html"
+  - id: t2008-409
+    type: invited
+    title: "Update to MC08 sample status [PDF]"
+    venue: "Onia subgroup meeting"
+    location: "October 15th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=2&resId=0&materialId=slides&confId=43058"
+  - id: t2008-410
+    type: invited
+    title: "Monte Carlo Production strategy for 10 TeV data [PDF]"
+    venue: "Performance and Physics Workshop"
+    location: "October 3rd"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=5&resId=0&materialId=slides&confId=40981"
+  - id: t2008-411
+    type: invited
+    title: "MC strategy of B-Physics WG [PDF]"
+    venue: "Monte Carlo Working Group meeting"
+    location: "October 1st"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=5&resId=0&materialId=slides&confId=24526"
+  - id: t2008-412
+    type: invited
+    title: "Quarkonium analysis software status [PDF]"
+    venue: "First meeting of Onia subgroup"
+    location: "September 24th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=4&resId=0&materialId=slides&confId=41487"
+  - id: t2008-413
+    type: invited
+    title: "Status of Monte Carlo samples [PDF]"
+    venue: "First meeting of Onia subgroup"
+    location: "September 24th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=1&resId=0&materialId=slides&confId=41487"
+  - id: t2008-414
+    type: invited
+    title: "Update on B-trigger monitoring"
+    venue: "Performance and Physics Workshop"
+    location: "August 28th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=38877"
+  - id: t2008-415
+    type: invited
+    title: "Data driven estimation of Inner Detector performance on muon tracks"
+    venue: "Performance and Physics Workshop"
+    location: "August 26th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [instrumentation]
+    links:
+      agenda: "http://indico.cern.ch/conferenceDisplay.py?confId=39507"
+  - id: t2008-416
+    type: invited
+    title: "DQM in express/physics stream and misalignment studies with Jpsi and Upsilon [PPT]"
+    venue: "Performance and Physics Workshop: towards first data"
+    location: "June 10th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=1&resId=0&materialId=slides&confId=33549"
+  - id: t2008-417
+    type: invited
+    title: "Update on results of FDR-I, plans and strategies for FDR-II [PDF]"
+    venue: "B-Physics Working Group"
+    location: "May 13th"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=5&resId=1&materialId=slides&confId=32731"
+  - id: t2008-418
+    type: internal
+    title: "J/psi and Upsilon production measurement, calibrations and alignment tests [PDF]"
+    venue: "ATLAS UK Physics meeting"
+    location: "10 Jan '08"
+    year: 2008
+    iso: "2008-01"
+    date: "Jan 2008"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://conference.ippp.dur.ac.uk/getFile.py/access?contribId=40&sessionId=6&resId=1&materialId=slides&confId=121"
+  - id: t2007-419
+    type: internal
+    title: "Inner Detector monitoring and calibration with J/psi and Upsilon in express/physics streams [PPT]"
+    venue: "ATLAS Trigger and Physics week"
+    location: "08 Nov '07"
+    year: 2007
+    iso: "2007-11"
+    date: "Nov 2007"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=6&resId=2&materialId=slides&confId=22892"
+  - id: t2007-420
+    type: internal
+    title: "Offline ID monitoring and calibration using J/psi and Upsilon in express and physics streams [PPT] [PDF]"
+    venue: "ATLAS B-Physics meeting"
+    location: "25 Oct '07"
+    year: 2007
+    iso: "2007-10"
+    date: "Oct 2007"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=2&resId=0&materialId=slides&confId=23011"
+  - id: t2007-421
+    type: internal
+    title: "Monte Carlo quarkonium simulations at ATLAS [Conf. www [PPT]]"
+    venue: "Plenary talk"
+    location: "International Workshop on Heavy Quarkonium 2007"
+    year: 2007
+    iso: "2007-10"
+    date: "Oct 2007"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      slides: "http://www.desy.de/qwg07/talks/Price_071020_MC.ppt"
+  - id: t2007-422
+    type: invited
+    title: "Quarkonium production and polarization [Conf. www [PDF] [PPT] [RealMedia] ] [ATL-SLIDE-2007-055 [PDF]]"
+    venue: "Plenary talk"
+    location: "International Workshop on Heavy Quarkonium 2007"
+    year: 2007
+    iso: "2007-10"
+    date: "Oct 2007"
+    tags: [b-physics]
+    links:
+      agenda: "http://dprice.web.cern.ch/dprice/work/"
+      slides: "http://www.desy.de/qwg07/talks/Price_071018.pdf"
+      recording: "http://webcast.desy.de/webcast_archiv.htm.en"
+  - id: t2007-423
+    type: internal
+    title: "Muon reconstruction with Staco/MuID in quarkonium [PDF] [PPT]"
+    venue: "ATLAS Week B-Physics meeting - 10/10/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=14&resId=1&materialId=slides&confId=10114"
+  - id: t2007-424
+    type: internal
+    title: "ID Tracking Performance: J/psi vertex resolution [PDF]"
+    venue: "ATLAS Inner Detector Week - 03/10/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?resId=1&materialId=slides&contribId=16&sessionId=3&subContId=8&confId=9663"
+  - id: t2007-425
+    type: internal
+    title: "Measuring J/Psi and Upsilon production [PDF] [PPT]"
+    venue: "ATLAS Overview Week: Physics plenary talk - 13/07/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=52&sessionId=32&resId=2&materialId=slides&confId=12732"
+  - id: t2007-426
+    type: internal
+    title: "Onia production - discussion for Glasgow [PPT]"
+    venue: "ATLAS UK B-Physics Working Group meeting - 14/06/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=3&resId=0&materialId=slides&confId=17470"
+  - id: t2007-427
+    type: internal
+    title: "Onia production new results for muon channels [PPT] [PDF]"
+    venue: "ATLAS Trigger & Physics meeting - 06/06/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=3&resId=1&materialId=slides&confId=10109"
+  - id: t2007-428
+    type: internal
+    title: "Direct onia production measurements in ATLAS, based on CSC data [PPT] [PDF]"
+    venue: "ATLAS B-Physics working group meeting - 16/05/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=4&resId=0&materialId=slides&confId=13510"
+  - id: t2007-429
+    type: internal
+    title: "Status of Jpsi and Upsilon CSC activities at ATLAS [PDF] [PPT]"
+    venue: "Meeting at RAL - 14/03/07"
+    year: 2007
+    iso: "2007-01"
+    date: "Jan 2007"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=9&resId=1&materialId=slides&confId=13537"
+  - id: t2006-430
+    type: internal
+    title: "Onium production with early data"
+    venue: "ATLAS UK Physics Workshop at IPPP Durham"
+    location: "Sept 2006) [PPT] [A http://dprice.web.cern.ch/dprice/work/pythiatuning-sept06_darren.ppt] Pythia 6.4 changes and tunings [PPT] [/A] (B-Physics meeting in ATLAS Software Week 15/09/06"
+    year: 2006
+    iso: "2006-09"
+    date: "Sep 2006"
+    tags: [collider]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/auk06meeting-sept06.ppt"
+  - id: t2006-431
+    type: internal
+    title: "Update on Brem Recovery using the DNA-Fitter [PDF]"
+    venue: "ID Tracking SW Meeting [ATLAS Software Week] - 12/12/06"
+    year: 2006
+    iso: "2006-01"
+    date: "Jan 2006"
+    tags: [collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=91&sessionId=7&resId=0&materialId=slides&confId=a057209"
+  - id: t2006-432
+    type: internal
+    title: "Summary of the Pythia 6.4 'problem' and new Pythia tunings for CSC production [PDF]"
+    venue: "ATLAS Physics and Trigger Week meeting - 02/11/06"
+    year: 2006
+    iso: "2006-01"
+    date: "Jan 2006"
+    tags: [instrumentation, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=1&resId=1&materialId=3&confId=8277"
+  - id: t2006-433
+    type: internal
+    title: "Pythia 6.4 preliminary tunings: direct J/psi production [PDF] [PPT]"
+    venue: "ATLAS B-Physics Pythia tuning meeting - 17/10/06"
+    year: 2006
+    iso: "2006-01"
+    date: "Jan 2006"
+    tags: [b-physics, collider]
+    links:
+      agenda: "http://indico.cern.ch/getFile.py/access?contribId=2&resId=1&materialId=slides&confId=7250"
+  - id: t2006-434
+    type: public
+    title: "Heavy Quarkonium Production at the LHC"
+    venue: "British Universities Summer School in Theoretical Elementary Particle Physics 2006) [PPT] [A http://dprice.web.cern.ch/dprice/work/pythiaB+onia-xsecs_in_rel12.pdf] PythiaB and Onia cross-sections in Pythia 6.4 [PDF] [/A] [A http://dprice.web.cern.ch/dprice/work/pythiaB+onia-xsecs_in_rel12.ppt] [PPT] [/A] (ATLAS B-Physics Group - 23/08/06"
+    year: 2006
+    iso: "2006-01"
+    date: "Jan 2006"
+    tags: [b-physics, collider]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/busstepp06-onium.ppt"
+  - id: t2006-435
+    type: internal
+    title: "Onium Production in 12.0.0 [PDF] [PPT]"
+    venue: "ATLAS B-Physics Group - 21/06/06"
+    year: 2006
+    iso: "2006-01"
+    date: "Jan 2006"
+    tags: [b-physics, collider]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/oniumvalidation-jun06.pdf"
+  - id: t2005-436
+    type: internal
+    title: "Simulations and Significance Studies"
+    venue: "NEMO Collaboration Meeting"
+    location: "Dubna - July '05"
+    year: 2005
+    iso: "2005-07"
+    date: "Jul 2005"
+    tags: [neutrinos, instrumentation]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/Simulations-NEMOmeeting-July05.ppt"
+  - id: t2005-437
+    type: internal
+    title: "SuperNEMO Meeting: Simulations for SuperNEMO"
+    venue: "SuperNEMO Collaboration Meeting 12/01/05"
+    year: 2005
+    iso: "2005-01"
+    date: "Jan 2005"
+    tags: [neutrinos, instrumentation]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/SuperNEMO_meeting-120105.ppt"
+  - id: t2005-438
+    type: invited
+    title: "GEANT Simulations for SuperNEMO"
+    venue: "Manchester Annual Christmas Meeting 04/01/05"
+    year: 2005
+    iso: "2005-01"
+    date: "Jan 2005"
+    tags: [neutrinos, instrumentation]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/Xmas-GEANT_simulations-040105.ppt"
+  - id: t2004-439
+    type: seminar
+    title: "Neutrinoless double-beta decay and the SuperNEMO project"
+    venue: "PG Seminar 24/11/04"
+    year: 2004
+    iso: "2004-01"
+    date: "Jan 2004"
+    tags: [neutrinos]
+    links:
+      slides: "http://dprice.web.cern.ch/dprice/work/PGseminar-SuperNEMO.ppt"

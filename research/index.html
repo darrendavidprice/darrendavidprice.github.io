@@ -1,0 +1,31 @@
+---
+layout: page
+title: "Research"
+eyebrow: "Research"
+heading: "Research"
+lede: "Eight themes, spanning collider physics and direct detection, joined up by phenomenology, instrumentation and data-intensive methods. Explore each theme, or browse the full publications, talks, and news."
+breadcrumb: '<a href="/">Home</a> &rsaquo; Research'
+wide: true
+---
+
+{% include section-nav.html current="themes" %}
+
+<figure class="page-fig">
+  <img src="{{ '/assets/images/research-hero.jpg' | relative_url }}" alt="From the ATLAS detector to the cosmic web">
+</figure>
+
+<h2 class="section-label" id="themes">Research themes</h2>
+<div class="card-grid">
+  {% assign themes = site.data.themes.list | sort: "order" %}
+  {% for th in themes %}
+  <a class="card" href="{{ '/research/' | append: th.id | append: '/' | relative_url }}">
+    <h3>{{ th.label }}</h3>
+    <p>{{ th.blurb }}</p>
+    <span class="more">Explore &rarr;</span>
+  </a>
+  {% endfor %}
+</div>
+
+<p class="prose small" style="margin-top:2rem">
+  Full publication record at <a href="{{ site.author.inspire }}" rel="noopener">INSPIRE-HEP</a>.
+</p>

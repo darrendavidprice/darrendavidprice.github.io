@@ -1,0 +1,1090 @@
+# ============================================================
+#  publications.yml — full publications record.
+#  Four sections rendered on /research/publications/:
+#    primary    — Significant personal contribution
+#    convener   — Publications as group convener (not otherwise listed)
+#    editorial  — Editorial-board chair / expert review
+#    proceedings — Conference proceedings & notes
+#
+#  Within each section: reverse-chronological; sections collapse
+#  when a topic filter empties them. Impact explainers appear ONLY
+#  on the primary section.
+# ============================================================
+
+primary:
+  - id: p-ssww-majorana
+    year: 2023
+    status: refereed
+    title: >-
+      Search for Majorana neutrinos in same-sign WW scattering events from pp
+      collisions at √s = 13 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 83 (2023) 824"
+    arxiv: "2305.14931"
+    doi: "10.1140/epjc/s10052-023-11915-y"
+    tags: [neutrinos, electroweak, collider]
+    explainer: >-
+      Same-sign WW scattering is a rare, purely-electroweak process that
+      uniquely tests whether neutrinos are their own antiparticles — at high
+      momentum transfer it is essentially a collider realisation of
+      neutrinoless double-beta decay. This search uses the full ATLAS Run 2
+      dataset (140 fb⁻¹) in the same-sign dimuon channel to look for heavy
+      Majorana neutrinos with masses from 50 GeV to 20 TeV, pushing the reach
+      past the TeV barrier where resonant production becomes kinematically
+      inaccessible. The results are interpreted in the Phenomenological
+      Type-I Seesaw; a discovery would establish lepton-number violation.
+    explainer_image: /assets/images/explainers/ssww-majorana.svg
+    explainer_caption: >-
+      Feynman-style schematic. Two incoming quarks radiate same-sign W
+      bosons that meet at a Majorana neutrino N; the Majorana mass
+      insertion (×) violates lepton number by two units, allowing the
+      final state to carry two same-sign leptons.
+  - id: p-cheek-sandford-price-2023
+    year: 2023
+    status: refereed
+    title: >-
+      Isospin-violating dark matter at liquid noble detectors: new constraints,
+      future projections, and an exploration of target complementarity
+    authors:
+          - "A. Cheek"
+          - "D. D. Price"
+          - "E. M. Sandford"
+    venue: "Eur. Phys. J. C 83 (2023) 1209"
+    arxiv: "2302.05458"
+    doi: "10.1140/epjc/s10052-023-12239-7"
+    tags: [dark-matter, phenomenology]
+    explainer: >-
+      Dark matter need not couple equally to protons and neutrons; relaxing
+      that symmetry can move direct-detection limits by orders of magnitude.
+      Earlier studies of isospin-violating dark matter worked in the
+      zero-momentum limit; we extend the treatment to the full
+      non-relativistic effective-field-theory (NREFT) basis and apply it to
+      XENON1T, DarkSide-50, DEAP-3600, LZ and DarkSide-20k. The headline
+      surprise: under the Standard-Model-gauge-invariant formulation of the
+      canonical spin-dependent interaction, argon — a zero-spin nucleus —
+      becomes competitive with xenon, illustrating how strongly target
+      complementarity matters for interpretation.
+  - id: p-gadmc-lowmass-2023
+    year: 2023
+    status: refereed
+    title: >-
+      Sensitivity projections for a dual-phase argon TPC optimized for light dark
+      matter searches through the ionization channel
+    collaboration: "Global Argon Dark Matter Collaboration"
+    venue: "Phys. Rev. D 107 (2023) 112006"
+    arxiv: "2209.01177"
+    doi: "10.1103/PhysRevD.107.112006"
+    tags: [dark-matter, instrumentation]
+    explainer: >-
+      Concept design study for <strong>DarkSide-LowMass</strong>: a
+      ionization-only, electron-counting argon TPC built on the DarkSide-50
+      legacy and the DarkSide-20k programme, optimised for sub-10 GeV/c² dark
+      matter. The projections show GeV-scale reach down to the solar
+      neutrino fog and — through the Migdal effect or DM-electron scattering
+      — significant sensitivity down to 10 MeV/c². Sets out the threshold,
+      background and spurious-electron control targets a purpose-built
+      low-mass argon experiment would need to hit.
+  - id: p-ds50-migdal-2023
+    year: 2023
+    status: refereed
+    title: "Search for dark matter–nucleon interactions via Migdal effect with DarkSide-50"
+    collaboration: "DarkSide-50 Collaboration"
+    venue: "Phys. Rev. Lett. 130 (2023) 101001"
+    arxiv: "2207.11967"
+    doi: "10.1103/PhysRevLett.130.101001"
+    tags: [dark-matter]
+    explainer: >-
+      The Migdal effect — ionization shaken loose when a nucleus recoils —
+      gives a sub-GeV WIMP a detectable electronic signature even when the
+      bare nuclear recoil is well below threshold. This analysis, on
+      DarkSide-50's full 12 306 kg·d low-radioactivity argon exposure using
+      the ionization signal alone, extends the search down to <strong>40
+      MeV/c²</strong> and sets the world-leading spin-independent limit on
+      WIMP-nucleon scattering for masses below 3.6 GeV/c² at the time of
+      publication. Establishes Migdal as a routine sub-GeV channel for
+      argon.
+  - id: p-ds50-lowmass-wimp-2023
+    year: 2023
+    status: refereed
+    title: "Search for low-mass dark matter WIMPs with 12 ton-day exposure of DarkSide-50"
+    collaboration: "DarkSide-50 Collaboration"
+    venue: "Phys. Rev. D 107 (2023) 063001"
+    arxiv: "2207.11966"
+    doi: "10.1103/PhysRevD.107.063001"
+    tags: [dark-matter]
+    explainer: >-
+      The legacy DarkSide-50 low-mass WIMP search, on the full 12 ton-day
+      low-radioactivity argon dataset. Improved calibration of the LAr
+      ionisation response, a refined background model and a 0.06 keV_er
+      analysis threshold push the SI cross-section limit at 3 GeV/c² to
+      6×10⁻⁴³ cm² — a factor-of-10 improvement on the previous DarkSide-50
+      result — and extend the exclusion region below the previous world
+      best across the [1.2, 3.6] GeV/c² WIMP mass range.
+    explainer_image: /assets/images/explainers/ds50-lowmass-wimp.png
+    explainer_caption: >-
+      Schematic of the factor-of-ten reach gain. The 2023 limit (oxblood,
+      this work) sits an order of magnitude below the 2018 DarkSide-50
+      ionisation-only result over [1.2, 10] GeV/c². Coarse pedagogical
+      digitisation, not a publication-grade figure.
+  - id: p-ds50-electron-2023
+    year: 2023
+    status: refereed
+    title: "Search for dark matter particle interactions with electron final states with DarkSide-50"
+    collaboration: "DarkSide-50 Collaboration"
+    venue: "Phys. Rev. Lett. 130 (2023) 101002"
+    arxiv: "2207.11968"
+    doi: "10.1103/PhysRevLett.130.101002"
+    tags: [dark-matter]
+    explainer: >-
+      The companion electron-channel analysis on DarkSide-50's 12 ton-day
+      argon exposure. Ionisation signals from sub-GeV/c² dark matter
+      scattering on atomic electrons constrain four distinct scenarios in
+      one paper: DM-electron elastic scattering, axion-like-particle
+      absorption, dark-photon kinetic mixing — and, for the first time in
+      direct detection, the <strong>mixing angle |U_e4|² for keV-scale
+      sterile neutrinos</strong>.
+  - id: p-menary-learn-discover-2022
+    year: 2022
+    status: refereed
+    title: >-
+      Learning to discover: expressive Gaussian mixture models for multi-
+      dimensional simulation and parameter inference in the physical sciences
+    authors:
+          - "S. B. Menary"
+          - "D. D. Price"
+    venue: "Mach. Learn.: Sci. Technol. 3 (2022) 015021"
+    arxiv: "2108.11481"
+    doi: "10.1088/2632-2153/ac4a3b"
+    tags: [ai-ml, phenomenology]
+    explainer: >-
+      An auto-regressive Gaussian-mixture density model designed for
+      problems where the observables have hard physical boundaries and
+      depend conditionally on external (theory) parameters — two features
+      that defeat most off-the-shelf generative models. Projecting onto a
+      configurable latent space gives the network enough expressive power
+      to (a) constrain physical parameters from data, (b) sample as a
+      Monte-Carlo surrogate, and (c) estimate likelihood ratios for event
+      classification, all from one trained model. Demonstrated on
+      anomalous electroweak Z+jj production at the LHC.
+  - id: p-quarkonium-hllhc-2022
+    year: 2022
+    status: refereed
+    title: "Prospects for quarkonium studies at the High-Luminosity LHC"
+    authors:
+          - "E. Chapon"
+          - "et al."
+    venue: "Prog. Part. Nucl. Phys. 122 (2022) 103906"
+    arxiv: "2012.14161"
+    doi: "10.1016/j.ppnp.2021.103906"
+    tags: [qcd, b-physics]
+    explainer: >-
+      A community roadmap for quarkonium physics at the High-Luminosity LHC,
+      covering pp, pA and AA collisions in both collider and fixed-target
+      modes. Five threads run through it: associated production of J/ψ and Υ
+      with other hard particles; low-pT χ_{c,b} and η_{c,b} spectroscopy;
+      quarkonia as probes of gluon PDFs, nuclear PDFs and the full
+      transverse-momentum-dependent / generalised parton distribution
+      family; the gluon Sivers effect; and quarkonia as a thermometer for
+      the quark–gluon plasma in heavy-ion collisions.
+  - id: p-atlas-bjets-met-2021
+    year: 2021
+    status: refereed
+    title: >-
+      Search for new phenomena in final states with b-jets and missing transverse
+      momentum in √s = 13 TeV pp collisions with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 05 (2021) 093"
+    arxiv: "2101.12527"
+    doi: "10.1007/JHEP05(2021)093"
+    tags: [dark-matter, collider]
+    explainer: >-
+      A full Run 2 ATLAS search (139 fb⁻¹) in the b-jets + missing
+      transverse momentum final state, simultaneously interpreted in three
+      well-motivated BSM scenarios: pair-produced bottom squarks decaying
+      to b + neutralino; pair-produced dark-matter particles via a generic
+      scalar or pseudoscalar mediator radiated off b-quarks; and
+      pair-produced third-generation down-type scalar leptoquarks. No
+      excess seen — the headline limit excludes bottom squarks below 1270
+      GeV at 95% CL for a massless neutralino, with the dark-matter and
+      leptoquark reinterpretations setting the strongest LHC bounds in
+      this channel at publication.
+  - id: p-menary-density-neurips-2020
+    year: 2020
+    status: proceedings
+    title: "Expressive density models for high energy physics using a custom latent space"
+    authors:
+          - "S. B. Menary"
+          - "D. D. Price"
+    venue: "NeurIPS 2020 ML4PS Workshop (peer-reviewed)"
+    tags: [ai-ml, phenomenology]
+    explainer: >-
+      Builds high-capacity density models for high-energy physics by designing a
+      custom latent space tailored to the structure of physical observables,
+      improving on generic deep generative architectures for simulation and
+      inference.
+  - id: p-reinterp-forum-2020
+    year: 2020
+    status: refereed
+    title: "Reinterpretation of LHC results for new physics: status and recommendations after Run 2"
+    collaboration: "LHC Reinterpretation Forum"
+    venue: "SciPost Phys. 9 (2020) 022"
+    arxiv: "2003.07868"
+    doi: "10.21468/SciPostPhys.9.2.022"
+    tags: [phenomenology, collider, open-data]
+    explainer: >-
+      The flagship report of the LHC Reinterpretation Forum, audited
+      against Run 2. Covers four dimensions of making LHC results reusable
+      against future theories: how direct searches publish their results,
+      how unfolded measurements are made available, what technical
+      implementations and Open Data exist, and which software frameworks
+      (Rivet, Contur, MadAnalysis, CheckMATE, SModelS, …) consume them.
+      Closes with concrete recommendations on what ATLAS, CMS and LHCb
+      should publish per analysis — recommendations that have since
+      shaped the experiments' release practice.
+  - id: p-cpv-higgs-2019
+    year: 2019
+    status: refereed
+    title: "Angles on CP-violation in Higgs boson interactions"
+    authors:
+          - "D. D. Price"
+          - "F. U. Bernlochner"
+          - "C. Englert"
+          - "C. Hays"
+          - "et al."
+    venue: "Phys. Lett. B 790 (2019) 372"
+    arxiv: "1808.06577"
+    doi: "10.1016/j.physletb.2019.01.043"
+    tags: [electroweak, phenomenology]
+    explainer: >-
+      CP-violation in the Higgs sector is one of the most direct routes to
+      a Standard-Model explanation of the baryon asymmetry of the universe.
+      ATLAS has reported two CP-sensitive differential measurements of the
+      signed azimuthal angle between forward jets in h+2-jet events,
+      yielding a combined asymmetry of 0.3 ± 0.2 — too coarse alone to
+      identify the underlying physics. This paper interprets that pattern
+      in SMEFT, exposes the blind directions left by inclusive φ_jj alone,
+      and shows that additional CP-sensitive observables combined with
+      phase-space-dependent effects can resolve them. The result is a
+      concrete roadmap for a global CP-aware Higgs coupling analysis
+      reachable with O(100 fb⁻¹) of LHC data.
+  - id: p-atlas-met-jets-unfolded-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurement of detector-corrected observables sensitive to the anomalous
+      production of events with jets and large missing transverse momentum in pp
+      collisions at √s = 13 TeV using the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 77 (2017) 765"
+    arxiv: "1707.03263"
+    doi: "10.1140/epjc/s10052-017-5315-6"
+    tags: [dark-matter, collider, electroweak]
+    explainer: >-
+      An early ATLAS Run 2 (3.2 fb⁻¹) measurement built around an
+      experimentalist-friendly idea: report the ratio R_miss = σ(jets +
+      MET) / σ(jets + ℓ⁺ℓ⁻), in which most systematic uncertainties
+      cancel. The ratio is measured differentially in two phase-space
+      regions — an inclusive single-jet region and a VBF-enhanced dijet
+      region — and the unfolded data are designed to be reinterpreted
+      against any future BSM hypothesis. The accompanying analysis
+      constrains simplified DM models, EFT operators and invisible Higgs
+      decays. The first ATLAS measurement of its kind, and a template for
+      reusable, model-agnostic BSM searches at colliders.
+  - id: p-atlas-ew-zjj-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurement of the cross-section for electroweak production of dijets in
+      association with a Z boson in pp collisions at √s = 13 TeV with the ATLAS
+      detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Lett. B 775 (2017) 206"
+    arxiv: "1709.10264"
+    doi: "10.1016/j.physletb.2017.10.040"
+    tags: [electroweak, collider]
+    explainer: >-
+      The first measurement of electroweak Zjj production at 13 TeV — 3.2
+      fb⁻¹ of early Run 2 data. The EW component is extracted in a fiducial
+      region designed to suppress the dominant QCD Drell-Yan Zjj background,
+      which is itself constrained by a data-driven method. Reports σ^Zjj_EW
+      = 119 ± 16(stat) ± 20(syst) fb above m_jj = 250 GeV and 34 ± 6 ± 6 fb
+      above 1 TeV — both consistent with Standard Model expectations.
+      A first-look 13 TeV benchmark for EW Zjj that later vector-boson-
+      scattering analyses build on.
+  - id: p-atlas-ew-wjj-agc-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurements of electroweak Wjj production and constraints on anomalous
+      gauge couplings with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 77 (2017) 474"
+    arxiv: "1703.04362"
+    doi: "10.1140/epjc/s10052-017-5007-2"
+    tags: [electroweak, collider]
+    explainer: >-
+      An ATLAS measurement of the electroweak production of a W boson with
+      two forward, high-mass dijets — the VBS-like topology that probes the
+      triple-gauge-boson vertex (WWZ/WWγ) directly. Combines 4.7 fb⁻¹ of 7
+      TeV data with 20.2 fb⁻¹ at 8 TeV, providing both fiducial and
+      differential cross-sections of the EW component (separated from
+      strong Wjj production) and using these to set limits on anomalous
+      triple-gauge couplings.
+  - id: p-atlas-jpsi-psi2s-2016
+    year: 2016
+    status: refereed
+    title: >-
+      Measurement of the differential cross-sections of prompt and non-prompt
+      production of J/ψ and ψ(2S) in pp collisions at √s = 7 and 8 TeV with the
+      ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 76 (2016) 283"
+    arxiv: "1512.03657"
+    doi: "10.1140/epjc/s10052-016-4050-8"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      Comprehensive double-differential cross-sections (in pT and rapidity)
+      for prompt and non-prompt J/ψ and ψ(2S), using 2.1 fb⁻¹ of 7 TeV and
+      11.4 fb⁻¹ of 8 TeV ATLAS data via the dimuon channel. Reports the
+      ψ(2S)-to-J/ψ production ratio and the non-prompt fraction across
+      kinematic phase space, separating the QCD-driven prompt component
+      from the b-hadron decay contribution. The benchmark reference for
+      quarkonium production theory at LHC Run 1 energies.
+  - id: p-atlas-jpsi-z-2015
+    year: 2015
+    status: refereed
+    title: >-
+      Observation and measurements of the production of prompt and non-prompt J/ψ
+      mesons in association with a Z boson in pp collisions at √s = 8 TeV with the
+      ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 75 (2015) 229"
+    arxiv: "1412.6428"
+    doi: "10.1140/epjc/s10052-015-3406-9"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      First observation of associated Z + J/ψ production at >5σ in both
+      the prompt and non-prompt channels, using ATLAS's full 20.3 fb⁻¹ of
+      8 TeV data. The cross-section ratios relative to inclusive Z are
+      reported as σ(Z + prompt J/ψ)/σ(Z) ~ 4 × 10⁻⁶ and σ(Z + non-prompt
+      J/ψ)/σ(Z) ~ 7 × 10⁻⁶, and the double-parton-scattering component is
+      separated to give a lower bound on σ_eff > 5.3 mb at 68% CL — a
+      direct experimental handle on multi-parton interactions in the
+      proton.
+  - id: p-atlas-psi2s-2014
+    year: 2014
+    status: refereed
+    title: >-
+      Measurement of the production cross-section of ψ(2S) → J/ψ(→μ+μ−)π+π− in pp
+      collisions at √s = 7 TeV at ATLAS
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1409 (2014) 79"
+    arxiv: "1407.5532"
+    doi: "10.1007/JHEP09(2014)079"
+    tags: [b-physics, collider]
+    explainer: >-
+      Prompt and non-prompt ψ(2S) production at 7 TeV (2.1 fb⁻¹ ATLAS data),
+      using the hadronic decay ψ(2S) → J/ψ(→μ⁺μ⁻)π⁺π⁻. Covers 10 < pT <
+      100 GeV and |y| < 2.0 — extending the prior dimuon-channel reach to
+      higher transverse momentum and providing an independent cross-check
+      of the colour-singlet, colour-octet and NRQCD descriptions of
+      charmonium production.
+  - id: p-atlas-muon-reco-2014
+    year: 2014
+    status: refereed
+    title: >-
+      Measurement of the muon reconstruction performance of the ATLAS detector
+      using 2011 and 2012 LHC pp collision data
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 74 (2014) 3130"
+    arxiv: "1407.3935"
+    doi: "10.1140/epjc/s10052-014-3130-x"
+    tags: [instrumentation, collider]
+    explainer: >-
+      The ATLAS muon-reconstruction performance paper for Run 1 (2011-12,
+      7 and 8 TeV), calibrated on large J/ψ → μμ, Z → μμ and Υ → μμ
+      reference samples. Reports muon-reconstruction efficiency above 99%
+      with per-mille precision across |η| < 2.7 and 5 < pT < 100 GeV, and
+      momentum resolution from 1.7% (central, pT ≈ 10 GeV) to 4% (large
+      rapidity, pT ≈ 100 GeV). Provides the simulation corrections used
+      across the entire Run 1 ATLAS physics programme, underpinning
+      B-physics, quarkonium and a broad range of new-physics analyses.
+  - id: p-atlas-chic12-2014
+    year: 2014
+    status: refereed
+    title: "Measurement of χc1 and χc2 production with √s = 7 TeV pp collisions at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1407 (2014) 154"
+    arxiv: "1404.7035"
+    doi: "10.1007/JHEP07(2014)154"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      Differential measurements of χ_c1 and χ_c2 production at the LHC in
+      4.5 fb⁻¹ of 7 TeV ATLAS data. The χ_c states are reconstructed via
+      the radiative decay χ_c → J/ψ γ using photons from conversions in
+      the inner detector — a technique that gives the resolution needed
+      to separate the two closely-spaced states. Both prompt and non-
+      prompt cross-sections are extracted, the σ(χ_c2)/σ(χ_c1) ratio is
+      measured as a function of J/ψ pT, and the contribution from
+      χ_c feed-down to prompt J/ψ is derived. Key inputs to NRQCD tests
+      of charmonium production.
+  - id: p-atlas-jpsi-w-2014
+    year: 2014
+    status: refereed
+    title: >-
+      Measurement of the production cross-section of prompt J/ψ mesons in
+      association with a W boson in pp collisions at √s = 7 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1404 (2014) 172"
+    arxiv: "1401.2831"
+    doi: "10.1007/JHEP04(2014)172"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      First observation of W + prompt J/ψ associated production at a
+      hadron collider (5.1σ, 27 ± 7 events) in 4.5 fb⁻¹ of ATLAS 7 TeV
+      data. The cross-section is reported as a ratio to inclusive W
+      production, and a double-parton-scattering contribution is
+      explicitly extracted — providing a clean handle on the σ_eff
+      governing multi-parton interactions in the proton and a sharp test
+      of charmonium production in the presence of an electroweak boson.
+  - id: p-dzero-wjets-legacy-2013
+    year: 2013
+    status: refereed
+    title: "Studies of W boson plus jets production in pp̄ collisions at √s = 1.96 TeV"
+    collaboration: "DØ Collaboration"
+    venue: "Phys. Rev. D 88 (2013) 092001"
+    arxiv: "1302.6508"
+    doi: "10.1103/PhysRevD.88.092001"
+    tags: [qcd, collider]
+    explainer: >-
+      The legacy DØ Tevatron measurement of inclusive W(→eν) + n-jet
+      (n=1-4) production on 3.7 fb⁻¹ of 1.96 TeV pp̄ data. Reports
+      differential cross-sections across an unusually broad observable
+      set — jet rapidities, lepton kinematics, H_T, leading-dijet pT and
+      invariant mass, opening angles, azimuthal separations, and (the
+      novel ingredient) rapidity separations between both pT-ordered and
+      angular-ordered jet pairs — plus the mean jet multiplicity as a
+      function of H_T. The angular-ordering observables exposed
+      shortcomings in best-of-day predictions and informed parton-shower
+      modelling that fed directly into later LHC W+jets analyses.
+  - id: p-atlas-upsilon-7tev-2013
+    year: 2013
+    status: refereed
+    title: "Measurements of Upsilon production in 7 TeV pp collisions at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. D 87 (2013) 052004"
+    arxiv: "1211.7255"
+    doi: "10.1103/PhysRevD.87.052004"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      Differential measurements of Υ(1S), Υ(2S) and Υ(3S) production at 7
+      TeV using 1.8 fb⁻¹ of ATLAS dimuon data, covering pT < 70 GeV and
+      |y| < 2.25. Reports total cross-sections of 8.01, 2.05 and 0.92 nb
+      respectively (assuming unpolarised production), with a quantified
+      polarisation systematic that can shift integrated cross-sections by
+      a factor of two under non-trivial azimuthal dependence. The
+      headline finding: none of the contemporary quarkonium-production
+      models reproduces the data across the full pT range — a clear
+      signal that bottomonium production theory was not yet under
+      control at LHC energies.
+  - id: p-atlas-chib3p-discovery-2012
+    year: 2012
+    status: refereed
+    title: "Observation of a new χb state in radiative transitions to Υ(1S) and Υ(2S) at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. Lett. 108 (2012) 152001 — Editors' Suggestion"
+    arxiv: "1112.5154"
+    doi: "10.1103/PhysRevLett.108.152001"
+    tags: [b-physics, collider]
+    explainer: >-
+      The first observation of a new particle at the Large Hadron
+      Collider, made by ATLAS in 4.4 fb⁻¹ of 7 TeV data. A new structure
+      at m = 10.530 ± 0.005(stat) ± 0.009(syst) GeV is seen in both the
+      Υ(1S)γ and Υ(2S)γ radiative decay channels, identifying it as the
+      χ_b(3P) bottomonium triplet. The result showcased the LHC's reach
+      in heavy-quarkonium spectroscopy, was selected as a PRL Editors'
+      Suggestion, and was confirmed shortly afterwards by DØ in re-analysed
+      Tevatron data.
+  - id: p-atlas-upsilon1s-2011
+    year: 2011
+    status: refereed
+    title: "Measurement of the Υ(1S) production cross-section in pp collisions at √s = 7 TeV in ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Lett. B 705 (2011) 9"
+    arxiv: "1106.5325"
+    doi: "10.1016/j.physletb.2011.09.092"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      The first measurement of Υ(1S) production at the LHC — Υ(1S) → μ⁺μ⁻
+      with 1.13 pb⁻¹ of 7 TeV ATLAS data, presented differentially in pT
+      and in two rapidity bands (|y|<1.2 and 1.2<|y|<2.4). The analysis
+      is designed to minimise sensitivity to the poorly known
+      polarisation by tight muon-pT requirements. The cross-section
+      agrees with NRQCD predictions (colour singlet + colour octet)
+      within a factor of two, but is off by up to an order of magnitude
+      from the NLO colour-singlet-only prediction — a foundational
+      bottomonium-production data point for the LHC programme.
+  - id: p-dzero-incl-wjets-2011
+    year: 2011
+    status: refereed
+    title: >-
+      Measurements of inclusive W+jets production rates as a function of jet
+      transverse momentum in pp̄ collisions at √s = 1.96 TeV
+    collaboration: "DØ Collaboration"
+    venue: "Phys. Lett. B 705 (2011) 200"
+    arxiv: "1106.1457"
+    doi: "10.1016/j.physletb.2011.10.011"
+    tags: [qcd, collider]
+    explainer: >-
+      The DØ inclusive W(→eν) + n-jet measurement (n = 1-4) on 4.2 fb⁻¹
+      of 1.96 TeV pp̄ data, presenting cross-sections differentially in
+      the nth-jet pT. Reaches considerably smaller uncertainties than
+      previous W+jets measurements and is compared to NLO pQCD for the
+      n = 1-3 bins and LO pQCD for n = 4. Generally agrees with the
+      predictions but identifies phase-space regions where they fall
+      short — informing later DØ Higgs searches and LHC W+jets analyses.
+  - id: p-atlas-jpsi-7tev-2011
+    year: 2011
+    status: refereed
+    title: >-
+      Measurement of the differential cross-sections of inclusive, prompt and non-
+      prompt J/ψ production in pp collisions at √s = 7 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "Nucl. Phys. B 850 (2011) 387"
+    arxiv: "1104.3038"
+    doi: "10.1016/j.nuclphysb.2011.05.015"
+    tags: [b-physics, qcd, collider]
+    explainer: >-
+      ATLAS's first B-physics publication. On just 2.3 pb⁻¹ of early
+      7 TeV data, the inclusive J/ψ → μ⁺μ⁻ cross-section is measured
+      double-differentially in pT and rapidity over 1 < pT < 70 GeV and
+      |y| < 2.4 — the widest reach of any J/ψ production measurement at
+      the time. The prompt and non-prompt components are separated via
+      the dimuon pseudo-proper time, and the results are compared
+      against Colour Singlet NNLO*, the Colour Evaporation Model and
+      FONLL. The work laid the groundwork for the LHC's
+      quarkonium-production programme.
+  - id: p-atlas-exp-performance-2009
+    year: 2009
+    status: refereed
+    title: "Expected performance of the ATLAS experiment — detector, trigger and physics"
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS Reports"
+    arxiv: "0901.0512"
+    tags: [instrumentation, collider]
+    explainer: >-
+      The pre-data ATLAS detector + physics compendium — an 1852-page
+      reference document that, before any 7 TeV collisions had been
+      recorded, surveyed expected reconstruction performance (tracking,
+      leptons, photons, MET, jets, b-tagging, trigger) and projected
+      sensitivity across the planned physics programme. The chapters on
+      low-pT muon reconstruction and quarkonium / heavy-flavour
+      measurements (contributed to here) anchored the early ATLAS
+      B-physics programme.
+  - id: p-atlas-jinst-2008
+    year: 2008
+    status: refereed
+    title: "The ATLAS experiment at the CERN Large Hadron Collider"
+    collaboration: "ATLAS Collaboration"
+    venue: "JINST 3 (2008) S08003"
+    doi: "10.1088/1748-0221/3/08/S08003"
+    tags: [instrumentation, collider]
+    explainer: >-
+      The detector paper for ATLAS — the canonical reference for the experiment's
+      design, construction and performance, with contributions on electron
+      bremsstrahlung-recovery algorithms.
+
+convener:
+  - id: p-atlas-b0d-kstarmumu-2018
+    year: 2018
+    status: refereed
+    title: >-
+      Angular analysis of B0d → K*μ+μ− decays in pp collisions at √s = 8 TeV with
+      the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1810 (2018) 047"
+    arxiv: "1805.04000"
+    doi: "10.1007/JHEP10(2018)047"
+    tags: [b-physics, collider]
+  - id: p-atlas-b0spi-2018
+    year: 2018
+    status: refereed
+    title: "Search for a structure in the B0sπ± invariant mass spectrum with the ATLAS experiment"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. Lett. 120 (2018) 202007"
+    arxiv: "1802.01840"
+    doi: "10.1103/PhysRevLett.120.202007"
+    tags: [b-physics, collider]
+  - id: p-atlas-quarkonium-ppb-2018
+    year: 2018
+    status: refereed
+    title: >-
+      Measurement of quarkonium production in proton–lead and proton–proton
+      collisions at 5.02 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 78 (2018) 171"
+    arxiv: "1709.03089"
+    doi: "10.1140/epjc/s10052-018-5624-4"
+    tags: [b-physics, qcd, collider]
+  - id: cv-vjets-precision-2018
+    year: 2018
+    status: refereed
+    title: "Pushing the precision frontier at the LHC with V+jets"
+    authors:
+          - "U. Blumenschein"
+          - "et al."
+    venue: "arXiv:1802.02100 (workshop report)"
+    arxiv: "1802.02100"
+    tags: [electroweak, qcd, collider]
+  - id: p-atlas-bhadron-pair-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurement of b-hadron pair production with the ATLAS detector in proton-
+      proton collisions at √s = 8 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1711 (2017) 062"
+    arxiv: "1705.03374"
+    doi: "10.1007/JHEP11(2017)062"
+    tags: [b-physics, qcd, collider]
+  - id: p-atlas-jpsi-pair-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurement of the prompt J/ψ pair production cross-section in pp collisions
+      at √s = 8 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 77 (2017) 76"
+    arxiv: "1612.02950"
+    doi: "10.1140/epjc/s10052-017-4644-9"
+    tags: [b-physics, qcd, collider]
+  - id: p-atlas-psi2s-x3872-2017
+    year: 2017
+    status: refereed
+    title: >-
+      Measurements of ψ(2S) and X(3872) → J/ψπ+π− production in pp collisions at
+      √s = 8 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1701 (2017) 117"
+    arxiv: "1610.09303"
+    doi: "10.1007/JHEP01(2017)117"
+    tags: [b-physics, collider]
+  - id: p-atlas-b0-width-2016
+    year: 2016
+    status: refereed
+    title: "Measurement of the relative width difference of the B0–B̄⁰ system with the ATLAS detector"
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1606 (2016) 081"
+    arxiv: "1605.07485"
+    doi: "10.1007/JHEP06(2016)081"
+    tags: [b-physics, collider]
+  - id: p-atlas-bsmumu-run1-2016
+    year: 2016
+    status: refereed
+    title: >-
+      Study of the rare decays of B0s and B0 into muon pairs from data collected
+      during the LHC Run 1 with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 76 (2016) 513"
+    arxiv: "1604.04263"
+    doi: "10.1140/epjc/s10052-016-4338-8"
+    tags: [b-physics, collider]
+  - id: p-atlas-phis-2016
+    year: 2016
+    status: refereed
+    title: >-
+      Measurement of the CP-violating phase φs and the B0s meson decay width
+      difference with B0s → J/ψφ decays in ATLAS
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1608 (2016) 147"
+    arxiv: "1601.03297"
+    doi: "10.1007/JHEP08(2016)147"
+    tags: [b-physics, collider]
+  - id: p-atlas-d-meson-2016
+    year: 2016
+    status: refereed
+    title: >-
+      Measurement of D*±, D± and Ds± meson production cross sections in pp
+      collisions at √s = 7 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Nucl. Phys. B 907 (2016) 717"
+    arxiv: "1512.02913"
+    doi: "10.1016/j.nuclphysb.2016.04.032"
+    tags: [qcd, collider]
+  - id: p-atlas-bcjpsi-ds-2016
+    year: 2016
+    status: refereed
+    title: "Study of the B+c → J/ψ Ds+ and B+c → J/ψ Ds*+ decays with the ATLAS detector"
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 76 (2016) 4"
+    arxiv: "1507.07099"
+    doi: "10.1140/epjc/s10052-015-3743-8"
+    tags: [b-physics, collider]
+  - id: p-atlas-lambdab-2015
+    year: 2015
+    status: refereed
+    title: "Measurement of the branching ratio Γ(Λ0b → ψ(2S)Λ⁰)/Γ(Λ0b → J/ψΛ⁰) with the ATLAS detector"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Lett. B 751 (2015) 63"
+    arxiv: "1507.08202"
+    doi: "10.1016/j.physletb.2015.10.009"
+    tags: [b-physics, collider]
+  - id: p-atlas-fsfd-2015
+    year: 2015
+    status: refereed
+    title: >-
+      Determination of the ratio of b-quark fragmentation fractions fs/fd in pp
+      collisions at √s = 7 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. Lett. 115 (2015) 262001"
+    arxiv: "1507.08925"
+    doi: "10.1103/PhysRevLett.115.262001"
+    tags: [b-physics, qcd, collider]
+  - id: p-atlas-xb-search-2015
+    year: 2015
+    status: refereed
+    title: "Search for the Xb and other hidden-beauty states in the π+π−Υ(1S) channel at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Lett. B 740 (2015) 199"
+    arxiv: "1410.4409"
+    doi: "10.1016/j.physletb.2014.11.055"
+    tags: [b-physics, collider]
+
+editorial:
+  - id: e-atlas-znngammajj-2022
+    year: 2022
+    status: preprint
+    title: >-
+      Measurement of electroweak Z(νν̄)γjj production and limits on anomalous
+      quartic gauge couplings in pp collisions at √s = 13 TeV with the ATLAS
+      detector
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 06 (2023) 082"
+    arxiv: "2208.12741"
+    doi: "10.1007/JHEP06(2023)082"
+    tags: [electroweak, collider]
+  - id: e-atlas-hzhad-2020
+    year: 2020
+    status: refereed
+    title: >-
+      Search for Higgs boson decays into a Z boson and a light hadronically
+      decaying resonance using 13 TeV pp collision data from the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. Lett. 125 (2020) 221802"
+    arxiv: "2004.01678"
+    doi: "10.1103/PhysRevLett.125.221802"
+    tags: [b-physics, collider]
+  - id: e-atlas-jpsiw-8tev-2020
+    year: 2020
+    status: refereed
+    title: "Measurement of J/ψ production in association with a W± boson with pp data at 8 TeV"
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 2001 (2020) 095"
+    arxiv: "1909.13626"
+    doi: "10.1007/JHEP01(2020)095"
+    tags: [b-physics, qcd, collider]
+  - id: e-atlas-mediator-dm-2019
+    year: 2019
+    status: refereed
+    title: >-
+      Constraints on mediator-based dark matter and scalar dark energy models
+      using √s = 13 TeV pp collisions at the LHC with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "JHEP 1905 (2019) 142"
+    arxiv: "1903.01400"
+    doi: "10.1007/JHEP05(2019)142"
+    tags: [dark-matter, collider]
+  - id: e-lhc-dmwg-spin0-2019
+    year: 2019
+    status: refereed
+    title: "Next-generation spin-0 dark matter models"
+    collaboration: "LHC Dark Matter Working Group"
+    venue: "Phys. Dark Univ. 27 (2020) 100351"
+    arxiv: "1810.09420"
+    doi: "10.1016/j.dark.2019.100351"
+    tags: [dark-matter, phenomenology]
+  - id: e-vbs-review-2018
+    year: 2018
+    status: refereed
+    title: "Vector boson scattering: recent experimental and theory developments"
+    authors:
+          - "C. F. Anders"
+          - "et al."
+    venue: "Rev. Phys. 3 (2018) 44"
+    arxiv: "1801.04203"
+    doi: "10.1016/j.revip.2018.11.001"
+    tags: [electroweak, phenomenology, collider]
+  - id: e-atlas-w-pbpb-2015
+    year: 2015
+    status: refereed
+    title: >-
+      Measurement of the production and lepton charge asymmetry of W bosons in
+      Pb+Pb collisions at √sNN = 2.76 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Eur. Phys. J. C 75 (2015) 23"
+    arxiv: "1408.4674"
+    doi: "10.1140/epjc/s10052-014-3231-6"
+    tags: [electroweak, collider]
+  - id: e-dzero-x4140-2014
+    year: 2014
+    status: refereed
+    title: "Search for the X(4140) state in B± → J/ψφK+ decays with the DØ detector"
+    collaboration: "DØ Collaboration"
+    venue: "Phys. Rev. D 89 (2014) 012004"
+    arxiv: "1309.6580"
+    doi: "10.1103/PhysRevD.89.012004"
+    tags: [b-physics, collider]
+  - id: e-dzero-bsmumu-2013
+    year: 2013
+    status: refereed
+    title: "Search for the rare decay B0s → μ+μ−"
+    collaboration: "DØ Collaboration"
+    venue: "Phys. Rev. D 87 (2013) 072006"
+    arxiv: "1301.4507"
+    doi: "10.1103/PhysRevD.87.072006"
+    tags: [b-physics, collider]
+  - id: e-atlas-z-pbpb-2013
+    year: 2013
+    status: refereed
+    title: >-
+      Measurement of Z boson production in Pb–Pb collisions at √sNN = 2.76 TeV
+      with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "Phys. Rev. Lett. 110 (2013) 022301"
+    arxiv: "1210.6486"
+    doi: "10.1103/PhysRevLett.110.022301"
+    tags: [electroweak, collider]
+  - id: e-dzero-upsilon-gamma-2012
+    year: 2012
+    status: refereed
+    title: >-
+      Observation of a narrow mass state decaying into Υ(1S)+γ in pp̄ collisions
+      at √s = 1.96 TeV
+    collaboration: "DØ Collaboration"
+    venue: "Phys. Rev. D 86 (2012) 031103(R)"
+    arxiv: "1203.6034"
+    doi: "10.1103/PhysRevD.86.031103"
+    tags: [b-physics, collider]
+
+proceedings:
+  - id: c-atlas-opendata-13tev-2020
+    year: 2020
+    status: note
+    title: "Review of the 13 TeV ATLAS Open Data release"
+    collaboration: "ATLAS Collaboration"
+    venue: "ATL-OREACH-PUB-2020-001"
+    tags: [open-data, collider, instrumentation]
+  - id: c-atlas-jpsi-lambdab-2019
+    year: 2019
+    status: note
+    title: >-
+      Study of J/ψ resonances in Λ0b → J/ψpK− decays in pp collisions at √s = 7
+      and 8 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2019-048"
+    tags: [b-physics, collider]
+  - id: c-atlas-jpsi-pair-conf-2016
+    year: 2016
+    status: note
+    title: >-
+      Measurement of the prompt J/ψ pair production cross-section in pp collisions
+      at √s = 8 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2016-047"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-psi2s-x3872-conf-2016
+    year: 2016
+    status: note
+    title: >-
+      Production measurements of ψ(2S) and X(3872) → J/ψπ+π− at √s = 8 TeV with
+      the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2016-028"
+    tags: [b-physics, collider]
+  - id: c-atlas-nonprompt-jpsi-13tev-2015
+    year: 2015
+    status: note
+    title: >-
+      Measurement of the differential non-prompt J/ψ production fraction at √s =
+      13 TeV pp collisions at the ATLAS experiment
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2015-030"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-jpsi-psi2s-conf-2015
+    year: 2015
+    status: note
+    title: "Differential cross-sections of prompt and non-prompt J/ψ and ψ(2S) at √s = 7 and 8 TeV"
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2015-024"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-w-pbpb-2014
+    year: 2014
+    status: note
+    title: >-
+      Measurement of W boson production and the lepton charge asymmetry in PbPb
+      collisions at √sNN = 2.76 TeV with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2014-023"
+    tags: [electroweak, collider]
+  - id: c-atlas-wmunu-pbpb-2013
+    year: 2013
+    status: note
+    title: >-
+      Measurement of the W → μν charge asymmetry and centrality dependence in
+      Pb+Pb collisions at √sNN = 2.76 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2013-106"
+    tags: [electroweak, collider]
+  - id: c-atlas-chic-conf-2013
+    year: 2013
+    status: note
+    title: "Measurement of χc1 and χc2 production with √s = 7 TeV pp collisions at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2013-095"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-psi2s-conf-2013
+    year: 2013
+    status: note
+    title: >-
+      Measurement of the production cross-section of ψ(2S) → J/ψ(μ+μ−)π+π− in pp
+      collisions at √s = 7 TeV at ATLAS
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2013-094"
+    tags: [b-physics, collider]
+  - id: c-atlas-jpsi-w-conf-2013
+    year: 2013
+    status: note
+    title: >-
+      Measurement of the production cross-section of prompt J/ψ mesons in
+      association with a W boson in pp collisions at √s = 7 TeV
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2013-042"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-z-jets-pbpb-2012
+    year: 2012
+    status: note
+    title: >-
+      Correlations between Z bosons and jets in 2.76 TeV/nucleon heavy-ion
+      collisions in ATLAS at the LHC
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2012-119"
+    tags: [electroweak, qcd, collider]
+  - id: c-dzero-wjets-conf-2012
+    year: 2012
+    status: note
+    title: "Measurements in W+jets production at √s = 1.96 TeV"
+    collaboration: "DØ Collaboration"
+    venue: "DØ Note 6339-CONF"
+    tags: [qcd, collider]
+  - id: c-atlas-z-pbpb-conf-2012
+    year: 2012
+    status: note
+    title: >-
+      Scaling properties of Z-boson production in lead-lead collisions at √sNN =
+      2.76 TeV with the ATLAS detector at the LHC
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2012-052"
+    tags: [electroweak, collider]
+  - id: cp-vjets-tev-2012
+    year: 2012
+    status: proceedings
+    title: "W/Z properties and V+jets at the Tevatron"
+    collaboration: "DØ and CDF Collaborations"
+    venue: "EPJ Web Conf. 28 (2012) 06006"
+    arxiv: "1201.5130"
+    doi: "10.1051/epjconf/20122806006"
+    tags: [qcd, collider, electroweak]
+  - id: cp-quarkonium-atlas-2012
+    year: 2012
+    status: proceedings
+    title: "Quarkonium production at ATLAS"
+    collaboration: "ATLAS Collaboration"
+    venue: "EPJ Web Conf. 28 (2012) 12025"
+    arxiv: "1201.4952"
+    doi: "10.1051/epjconf/20122812025"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-chic-conf-2011
+    year: 2011
+    status: note
+    title: >-
+      Observation of the χc1(1P) and χc2(1P) charmonium states in √s = 7 TeV pp
+      collisions at the ATLAS experiment
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2011-136"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-w-pbpb-2011
+    year: 2011
+    status: note
+    title: >-
+      Measurements of W boson yields in Pb+Pb at 2.76 TeV/nucleon via single muons
+      with the ATLAS detector
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2011-078"
+    tags: [electroweak, collider]
+  - id: cp-wzjets-d0-2011
+    year: 2011
+    status: proceedings
+    title: "W/Z+jets measurements at DØ"
+    collaboration: "DØ Collaboration"
+    venue: "Proc. DIS 2011 (FERMILAB-CONF-11-398-E)"
+    arxiv: "1111.3766"
+    tags: [qcd, electroweak, collider]
+  - id: cp-atlas-quarkonium-overview-2011
+    year: 2011
+    status: proceedings
+    title: "Overview of ATLAS quarkonium results with first data"
+    authors:
+          - "Darren D. Price"
+    venue: "Nucl. Phys. Proc. Suppl. 214 (2011) 48"
+    doi: "10.1016/j.nuclphysbps.2011.03.056"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-jpsi-ratio-2010
+    year: 2010
+    status: note
+    title: >-
+      A first measurement of the differential cross section for the J/ψ → μ+μ−
+      resonance and the indirect-to-prompt J/ψ cross-section ratio with pp
+      collisions at √s = 7 TeV in ATLAS
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2010-062"
+    tags: [b-physics, qcd, collider]
+  - id: c-atlas-jpsi-obs-2010
+    year: 2010
+    status: note
+    title: "First observation of the J/ψ → μ+μ− resonance in ATLAS pp collisions at √s = 7 TeV"
+    collaboration: "ATLAS Collaboration"
+    venue: "ATLAS-CONF-2010-045"
+    tags: [b-physics, collider]
+  - id: cp-atlas-charm-2010
+    year: 2010
+    status: proceedings
+    title: "Production of charm and charmonium with the ATLAS detector at 7 TeV"
+    collaboration: "ATLAS Collaboration"
+    venue: "Proc. ICHEP 2010"
+    arxiv: "1010.5232"
+    tags: [b-physics, qcd, collider]
+  - id: cp-tev-jets-2010
+    year: 2010
+    status: proceedings
+    title: "Latest jet results from the Tevatron"
+    collaboration: "CDF and DØ Collaborations"
+    venue: "Proc. DIS 2010 (FERMILAB-CONF-10-172-E)"
+    arxiv: "1005.3499"
+    tags: [qcd, collider]
+  - id: cp-tev-wh-2009
+    year: 2009
+    status: proceedings
+    title: "Search for Standard Model Higgs in WH → lνb̄b at the Tevatron"
+    collaboration: "CDF and DØ Collaborations"
+    venue: "Proc. HCP 2009"
+    arxiv: "0910.3420"
+    tags: [electroweak, collider]
+  - id: cp-atlas-quarkonium-2008
+    year: 2008
+    status: proceedings
+    title: "Quarkonium production and polarisation with early data at ATLAS"
+    authors:
+          - "Darren D. Price"
+    venue: "Proc. Lake Louise Winter Inst. 2008 (ATL-PHYS-PROC-2008-001)"
+    arxiv: "0808.3367"
+    tags: [b-physics, qcd, collider]
