@@ -1,6 +1,6 @@
 # ============================================================
 #  talks.yml — full presentations record
-#  Re-parsed from Presentations.html: years 2004-2023, with
+#  Re-parsed from Presentations.html: years 2004-2026, with
 #  agenda/slides/recording links preserved where present.
 #  type: invited | seminar | public | internal | poster
 #  internal (working meetings) are HIDDEN by default on page.
@@ -4784,3 +4784,399 @@ entries:
     tags: [neutrinos]
     links:
       slides: "http://dprice.web.cern.ch/dprice/work/PGseminar-SuperNEMO.ppt"
+  - id: t2023-013
+    type: internal
+    title: "ATLAS-UK Collaboration Meeting — Welcome"
+    venue: "ATLAS-UK Collaboration Meeting"
+    year: 2023
+    iso: "2023-03"
+    date: "Mar 2023"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1215670/timetable/?view=standard"
+  - id: t2023-014
+    type: public
+    title: "ATLAS Education & Outreach data visualisation needs"
+    venue: "Partners Meeting for Better Collaboration"
+    location: "Tbilisi, Georgia"
+    year: 2023
+    iso: "2023-11"
+    date: "Nov 2023"
+    tags: [collider]
+    links:
+      agenda: "https://indico.cern.ch/event/1334518/timetable/"
+  - id: t2023-015
+    type: internal
+    title: "From ATLAS to the DarkSide"
+    venue: "Particle Physics Group Christmas Meeting"
+    location: "December 19th '23"
+    year: 2023
+    iso: "2023-12"
+    date: "Dec 2023"
+    tags: [collider, dark-matter]
+  - id: t2024-001
+    type: internal
+    title: "DarkSide-LowMass at Boulby Underground Laboratory"
+    venue: "DRD2 Collaboration Meeting"
+    location: "CERN"
+    year: 2024
+    iso: "2024-02"
+    date: "Feb 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/1367848/timetable/"
+  - id: t2024-002
+    type: internal
+    title: "SOLAIRE: a proposal for a future low-threshold dark matter / neutrino experimental facility — opportunities for DRD2 collaboration and deployment"
+    venue: "DRD2 Collaboration Meeting"
+    location: "CERN"
+    year: 2024
+    iso: "2024-02"
+    date: "Feb 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+    links:
+      agenda: "https://indico.cern.ch/event/1367848/timetable/?view=standard"
+  - id: t2024-003
+    type: public
+    title: "Particle Physics: exploring the Universe with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "University of Manchester"
+    year: 2024
+    iso: "2024-03"
+    date: "Mar 2024"
+    tags: [collider, dark-matter]
+    links:
+      agenda: "https://indico.global/event/4168/"
+  - id: t2024-004
+    type: public
+    title: "SOLAIRE: a vision for a direct dark matter and neutrino fog science experiment at the Boulby Underground Laboratory"
+    venue: "SOLAIRE open meeting"
+    year: 2024
+    iso: "2024-03"
+    date: "Mar 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-005
+    type: internal
+    title: "SOLAIRE: an underground LAr facility and dark matter / neutrino science experiment at Boulby Underground Laboratory"
+    venue: "SOLAIRE management / planning meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-03"
+    date: "Mar 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-006
+    type: internal
+    title: "SOLAIRE management update"
+    venue: "SOLAIRE management meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-04"
+    date: "Apr 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-007
+    type: internal
+    title: "SOLAIRE working meeting updates"
+    venue: "SOLAIRE working meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-04"
+    date: "Apr 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-008
+    type: internal
+    title: "SOLAIRE working meeting updates"
+    venue: "SOLAIRE Boulby Laboratory planning meeting"
+    year: 2024
+    iso: "2024-04"
+    date: "Apr 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-009
+    type: internal
+    title: "SOLAIRE working meeting updates"
+    venue: "SOLAIRE working meeting"
+    year: 2024
+    iso: "2024-04"
+    date: "Apr 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-010
+    type: internal
+    title: "SOLAIRE working meeting updates"
+    venue: "SOLAIRE working meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-04"
+    date: "Apr 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-011
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider"
+    venue: "New Scientist Discovery Tour"
+    location: "Geneva / CERN"
+    year: 2024
+    iso: "2024-05"
+    date: "May 2024"
+    tags: [collider, dark-matter]
+  - id: t2024-012
+    type: seminar
+    title: "SOLAIRE: a near-future vision for a direct dark matter and neutrino fog science experiment at the Boulby Underground Laboratory"
+    venue: "Dark Matter UK meeting"
+    location: "Lancaster University"
+    year: 2024
+    iso: "2024-05"
+    date: "May 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+    links:
+      agenda: "https://indico.global/event/5610/timetable/"
+  - id: t2024-013
+    type: internal
+    title: "SOLAIRE working meeting"
+    venue: "SOLAIRE working meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-05"
+    date: "May 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-014
+    type: internal
+    title: "Design, costings and plan for SOLAIRE"
+    venue: "SOLAIRE working meeting"
+    location: "Online"
+    year: 2024
+    iso: "2024-05"
+    date: "May 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-015
+    type: public
+    title: "Manchester Particle Physics Schools Masterclass"
+    venue: "Particle Physics Masterclass Network Workshop"
+    location: "IoP London"
+    year: 2024
+    iso: "2024-09"
+    date: "Sep 2024"
+    tags: [collider, open-data]
+    links:
+      agenda: "https://conference.ippp.dur.ac.uk/event/1376/"
+  - id: t2024-016
+    type: public
+    title: "Particle Physics Masterclass Workshop — plans and goals: today and beyond"
+    venue: "Particle Physics Masterclass Network Workshop"
+    location: "IoP London"
+    year: 2024
+    iso: "2024-09"
+    date: "Sep 2024"
+    tags: [collider, open-data]
+    links:
+      agenda: "https://conference.ippp.dur.ac.uk/event/1376/"
+  - id: t2024-017
+    type: public
+    title: "Facilities requirements for near-future LAr dark matter / neutrino science at Boulby"
+    venue: "Boulby Development Infrastructure Review"
+    location: "Daresbury Laboratory"
+    year: 2024
+    iso: "2024-09"
+    date: "Sep 2024"
+    tags: [dark-matter, neutrinos, instrumentation]
+  - id: t2024-018
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider"
+    venue: "New Scientist Discovery Tour"
+    location: "Geneva / CERN"
+    year: 2024
+    iso: "2024-10"
+    date: "Oct 2024"
+    tags: [collider, dark-matter]
+  - id: t2024-019
+    type: internal
+    title: "DarkSide-20k distributed computing: UK resources and potential for DarkSide-20k"
+    venue: "DarkSide-20k Computing working meeting"
+    year: 2024
+    iso: "2024-10"
+    date: "Oct 2024"
+    tags: [dark-matter]
+  - id: t2024-020
+    type: internal
+    title: "DarkSide-UK collaboration science sensitivity studies: sharing ideas and workflows for greater results"
+    venue: "DarkSide-UK Physics meeting"
+    year: 2024
+    iso: "2024-11"
+    date: "Nov 2024"
+    tags: [dark-matter, neutrinos, instrumentation, phenomenology]
+  - id: t2024-021
+    type: internal
+    title: "Developing a public engagement platform for DarkSide"
+    venue: "DarkSide-UK Physics meeting"
+    year: 2024
+    iso: "2024-11"
+    date: "Nov 2024"
+    tags: [dark-matter]
+  - id: t2025-001
+    type: public
+    title: "Opportunities in low-mass dark matter discovery"
+    venue: "Strategy meeting on quantum technologies for fundamental physics"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-01"
+    date: "Jan 2025"
+    tags: [dark-matter, instrumentation, levitating-sensors]
+  - id: t2025-002
+    type: internal
+    title: "FSE Engagement — Public, Civic, Outreach"
+    venue: "School of Natural Sciences Senior Leadership Team meeting"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-03"
+    date: "Mar 2025"
+    tags: []
+  - id: t2025-003
+    type: public
+    title: "Levelling Up: Physics / Maths / Engineering — information session for teachers"
+    venue: "Faculty of Science & Engineering"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-03"
+    date: "Mar 2025"
+    tags: []
+  - id: t2025-004
+    type: internal
+    title: "FSE Engagement — Public, Civic, Outreach"
+    venue: "School of Engineering Senior Leadership Team meeting"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-04"
+    date: "Apr 2025"
+    tags: []
+  - id: t2025-005
+    type: public
+    title: "Particle Physics: exploring the Universe with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-04"
+    date: "Apr 2025"
+    tags: [collider, dark-matter, open-data]
+    links:
+      agenda: "https://indico.global/event/4172/timetable/"
+  - id: t2025-006
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider"
+    venue: "New Scientist Discovery Tour"
+    location: "Geneva / CERN"
+    year: 2025
+    iso: "2025-04"
+    date: "Apr 2025"
+    tags: [collider, dark-matter]
+  - id: t2025-007
+    type: public
+    title: "Open Data in particle physics research"
+    venue: "Opening Up Research event"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-05"
+    date: "May 2025"
+    tags: [collider, open-data]
+  - id: t2025-008
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider"
+    venue: "Sale Festival public talk"
+    location: "Sale, Greater Manchester"
+    year: 2025
+    iso: "2025-06"
+    date: "Jun 2025"
+    tags: [collider, dark-matter]
+    links:
+      agenda: "https://watersidearts.org/events/sale-festival-discovering-the-unknown-at-the-large-hadron-collider/"
+  - id: t2025-009
+    type: internal
+    title: "Quantum sensors for low-energy rare-event detection"
+    venue: "Quantum Technologies development meeting"
+    location: "University of Manchester"
+    year: 2025
+    iso: "2025-07"
+    date: "Jul 2025"
+    tags: [dark-matter, instrumentation, levitating-sensors, neutrinos]
+  - id: t2025-010
+    type: internal
+    title: "Enabling spin-dependent dark matter sensitivity with DarkSide-20k"
+    venue: "DarkSide-UK spin-dependent dark matter discussion"
+    year: 2025
+    iso: "2025-09"
+    date: "Sep 2025"
+    tags: [dark-matter, instrumentation, phenomenology]
+  - id: t2025-011
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider"
+    venue: "New Scientist Discovery Tour"
+    location: "Geneva / CERN"
+    year: 2025
+    iso: "2025-10"
+    date: "Oct 2025"
+    tags: [collider, dark-matter]
+  - id: t2025-012
+    type: seminar
+    title: "Levitating quantum sensors for low-energy rare-event detection"
+    venue: "QTFP levitated-sensors community discussion"
+    year: 2025
+    iso: "2025-10"
+    date: "Oct 2025"
+    tags: [dark-matter, instrumentation, levitating-sensors, neutrinos, gravitational-waves]
+  - id: t2025-013
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider: Dark Matter & More!"
+    venue: "Manchester Astronomical Society — Kopal Memorial Lecture 2025"
+    location: "Manchester"
+    year: 2025
+    iso: "2025-10"
+    date: "Oct 2025"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://www.manastro.org/lectures.html"
+  - id: t2025-014
+    type: internal
+    title: "DarkSide-50 and DarkSide-20k sensitivity to spin-dependent dark matter"
+    venue: "DarkSide Collaboration Meeting"
+    location: "GSSI, Italy"
+    year: 2025
+    iso: "2025-11"
+    date: "Nov 2025"
+    tags: [dark-matter, phenomenology, instrumentation]
+    links:
+      agenda: "https://agenda.infn.it/event/48469/overview"
+  - id: t2025-015
+    type: internal
+    title: "DarkSide March 2026 Manchester meeting — planning"
+    venue: "DarkSide Institutional Board meeting"
+    year: 2025
+    iso: "2025-11"
+    date: "Nov 2025"
+    tags: [dark-matter]
+  - id: t2026-001
+    type: public
+    title: "Discovering the unknown at the Large Hadron Collider: Dark Matter & More!"
+    venue: "Bradford Astronomical Society"
+    location: "Bradford"
+    year: 2026
+    iso: "2026-03"
+    date: "Mar 2026"
+    tags: [dark-matter, collider]
+    links:
+      agenda: "https://bradfordastronomy.co.uk/meetings/"
+  - id: t2026-002
+    type: public
+    title: "Particle Physics: exploring the Universe with the Large Hadron Collider"
+    venue: "Manchester Particle Physics Masterclass"
+    location: "University of Manchester"
+    year: 2026
+    iso: "2026-04"
+    date: "Apr 2026"
+    tags: [collider, dark-matter, open-data]
+    links:
+      agenda: "https://indico.global/event/16695/timetable/"
+  - id: t2026-003
+    type: internal
+    title: "FSE Public, Civic and Schools Engagement: status and strategy"
+    venue: "Social Responsibility & EDIA Committee, Faculty of Science & Engineering"
+    location: "University of Manchester"
+    year: 2026
+    iso: "2026-06"
+    date: "Jun 2026"
+    tags: []

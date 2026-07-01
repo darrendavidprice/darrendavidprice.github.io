@@ -2,7 +2,7 @@
 
 <!--
 ================================================================
- SITE INTERNAL VERSION — v3.4.1   (2026-06)
+ SITE INTERNAL VERSION — v3.4.2   (2026-06)
  Not displayed on the rendered site. Bump on each shipped batch
  so chats / zip files can be reconciled across sessions:
    MAJOR  — site-wide restructure, theme overhaul, breaking schema
