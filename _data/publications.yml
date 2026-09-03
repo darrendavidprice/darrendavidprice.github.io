@@ -12,6 +12,27 @@
 # ============================================================
 
 primary:
+  - id: p-ds20k-vtiles-2026
+    year: 2026
+    status: refereed
+    title: >-
+      Construction and characterisation of the DarkSide-20k veto silicon
+      photo-multiplier tiles
+    collaboration: "DarkSide-20k Collaboration"
+    venue: "Eur. Phys. J. C (2026), accepted"
+    arxiv: "2604.02551"
+    tags: [dark-matter, instrumentation]
+    explainer: >-
+      Describes the completed production and characterisation of 1920 silicon
+      photomultiplier "veto tile" assemblies — arrays of 24 SiPMs on custom PCBs
+      providing power distribution and signal amplification — for the DarkSide-20k
+      Inner Veto, which discriminates against radiogenic neutron and cosmic muon
+      backgrounds. The Manchester group led the assembly, warm testing, handler
+      design and construction, assembly and testing procedures, and shipping
+      logistics, and contributed to cryogenic testing. Final production yield
+      exceeded 87%, surpassing the 80% requirement, with all tiles confirming
+      stable cryogenic operation, high signal-to-noise ratio, and low radioactive
+      contamination.
   - id: p-ssww-majorana
     year: 2023
     status: refereed

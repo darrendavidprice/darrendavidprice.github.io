@@ -2,7 +2,7 @@
 
 <!--
 ================================================================
- SITE INTERNAL VERSION — v3.4.2   (2026-06)
+ SITE INTERNAL VERSION — v3.4.3   (2026-08)
  Not displayed on the rendered site. Bump on each shipped batch
  so chats / zip files can be reconciled across sessions:
    MAJOR  — site-wide restructure, theme overhaul, breaking schema
@@ -10,6 +10,10 @@
             new page types, accessibility / SEO landings)
    PATCH  — content corrections, small visual fixes, typo passes
  History (top = newest):
+   v3.4.3  Title tags reformatted sitewide; new team member
+           Dr. Wenqian Yao; new publication p-ds20k-vtiles-2026;
+           jobtitle set; dummy news removed; about page first-gen
+           student; t2024-013 title consistency.
    v3.4.0  JSON-LD structured data (SEO + entity disambiguation).
            New hand-rolled _includes/structured-data.html (single
            @graph, shared @id anchors), included in default.html <head>

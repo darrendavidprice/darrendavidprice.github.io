@@ -85,10 +85,3 @@ entries:
   - { id: n-prl-suggestion-2012, category: result, year: 2012, iso: "2012-04", date: "2012",
       title: "χb(3P) observation selected as a PRL Editors' Suggestion",
       tags: [b-physics] }
-
-  # ---------- DUMMY — copy, edit, or delete ----------
-  - { id: n-dummy-2026, category: media, year: 2026, iso: "2026-01", date: "2026",
-      title: "EXAMPLE — Interviewed on BBC Radio about the hunt for dark matter",
-      body: "EXAMPLE — replace with a real news item, or delete.",
-      tags: [dark-matter],
-      link: "https://example.com/EDIT" }
